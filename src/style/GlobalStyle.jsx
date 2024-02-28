@@ -12,6 +12,10 @@ const GlobalStyle = createGlobalStyle`
     text-decoration: none;
     color: initial;
   }
+
+  .a11y-hidden{
+
+  }
 `;
 
 export default GlobalStyle;
