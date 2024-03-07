@@ -1,11 +1,11 @@
 import GlobalStyle from "./style/GlobalStyle";
+import ProductInfoHeader from "./components/ProductInfoHeader";
 
 function App() {
   return (
     <>
-      <GlobalStyle>
-        <h1>hello</h1>
-      </GlobalStyle>
+      <GlobalStyle />
+      <ProductInfoHeader type="order" />
     </>
   );
 }
