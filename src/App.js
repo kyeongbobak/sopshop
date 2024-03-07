@@ -1,5 +1,5 @@
 import GlobalStyle from "./style/GlobalStyle";
-import ProductInfoHeader from "./components/ProductInfoHeader";
+import ProductInfoHeader from "./components/ProductInfoHeader/ProductInfoHeader";
 
 function App() {
   return (
