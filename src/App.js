@@ -5,7 +5,7 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <ProductInfoHeader type="order" />
+      <ProductInfoHeader type="cart" />
     </>
   );
 }
