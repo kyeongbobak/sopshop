@@ -1,11 +1,11 @@
 import GlobalStyle from "./style/GlobalStyle";
+import BuyerHeader from "./components/BuyerHeader";
 
 function App() {
   return (
     <>
-      <GlobalStyle>
-        <h1>hello</h1>
-      </GlobalStyle>
+      <GlobalStyle />
+      <BuyerHeader type="login" />
     </>
   );
 }
