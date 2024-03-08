@@ -5,7 +5,7 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <BuyerHeader type="login" />
+      <BuyerHeader type="login" isLoggedIn />
     </>
   );
 }

@@ -40,7 +40,7 @@ export const SearchInput = styled.input`
   outline: none;
 `;
 
-export const HeaderButtonMenu = styled.div`
+export const HeaderLinkMenu = styled.div`
   display: flex;
   gap: 27px;
   img {
@@ -53,12 +53,12 @@ export const HeaderButtonMenu = styled.div`
   }
 `;
 
-export const HeaderCartButton = styled.a``;
+export const HeaderCartLink = styled.a``;
 
-export const HeaderLoginButton = styled.a`
+export const HeaderUserPageLink = styled.a`
   text-align: center;
 `;
 
-export const HeaderUserSettingButton = styled.a`
+export const HeaderLoginLink = styled.a`
   text-align: center;
 `;
