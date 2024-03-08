@@ -9,20 +9,22 @@ const GlobalStyle = createGlobalStyle`
      font-size: 10px;
 
     --main-color : #D5BEB1;
-    --gray-color : #C4C4C4
-    --white-color : #fff
+    --gray-color : #C4C4C4;
+    --white-color : #fff;
 
     --box-gray-color : #F2F2F2;
     --box-black-color : #434343;
    
     --line-black-color : #767676;
 
-    --font-min-size : 1.2rem 
-    --font-lg-size : 1.6rem
-    --font-md-size : 1.4rem
-    --font-sm-size : 1.8rem
-    --font-max-size : 2.4rem
-    --font-extra-size : 3.6rem
+    --font-min-size : 1.2rem; 
+
+    --font-sm-size : 1.4rem;
+    --font-md-size : 1.6rem;
+    --font-lg-size : 1.8rem;
+
+    --font-max-size : 2.4rem;
+    --font-extra-size : 3.6rem;
 
     --font-bold : 500; 
     --font-medium : 400;
@@ -53,6 +55,11 @@ const GlobalStyle = createGlobalStyle`
   a{
     text-decoration: none;
     color: initial;
+  }
+
+  ul,li{
+    padding: unset;
+    list-style: none;
   }
 
   button{
