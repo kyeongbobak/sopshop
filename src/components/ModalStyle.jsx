@@ -6,24 +6,28 @@ export const ModalBack = styled.div`
   height: 100vh;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.2);
 `;
 
 export const ModalWrapper = styled.div`
+  background-color: var(--white-color);
   width: 360px;
   padding: 50px 70px 40px;
   border: 1px solid var(--gray-color);
   font-size: var(--font-md-size);
   text-align: center;
+  line-height: 20px;
   box-sizing: border-box;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: 100;
 `;
 
 export const ButtonWrapper = styled.div`
   margin-top: 30px;
+  z-index: 101;
+
   button {
     color: var(--line-black-color);
     font-size: var(--font-md-size);
