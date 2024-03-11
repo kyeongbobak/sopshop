@@ -4,7 +4,7 @@ function App() {
   return (
     <>
       <GlobalStyle>
-        <h1>hello</h1>
+        <h1>hello1</h1>
       </GlobalStyle>
     </>
   );
