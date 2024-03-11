@@ -1,3 +1,7 @@
 export default function BuyerLogin() {
-  return <></>;
+  return (
+    <>
+      <h1>hello</h1>
+    </>
+  );
 }
