@@ -26,7 +26,7 @@ function App() {
       </button>
       <Contents>내용</Contents>
       {modalOpen && (
-        <Modal text="아니오" submitText="예">
+        <Modal text="시작" submitText="취소">
           로그인이 필요한 서비스입니다. 로그인 하시겠습니까?
         </Modal>
       )}
