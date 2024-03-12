@@ -94,7 +94,6 @@ const LoginTabLinkBase = css`
 export const BuyerLoginTabLink = styled.a`
   ${LoginTabLinkBase}
   ${(props) => props.isActive && activeTabStyles} 
-
   border-right: ${(props) => (props.isActive ? 0 : "1px solid var(--gray-color)")};
 `;
 
@@ -108,6 +107,5 @@ const activeTabStyles = css`
 export const SellerLoginTabLink = styled.a`
   ${LoginTabLinkBase}
   ${(props) => props.isActive && activeTabStyles} 
-
     border-left: ${(props) => (props.isActive ? 0 : "1px solid var(--gray-color)")};
 `;
