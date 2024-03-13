@@ -5,11 +5,11 @@ const userToken = localStorage.getItem("token");
 export const AuthContext = createContext({ isLogin: userToken !== null ? true : false });
 
 export default function AuthProvider({ children }) {
-  const [isLogin, setIsLogin] = useState(userToken !== null);
+  const [token, setToken] = useState(userToken);
 
   return (
     <>
-      <AuthProvider.Provider value={{ isLogin, setIsLogin }}>{children}</AuthProvider.Provider>
+      <AuthProvider.Provider value={{ token, setToken }}>{children}</AuthProvider.Provider>
     </>
   );
 }
