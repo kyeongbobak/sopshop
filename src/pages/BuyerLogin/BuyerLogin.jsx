@@ -28,7 +28,7 @@ export default function BuyerLogin() {
     const body = {
       username: userId,
       password: userPassword,
-      login_type: "BUYER", // BUYER : 일반 구매자, SELLER : 판매자
+      login_type: "BUYER",
     };
 
     try {
