@@ -47,13 +47,11 @@ export default function BuyerLogin() {
         localStorage.setItem("id", data.id);
         setWarningMessage("");
       } else if (!userId && !userPassword) {
-        setWarningMessage("아이디를 입력하지 않았습니다.");
-      } else if (!userId && userPassword) {
-        setWarningMessage("아이디를 입력하지 않았습니다.");
+        setWarningMessage("아이디를 입력해주세요");
       } else if (userId && !userPassword) {
-        setWarningMessage("비밀번호를 입력하지 않았습니다.");
+        setWarningMessage("비밀번호를 입력해주세요");
       } else if (!data.id) {
-        setWarningMessage(data.FAIL_Message);
+        setWarningMessage("아이디 비밀번호가 일치하지 않습니다.");
       }
     } catch (error) {
       console.log("error");
