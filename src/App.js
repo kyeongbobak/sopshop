@@ -1,11 +1,12 @@
 import GlobalStyle from "./style/GlobalStyle";
+import AuthContextProvider from "./contexts/AuthContext";
 
 function App() {
   return (
     <>
-      <GlobalStyle>
-        <h1>hello1</h1>
-      </GlobalStyle>
+      <AuthContextProvider>
+        <GlobalStyle />
+      </AuthContextProvider>
     </>
   );
 }
