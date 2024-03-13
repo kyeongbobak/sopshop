@@ -76,7 +76,7 @@ export const LoginTab = styled.li`
   display: table-cell;
 `;
 
-const LoginTabLinkBase = css`
+const LoginTabLink = css`
   display: block;
   cursor: pointer;
   position: relative;
@@ -91,21 +91,28 @@ const LoginTabLinkBase = css`
   z-index: 2;
 `;
 
-export const BuyerLoginTabLink = styled.a`
-  ${LoginTabLinkBase}
-  ${(props) => props.isActive && activeTabStyles} 
-  border-right: ${(props) => (props.isActive ? 0 : "1px solid var(--gray-color)")};
-`;
-
-const activeTabStyles = css`
+const activeTab = css`
   background-color: white;
   z-index: 5;
   border: 1px solid var(--gray-color);
   border-bottom: 0;
 `;
 
+export const BuyerLoginTabLink = styled.a`
+  ${LoginTabLink}
+  ${(props) => props.isActive && activeTab} 
+  border-right: ${(props) => (props.isActive ? 0 : "1px solid var(--gray-color)")};
+`;
+
 export const SellerLoginTabLink = styled.a`
-  ${LoginTabLinkBase}
-  ${(props) => props.isActive && activeTabStyles} 
+  ${LoginTabLink}
+  ${(props) => props.isActive && activeTab} 
     border-left: ${(props) => (props.isActive ? 0 : "1px solid var(--gray-color)")};
+`;
+
+export const ValidateMessage = styled.p`
+  color: red;
+  text-align: left;
+  padding-top: 25px;
+  font-size: var(--font-sm-size);
 `;
