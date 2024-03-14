@@ -49,9 +49,6 @@ const GlobalStyle = createGlobalStyle`
     font-style: normal;
 }
           
-
-
-
   body{
     font-family: 'SpoqaHanSansNeo-Light';
   }
