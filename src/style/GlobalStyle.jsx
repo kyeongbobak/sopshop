@@ -26,9 +26,8 @@ const GlobalStyle = createGlobalStyle`
     --font-max-size : 2.4rem;
     --font-extra-size : 3.6rem;
 
-    --font-bold : 500; 
-    --font-medium : 400;
-    --font-regular : 300;
+    --font-light :100;
+    --font-bold : 800;
   }
 
 
@@ -36,15 +35,25 @@ const GlobalStyle = createGlobalStyle`
     margin: unset;
   }
 
-  @font-face {
-    font-family: 'SpoqaHanSansNeo-Regular';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Regular.woff') format('woff');
+            @font-face {
+    font-family: 'SpoqaHanSansNeo-Light';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Light.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
 
+            @font-face {
+    font-family: 'SpoqaHanSansNeo-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+          
+
+
+
   body{
-    font-family: 'SpoqaHanSansNeo-Regular';
+    font-family: 'SpoqaHanSansNeo-Light';
   }
 
 
