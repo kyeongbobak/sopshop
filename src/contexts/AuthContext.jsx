@@ -9,7 +9,7 @@ export default function AuthProvider({ children }) {
 
   return (
     <>
-      <AuthProvider.Provider value={{ token, setToken }}>{children}</AuthProvider.Provider>
+      <AuthContext.Provider value={{ token, setToken }}>{children}</AuthContext.Provider>
     </>
   );
 }
