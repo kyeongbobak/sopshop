@@ -8,5 +8,3 @@ export const MainPageSlider = styled.div`
 export const ProductListWrapper = styled.div``;
 
 export const ProductGroup = styled.ul``;
-
-export const ProductList = styled.li``;
