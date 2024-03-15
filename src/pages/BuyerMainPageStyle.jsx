@@ -1,6 +1,17 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
+export const MainPageSlider = styled.div`
+  height: 500px;
+  background-color: skyblue;
+`;
+
+export const ProductListWrapper = styled.div``;
+
+export const ProductGroup = styled.div``;
+
+export const ProductList = styled.div``;
+
 export const Footer = styled.footer`
   background-color: var(--box-gray-color);
 `;
