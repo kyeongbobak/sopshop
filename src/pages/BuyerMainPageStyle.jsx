@@ -8,9 +8,9 @@ export const MainPageSlider = styled.div`
 
 export const ProductListWrapper = styled.div``;
 
-export const ProductGroup = styled.div``;
+export const ProductGroup = styled.ul``;
 
-export const ProductList = styled.div``;
+export const ProductList = styled.li``;
 
 export const Footer = styled.footer`
   background-color: var(--box-gray-color);

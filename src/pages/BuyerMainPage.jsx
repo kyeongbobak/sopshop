@@ -78,7 +78,7 @@ export default function BuyerMainPage() {
             <span className="first-span">(주)SopShop</span>
             <span>서울시 중구 신당동 마린 빌딩 2층</span>
             <span>사업자번호 123-1234-5678 </span>
-            <span>대표: 박태리</span>
+            <span>대표: 박효리</span>
           </FooterBottom>
         </FooterWrapper>
       </Footer>
