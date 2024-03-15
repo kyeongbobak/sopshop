@@ -1,14 +1,14 @@
-import { Product, ProductImage, ProductName, ProductPrice } from "./ProductListStyle";
+import { Product, ProductImage, ProductName, ProductPrice, ProductStoreName } from "./ProductListStyle";
 
-export default function ProductList({ product_id, product_name, price }) {
+export default function ProductList({ product_id, product_store_name, product_img, product_name, product_price }) {
   return (
     <Product>
       <ProductImage to={`/products/${product_id}/`}>
-        <img src="" alt="" />
+        <img src={product_img} alt="" />
       </ProductImage>
+      <ProductStoreName>{product_store_name}</ProductStoreName>
       <ProductName>{product_name}</ProductName>
-      <ProductPrice>{price}</ProductPrice>
-      <p>내용</p>
+      <ProductPrice>{product_price}</ProductPrice>
     </Product>
   );
 }

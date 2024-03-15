@@ -16,15 +16,6 @@ export default function BuyerMainPage() {
     },
   });
 
-  // const data = [
-  //   {
-  //     product_id: `${product_id}`,
-  //     product_name: "Hack Your Life 개발자 노트북 파우치",
-  //     image: "productList1.png",
-  //     price: "29000원",
-  //   },
-  // ];
-
   const getProduct = async () => {
     try {
       const res = await instance.get("https://openmarket.weniv.co.kr/products/");
@@ -44,9 +35,9 @@ export default function BuyerMainPage() {
       <MainPageSlider></MainPageSlider>
       <ProductListWrapper>
         <ProductGroup>
-          {/* {product.map((product) => (
-            <ProductList key={product.product_id} product_name={product.product_name} product_price={product.product_price} />
-          ))} */}
+          {product.map((product) => (
+            <ProductList key={product.product_id} product_img={product.image} product_store_name={product.store_name} product product_name={product.product_name} product_price={product.price} />
+          ))}
         </ProductGroup>
       </ProductListWrapper>
     </>
