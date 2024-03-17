@@ -1,12 +1,12 @@
-import GlobalStyle from "./style/GlobalStyle";
+import React from 'react';
+import Button from '../src/components/Button';
 
 function App() {
   return (
-    <>
-      <GlobalStyle>
-        <h1>hello</h1>
-      </GlobalStyle>
-    </>
+    <div>
+      <Button />
+    </div>
   );
-}
+};
+
 export default App;
