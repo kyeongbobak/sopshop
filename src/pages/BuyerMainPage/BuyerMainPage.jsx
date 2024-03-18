@@ -26,7 +26,7 @@ export default function BuyerMainPage() {
           method: "GET",
         });
       }
-      const data = await res.json();
+      const data = token ? await res.data : await res.json();
       setProduct(data.results);
     } catch (error) {
       console.log("error");
