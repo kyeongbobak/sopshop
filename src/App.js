@@ -1,17 +1,11 @@
 import GlobalStyle from "./style/GlobalStyle";
-import AuthContextProvider from "./contexts/AuthContext";
-import ProductList from "./components/ProductList/ProductList";
-import { BrowserRouter as Router } from "react-router-dom";
+import { AuthProvider } from "./contexts/AuthContext";
 
 function App() {
   return (
     <>
-      <Router>
-        <GlobalStyle />
-        <AuthContextProvider>
-          <ProductList />
-        </AuthContextProvider>
-      </Router>
+      <GlobalStyle />
+      <AuthProvider></AuthProvider>
     </>
   );
 }
