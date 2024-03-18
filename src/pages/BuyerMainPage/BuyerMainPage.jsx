@@ -8,6 +8,9 @@ export default function BuyerMainPage() {
   const { token, setToken } = useContext(AuthContext);
   const [product, setProduct] = useState([]);
 
+  console.log(token);
+  console.log(setToken);
+
   const getProduct = async () => {
     try {
       let res;
