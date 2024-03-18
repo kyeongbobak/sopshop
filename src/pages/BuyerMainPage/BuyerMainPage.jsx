@@ -14,7 +14,7 @@ export default function BuyerMainPage() {
   const getProduct = async () => {
     try {
       let res;
-      if (setToken(token)) {
+      if (token) {
         const instance = axios.create({
           headers: {
             Authorization: `JWT ${token}`,
