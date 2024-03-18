@@ -48,9 +48,6 @@ const GlobalStyle = createGlobalStyle`
     font-weight: normal;
     font-style: normal;
 }
-          
-
-
 
   body{
     font-family: 'SpoqaHanSansNeo-Light';
