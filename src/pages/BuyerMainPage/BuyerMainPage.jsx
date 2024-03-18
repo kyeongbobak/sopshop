@@ -5,13 +5,13 @@ import axios from "axios";
 import { AuthContext } from "../../contexts/AuthContext";
 
 export default function BuyerMainPage() {
-  const { token, isLoggedIn } = useContext(AuthContext);
+  const { token, setToken } = useContext(AuthContext);
   const [product, setProduct] = useState([]);
 
   const getProduct = async () => {
     try {
       let res;
-      if (isLoggedIn) {
+      if (token) {
         const instance = axios.create({
           headers: {
             Authorization: `JWT ${token}`,
@@ -32,7 +32,7 @@ export default function BuyerMainPage() {
 
   useEffect(() => {
     getProduct();
-  }, [token, isLoggedIn]);
+  }, [token]);
 
   return (
     <>
