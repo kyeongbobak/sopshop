@@ -1,33 +1,38 @@
 import { MainPageSlider, ProductListWrapper, ProductGroup } from "../BuyerMainPage/BuyerMainPageStyle";
 import { useContext, useEffect, useState } from "react";
+import ProductList from "../../components/ProductList/ProductList";
 import axios from "axios";
 import { AuthContext } from "../../contexts/AuthContext";
 
 export default function BuyerMainPage() {
-  const { token } = useContext(AuthContext);
+  const { token, isLoggedIn } = useContext(AuthContext);
   const [product, setProduct] = useState([]);
-
-  console.log(token);
-
-  const instance = axios.create({
-    headers: {
-      Authorization: `JWT ${token}`,
-    },
-  });
 
   const getProduct = async () => {
     try {
-      const res = await instance.get("https://openmarket.weniv.co.kr/products/");
-      setProduct(res.data.results);
-      console.log(res);
+      let res;
+      if (isLoggedIn) {
+        const instance = axios.create({
+          headers: {
+            Authorization: `JWT ${token}`,
+          },
+        });
+        res = await instance.get("https://openmarket.weniv.co.kr/products/");
+      } else {
+        res = await fetch("https://openmarket.weniv.co.kr/products/", {
+          method: "GET",
+        });
+      }
+      const data = await res.json();
+      setProduct(data.results);
     } catch (error) {
-      console.log(error);
+      console.log("error");
     }
   };
 
   useEffect(() => {
     getProduct();
-  }, []);
+  }, [token, isLoggedIn]);
 
   return (
     <>
