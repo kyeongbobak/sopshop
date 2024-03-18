@@ -5,13 +5,13 @@ import axios from "axios";
 import { AuthContext } from "../../contexts/AuthContext";
 
 export default function BuyerMainPage() {
-  const { token } = useContext(AuthContext);
+  const { token, setToken } = useContext(AuthContext);
   const [product, setProduct] = useState([]);
 
   const getProduct = async () => {
     try {
       let res;
-      if (token) {
+      if (setToken(token)) {
         const instance = axios.create({
           headers: {
             Authorization: `JWT ${token}`,
