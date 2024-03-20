@@ -29,7 +29,6 @@ export default function BuyerMainPage() {
         const data = await Promise.all(res.map((res) => (token ? res.data : res.json())));
         console.log(res);
         const mergedData = data.flatMap((d) => d.results);
-        // 필요한 부분을 바로 추출
         console.log(mergedData);
         setProducts([...mergedData.slice(0, 3), ...mergedData.slice(-4, -2)]);
       } catch (error) {
