@@ -25,10 +25,10 @@ export default function BuyerMainPage() {
           promises.push(fetch("https://openmarket.weniv.co.kr/products/?page=5"));
         }
         const res = await Promise.all(promises);
-        console.log(Promise.all);
+
         const data = await Promise.all(res.map((res) => (token ? res.data : res.json())));
-        console.log(res);
-        const mergedData = data.flatMap((d) => d.results);
+        console.log(data);
+        const mergedData = [...data[0].results, ...data[1].results];
         console.log(mergedData);
         setProducts([...mergedData.slice(0, 3), ...mergedData.slice(-4, -2)]);
       } catch (error) {
