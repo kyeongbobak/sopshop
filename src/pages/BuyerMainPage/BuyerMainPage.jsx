@@ -5,36 +5,38 @@ import axios from "axios";
 import { AuthContext } from "../../contexts/AuthContext";
 
 export default function BuyerMainPage() {
-  const { token, setToken } = useContext(AuthContext);
-  const [product, setProduct] = useState([]);
-
-  console.log(token);
-  console.log(setToken);
-
-  const getProduct = async () => {
-    try {
-      let res;
-      if (token) {
-        const instance = axios.create({
-          headers: {
-            Authorization: `JWT ${token}`,
-          },
-        });
-        res = await instance.get("https://openmarket.weniv.co.kr/products/");
-      } else {
-        res = await fetch("https://openmarket.weniv.co.kr/products/", {
-          method: "GET",
-        });
-      }
-      const data = token ? await res.data : await res.json();
-      setProduct(data.results);
-    } catch (error) {
-      console.log("error");
-    }
-  };
+  const { token } = useContext(AuthContext);
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    getProduct();
+    const fetchData = async () => {
+      try {
+        const promises = [];
+        if (token) {
+          const instance = axios.create({
+            headers: {
+              Authorization: `JWT ${token}`,
+            },
+          });
+          promises.push(instance.get("https://openmarket.weniv.co.kr/products/?page=4"));
+          promises.push(instance.get("https://openmarket.weniv.co.kr/products/?page=5"));
+        } else {
+          promises.push(fetch("https://openmarket.weniv.co.kr/products/?page=4"));
+          promises.push(fetch("https://openmarket.weniv.co.kr/products/?page=5"));
+        }
+        const res = await Promise.all(promises);
+        console.log(Promise.all);
+        const data = await Promise.all(res.map((res) => (token ? res.data : res.json())));
+        console.log(res);
+        const mergedData = data.flatMap((d) => d.results);
+        // 필요한 부분을 바로 추출
+        console.log(mergedData);
+        setProducts([...mergedData.slice(0, 3), ...mergedData.slice(-4, -2)]);
+      } catch (error) {
+        console.log("error");
+      }
+    };
+    fetchData();
   }, [token]);
 
   return (
@@ -42,7 +44,7 @@ export default function BuyerMainPage() {
       <MainPageSlider></MainPageSlider>
       <ProductListWrapper>
         <ProductGroup>
-          {product.map((product) => (
+          {products.map((product) => (
             <ProductList key={product.product_id} product_img={product.image} product_store_name={product.store_name} product product_name={product.product_name} product_price={product.price} />
           ))}
         </ProductGroup>
