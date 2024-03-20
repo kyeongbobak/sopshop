@@ -9,7 +9,7 @@ export default function BuyerMainPage() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const getProduct = async () => {
       try {
         const promises = [];
         if (token) {
@@ -20,22 +20,20 @@ export default function BuyerMainPage() {
           });
           promises.push(instance.get("https://openmarket.weniv.co.kr/products/?page=4"));
           promises.push(instance.get("https://openmarket.weniv.co.kr/products/?page=5"));
+          console.log(promises);
         } else {
           promises.push(fetch("https://openmarket.weniv.co.kr/products/?page=4"));
           promises.push(fetch("https://openmarket.weniv.co.kr/products/?page=5"));
         }
         const res = await Promise.all(promises);
-
         const data = await Promise.all(res.map((res) => (token ? res.data : res.json())));
-        console.log(data);
         const mergedData = [...data[0].results, ...data[1].results];
-        console.log(mergedData);
         setProducts([...mergedData.slice(0, 3), ...mergedData.slice(-4, -2)]);
       } catch (error) {
         console.log("error");
       }
     };
-    fetchData();
+    getProduct();
   }, [token]);
 
   return (
