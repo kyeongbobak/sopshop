@@ -8,7 +8,7 @@ export default function ProductList({ product_id, product_store_name, product_im
       </ProductImage>
       <ProductStoreName>{product_store_name}</ProductStoreName>
       <ProductName>{product_name}</ProductName>
-      <ProductPrice>{product_price}</ProductPrice>
+      <ProductPrice>{product_price.toLocaleString()} 원</ProductPrice>
     </Product>
   );
 }

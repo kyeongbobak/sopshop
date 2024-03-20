@@ -3,10 +3,26 @@ import { Link } from "react-router-dom";
 
 export const Product = styled.div``;
 
-export const ProductImage = styled(Link)``;
+export const ProductImage = styled(Link)`
+  img {
+    width: 380px;
+    border-radius: 10px;
+  }
+`;
 
-export const ProductStoreName = styled.div``;
+export const ProductStoreName = styled.div`
+  color: var(--box-black-color);
+  font-size: var(--font-md-size);
+  margin-top: 17px;
+`;
 
-export const ProductName = styled.h3``;
+export const ProductName = styled.h3`
+  font-size: var(--font-lg-size);
+  margin-top: 15px;
+`;
 
-export const ProductPrice = styled.p``;
+export const ProductPrice = styled.p`
+  font-size: var(--font-lg-size);
+  font-weight: var(--font-bold);
+  margin-top: 15px;
+`;
