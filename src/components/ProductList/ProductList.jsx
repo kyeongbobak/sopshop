@@ -3,7 +3,7 @@ import { Product, ProductImage, ProductName, ProductPrice, ProductStoreName } fr
 export default function ProductList({ product_id, product_store_name, product_img, product_name, product_price }) {
   return (
     <Product>
-      <ProductImage to={`/products/${product_id}/`}>
+      <ProductImage to={`/products/${product_id}`}>
         <img src={product_img} alt="" />
       </ProductImage>
       <ProductStoreName>{product_store_name}</ProductStoreName>

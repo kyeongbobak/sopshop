@@ -16,7 +16,8 @@ export const ProductStoreName = styled.div`
   margin-top: 17px;
 `;
 
-export const ProductName = styled.h3`
+export const ProductName = styled(Link)`
+  display: inline-block;
   font-size: var(--font-lg-size);
   margin-top: 15px;
 `;

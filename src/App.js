@@ -1,18 +1,15 @@
 import GlobalStyle from "./style/GlobalStyle";
-import { AuthProvider } from "./contexts/AuthContext";
-// import BuyerMainPage from "./pages/BuyerMainPage/BuyerMainPage";
-import { BrowserRouter as Router } from "react-router-dom";
-import ProductDetail from "./pages/ProductDetail/ProductDetail";
+import { BrowserRouter } from "react-router-dom";
+import Router from "./routes/Router";
 
 function App() {
   return (
-    <Router>
+    <>
       <GlobalStyle />
-      <AuthProvider>
-        {/* <BuyerMainPage /> */}
-        <ProductDetail />
-      </AuthProvider>
-    </Router>
+      <BrowserRouter>
+        <Router />
+      </BrowserRouter>
+    </>
   );
 }
 export default App;

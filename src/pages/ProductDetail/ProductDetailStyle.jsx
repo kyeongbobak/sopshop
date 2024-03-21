@@ -5,6 +5,17 @@ export const ProductDetailWrapper = styled.div`
   width: 1280px;
   margin: 0 auto;
 `;
+
+export const ProductBrandName = styled.p``;
+
+export const ProductName = styled.h2``;
+
+export const ProductPrice = styled.p``;
+
+export const ProductDetailContent = styled.div``;
+
+export const ProductImage = styled.img``;
+
 export const ProductDetailTabMenu = styled.ul`
   width: 100%;
   display: flex;

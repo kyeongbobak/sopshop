@@ -28,6 +28,7 @@ export default function BuyerMainPage() {
         const res = await Promise.all(promises);
         const data = await Promise.all(res.map((res) => (token ? res.data : res.json())));
         const mergedData = [...data[0].results, ...data[1].results];
+        console.log(data);
         setProducts([...mergedData.slice(0, 3), ...mergedData.slice(-4, -2)]);
       } catch (error) {
         console.log("error");
@@ -42,7 +43,7 @@ export default function BuyerMainPage() {
       <ProductListWrapper>
         <ProductGroup>
           {products.map((product) => (
-            <ProductList key={product.product_id} product_img={product.image} product_store_name={product.store_name} product product_name={product.product_name} product_price={product.price} />
+            <ProductList key={product.product_id} product_id={product.product_id} product_img={product.image} product_store_name={product.store_name} product product_name={product.product_name} product_price={product.price} />
           ))}
         </ProductGroup>
       </ProductListWrapper>
