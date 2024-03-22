@@ -1,12 +1,15 @@
-import React from 'react';
-import Button from '../src/components/Button';
+import Button from "./components/Button/Button";
+import GlobalStyle from "./style/GlobalStyle";
 
 function App() {
   return (
-    <div>
-      <Button />
-    </div>
+    <>
+      <GlobalStyle />
+      <Button type="submit" SButton White Abled>
+        버튼
+      </Button>
+    </>
   );
-};
+}
 
 export default App;
