@@ -5,7 +5,7 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <Button type="submit" SButton White Abled>
+      <Button type="submit" MsButton>
         버튼
       </Button>
     </>
