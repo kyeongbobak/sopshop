@@ -34,7 +34,7 @@ export default function ProductDetail() {
           <ProductImage src={product.image}></ProductImage>
           <ProductBrandName>{product.store_name}</ProductBrandName>
           <ProductName>{product.product_name}</ProductName>
-          <ProductPrice>{Math.floor(product.price).toLocaleString()} 원</ProductPrice>
+          <ProductPrice>{product.price ? product.price.toLocaleString() : "가격정보 없음"} 원</ProductPrice>
         </ProductDetailContent>
         <ProductDetailTabMenu>
           <TabMenuItem>

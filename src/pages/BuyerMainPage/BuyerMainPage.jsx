@@ -20,7 +20,6 @@ export default function BuyerMainPage() {
           });
           promises.push(instance.get("https://openmarket.weniv.co.kr/products/?page=4"));
           promises.push(instance.get("https://openmarket.weniv.co.kr/products/?page=5"));
-          console.log(promises);
         } else {
           promises.push(fetch("https://openmarket.weniv.co.kr/products/?page=4"));
           promises.push(fetch("https://openmarket.weniv.co.kr/products/?page=5"));
