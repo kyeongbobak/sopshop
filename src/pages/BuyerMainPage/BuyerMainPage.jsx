@@ -28,9 +28,7 @@ export default function BuyerMainPage() {
         const res = await Promise.all(promises);
         const data = await Promise.all(res.map((res) => (token ? res.data : res.json())));
         const mergedData = [...data[0].results, ...data[1].results];
-        console.log(data);
         setProducts([...mergedData.slice(1, 4), ...mergedData.slice(-3, -1)]);
-        console.log(...mergedData);
       } catch (error) {
         console.log("error");
       }

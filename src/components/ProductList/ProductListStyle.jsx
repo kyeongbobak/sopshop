@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-export const Product = styled.div``;
+export const Product = styled.li``;
 
 export const ProductImage = styled(Link)`
   img {

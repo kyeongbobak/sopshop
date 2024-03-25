@@ -7,9 +7,10 @@ export default function ProductDetail() {
   const { product_id } = useParams();
   const [product, setProduct] = useState("");
 
+  console.log(useParams());
+
   const handleTabClick = (e) => {
     setActiveTab(e);
-    console.log(e);
   };
 
   useEffect(() => {
@@ -20,8 +21,6 @@ export default function ProductDetail() {
         });
         const data = await res.json();
         setProduct(data);
-        console.log(data.price);
-        console.log(data);
       } catch (error) {}
     };
 
