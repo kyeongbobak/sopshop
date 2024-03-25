@@ -1,15 +1,15 @@
-import Button from "./components/Button/Button";
 import GlobalStyle from "./style/GlobalStyle";
+import { BrowserRouter } from "react-router-dom";
+import Router from "./routes/Router";
 
 function App() {
   return (
     <>
       <GlobalStyle />
-      <Button type="submit" MsButton>
-        버튼
-      </Button>
+      <BrowserRouter>
+        <Router />
+      </BrowserRouter>
     </>
   );
 }
-
 export default App;
