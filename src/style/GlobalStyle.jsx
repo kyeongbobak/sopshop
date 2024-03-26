@@ -43,7 +43,6 @@ const GlobalStyle = createGlobalStyle`
   
   body{
     font-family: 'SpoqaHanSansNeo-Light';
-    font-family: 'SpoqaHanSansNeo-Light';
   }
 
 
