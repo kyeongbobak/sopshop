@@ -25,6 +25,8 @@ const GlobalStyle = createGlobalStyle`
 
     --font-light :100;
     --font-bold : 800;
+    --font-light :100;
+    --font-bold : 800;
   }
 
 
@@ -40,6 +42,7 @@ const GlobalStyle = createGlobalStyle`
 }
   
   body{
+    font-family: 'SpoqaHanSansNeo-Light';
     font-family: 'SpoqaHanSansNeo-Light';
   }
 
