@@ -1,12 +1,15 @@
 import LogoImage from "../../assets/Logo-hodu.png";
 import { useState } from "react";
 import { LoginWrapper, FormBox, SiteLogo, LoginForm, Label, StyledInput, LoginButton, LinkContainer, StyledLink, UserTypeTabs, LoginTab, SellerLoginTabLink, BuyerLoginTabLink, ValidateMessage } from "./BuyerLoginStyle";
+import { useNavigate } from "react-router-dom";
 
 export default function BuyerLogin() {
   const [activeTab, setActiveTab] = useState("buyer");
   const [userId, setUserId] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [warningMessage, setWarningMessage] = useState("");
+
+  const navigate = useNavigate();
 
   const handleTabClick = (e) => {
     setActiveTab(e);
@@ -56,6 +59,7 @@ export default function BuyerLogin() {
     } catch (error) {
       console.log("error");
     }
+    navigate(`/mainpage`);
   };
 
   return (

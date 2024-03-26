@@ -8,7 +8,7 @@ export const HeaderWrapper = styled.div`
   align-items: center;
   width: 1280px;
   margin: 0 auto;
-  padding: 20px 0;
+  padding: 23px 0;
 `;
 
 export const HeaderInnerMain = styled.div`
