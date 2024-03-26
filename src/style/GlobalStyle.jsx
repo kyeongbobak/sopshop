@@ -12,7 +12,6 @@ const GlobalStyle = createGlobalStyle`
     --gray-color : #C4C4C4;
     --white-color : #fff;
     --black-color : #434343;
-
     --light-gray-color : #F2F2F2;
     --light-black-color : #767676;
    
@@ -53,6 +52,11 @@ const GlobalStyle = createGlobalStyle`
   a{
     text-decoration: none;
     color: initial;
+  }
+
+  ul,li{
+    padding: unset;
+    list-style: none;
   }
 
   ul,li{
