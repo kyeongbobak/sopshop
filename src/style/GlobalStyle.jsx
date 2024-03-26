@@ -20,7 +20,6 @@ const GlobalStyle = createGlobalStyle`
     --font-sm-size : 1.4rem;
     --font-md-size : 1.6rem;
     --font-lg-size : 1.8rem;
-
     --font-max-size : 2.4rem;
     --font-extra-size : 3.6rem;
 
@@ -32,21 +31,14 @@ const GlobalStyle = createGlobalStyle`
   body,p{
     margin: unset;
   }
-
-            @font-face {
+           
+    @font-face {
     font-family: 'SpoqaHanSansNeo-Light';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Light.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
-
-            @font-face {
-    font-family: 'SpoqaHanSansNeo-Bold';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Bold.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
+  
   body{
     font-family: 'SpoqaHanSansNeo-Light';
   }
@@ -68,6 +60,11 @@ const GlobalStyle = createGlobalStyle`
 
   button{
     all:  unset;
+  }
+
+  input{
+    border: unset;
+    outline : none;
   }
 
   input{
