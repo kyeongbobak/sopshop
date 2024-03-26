@@ -1,5 +1,28 @@
 import { useEffect, useState } from "react";
-import { ProductDetailWrapper, ProductDetailContent, ProductImage, ProductBrandName, ProductName, ProductPrice, ProductDetailTabMenu, ProductDetailLink, ProductReviewLink, ProductQnALink, ProductRefundLink, TabMenuItem } from "./ProductDetailStyle";
+import {
+  ProductDetailWrapper,
+  ProductDetailContent,
+  ProductImage,
+  ProductDetailInfo,
+  ProductBrandName,
+  ProductName,
+  ProductPrice,
+  ProductDelivary,
+  ProductOrderSummery,
+  ProductQuanTity,
+  ProductOrderPrice,
+  ProductTotalPrice,
+  ProductTotalQuanTity,
+  ProductDetailButtonMenu,
+  ProductOrderButton,
+  ProductAddCartButton,
+  ProductDetailTabMenu,
+  ProductDetailLink,
+  ProductReviewLink,
+  ProductQnALink,
+  ProductRefundLink,
+  TabMenuItem,
+} from "./ProductDetailStyle";
 import { useParams } from "react-router-dom";
 
 export default function ProductDetail() {
@@ -32,9 +55,26 @@ export default function ProductDetail() {
       <ProductDetailWrapper>
         <ProductDetailContent>
           <ProductImage src={product.image}></ProductImage>
-          <ProductBrandName>{product.store_name}</ProductBrandName>
-          <ProductName>{product.product_name}</ProductName>
-          <ProductPrice>{product.price ? product.price.toLocaleString() : "가격정보 없음"} 원</ProductPrice>
+          <ProductDetailInfo>
+            <ProductBrandName>{product.store_name}</ProductBrandName>
+            <ProductName>{product.product_name}</ProductName>
+            <ProductPrice>
+              {product.price ? product.price.toLocaleString() : "가격정보 없음"} <span>원</span>
+            </ProductPrice>
+            <ProductDelivary>택배배송 / 무료배송</ProductDelivary>
+            <ProductQuanTity></ProductQuanTity>
+            <ProductOrderSummery>
+              <strong>총 상품 금액</strong>
+              <ProductOrderPrice>
+                <ProductTotalPrice>총 수량 개</ProductTotalPrice>
+                <ProductTotalQuanTity></ProductTotalQuanTity>
+              </ProductOrderPrice>
+            </ProductOrderSummery>
+            <ProductDetailButtonMenu>
+              <ProductOrderButton>바로구매</ProductOrderButton>
+              <ProductAddCartButton>장바구니</ProductAddCartButton>
+            </ProductDetailButtonMenu>
+          </ProductDetailInfo>
         </ProductDetailContent>
         <ProductDetailTabMenu>
           <TabMenuItem>

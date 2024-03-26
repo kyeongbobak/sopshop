@@ -37,14 +37,14 @@ export const ButtonStyle = styled.button`
       ${(props) =>
         props.Dark &&
         css`
-          background-color: var(--box-black-color);
+          background-color: var(--black-color);
         `}
 
         ${(props) =>
         props.White &&
         css`
           background-color: var(--white-color);
-          color: var(--box-black-color);
+          color: var(--black-color);
         `}
     `}
 
@@ -53,7 +53,7 @@ export const ButtonStyle = styled.button`
     css`
       width: 166px;
       height: 54px;
-      background-color: var(--box-black-color);
+      background-color: var(--black-color);
       color: var(--white-color);
       font-size: var(--font-md-size);
 
@@ -61,14 +61,14 @@ export const ButtonStyle = styled.button`
         props.White &&
         css`
           background-color: var(--white-color);
-          color: var(--box-black-color);
+          color: var(--black-color);
           border: 1px solid var(--gray-color);
           font-weight: var(--font-bold);
 
           ${(props) =>
             props.Abled &&
             css`
-              border: 1px solid var(--box-black-color);
+              border: 1px solid var(--black-color);
             `}
         `}
     `}
@@ -77,7 +77,7 @@ export const ButtonStyle = styled.button`
     props.SButton &&
     css`
       padding: 10px 25px;
-      background-color: var(--box-black-color);
+      background-color: var(--black-color);
       color: var(--white-color);
       font-size: var(--font-md-size);
 
@@ -85,14 +85,14 @@ export const ButtonStyle = styled.button`
         props.White &&
         css`
           background-color: var(--white-color);
-          color: var(--box-black-color);
+          color: var(--black-color);
           border: 1px solid var(--gray-color);
           font-weight: var(--font-bold);
 
           ${(props) =>
             props.Abled &&
             css`
-              border: 1px solid var(--box-black-color);
+              border: 1px solid var(--black-color);
             `}
         `}
     `}
