@@ -3,6 +3,8 @@ import { useContext, useEffect, useState } from "react";
 import ProductList from "../../components/ProductList/ProductList";
 import axios from "axios";
 import { AuthContext } from "../../contexts/AuthContext";
+import BuyerHeader from "../../components/BuyerHeader/BuyerHeader";
+import BuyerFooter from "../../components/BuyerFooter/BuyerFooter";
 
 export default function BuyerMainPage() {
   const { token } = useContext(AuthContext);
@@ -37,6 +39,7 @@ export default function BuyerMainPage() {
 
   return (
     <>
+      <BuyerHeader />
       <MainPageSlider></MainPageSlider>
       <ProductListWrapper>
         <ProductGroup>
@@ -45,6 +48,7 @@ export default function BuyerMainPage() {
           ))}
         </ProductGroup>
       </ProductListWrapper>
+      <BuyerFooter />
     </>
   );
 }

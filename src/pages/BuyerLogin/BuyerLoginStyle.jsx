@@ -46,7 +46,7 @@ export const LoginButton = styled.button`
   margin-top: 36px;
   padding: 19px 213px;
   border-radius: 5px;
-  background-color: var(--box-black-color);
+  background-color: var(--black-color);
   color: white;
   font-size: var(--font-lg-size);
 `;
@@ -84,7 +84,7 @@ const LoginTabLink = css`
   padding-top: 20px;
   border-radius: 10px;
   border: 1px solid var(--gray-color);
-  background-color: var(--box-gray-color);
+  background-color: var(--light-gray-color);
   box-sizing: border-box;
   border-radius: 10px 10px 0px 0px;
   border-bottom: 0;
