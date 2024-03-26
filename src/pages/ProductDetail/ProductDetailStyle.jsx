@@ -21,6 +21,7 @@ export const ProductImage = styled.img`
 
 export const ProductBrandName = styled.p`
   font-size: var(--font-lg-size);
+  font-weight: var(--font-bold);
 `;
 
 export const ProductName = styled.h2`
@@ -44,12 +45,29 @@ export const ProductDelivary = styled.div`
   padding-bottom: 20px;
   font-size: var(--font-md-size);
   color: var(--black-color);
-  border-bottom: 2px solid var(--gray-color);
+  border-bottom: 3px solid var(--gray-color);
+`;
+
+export const ProductQuanTityWrapper = styled.div`
+  padding: 30px 0;
+  border-bottom: 3px solid var(--gray-color);
+  text-align: center;
 `;
 
 export const ProductQuanTity = styled.div`
-  padding-top: 30px;
-  border-bottom: 2px solid var(--gray-color);
+  width: 150px;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--gray-color);
+  border-radius: 5px;
+  padding: 15px 0;
+  button {
+    width: 50px;
+  }
+  p {
+    width: 50px;
+    font-size: var(--font-lg-size);
+  }
 `;
 
 export const ProductOrderSummery = styled.div`
@@ -64,13 +82,40 @@ export const ProductOrderSummery = styled.div`
   }
 `;
 
-export const ProductOrderPrice = styled.div``;
-
-export const ProductTotalPrice = styled.div`
-  font-size: var(--font-lg-size);
+export const ProductOrderPrice = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
-export const ProductTotalQuanTity = styled.div``;
+export const ProductTotalPrice = styled.div`
+  font-size: var(--font-extra-size);
+  p {
+    &::before {
+      display: inline-block;
+      content: "";
+      width: 2px;
+      height: 23px;
+      background-color: var(--main-color);
+
+      margin: 0 12px;
+    }
+  }
+
+  span {
+    font-size: var(--font-lg-size);
+    padding-left: 3px;
+  }
+`;
+
+export const ProductTotalQuanTity = styled.div`
+  p {
+    font-size: var(--font-lg-size);
+  }
+
+  strong {
+    color: var(--main-color);
+  }
+`;
 
 export const ProductDetailButtonMenu = styled.div``;
 
