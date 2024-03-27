@@ -21,10 +21,16 @@ import {
   SignUpRegistrationSection,
   SignUpAgreementWrapper,
   SignUpAgreementInput,
+  DropDownIcon,
 } from "./BuyerSignUpStyle";
 
 export default function BuyerSignUp() {
   const [activeTab, setActiveTab] = useState("buyer");
+  // const [userId, setUserId] = useState("");
+  // const [userPassword, setuserPassword] = useState("");
+  // const [userPassWordCheck, setuserPassWordCheck] = useState("");
+  // const [userName, setUserName] = useState("");
+  // const [userPhoneNumber, setUserPhoneNumber] = useState("");
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -37,7 +43,7 @@ export default function BuyerSignUp() {
   return (
     <>
       <SignUpWrapper>
-        <SiteLogo>
+        <SiteLogo to={"/mainPage"}>
           <img src={LogoImage} alt="" />
         </SiteLogo>
         <FormBox>
@@ -70,9 +76,17 @@ export default function BuyerSignUp() {
             <PhoneNumberWrapper>
               <Label htmlFor="userPhoneNumber">휴대전화번호</Label>
               <PhoneStyledInputWrapper>
-                <PhoneStyledInput type="text" />
-                <PhoneStyledInput type="text" />
-                <PhoneStyledInput type="text" />
+                <select defaultValue="010">
+                  <option value="010">010</option>
+                  <option value="011">011</option>
+                  <option value="016">016</option>
+                  <option value="017">017</option>
+                  <option value="018">018</option>
+                  <option value="019">019</option>
+                </select>
+
+                <PhoneStyledInput id="userPhoneNumberOtherPart" type="text" />
+                <PhoneStyledInput id="userPhoneNumberTheOtherPart" type="text" />
               </PhoneStyledInputWrapper>
             </PhoneNumberWrapper>
           </SignUpForm>

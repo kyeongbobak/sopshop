@@ -71,9 +71,8 @@ const GlobalStyle = createGlobalStyle`
     outline : none;
   }
 
-  input{
-    border: unset;
-    outline : none;
+  select{
+    appearance: none;
   }
 
   .a11y-hidden {

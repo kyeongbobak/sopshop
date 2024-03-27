@@ -82,6 +82,7 @@ export const UserIdInput = styled.input`
   height: 54px;
   border: 1px solid var(--gray-color);
   border-radius: 5px;
+  font-size: var(--font-md-size);
 `;
 
 export const UserIdDupicateButton = styled.button`
@@ -98,6 +99,7 @@ export const StyledInput = styled.input`
   height: 54px;
   border: 1px solid var(--gray-color);
   border-radius: 5px;
+  font-size: var(--font-md-size);
 `;
 
 export const PhoneNumberWrapper = styled.div`
@@ -108,6 +110,15 @@ export const PhoneStyledInputWrapper = styled.div`
   display: flex;
   gap: 12px;
   padding-top: 12px;
+
+  select {
+    width: 146px;
+    height: 54px;
+    border: 1px solid var(--gray-color);
+    border-radius: 5px;
+    text-align: center;
+    font-size: var(--font-md-size);
+  }
 `;
 
 export const PhoneStyledInput = styled.input`
@@ -115,6 +126,7 @@ export const PhoneStyledInput = styled.input`
   height: 54px;
   border: 1px solid var(--gray-color);
   border-radius: 5px;
+  font-size: var(--font-md-size);
 `;
 
 export const SignUpRegistrationSection = styled.div`
