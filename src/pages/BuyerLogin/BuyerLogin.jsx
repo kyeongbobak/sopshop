@@ -1,6 +1,6 @@
 import LogoImage from "../../assets/Logo-hodu.png";
 import { useState } from "react";
-import { LoginWrapper, FormBox, SiteLogo, LoginForm, Label, StyledInput, LoginButton, LinkContainer, StyledLink, UserTypeTabs, LoginTab, SellerLoginTabLink, BuyerLoginTabLink, ValidateMessage } from "./BuyerLoginStyle";
+import { LoginWrapper, FormBox, SiteLogo, LoginForm, Label, StyledInput, LoginButton, LinkWrapper, StyledLink, UserTypeTabs, LoginTab, SellerLoginTabLink, BuyerLoginTabLink, ValidateMessage } from "./BuyerLoginStyle";
 import { useNavigate } from "react-router-dom";
 
 export default function BuyerLogin() {
@@ -59,13 +59,13 @@ export default function BuyerLogin() {
     } catch (error) {
       console.log("error");
     }
-    navigate(`/mainpage`);
+    navigate(`/mainPage`);
   };
 
   return (
     <>
       <LoginWrapper>
-        <SiteLogo>
+        <SiteLogo to={"/mainPage"}>
           <img src={LogoImage} alt="" />
         </SiteLogo>
         <FormBox>
@@ -94,11 +94,11 @@ export default function BuyerLogin() {
             <ValidateMessage>{warningMessage}</ValidateMessage>
           </LoginForm>
         </FormBox>
-        <LinkContainer>
-          <StyledLink>회원가입</StyledLink>
+        <LinkWrapper>
+          <StyledLink to={"/signUp"}>회원가입</StyledLink>
           <span>|</span>
           <StyledLink>비밀번호 찾기</StyledLink>
-        </LinkContainer>
+        </LinkWrapper>
       </LoginWrapper>
     </>
   );

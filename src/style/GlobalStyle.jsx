@@ -24,8 +24,6 @@ const GlobalStyle = createGlobalStyle`
 
     --font-light :100;
     --font-bold : 800;
-    --font-light :100;
-    --font-bold : 800;
   }
 
 

@@ -1,24 +1,62 @@
 import styled, { css } from "styled-components";
+import { Link } from "react-router-dom";
 
 export const LoginWrapper = styled.div`
   width: 550px;
   margin: 74px auto;
 `;
 
-export const FormBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+export const FormBox = styled.div``;
 
-  border-radius: 10px;
-  border-top: 0;
-`;
-
-export const SiteLogo = styled.a`
+export const SiteLogo = styled(Link)`
   display: block;
   text-align: center;
   margin-bottom: 70px;
   cursor: pointer;
+`;
+
+export const UserTypeTabs = styled.ul`
+  display: table;
+  width: 100%;
+  font-size: var(--font-lg-size);
+  text-align: center;
+`;
+
+export const LoginTab = styled.li`
+  display: table-cell;
+`;
+
+const LoginTabLink = css`
+  display: block;
+  cursor: pointer;
+  position: relative;
+  height: 67px;
+  padding-top: 20px;
+  border: 1px solid var(--gray-color);
+  background-color: var(--light-gray-color);
+  box-sizing: border-box;
+  border-radius: 10px 10px 0px 0px;
+  border-bottom: 0;
+  z-index: 2;
+`;
+
+const activeTab = css`
+  background-color: white;
+  z-index: 4;
+  border: 1px solid var(--gray-color);
+  border-bottom: 0;
+`;
+
+export const BuyerLoginTabLink = styled(Link)`
+  ${LoginTabLink}
+  ${(props) => props.isActive && activeTab} 
+  border-right: ${(props) => (props.isActive ? 0 : "1px solid var(--gray-color)")};
+`;
+
+export const SellerLoginTabLink = styled(Link)`
+  ${LoginTabLink}
+  ${(props) => props.isActive && activeTab} 
+    border-left: ${(props) => (props.isActive ? 0 : "1px solid var(--gray-color)")};
 `;
 
 export const LoginForm = styled.form`
@@ -51,7 +89,7 @@ export const LoginButton = styled.button`
   font-size: var(--font-lg-size);
 `;
 
-export const LinkContainer = styled.div`
+export const LinkWrapper = styled.div`
   margin-top: 30px;
   font-size: var(--font-md-size);
   text-align: center;
@@ -62,53 +100,7 @@ export const LinkContainer = styled.div`
   }
 `;
 
-export const StyledLink = styled.a``;
-
-export const UserTypeTabs = styled.ul`
-  display: table;
-  width: 100%;
-  font-size: var(--font-lg-size);
-  text-align: center;
-`;
-
-export const LoginTab = styled.li`
-  position: relative;
-  display: table-cell;
-`;
-
-const LoginTabLink = css`
-  display: block;
-  cursor: pointer;
-  position: relative;
-  height: 67px;
-  padding-top: 20px;
-  border-radius: 10px;
-  border: 1px solid var(--gray-color);
-  background-color: var(--light-gray-color);
-  box-sizing: border-box;
-  border-radius: 10px 10px 0px 0px;
-  border-bottom: 0;
-  z-index: 2;
-`;
-
-const activeTab = css`
-  background-color: white;
-  z-index: 5;
-  border: 1px solid var(--gray-color);
-  border-bottom: 0;
-`;
-
-export const BuyerLoginTabLink = styled.a`
-  ${LoginTabLink}
-  ${(props) => props.isActive && activeTab} 
-  border-right: ${(props) => (props.isActive ? 0 : "1px solid var(--gray-color)")};
-`;
-
-export const SellerLoginTabLink = styled.a`
-  ${LoginTabLink}
-  ${(props) => props.isActive && activeTab} 
-    border-left: ${(props) => (props.isActive ? 0 : "1px solid var(--gray-color)")};
-`;
+export const StyledLink = styled(Link)``;
 
 export const ValidateMessage = styled.p`
   color: red;
