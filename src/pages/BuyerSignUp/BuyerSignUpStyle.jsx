@@ -104,55 +104,50 @@ export const StyledInput = styled.input`
 
 export const PhoneNumberWrapper = styled.div`
   padding-top: 12px;
-  position: relative;
-`;
-
-export const PrefixNumberSelect = styled.div`
-  width: 146px;
-  height: 54px;
-  border: 1px solid var(--gray-color);
-  border-radius: 5px;
-  text-align: center;
-  font-size: var(--font-md-size);
-
-  button {
-    position: absolute;
-    margin-top: 17px;
-    margin-left: 20px;
-  }
-`;
-
-export const PrefixNumberInput = styled.input`
-  margin-top: 20px;
-  background-color: white;
 `;
 
 export const PhoneStyledInputWrapper = styled.div`
   display: flex;
-  gap: 13px;
+  gap: 12px;
   padding-top: 12px;
   position: relative;
 
-  ul {
+  button {
     position: absolute;
-    margin-top: 60px;
+    margin-left: 116px;
+    margin-top: 17px;
+  }
+
+  ul {
     width: 146px;
+    height: 150px;
+    position: absolute;
+    margin-top: 70px;
     border: 1px solid var(--gray-color);
     border-radius: 5px;
-  }
-  li {
     font-size: var(--font-md-size);
     text-align: center;
-    padding: 10px;
   }
+
+  li {
+    padding: 10px 0;
+  }
+`;
+
+export const PrefixNumberInput = styled.input`
+  width: 146px;
+  border: 1px solid var(--gray-color);
+  border-radius: 5px;
+  height: 54px;
+  text-align: center;
+  font-size: var(--font-md-size);
 `;
 
 export const PhoneStyledInput = styled.input`
   width: 146px;
-  height: 54px;
   border: 1px solid var(--gray-color);
   border-radius: 5px;
-  font-size: var(--font-md-size);
+  height: 54px;
 `;
 
 export const SignUpRegistrationSection = styled.div`

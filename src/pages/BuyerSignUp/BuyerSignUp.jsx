@@ -15,7 +15,6 @@ import {
   Label,
   StyledInput,
   PhoneNumberWrapper,
-  PrefixNumberSelect,
   PrefixNumberInput,
   PhoneStyledInputWrapper,
   PhoneStyledInput,
@@ -23,15 +22,15 @@ import {
   SignUpAgreementWrapper,
   SignUpAgreementInput,
 } from "./BuyerSignUpStyle";
-import { useState, useRef } from "react";
-// import PullUpIcon from "../../assets/icon-up-arrow.png";
+import { useState } from "react";
 import DropDownIcon from "../../assets/icon-down-arrow.png";
-import DropDownItem from "../../components/DropDownItem/DropDownItem";
+import PullUpIcon from "../../assets/icon-up-arrow.png";
+
 export default function BuyerSignUp() {
   const [activeTab, setActiveTab] = useState("buyer");
-  const dropDownRef = useRef();
-  const [isOpen, setIsOpen] = useState(dropDownRef, false);
-  const [phoneIdentify, setPhoneIdentify] = useState("010");
+  const [isOpen, setIsOpen] = useState(false);
+  const [isClickedOption, setIsClickedOption] = useState("010");
+
   const phoneList = ["010", "011", "016", "017", "018", "019"];
   // const [userId, setUserId] = useState("");
   // const [userPassword, setuserPassword] = useState("");
@@ -64,6 +63,7 @@ export default function BuyerSignUp() {
               <SellerLoginSignUp onClick={() => handleTabClick("seller")} isActive={activeTab === "seller"}>
                 판매회원 가입
               </SellerLoginSignUp>
+              {isOpen && <ul>{}</ul>}
             </SignUpTab>
           </UserTypeTabs>
           <SignUpForm onSubmit={onSubmitHandler}>
@@ -83,26 +83,26 @@ export default function BuyerSignUp() {
             <PhoneNumberWrapper>
               <Label htmlFor="userPhoneNumber">휴대전화번호</Label>
               <PhoneStyledInputWrapper>
-                <PrefixNumberSelect ref={dropDownRef}>
-                  <PrefixNumberInput value={phoneIdentify} />
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setIsOpen(!isOpen);
-                    }}
-                  >
-                    <img src={DropDownIcon} alt="" />
-                  </button>
-                </PrefixNumberSelect>
+                <PrefixNumberInput value={isClickedOption} />
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setIsOpen(!isOpen);
+                  }}
+                >
+                  {isOpen ? <img src={DropDownIcon} alt="drop-down-icon" /> : <img src={PullUpIcon} alt="pull-up-icon" />}
+                </button>
                 {isOpen && (
                   <ul>
                     {phoneList.map((value, index) => (
-                      <DropDownItem key={index} value={value} setIsOpen={setIsOpen} setPhoneIdentify={setPhoneIdentify} isOpen={isOpen} />
+                      <li key={index} onClick={() => setIsClickedOption(value)}>
+                        {value}
+                      </li>
                     ))}
                   </ul>
                 )}
-                <PhoneStyledInput id="userPhoneNumberOtherPart" type="text" />
-                <PhoneStyledInput id="userPhoneNumberTheOtherPart" type="text" />
+                <PhoneStyledInput id="userPhoneNumberOther" type="text" />
+                <PhoneStyledInput id="userPhoneNumberTheOther" type="text" />
               </PhoneStyledInputWrapper>
             </PhoneNumberWrapper>
           </SignUpForm>
