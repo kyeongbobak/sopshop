@@ -1,4 +1,3 @@
-import { useState } from "react";
 import LogoImage from "../../assets/Logo-hodu.png";
 import Button from "../../components/Button/Button";
 import {
@@ -16,16 +15,24 @@ import {
   Label,
   StyledInput,
   PhoneNumberWrapper,
+  PrefixNumberSelect,
+  PrefixNumberInput,
   PhoneStyledInputWrapper,
   PhoneStyledInput,
   SignUpRegistrationSection,
   SignUpAgreementWrapper,
   SignUpAgreementInput,
-  DropDownIcon,
 } from "./BuyerSignUpStyle";
-
+import { useState, useRef } from "react";
+// import PullUpIcon from "../../assets/icon-up-arrow.png";
+import DropDownIcon from "../../assets/icon-down-arrow.png";
+import DropDownItem from "../../components/DropDownItem/DropDownItem";
 export default function BuyerSignUp() {
   const [activeTab, setActiveTab] = useState("buyer");
+  const dropDownRef = useRef();
+  const [isOpen, setIsOpen] = useState(dropDownRef, false);
+  const [phoneIdentify, setPhoneIdentify] = useState("010");
+  const phoneList = ["010", "011", "016", "017", "018", "019"];
   // const [userId, setUserId] = useState("");
   // const [userPassword, setuserPassword] = useState("");
   // const [userPassWordCheck, setuserPassWordCheck] = useState("");
@@ -76,15 +83,24 @@ export default function BuyerSignUp() {
             <PhoneNumberWrapper>
               <Label htmlFor="userPhoneNumber">휴대전화번호</Label>
               <PhoneStyledInputWrapper>
-                <select defaultValue="010">
-                  <option value="010">010</option>
-                  <option value="011">011</option>
-                  <option value="016">016</option>
-                  <option value="017">017</option>
-                  <option value="018">018</option>
-                  <option value="019">019</option>
-                </select>
-
+                <PrefixNumberSelect ref={dropDownRef}>
+                  <PrefixNumberInput value={phoneIdentify} />
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setIsOpen(!isOpen);
+                    }}
+                  >
+                    <img src={DropDownIcon} alt="" />
+                  </button>
+                </PrefixNumberSelect>
+                {isOpen && (
+                  <ul>
+                    {phoneList.map((value, index) => (
+                      <DropDownItem key={index} value={value} setIsOpen={setIsOpen} setPhoneIdentify={setPhoneIdentify} isOpen={isOpen} />
+                    ))}
+                  </ul>
+                )}
                 <PhoneStyledInput id="userPhoneNumberOtherPart" type="text" />
                 <PhoneStyledInput id="userPhoneNumberTheOtherPart" type="text" />
               </PhoneStyledInputWrapper>
@@ -93,7 +109,7 @@ export default function BuyerSignUp() {
         </FormBox>
         <SignUpRegistrationSection>
           <SignUpAgreementWrapper>
-            <SignUpAgreementInput type="checkbox" />
+            <SignUpAgreementInput />
             <p>
               호두샵의 <strong>이용약관</strong>및 <strong>개인정보처리방침</strong>에 대한 내용을 확인하였고 동<br />
               의합니다.

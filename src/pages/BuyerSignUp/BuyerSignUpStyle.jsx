@@ -104,20 +104,46 @@ export const StyledInput = styled.input`
 
 export const PhoneNumberWrapper = styled.div`
   padding-top: 12px;
+  position: relative;
+`;
+
+export const PrefixNumberSelect = styled.div`
+  width: 146px;
+  height: 54px;
+  border: 1px solid var(--gray-color);
+  border-radius: 5px;
+  text-align: center;
+  font-size: var(--font-md-size);
+
+  button {
+    position: absolute;
+    margin-top: 17px;
+    margin-left: 20px;
+  }
+`;
+
+export const PrefixNumberInput = styled.input`
+  margin-top: 20px;
+  background-color: white;
 `;
 
 export const PhoneStyledInputWrapper = styled.div`
   display: flex;
-  gap: 12px;
+  gap: 13px;
   padding-top: 12px;
+  position: relative;
 
-  select {
+  ul {
+    position: absolute;
+    margin-top: 60px;
     width: 146px;
-    height: 54px;
     border: 1px solid var(--gray-color);
     border-radius: 5px;
-    text-align: center;
+  }
+  li {
     font-size: var(--font-md-size);
+    text-align: center;
+    padding: 10px;
   }
 `;
 
