@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const Header = styled.header``;
 
@@ -55,12 +56,12 @@ export const HeaderLinkMenu = styled.div`
   }
 `;
 
-export const HeaderCartLink = styled.a``;
+export const HeaderCartLink = styled(Link)``;
 
-export const HeaderUserPageLink = styled.a`
+export const HeaderUserPageLink = styled(Link)`
   text-align: center;
 `;
 
-export const HeaderLoginLink = styled.a`
+export const HeaderLoginLink = styled(Link)`
   text-align: center;
 `;

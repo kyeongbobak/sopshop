@@ -32,7 +32,7 @@ export default function BuyerHeader() {
               <p>마이페이지</p>
             </HeaderUserPageLink>
           ) : (
-            <HeaderLoginLink>
+            <HeaderLoginLink to={"./login"}>
               <img src={UserIcon} alt="" />
               <p>로그인</p>
             </HeaderLoginLink>

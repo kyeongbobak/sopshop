@@ -20,11 +20,13 @@ import {
   PhoneStyledInput,
   SignUpRegistrationSection,
   SignUpAgreementWrapper,
-  SignUpAgreementInput,
+  SignUpButton,
+  SignUpAgreementCheckBox,
 } from "./BuyerSignUpStyle";
 import { useState } from "react";
 import DropDownIcon from "../../assets/icon-down-arrow.png";
 import PullUpIcon from "../../assets/icon-up-arrow.png";
+import checkBoxIcon from "../../assets/check-box.png";
 
 export default function BuyerSignUp() {
   const [activeTab, setActiveTab] = useState("buyer");
@@ -95,7 +97,13 @@ export default function BuyerSignUp() {
                 {isOpen && (
                   <ul>
                     {phoneList.map((value, index) => (
-                      <li key={index} onClick={() => setIsClickedOption(value)}>
+                      <li
+                        key={index}
+                        onClick={() => {
+                          setIsClickedOption(value);
+                          setIsOpen(false);
+                        }}
+                      >
                         {value}
                       </li>
                     ))}
@@ -109,15 +117,14 @@ export default function BuyerSignUp() {
         </FormBox>
         <SignUpRegistrationSection>
           <SignUpAgreementWrapper>
-            <SignUpAgreementInput />
+            <Label htmlFor="chk">이름</Label>
+            <SignUpAgreementCheckBox id="chk"></SignUpAgreementCheckBox>
             <p>
               호두샵의 <strong>이용약관</strong>및 <strong>개인정보처리방침</strong>에 대한 내용을 확인하였고 동<br />
               의합니다.
             </p>
           </SignUpAgreementWrapper>
-          <Button MButton disabled>
-            가입하기
-          </Button>
+          <SignUpButton>가입하기</SignUpButton>
         </SignUpRegistrationSection>
       </SignUpWrapper>
     </>

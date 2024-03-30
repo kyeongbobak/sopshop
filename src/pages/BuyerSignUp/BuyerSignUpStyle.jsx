@@ -114,23 +114,46 @@ export const PhoneStyledInputWrapper = styled.div`
 
   button {
     position: absolute;
-    margin-left: 116px;
+    margin-left: 117px;
     margin-top: 17px;
   }
 
   ul {
-    width: 146px;
+    width: 150px;
     height: 150px;
     position: absolute;
-    margin-top: 70px;
+    margin-top: 63px;
     border: 1px solid var(--gray-color);
     border-radius: 5px;
     font-size: var(--font-md-size);
     text-align: center;
+    overflow-y: auto;
+    background-color: white;
+  }
+
+  ul::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  ul::-webkit-scrollbar-track {
+    background: var(--light-gray-color);
+  }
+
+  ul::-webkit-scrollbar-thumb {
+    background: var(--gray-color);
+    border-radius: 10px;
+    background-clip: padding-box; // 트랙의 너비 조절
+    border: 3px solid transparent; // 트랙의 너비 조절
   }
 
   li {
     padding: 10px 0;
+    overflow: auto;
+    cursor: pointer;
+  }
+
+  li:hover {
+    background-color: #e0e0e0;
   }
 `;
 
@@ -158,6 +181,7 @@ export const SignUpAgreementWrapper = styled.div`
   display: flex;
   align-items: start;
   justify-content: center;
+  gap: 10px;
   padding: 34px 0;
   font-size: var(--font-md-size);
 
@@ -171,4 +195,13 @@ export const SignUpAgreementWrapper = styled.div`
   }
 `;
 
-export const SignUpAgreementInput = styled.input``;
+export const SignUpButton = styled.button`
+  width: 480px;
+  height: 60px;
+  border-radius: 5px;
+  background-color: var(--gray-color);
+  color: white;
+  font-size: var(--font-md-size);
+`;
+
+export const SignUpAgreementCheckBox = styled.input``;
