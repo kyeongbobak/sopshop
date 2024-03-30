@@ -117,8 +117,10 @@ export default function BuyerSignUp() {
         </FormBox>
         <SignUpRegistrationSection>
           <SignUpAgreementWrapper>
-            <Label htmlFor="chk">이름</Label>
-            <SignUpAgreementCheckBox id="chk"></SignUpAgreementCheckBox>
+            <Label className="a11y-hidden" htmlFor="chk">
+              인증 약관 전체 동의
+            </Label>
+            <SignUpAgreementCheckBox type="checkbox" id="chk"></SignUpAgreementCheckBox>
             <p>
               호두샵의 <strong>이용약관</strong>및 <strong>개인정보처리방침</strong>에 대한 내용을 확인하였고 동<br />
               의합니다.
