@@ -3,11 +3,15 @@ import LogoImage from "../../assets/Logo-hodu.png";
 import ShoppingCartIcon from "../../assets/icon-shopping-cart.png";
 import UserIcon from "../../assets/icon-user.png";
 import SearchIcon from "../../assets/search.png";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 
 export default function BuyerHeader() {
-  const { token } = useContext(AuthContext);
+  const { token, isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
+
+  useEffect(() => {
+    setIsLoggedIn(!!token);
+  }, [token]);
 
   return (
     <Header>
@@ -26,7 +30,7 @@ export default function BuyerHeader() {
             <img src={ShoppingCartIcon} alt="" />
             <p>장바구니</p>
           </HeaderCartLink>
-          {token ? (
+          {isLoggedIn ? (
             <HeaderUserPageLink>
               <img src={UserIcon} alt="" />
               <p>마이페이지</p>
