@@ -56,7 +56,9 @@ export const SellerLoginSignUp = styled(Link)`
   border-left : ${(props) => (props.isActive ? 0 : "1px solid var(var(--gray-color))")}
 `;
 
-export const SignUpForm = styled.form`
+export const SignUpForm = styled.form``;
+
+export const SignUpFormSection = styled.div`
   display: flex;
   flex-direction: column;
   padding: 36px 35px;
@@ -73,16 +75,24 @@ export const Label = styled.label`
   font-size: var(--font-md-size);
 `;
 
+export const commonInputStyled = css`
+  height: 54px;
+  border: 1px solid var(--gray-color);
+  border-radius: 5px;
+  font-size: var(--font-md-size);
+`;
+
+export const StyledInput = styled.input`
+  ${commonInputStyled}
+`;
+
 export const UserIdInputWrapper = styled.div`
   display: flex;
 `;
 
 export const UserIdInput = styled.input`
+  ${commonInputStyled}
   flex-grow: 1;
-  height: 54px;
-  border: 1px solid var(--gray-color);
-  border-radius: 5px;
-  font-size: var(--font-md-size);
 `;
 
 export const UserIdDupicateButton = styled.button`
@@ -95,11 +105,12 @@ export const UserIdDupicateButton = styled.button`
   text-align: center;
 `;
 
-export const StyledInput = styled.input`
-  height: 54px;
-  border: 1px solid var(--gray-color);
-  border-radius: 5px;
-  font-size: var(--font-md-size);
+export const PassWordInput = styled.input`
+  ${commonInputStyled}
+`;
+
+export const PassWordCheckInput = styled.input`
+  ${commonInputStyled}
 `;
 
 export const PhoneNumberWrapper = styled.div`
@@ -187,6 +198,7 @@ export const SignUpAgreementWrapper = styled.div`
 
   p {
     text-align: left;
+    line-height: 20px;
   }
 
   strong {
