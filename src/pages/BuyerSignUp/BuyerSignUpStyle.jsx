@@ -105,12 +105,26 @@ export const UserIdDupicateButton = styled.button`
   text-align: center;
 `;
 
+export const PassWordInputWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  img {
+    width: 28px;
+    margin-left: 430px;
+    margin-top: 55px;
+    position: absolute;
+  }
+`;
+
 export const PassWordInput = styled.input`
   ${commonInputStyled}
+  position: relative;
 `;
 
 export const PassWordCheckInput = styled.input`
   ${commonInputStyled}
+  position: relative;
 `;
 
 export const PhoneNumberWrapper = styled.div`
@@ -177,7 +191,7 @@ export const PrefixNumberInput = styled.input`
   font-size: var(--font-md-size);
 `;
 
-export const PhoneStyledInput = styled.input`
+export const PhoneNumberStyledInput = styled.input`
   width: 146px;
   border: 1px solid var(--gray-color);
   border-radius: 5px;
@@ -238,4 +252,9 @@ export const SignUpAgreementCheckBox = styled.input`
     transform: rotate(45deg);
     margin: 0px 0px 3px 3px;
   }
+`;
+
+export const ValidateMessage = styled.p`
+  color: var(--black-color);
+  font-size: var(--font-md-size);
 `;

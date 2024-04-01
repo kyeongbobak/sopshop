@@ -11,23 +11,27 @@ import {
   SignUpFormSection,
   UserIdInputWrapper,
   UserIdInput,
+  UserIdDupicateButton,
+  PassWordInputWrapper,
   PassWordInput,
   PassWordCheckInput,
-  UserIdDupicateButton,
   Label,
   StyledInput,
   PhoneNumberWrapper,
   PrefixNumberInput,
   PhoneStyledInputWrapper,
-  PhoneStyledInput,
+  PhoneNumberStyledInput,
   SignUpRegistrationSection,
   SignUpAgreementWrapper,
   SignUpButton,
   SignUpAgreementCheckBox,
+  ValidateMessage,
 } from "./BuyerSignUpStyle";
 import { useState } from "react";
 import DropDownIcon from "../../assets/icon-down-arrow.png";
 import PullUpIcon from "../../assets/icon-up-arrow.png";
+import CheckOffIcon from "../../assets/icon-check-off.png";
+import CheckOnIcon from "../../assets/icon-check-on.png";
 
 export default function BuyerSignUp() {
   const [activeTab, setActiveTab] = useState("buyer");
@@ -35,37 +39,62 @@ export default function BuyerSignUp() {
   const [isClickedOption, setIsClickedOption] = useState("010");
   const phoneList = ["010", "011", "016", "017", "018", "019"];
   const [userId, setUserId] = useState("");
-  const [userPassWord, setUserPassWord] = useState("");
-  const [passWordCheck, setPassWordCheck] = useState("");
+  const [userPassword, setUserPassword] = useState("");
+  const [userPassWordCheck, setUserPassWordCheck] = useState("");
   const [userName, setUserName] = useState("");
   const [phoneNumberMiddle, setPhoneNumberMiddle] = useState("");
   const [phoneNumberEnd, setPhonNumberEnd] = useState("");
+  const [DuplicateMessage, setDuplicateMessage] = useState("");
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
 
+  const phoneNumber = isClickedOption.concat(phoneNumberMiddle).concat(phoneNumberEnd);
+
+  const body = {
+    username: userId,
+    password: userPassword,
+    password2: userPassWordCheck,
+    phone_number: phoneNumber,
+    name: userName,
+  };
+
+  const verifyAccount = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await fetch("https://openmarket.weniv.co.kr/accounts/signup/valid/username/", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({ username: userId }),
+      });
+      const data = await res.json();
+      console.log(data.FAIL_Message);
+      if (data.Success) {
+        setDuplicateMessage(data.Success);
+      } else {
+        setDuplicateMessage(data.FAIL_Message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const onSubmitHandler = async (e) => {
     e.preventDefault();
 
-    const phoneNumber = isClickedOption.concat(phoneNumberMiddle).concat(phoneNumberEnd);
-
-    const body = {
-      username: userId,
-      password: userPassWord,
-      password2: passWordCheck,
-      phone_number: phoneNumber,
-      name: userName,
-    };
-
     try {
-      const res = await fetch("https://api.mandarin.weniv.co.kr/accounts/signup/", {
+      const res = await fetch("https://openmarket.weniv.co.kr/accounts/signup/", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
         },
         body: JSON.stringify(body),
       });
+
       const data = await res.json();
       console.log(data);
     } catch (error) {
@@ -90,22 +119,28 @@ export default function BuyerSignUp() {
               <SellerLoginSignUp onClick={() => handleTabClick("seller")} isActive={activeTab === "seller"}>
                 판매회원 가입
               </SellerLoginSignUp>
-              {isOpen && <ul>{}</ul>}
             </SignUpTab>
           </UserTypeTabs>
           <SignUpForm onSubmit={onSubmitHandler}>
             <SignUpFormSection>
               <Label htmlFor="userId">아이디</Label>
               <UserIdInputWrapper>
-                <UserIdInput id="userId" type="text" value={userId} onChange={(e) => setUserId(e.target.value)} />
-                <UserIdDupicateButton>중복확인</UserIdDupicateButton>
+                <UserIdInput id="userId" type="text" onChange={(e) => setUserId(e.target.value)} value={userId} />
+                <UserIdDupicateButton onClick={verifyAccount}>중복확인</UserIdDupicateButton>
               </UserIdInputWrapper>
-              <Label htmlFor="userPassword">비밀번호</Label>
-              <PassWordInput id="userPassWord" type="password" value={userPassWord} onChange={(e) => setUserPassWord(e.target.value)} />
-              <Label htmlFor="userPassWordCheck">비밀번호 재확인</Label>
-              <PassWordCheckInput id="userPassWordCheck" type="password" value={passWordCheck} onChange={(e) => setPassWordCheck(e.target.value)} />
+              <ValidateMessage>{DuplicateMessage}</ValidateMessage>
+              <PassWordInputWrapper>
+                <Label htmlFor="userPassword">비밀번호</Label>
+                <PassWordInput id="userPassWord" type="password" onChange={(e) => setUserPassword(e.target.value)} value={userPassword} />
+                {userPassword ? <img src={CheckOnIcon} alt="" /> : <img src={CheckOffIcon} alt="" />}
+              </PassWordInputWrapper>
+              <PassWordInputWrapper>
+                <Label htmlFor="userPassWordCheck">비밀번호 재확인</Label>
+                <PassWordCheckInput id="userPassWordCheck" type="password" onChange={(e) => setUserPassWordCheck(e.target.value)} value={userPassWordCheck} />
+                {userPassWordCheck ? <img src={CheckOnIcon} alt="" /> : <img src={CheckOffIcon} alt="" />}
+              </PassWordInputWrapper>
               <Label htmlFor="userName">이름</Label>
-              <StyledInput id="userName" type="text" value={userName} onChange={(e) => setUserName(e.target.value)} />
+              <StyledInput id="userName" type="text" onChange={(e) => setUserName(e.target.value)} value={userName} />
               <PhoneNumberWrapper>
                 <Label htmlFor="userPhoneNumber">휴대전화번호</Label>
                 <PhoneStyledInputWrapper>
@@ -133,8 +168,8 @@ export default function BuyerSignUp() {
                       ))}
                     </ul>
                   )}
-                  <PhoneStyledInput id="userPhoneNumberOther" type="text" value={phoneNumberMiddle} onChange={(e) => setPhoneNumberMiddle(e.target.value)} />
-                  <PhoneStyledInput id="userPhoneNumberTheOther" type="text" value={phoneNumberEnd} onChange={(e) => setPhonNumberEnd(e.target.value)} />
+                  <PhoneNumberStyledInput id="userPhoneNumberOther" type="text" onChange={(e) => setPhoneNumberMiddle(e.target.value)} value={phoneNumberMiddle} />
+                  <PhoneNumberStyledInput id="userPhoneNumberTheOther" type="text" onChange={(e) => setPhonNumberEnd(e.target.value)} value={phoneNumberEnd} />
                 </PhoneStyledInputWrapper>
               </PhoneNumberWrapper>
             </SignUpFormSection>
@@ -145,7 +180,7 @@ export default function BuyerSignUp() {
                 </Label>
                 <SignUpAgreementCheckBox type="checkbox" id="chk"></SignUpAgreementCheckBox>
                 <p>
-                  호두샵의 <strong>이용약관</strong> 및 <strong>개인정보처리방침</strong>에 대한 내용을 확인하였고 동<br />
+                  호두샵의 <strong>이용약관</strong>및 <strong>개인정보처리방침</strong>에 대한 내용을 확인하였고 동<br />
                   의합니다.
                 </p>
               </SignUpAgreementWrapper>

@@ -49,6 +49,7 @@ export default function BuyerLogin() {
         localStorage.setItem("token", data.token);
         localStorage.setItem("id", data.id);
         setWarningMessage("");
+        navigate("/mainPage");
       } else if (!userId && !userPassword) {
         setWarningMessage("아이디를 입력해주세요");
       } else if (userId && !userPassword) {
@@ -59,7 +60,6 @@ export default function BuyerLogin() {
     } catch (error) {
       console.log("error");
     }
-    navigate(`/mainPage`);
   };
 
   return (
@@ -90,8 +90,8 @@ export default function BuyerLogin() {
               비밀번호
             </Label>
             <StyledInput id="userPassword" type="password" placeholder="비밀번호" value={userPassword} onChange={inputHandler} />
+            {warningMessage ? <ValidateMessage>{warningMessage}</ValidateMessage> : ""}
             <LoginButton type="submit">로그인</LoginButton>
-            <ValidateMessage>{warningMessage}</ValidateMessage>
           </LoginForm>
         </FormBox>
         <LinkWrapper>
