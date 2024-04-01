@@ -77,13 +77,13 @@ export const Label = styled.label`
 
 export const commonInputStyled = css`
   height: 54px;
-  border: 1px solid var(--gray-color);
   border-radius: 5px;
   font-size: var(--font-md-size);
 `;
 
 export const StyledInput = styled.input`
   ${commonInputStyled}
+  border: 1px solid var(--gray-color);
 `;
 
 export const UserIdInputWrapper = styled.div`
@@ -92,6 +92,7 @@ export const UserIdInputWrapper = styled.div`
 
 export const UserIdInput = styled.input`
   ${commonInputStyled}
+  border: ${(props) => (props.isUserIdError ? "1px solid red" : "1px solid var(--gray-color)")};
   flex-grow: 1;
 `;
 
@@ -119,12 +120,12 @@ export const PassWordInputWrapper = styled.div`
 
 export const PassWordInput = styled.input`
   ${commonInputStyled}
-  position: relative;
+  border: 1px solid var(--gray-color);
 `;
 
 export const PassWordCheckInput = styled.input`
   ${commonInputStyled}
-  position: relative;
+  border: ${(props) => (props.isPassWordError ? "1px solid red" : "1px solid var(--gray-color)")};
 `;
 
 export const PhoneNumberWrapper = styled.div`
@@ -139,7 +140,7 @@ export const PhoneStyledInputWrapper = styled.div`
 
   button {
     position: absolute;
-    margin-left: 120px;
+    margin-left: 125px;
     margin-top: 17px;
   }
 
@@ -255,6 +256,7 @@ export const SignUpAgreementCheckBox = styled.input`
 `;
 
 export const ValidateMessage = styled.p`
-  color: var(--black-color);
+  padding-top: 12px;
   font-size: var(--font-md-size);
+  color: ${(props) => (props.isDuplicate || props.isPassWordError ? "red" : "var(--black-color)")};
 `;

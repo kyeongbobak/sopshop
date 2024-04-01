@@ -45,6 +45,9 @@ export default function BuyerSignUp() {
   const [phoneNumberMiddle, setPhoneNumberMiddle] = useState("");
   const [phoneNumberEnd, setPhonNumberEnd] = useState("");
   const [DuplicateMessage, setDuplicateMessage] = useState("");
+  const [passWordWarningMessage, setPassWordWarningMessage] = useState("");
+  const [userNameWarningMessage, setUserNameWarningMessage] = useState("");
+  const [phoneNumberWarningMessage, setPhoneNumberWarningMessage] = useState("");
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -72,11 +75,10 @@ export default function BuyerSignUp() {
         body: JSON.stringify({ username: userId }),
       });
       const data = await res.json();
-      console.log(data.FAIL_Message);
       if (data.Success) {
         setDuplicateMessage(data.Success);
       } else {
-        setDuplicateMessage(data.FAIL_Message);
+        setDuplicateMessage("해당 사용자 아이디는 이미 존재합니다.");
       }
     } catch (error) {
       console.log(error);
@@ -96,7 +98,29 @@ export default function BuyerSignUp() {
       });
 
       const data = await res.json();
+
       console.log(data);
+      if (!userPassword && !userPassWordCheck) {
+        setPassWordWarningMessage("이 필드는 blank일 수 없습니다.");
+      } else if (userPassword.length < 8 && userPassWordCheck.length < 8) {
+        setPassWordWarningMessage("비밀번호는 8자 이상이어야 합니다.");
+      } else if (userPassword.search(/[a-z]/gi) < 0 && userPassWordCheck.search(/[a-z]/gi) < 0) {
+        setPassWordWarningMessage("비밀번호는 한개 이상의 영소문자가 필수적으로 들어가야 합니다.");
+      } else if (userPassword.search(/[0-9]/g) < 0 && userPassWordCheck.search(/[0-9]/g) < 0) {
+        setPassWordWarningMessage("비밀번호는 한개 이상의 숫자가 필수적으로 들어가야 합니다.");
+      }
+
+      if (20 < userId.length || /^[a-zA-Z0-9]$/.test(userId)) {
+        setUserNameWarningMessage("ID는 20자 이내의 영어 소문자, 대문자, 숫자만 가능합니다.");
+      } else {
+        setUserNameWarningMessage("해당 사용자 아이디는 이미 존재합니다.");
+      }
+
+      if (!/^01[0-9]{8,9}$/.test(phoneNumber)) {
+        setPhoneNumberWarningMessage("핸드폰번호는 01*으로 시작해야 하는 10~11자리 숫자여야 합니다.");
+      } else {
+        setPhoneNumberWarningMessage(data.phone_number[0]);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -125,10 +149,10 @@ export default function BuyerSignUp() {
             <SignUpFormSection>
               <Label htmlFor="userId">아이디</Label>
               <UserIdInputWrapper>
-                <UserIdInput id="userId" type="text" onChange={(e) => setUserId(e.target.value)} value={userId} />
+                <UserIdInput id="userId" type="text" onChange={(e) => setUserId(e.target.value)} value={userId} isUserIdError={DuplicateMessage === "username 필드를 추가해주세요 :)" || DuplicateMessage === "해당 사용자 아이디는 이미 존재합니다."} />
                 <UserIdDupicateButton onClick={verifyAccount}>중복확인</UserIdDupicateButton>
               </UserIdInputWrapper>
-              <ValidateMessage>{DuplicateMessage}</ValidateMessage>
+              {DuplicateMessage ? <ValidateMessage isDuplicate={DuplicateMessage === "username 필드를 추가해주세요 :)" || DuplicateMessage === "해당 사용자 아이디는 이미 존재합니다."}>{DuplicateMessage}</ValidateMessage> : ""}
               <PassWordInputWrapper>
                 <Label htmlFor="userPassword">비밀번호</Label>
                 <PassWordInput id="userPassWord" type="password" onChange={(e) => setUserPassword(e.target.value)} value={userPassword} />
@@ -136,11 +160,13 @@ export default function BuyerSignUp() {
               </PassWordInputWrapper>
               <PassWordInputWrapper>
                 <Label htmlFor="userPassWordCheck">비밀번호 재확인</Label>
-                <PassWordCheckInput id="userPassWordCheck" type="password" onChange={(e) => setUserPassWordCheck(e.target.value)} value={userPassWordCheck} />
+                <PassWordCheckInput id="userPassWordCheck" type="password" onChange={(e) => setUserPassWordCheck(e.target.value)} value={userPassWordCheck} isPassWordError={passWordWarningMessage !== ""} />
                 {userPassWordCheck ? <img src={CheckOnIcon} alt="" /> : <img src={CheckOffIcon} alt="" />}
+                {passWordWarningMessage ? <ValidateMessage isPassWordError={passWordWarningMessage !== ""}>{passWordWarningMessage}</ValidateMessage> : ""}
               </PassWordInputWrapper>
               <Label htmlFor="userName">이름</Label>
               <StyledInput id="userName" type="text" onChange={(e) => setUserName(e.target.value)} value={userName} />
+
               <PhoneNumberWrapper>
                 <Label htmlFor="userPhoneNumber">휴대전화번호</Label>
                 <PhoneStyledInputWrapper>
@@ -171,6 +197,7 @@ export default function BuyerSignUp() {
                   <PhoneNumberStyledInput id="userPhoneNumberOther" type="text" onChange={(e) => setPhoneNumberMiddle(e.target.value)} value={phoneNumberMiddle} />
                   <PhoneNumberStyledInput id="userPhoneNumberTheOther" type="text" onChange={(e) => setPhonNumberEnd(e.target.value)} value={phoneNumberEnd} />
                 </PhoneStyledInputWrapper>
+                {phoneNumberWarningMessage ? <ValidateMessage>{phoneNumberWarningMessage}</ValidateMessage> : ""}
               </PhoneNumberWrapper>
             </SignUpFormSection>
             <SignUpRegistrationSection>
