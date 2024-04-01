@@ -75,9 +75,12 @@ export default function BuyerSignUp() {
         body: JSON.stringify({ username: userId }),
       });
       const data = await res.json();
+      console.log(data);
       if (data.Success) {
         setDuplicateMessage(data.Success);
-      } else {
+      } else if (!userId) {
+        setDuplicateMessage(data.FAIL_Message);
+      } else if (data.FAIL_Message) {
         setDuplicateMessage("해당 사용자 아이디는 이미 존재합니다.");
       }
     } catch (error) {
@@ -112,14 +115,17 @@ export default function BuyerSignUp() {
 
       if (20 < userId.length || /^[a-zA-Z0-9]$/.test(userId)) {
         setUserNameWarningMessage("ID는 20자 이내의 영어 소문자, 대문자, 숫자만 가능합니다.");
-      } else {
-        setUserNameWarningMessage("해당 사용자 아이디는 이미 존재합니다.");
+      } else if (!userId) {
+        setUserNameWarningMessage(data.username[0]);
       }
 
-      if (!/^01[0-9]{8,9}$/.test(phoneNumber)) {
+      // 코드 더 간결하게 수정
+      if (!phoneNumberMiddle || !phoneNumberEnd) {
+        setPhoneNumberWarningMessage("이 필드는 blank일 수 없습니다.");
+      } else if (!/^01[0-9]{8,10}$/.test(phoneNumber)) {
         setPhoneNumberWarningMessage("핸드폰번호는 01*으로 시작해야 하는 10~11자리 숫자여야 합니다.");
-      } else {
-        setPhoneNumberWarningMessage(data.phone_number[0]);
+      } else if (data.phone_number) {
+        setPhoneNumberWarningMessage("해당 사용자 전화번호는 이미 존재합니다.");
       }
     } catch (error) {
       console.log(error);
@@ -153,6 +159,7 @@ export default function BuyerSignUp() {
                 <UserIdDupicateButton onClick={verifyAccount}>중복확인</UserIdDupicateButton>
               </UserIdInputWrapper>
               {DuplicateMessage ? <ValidateMessage isDuplicate={DuplicateMessage === "username 필드를 추가해주세요 :)" || DuplicateMessage === "해당 사용자 아이디는 이미 존재합니다."}>{DuplicateMessage}</ValidateMessage> : ""}
+              {userNameWarningMessage ? <ValidateMessage>{userNameWarningMessage}</ValidateMessage> : ""}
               <PassWordInputWrapper>
                 <Label htmlFor="userPassword">비밀번호</Label>
                 <PassWordInput id="userPassWord" type="password" onChange={(e) => setUserPassword(e.target.value)} value={userPassword} />
