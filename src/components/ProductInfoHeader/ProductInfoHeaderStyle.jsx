@@ -5,7 +5,7 @@ export const ProductInfoMenu = styled.ul`
   width: 1280px;
   margin: 0 auto;
   border-radius: 10px;
-  background-color: var(--box-gray-color);
+  background-color: var(--light-gray-color);
   gap: 40px;
   text-align: center;
   padding: 20px 0;
