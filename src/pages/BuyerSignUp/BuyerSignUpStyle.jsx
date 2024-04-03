@@ -226,9 +226,9 @@ export const SignUpButton = styled.button`
   width: 480px;
   height: 60px;
   border-radius: 5px;
-  background-color: var(--gray-color);
   color: white;
   font-size: var(--font-md-size);
+  background-color: ${(props) => (props.isSignUp ? "var(--main-color)" : "var(--gray-color)")};
 `;
 
 export const SignUpAgreementCheckBox = styled.input`

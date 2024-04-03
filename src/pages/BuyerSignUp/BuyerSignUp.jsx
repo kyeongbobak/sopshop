@@ -48,9 +48,13 @@ export default function BuyerSignUp() {
   const [passWordWarningMessage, setPassWordWarningMessage] = useState("");
   const [userNameWarningMessage, setUserNameWarningMessage] = useState("");
   const [phoneNumberWarningMessage, setPhoneNumberWarningMessage] = useState("");
+  const [isClickedSignUp, setIsClickedSignUp] = useState(false);
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
+  };
+  const handleOnSignUp = () => {
+    setIsClickedSignUp(!isClickedSignUp);
   };
 
   const phoneNumber = isClickedOption.concat(phoneNumberMiddle).concat(phoneNumberEnd);
@@ -216,7 +220,9 @@ export default function BuyerSignUp() {
                   의합니다.
                 </p>
               </SignUpAgreementWrapper>
-              <SignUpButton type="submit">가입하기</SignUpButton>
+              <SignUpButton type="submit" isSignUp={isClickedSignUp} onClick={handleOnSignUp}>
+                가입하기
+              </SignUpButton>
             </SignUpRegistrationSection>
           </SignUpForm>
         </FormBox>
