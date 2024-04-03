@@ -29,3 +29,15 @@ export const EmptyCartMessage = styled.div`
     font-weight: var(--font-bold);
   }
 `;
+
+export const CartItemWrapper = styled.ul``;
+
+export const CartItem = styled.li``;
+
+export const CartItemInput = styled.input``;
+
+export const CartItemInfo = styled.div``;
+
+export const CartItemQuantity = styled.div``;
+
+export const CartItemPrice = styled.div``;

@@ -18,7 +18,7 @@ export const ProductInfoMenuItem = styled.li`
   width: ${({ width }) => width || "auto"};
 `;
 
-export const ProductInfoCheckbox = styled.li`
+export const ProductInfoCheckbox = styled.div`
   width: 20px;
   height: 20px;
   margin: 0 30px;
