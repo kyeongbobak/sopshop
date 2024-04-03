@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   ProductDetailWrapper,
   ProductDetailContent,
@@ -27,14 +27,16 @@ import {
 import { useParams } from "react-router-dom";
 import PlusIcon from "../../assets/icon-plus-line.png";
 import MinusIcon from "../../assets/icon-minus-line.png";
+import BuyerHeader from "../../components/BuyerHeader/BuyerHeader";
+import axios from "axios";
+import { AuthContext } from "../../contexts/AuthContext";
 
 export default function ProductDetail() {
   const [activeTab, setActiveTab] = useState("button");
   const { product_id } = useParams();
   const [product, setProduct] = useState("");
   const [count, setCount] = useState(1);
-
-  console.log(useParams());
+  const { token } = useContext(AuthContext);
 
   const handleTabClick = (e) => {
     setActiveTab(e);
@@ -48,7 +50,6 @@ export default function ProductDetail() {
         });
         const data = await res.json();
         setProduct(data);
-        console.log(data);
       } catch (error) {}
     };
 
@@ -69,8 +70,30 @@ export default function ProductDetail() {
     });
   };
 
+  const AddToCart = async () => {
+    try {
+      const instance = axios.create({
+        headers: {
+          Authorization: `JWT ${token}`,
+        },
+      });
+
+      const body = {
+        product_id: `${product_id}`,
+        quantity: `${count}`,
+        check: `${product.product_id === product_id ? "true" : "false"}`,
+      };
+
+      const res = await instance.post("https://openmarket.weniv.co.kr/cart/", body);
+      console.log(res.data);
+    } catch (error) {
+      console.log("error");
+    }
+  };
+
   return (
     <>
+      <BuyerHeader />
       <ProductDetailWrapper>
         <ProductDetailContent>
           <ProductImage src={product.image}></ProductImage>
@@ -110,7 +133,7 @@ export default function ProductDetail() {
             </ProductOrderSummery>
             <ProductDetailButtonMenu>
               <ProductOrderButton>바로구매</ProductOrderButton>
-              <ProductAddCartButton>장바구니</ProductAddCartButton>
+              <ProductAddCartButton onClick={() => AddToCart()}>장바구니</ProductAddCartButton>
             </ProductDetailButtonMenu>
           </ProductDetailInfo>
         </ProductDetailContent>

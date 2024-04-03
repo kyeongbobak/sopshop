@@ -17,7 +17,7 @@ export default function BuyerHeader() {
     <Header>
       <HeaderWrapper>
         <HeaderInnerMain>
-          <Logo>
+          <Logo Link to={`/mainPage`}>
             <img src={LogoImage} alt="" />
           </Logo>
           <SearchInput type="search" placeholder="상품을 검색해보세요!" />

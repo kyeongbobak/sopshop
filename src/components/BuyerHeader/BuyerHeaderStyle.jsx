@@ -18,7 +18,7 @@ export const HeaderInnerMain = styled.div`
   display: flex;
 `;
 
-export const Logo = styled.a`
+export const Logo = styled(Link)`
   img {
     width: 124px;
   }
