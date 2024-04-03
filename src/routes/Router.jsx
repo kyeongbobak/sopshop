@@ -4,6 +4,7 @@ import BuyerLogin from "../pages/BuyerLogin/BuyerLogin";
 import BuyerMainPage from "../pages/BuyerMainPage/BuyerMainPage";
 import ProductDetail from "../pages/ProductDetail/ProductDetail";
 import BuyerSignUp from "../pages/BuyerSignUp/BuyerSignUp";
+import BuyerShoppingCart from "../pages/BuyerShoppingCart/BuyerShoppingCart";
 // import { useLocation } from "react-router-dom";
 
 export default function Router() {
@@ -24,6 +25,7 @@ export default function Router() {
           <Route path="/products/*" element={<Outlet />}>
             <Route path=":product_id" element={<ProductDetail />}></Route>
           </Route>
+          <Route path="/shoppingCart" element={<BuyerShoppingCart />}></Route>
         </Routes>
       </AuthProvider>
     </>
