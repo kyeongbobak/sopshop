@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-export const Header = styled.header``;
+export const Header = styled.header`
+  box-shadow: 0px 0px 2px 5px var(--light-gray-color);
+`;
 
 export const HeaderWrapper = styled.div`
   display: flex;
