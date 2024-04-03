@@ -11,7 +11,7 @@ export default function BuyerHeader() {
 
   useEffect(() => {
     setIsLoggedIn(!!token);
-  }, [token]);
+  }, [token, setIsLoggedIn]);
 
   return (
     <Header>

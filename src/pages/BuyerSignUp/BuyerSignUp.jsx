@@ -102,7 +102,6 @@ export default function BuyerSignUp() {
 
       const data = await res.json();
 
-      console.log(data);
       if (!userPassword && !userPassWordCheck) {
         setPassWordWarningMessage("이 필드는 blank일 수 없습니다.");
       } else if (userPassword.length < 8 && userPassWordCheck.length < 8) {
@@ -119,7 +118,6 @@ export default function BuyerSignUp() {
         setUserNameWarningMessage(data.username[0]);
       }
 
-      // 코드 더 간결하게 수정
       if (!phoneNumberMiddle || !phoneNumberEnd) {
         setPhoneNumberWarningMessage("이 필드는 blank일 수 없습니다.");
       } else if (!/^01[0-9]{8,10}$/.test(phoneNumber)) {
