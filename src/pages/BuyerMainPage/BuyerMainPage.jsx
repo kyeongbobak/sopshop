@@ -22,14 +22,19 @@ export default function BuyerMainPage() {
           });
           promises.push(instance.get("https://openmarket.weniv.co.kr/products/?page=4"));
           promises.push(instance.get("https://openmarket.weniv.co.kr/products/?page=5"));
+          promises.push(instance.get("https://openmarket.weniv.co.kr/products/?page=6"));
         } else {
           promises.push(fetch("https://openmarket.weniv.co.kr/products/?page=4"));
           promises.push(fetch("https://openmarket.weniv.co.kr/products/?page=5"));
+          promises.push(fetch("https://openmarket.weniv.co.kr/products/?page=6"));
         }
         const res = await Promise.all(promises);
         const data = await Promise.all(res.map((res) => (token ? res.data : res.json())));
-        const mergedData = [...data[0].results, ...data[1].results];
-        setProducts([...mergedData.slice(2, 5), ...mergedData.slice(-2)]);
+        console.log(data);
+        const mergedData = [...data[0].results, ...data[1].results, ...data[2].results];
+        const newArray = mergedData.filter((i) => i.store_name === "Too_much_shop" || i.store_name === "FLOPS");
+        setProducts([...newArray.slice(2, 5), ...newArray.slice(-4, -2)]);
+        console.log(newArray);
         console.log(mergedData);
       } catch (error) {
         console.log("error");
