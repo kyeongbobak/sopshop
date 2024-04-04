@@ -26,7 +26,7 @@ export default function BuyerHeader() {
           </SearchButton>
         </HeaderInnerMain>
         <HeaderLinkMenu>
-          <HeaderCartLink>
+          <HeaderCartLink Link to={`/shoppingCart`}>
             <img src={ShoppingCartIcon} alt="" />
             <p>장바구니</p>
           </HeaderCartLink>
