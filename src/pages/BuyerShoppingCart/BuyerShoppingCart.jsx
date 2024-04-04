@@ -9,7 +9,7 @@ export default function BuyerShoppingCart() {
   const { token, setIsLoggedIn } = useContext(AuthContext);
   const [isEmpty, setIsEmpty] = useState(true);
   const [cartList, setCartList] = useState([]);
-  const [cartProductInfoList, setCartProductInfoList] = useState([]);
+  const [cartProductInfo, setCartProductInfo] = useState([]);
 
   const getShoppingCartList = async () => {
     try {
@@ -18,19 +18,16 @@ export default function BuyerShoppingCart() {
           Authorization: `JWT ${token}`,
         },
       });
-
       const res = await instance.get("https://openmarket.weniv.co.kr/cart/");
       setIsEmpty(false);
       const cartItem = res.data.results;
       setCartList(cartItem);
-      console.log(cartItem);
-      cartItem.forEach((list) => getProductInfo(list.product_id));
-      const productInfoPromises = cartItem.map((list) => getProductInfo(list.product_id));
 
-      const productInfos = await Promise.all(productInfoPromises);
+      const productInfos = cartItem.map((list) => getProductInfo(list.product_id));
+      const productInfoPromises = await Promise.all(productInfos);
+      setCartProductInfo(productInfoPromises);
+
       console.log(productInfoPromises);
-      console.log(productInfos);
-      setCartProductInfoList(productInfos);
     } catch (error) {
       console.log(error);
     }
@@ -72,20 +69,19 @@ export default function BuyerShoppingCart() {
             </>
           ) : (
             <>
-              {cartList.map((list, index) => (
+              {cartList.map((list, i) => (
                 <CartItemWrapper key={list.cart_item_id}>
                   <CartItem>
-                    <CartItemInput key={list.product_id} type="radio" />
+                    <CartItemInput type="radio" />
                     <CartItemInfo>
-                      {cartProductInfoList[index] && (
-                        <div key={cartProductInfoList[index].product_id}>
-                          <span>{cartProductInfoList[index].store_name}</span>
-                          <div>{cartProductInfoList[index].product_name}</div>
-                          <div>{cartProductInfoList[index].price}</div>
+                      {cartProductInfo[i] && (
+                        <div key={cartProductInfo[i].product_id}>
+                          <span>{cartProductInfo[i].store_name}</span>
+                          <div>{cartProductInfo[i].product_name}</div>
+                          <div>{cartProductInfo[i].price}</div>
                         </div>
                       )}
                     </CartItemInfo>
-
                     <CartItemQuantity>{list.quantity}</CartItemQuantity>
                     <CartItemPrice></CartItemPrice>
                   </CartItem>
