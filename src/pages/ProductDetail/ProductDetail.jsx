@@ -139,11 +139,6 @@ export default function ProductDetail() {
         </ProductDetailContent>
         <ProductDetailTabMenu>
           <TabMenuItem>
-            <ProductDetailLink onClick={() => handleTabClick("button")} isActive={activeTab === "button"}>
-              버튼
-            </ProductDetailLink>
-          </TabMenuItem>
-          <TabMenuItem>
             <ProductReviewLink onClick={() => handleTabClick("review")} isActive={activeTab === "review"}>
               리뷰
             </ProductReviewLink>

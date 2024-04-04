@@ -150,7 +150,7 @@ export const ProductDetailTabMenu = styled.ul`
   font-size: var(--font-lg-size);
 `;
 export const TabMenuItem = styled.li`
-  width: 320px;
+  width: 100%;
 `;
 
 export const ProductDetailTabLink = css`
