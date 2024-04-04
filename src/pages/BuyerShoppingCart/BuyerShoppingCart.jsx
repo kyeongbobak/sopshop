@@ -7,7 +7,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 
 export default function BuyerShoppingCart() {
   const { token, setIsLoggedIn } = useContext(AuthContext);
-  const [isEmpty, setIsEmpty] = useState(false);
+  const [isEmpty, setIsEmpty] = useState(true);
   const [cartList, setCartList] = useState([]);
   const [cartProductInfo, setCartProductInfo] = useState([]);
 

@@ -26,6 +26,9 @@ export default function Router() {
             <Route path=":product_id" element={<ProductDetail />}></Route>
           </Route>
           <Route path="/shoppingCart" element={<BuyerShoppingCart />}></Route>
+          <Route path="/shoppingCart/*" element={<Outlet />}>
+            <Route path="login" element={<BuyerLogin />}></Route>
+          </Route>
         </Routes>
       </AuthProvider>
     </>
