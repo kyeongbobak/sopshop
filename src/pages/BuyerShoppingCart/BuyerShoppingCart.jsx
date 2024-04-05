@@ -1,15 +1,32 @@
 import ProductInfoHeader from "../../components/ProductInfoHeader/ProductInfoHeader";
 import BuyerHeader from "../../components/BuyerHeader/BuyerHeader";
-import { ShoppingCartWrapper, ShoppingCartTitle, ShoppingCartContents, EmptyCartMessage, CartItem, CartItemWrapper, CartItemInput, CartItemInfo, CartItemQuantity, CartItemPrice } from "./BuyerShoppingCartStyle";
+import {
+  ShoppingCartWrapper,
+  ShoppingCartTitle,
+  ShoppingCartContents,
+  EmptyCartMessage,
+  CartItem,
+  CartItemWrapper,
+  CartItemInput,
+  CartItemInfo,
+  CartItemPrice,
+  PriceDetailsContents,
+  TotalPrice,
+  DisCountPrice,
+  DeliveryPrice,
+  OrderTotalPrice,
+} from "./BuyerShoppingCartStyle";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../../contexts/AuthContext";
+import Button from "../../components/Button/Button";
 
 export default function BuyerShoppingCart() {
   const { token, setIsLoggedIn } = useContext(AuthContext);
   const [isEmpty, setIsEmpty] = useState(true);
   const [cartList, setCartList] = useState([]);
   const [cartProductInfo, setCartProductInfo] = useState([]);
+  const [totalProductPrice, setTotalProuctPrice] = useState(0);
 
   const getShoppingCartList = async () => {
     try {
@@ -27,7 +44,11 @@ export default function BuyerShoppingCart() {
       const productInfoPromises = await Promise.all(productInfos);
       setCartProductInfo(productInfoPromises);
 
-      console.log(productInfoPromises);
+      Promise.all(productInfoPromises).then((product) => {
+        const totalProductPrice = product.map((v, i) => v.price * cartItem[i].quantity);
+        const cartTotalPrice = totalProductPrice.reduce((acc, cur) => acc + cur, 0);
+        setTotalProuctPrice(cartTotalPrice);
+      });
     } catch (error) {
       console.log(error);
     }
@@ -42,7 +63,6 @@ export default function BuyerShoppingCart() {
       });
       const res = await instance.get(`https://openmarket.weniv.co.kr/products/${id}`);
       const data = await res.data;
-      console.log(data);
       return data;
     } catch (error) {
       console.log(error);
@@ -78,11 +98,11 @@ export default function BuyerShoppingCart() {
                         <div key={cartProductInfo[i].product_id}>
                           <span>{cartProductInfo[i].store_name}</span>
                           <div>{cartProductInfo[i].product_name}</div>
-                          <div>{cartProductInfo[i].price}</div>
+                          <div>{list.quantity}</div>
+                          <div>{list.quantity * cartProductInfo[i].price}</div>
                         </div>
                       )}
                     </CartItemInfo>
-                    <CartItemQuantity>{list.quantity}</CartItemQuantity>
                     <CartItemPrice></CartItemPrice>
                   </CartItem>
                 </CartItemWrapper>
@@ -90,6 +110,13 @@ export default function BuyerShoppingCart() {
             </>
           )}
         </ShoppingCartContents>
+        <PriceDetailsContents>
+          <TotalPrice>{totalProductPrice.toLocaleString()} 원</TotalPrice>
+          <DisCountPrice>0 원</DisCountPrice>
+          <DeliveryPrice>0 원</DeliveryPrice>
+          <OrderTotalPrice>{totalProductPrice.toLocaleString()} 원</OrderTotalPrice>
+        </PriceDetailsContents>
+        <Button LButton>주문하기</Button>
       </ShoppingCartWrapper>
     </>
   );

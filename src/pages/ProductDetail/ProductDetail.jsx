@@ -18,7 +18,6 @@ import {
   ProductOrderButton,
   ProductAddCartButton,
   ProductDetailTabMenu,
-  ProductDetailLink,
   ProductReviewLink,
   ProductQnALink,
   ProductRefundLink,

@@ -41,3 +41,13 @@ export const CartItemInfo = styled.div``;
 export const CartItemQuantity = styled.div``;
 
 export const CartItemPrice = styled.div``;
+
+export const PriceDetailsContents = styled.div``;
+
+export const TotalPrice = styled.p``;
+
+export const DisCountPrice = styled.p``;
+
+export const DeliveryPrice = styled.p``;
+
+export const OrderTotalPrice = styled.p``;
