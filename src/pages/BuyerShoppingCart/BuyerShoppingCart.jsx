@@ -9,17 +9,25 @@ import {
   CartItemWrapper,
   CartItemInput,
   CartItemInfo,
+  CartItemBranName,
+  CartItemName,
+  CartItemInner,
+  CartItemQuantity,
   CartItemPrice,
+  CartItemTotalPrice,
   PriceDetailsContents,
   TotalPrice,
   DisCountPrice,
   DeliveryPrice,
   OrderTotalPrice,
+  OrderButton,
 } from "./BuyerShoppingCartStyle";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../../contexts/AuthContext";
 import Button from "../../components/Button/Button";
+import PlusIcon from "../../assets/icon-plus-line.png";
+import MinusIcon from "../../assets/icon-minus-line.png";
 
 export default function BuyerShoppingCart() {
   const { token, setIsLoggedIn } = useContext(AuthContext);
@@ -27,6 +35,7 @@ export default function BuyerShoppingCart() {
   const [cartList, setCartList] = useState([]);
   const [cartProductInfo, setCartProductInfo] = useState([]);
   const [totalProductPrice, setTotalProuctPrice] = useState(0);
+  const [count, setCount] = useState(1);
 
   const getShoppingCartList = async () => {
     try {
@@ -69,6 +78,20 @@ export default function BuyerShoppingCart() {
     }
   };
 
+  const handleCounterChange = (amount) => {
+    setCount((prev) => {
+      const newCount = prev + amount;
+      if (newCount < 1) {
+        return 1;
+      } else if (newCount) {
+        alert(`이 제품의 최대 구매 가능한 수량은 ${newCount - 1}개 입니다.`);
+        return prev;
+      } else {
+        return newCount;
+      }
+    });
+  };
+
   useEffect(() => {
     getShoppingCartList();
   }, [token, setIsLoggedIn]);
@@ -95,15 +118,23 @@ export default function BuyerShoppingCart() {
                     <CartItemInput type="radio" />
                     <CartItemInfo>
                       {cartProductInfo[i] && (
-                        <div key={cartProductInfo[i].product_id}>
-                          <span>{cartProductInfo[i].store_name}</span>
-                          <div>{cartProductInfo[i].product_name}</div>
-                          <div>{list.quantity}</div>
-                          <div>{list.quantity * cartProductInfo[i].price}</div>
-                        </div>
+                        <>
+                          <CartItemInner key={cartProductInfo[i].product_id}>
+                            <CartItemBranName>{cartProductInfo[i].store_name}</CartItemBranName>
+                            <CartItemName>{cartProductInfo[i].product_name}</CartItemName>
+                            <CartItemPrice>{cartProductInfo[i].price.toLocaleString()} 원</CartItemPrice>
+                            <p>택배배송 / 무료배송</p>
+                          </CartItemInner>
+                          <CartItemQuantity>{list.quantity}</CartItemQuantity>
+                          <CartItemTotalPrice>
+                            <p>{(list.quantity * cartProductInfo[i].price).toLocaleString()} 원</p>
+                            <OrderButton to={`/order`}>
+                              <Button SButton>주문하기</Button>
+                            </OrderButton>
+                          </CartItemTotalPrice>
+                        </>
                       )}
                     </CartItemInfo>
-                    <CartItemPrice></CartItemPrice>
                   </CartItem>
                 </CartItemWrapper>
               ))}
@@ -116,7 +147,9 @@ export default function BuyerShoppingCart() {
           <DeliveryPrice>0 원</DeliveryPrice>
           <OrderTotalPrice>{totalProductPrice.toLocaleString()} 원</OrderTotalPrice>
         </PriceDetailsContents>
-        <Button LButton>주문하기</Button>
+        <OrderButton to={`/order`}>
+          <Button LButton>주문하기</Button>
+        </OrderButton>
       </ShoppingCartWrapper>
     </>
   );

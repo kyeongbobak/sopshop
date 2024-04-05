@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const ShoppingCartWrapper = styled.div`
@@ -14,7 +15,7 @@ export const ShoppingCartTitle = styled.h1`
 
 export const ShoppingCartContents = styled.div`
   text-align: center;
-  margin-top: 220px;
+  margin-top: 35px;
 `;
 
 export const EmptyCartMessage = styled.div`
@@ -30,17 +31,74 @@ export const EmptyCartMessage = styled.div`
   }
 `;
 
-export const CartItemWrapper = styled.ul``;
+export const CartItemWrapper = styled.ul`
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  margin-bottom: 10px;
+`;
 
-export const CartItem = styled.li``;
+export const CartItem = styled.li`
+  width: auto;
+  display: flex;
+  align-items: center;
+`;
 
-export const CartItemInput = styled.input``;
+export const CartItemInput = styled.input`
+  width: 20px;
+  height: 20px;
+  flex-grow: 1;
+  margin: 90px 0;
+  border: 2px solid var(--main-color);
+  border-radius: 50px;
+`;
 
-export const CartItemInfo = styled.div``;
+export const CartItemInfo = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
-export const CartItemQuantity = styled.div``;
+export const CartItemInner = styled.div`
+  width: 362px;
+  text-align: left;
+  padding-left: 238px;
 
-export const CartItemPrice = styled.div``;
+  p {
+    margin-top: 40px;
+    font-size: var(--font-sm-size);
+    color: var(--black-color);
+  }
+`;
+
+export const CartItemBranName = styled.div`
+  font-size: var(--font-sm-size);
+  color: var(--black-color);
+`;
+
+export const CartItemName = styled.div`
+  font-size: var(--font-lg-size);
+  margin-top: 20px;
+`;
+
+export const CartItemPrice = styled.div`
+  font-size: var(--font-md-size);
+  font-weight: var(--font-bold);
+  margin-top: 20px;
+`;
+
+export const CartItemQuantity = styled.div`
+  width: 300px;
+  font-size: var(--font-lg-size);
+`;
+
+export const CartItemTotalPrice = styled.div`
+  width: 300px;
+  font-size: var(--font-lg-size);
+
+  button {
+    margin-top: 28px;
+  }
+`;
 
 export const PriceDetailsContents = styled.div``;
 
@@ -51,3 +109,5 @@ export const DisCountPrice = styled.p``;
 export const DeliveryPrice = styled.p``;
 
 export const OrderTotalPrice = styled.p``;
+
+export const OrderButton = styled(Link)``;
