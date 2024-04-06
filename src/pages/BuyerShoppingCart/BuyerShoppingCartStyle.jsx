@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const ShoppingCartWrapper = styled.div`
   width: 1280px;
@@ -133,14 +133,63 @@ export const CartItemTotalPrice = styled.div`
 
 export const PriceDetailsContents = styled.div`
   background-color: var(--light-gray-color);
+  display: flex;
+  text-align: center;
+  align-items: center;
+  border-radius: 10px;
+  padding: 46px 112px;
+  margin: 80px 0 40px;
+
+  div {
+    background-color: white;
+    border-radius: 50px;
+    padding: 8px 8px;
+  }
 `;
 
-export const TotalPrice = styled.p``;
+export const PriceDetailsContentsCommon = css`
+  span {
+    font-size: var(--font-md-size);
+  }
 
-export const DisCountPrice = styled.p``;
+  p {
+    font-size: var(--font-max-size);
+    padding-top: 12px;
+  }
+`;
 
-export const DeliveryPrice = styled.p``;
+export const TotalPrice = styled.p`
+  ${PriceDetailsContentsCommon}
+  width: 320px;
+`;
 
-export const OrderTotalPrice = styled.p``;
+export const DisCountPrice = styled.p`
+  ${PriceDetailsContentsCommon}
+  width: 320px;
+`;
+
+export const DeliveryPrice = styled.p`
+  ${PriceDetailsContentsCommon}
+  width: 320px;
+`;
+
+export const OrderTotalPrice = styled.p`
+  ${PriceDetailsContentsCommon}
+  width: 320px;
+
+  span {
+    font-weight: var(--font-bold);
+  }
+  p {
+    color: red;
+    font-weight: var(--font-bold);
+  }
+`;
 
 export const OrderButton = styled(Link)``;
+
+export const PaymentButton = styled(Link)`
+  display: flex;
+  justify-content: center;
+  margin-bottom: 80px;
+`;

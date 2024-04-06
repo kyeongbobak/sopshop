@@ -22,6 +22,7 @@ import {
   DeliveryPrice,
   OrderTotalPrice,
   OrderButton,
+  PaymentButton,
 } from "./BuyerShoppingCartStyle";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
@@ -165,14 +166,40 @@ export default function BuyerShoppingCart() {
           )}
         </ShoppingCartContents>
         <PriceDetailsContents>
-          <TotalPrice>{totalProductPrice.toLocaleString()} 원</TotalPrice>
-          <DisCountPrice>0 원</DisCountPrice>
-          <DeliveryPrice>0 원</DeliveryPrice>
-          <OrderTotalPrice>{totalProductPrice.toLocaleString()} 원</OrderTotalPrice>
+          <TotalPrice>
+            <span>총 상품금액</span>
+            <p>
+              {totalProductPrice.toLocaleString()} <span>원</span>
+            </p>
+          </TotalPrice>
+          <div>
+            <img src={MinusIcon} alt="" />
+          </div>
+          <DisCountPrice>
+            <span>상품 할인</span>
+            <p>
+              0 <span>원</span>
+            </p>
+          </DisCountPrice>
+          <div>
+            <img src={PlusIcon} alt="" />
+          </div>
+          <DeliveryPrice>
+            <span>배송비</span>
+            <p>
+              0 <span>원</span>
+            </p>
+          </DeliveryPrice>
+          <OrderTotalPrice>
+            <span>결제예정금액</span>
+            <p>
+              {totalProductPrice.toLocaleString()} <span>원</span>
+            </p>
+          </OrderTotalPrice>
         </PriceDetailsContents>
-        <OrderButton to={`/order`}>
+        <PaymentButton to={`/order`}>
           <Button LButton>주문하기</Button>
-        </OrderButton>
+        </PaymentButton>
       </ShoppingCartWrapper>
     </>
   );
