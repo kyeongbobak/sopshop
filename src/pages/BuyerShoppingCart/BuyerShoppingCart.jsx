@@ -49,10 +49,12 @@ export default function BuyerShoppingCart() {
       setIsEmpty(false);
       const cartItem = res.data.results;
       setCartList(cartItem);
+      console.log(cartList);
 
       const productInfos = cartItem.map((list) => getProductInfo(list.product_id));
       const productInfoPromises = await Promise.all(productInfos);
       setCartProductInfo(productInfoPromises);
+      console.log(productInfoPromises);
 
       Promise.all(productInfoPromises).then((product) => {
         const totalProductPrice = product.map((v, i) => v.price * cartItem[i].quantity);
@@ -78,9 +80,16 @@ export default function BuyerShoppingCart() {
       console.log(error);
     }
   };
-  const handleCounterChange = (cartItemId, amount) => {
-    setCartList((prev) => prev.map((item) => (item.cart_item_id === cartItemId ? { quantity: item.quantity + amount } : item)));
+
+  const handleCounterChange = (cartItemId, amount, productItemId) => {
+    setCartList((prev) => prev.map((item) => (item.cart_item_id === cartItemId ? { ...item, quantity: item.quantity + amount } : item)));
+
+    const productIndex = cartProductInfo.findIndex((product) => product.product_id === productItemId);
+    const productPrice = productIndex !== -1 ? cartProductInfo[productIndex].price : 0;
+
+    setTotalProuctPrice((prev) => prev + productPrice * amount);
   };
+
   useEffect(() => {
     getShoppingCartList();
   }, [token, setIsLoggedIn]);
@@ -131,11 +140,11 @@ export default function BuyerShoppingCart() {
                           </CartItemInner>
                           <CartItemQuantity>
                             <CartItemQuantityInner>
-                              <button onClick={() => handleCounterChange(list.cart_item_id, -1)}>
+                              <button onClick={() => handleCounterChange(list.cart_item_id, -1, cartProductInfo[i].product_id)}>
                                 <img src={MinusIcon} alt="" />
                               </button>
                               <p>{list.quantity}</p>
-                              <button onClick={() => handleCounterChange(list.cart_item_id, +1)}>
+                              <button onClick={() => handleCounterChange(list.cart_item_id, +1, cartProductInfo[i].product_id)}>
                                 <img src={PlusIcon} alt="" />
                               </button>
                             </CartItemQuantityInner>
