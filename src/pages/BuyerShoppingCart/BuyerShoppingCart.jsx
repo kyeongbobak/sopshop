@@ -13,6 +13,7 @@ import {
   CartItemName,
   CartItemInner,
   CartItemQuantity,
+  CartItemQuantityInner,
   CartItemPrice,
   CartItemTotalPrice,
   PriceDetailsContents,
@@ -35,7 +36,7 @@ export default function BuyerShoppingCart() {
   const [cartList, setCartList] = useState([]);
   const [cartProductInfo, setCartProductInfo] = useState([]);
   const [totalProductPrice, setTotalProuctPrice] = useState(0);
-  const [count, setCount] = useState(1);
+  const [SelectedItem, setSelectedItem] = useState(null);
 
   const getShoppingCartList = async () => {
     try {
@@ -77,21 +78,9 @@ export default function BuyerShoppingCart() {
       console.log(error);
     }
   };
-
-  const handleCounterChange = (amount) => {
-    setCount((prev) => {
-      const newCount = prev + amount;
-      if (newCount < 1) {
-        return 1;
-      } else if (newCount) {
-        alert(`이 제품의 최대 구매 가능한 수량은 ${newCount - 1}개 입니다.`);
-        return prev;
-      } else {
-        return newCount;
-      }
-    });
+  const handleCounterChange = (cartItemId, amount) => {
+    setCartList((prev) => prev.map((item) => (item.cart_item_id === cartItemId ? { quantity: item.quantity + amount } : item)));
   };
-
   useEffect(() => {
     getShoppingCartList();
   }, [token, setIsLoggedIn]);
@@ -115,7 +104,22 @@ export default function BuyerShoppingCart() {
               {cartList.map((list, i) => (
                 <CartItemWrapper key={list.cart_item_id}>
                   <CartItem>
-                    <CartItemInput type="radio" />
+                    <CartItemInput>
+                      <label htmlFor="cartItemInput"></label>
+                      <input
+                        type="radio"
+                        name="cartItemCheck"
+                        id="cartItemInput"
+                        checked={SelectedItem === list.cart_item_id}
+                        onClick={() => {
+                          if (SelectedItem === list.cart_item_id) {
+                            setSelectedItem(null);
+                          } else {
+                            setSelectedItem(list.cart_item_id);
+                          }
+                        }}
+                      />
+                    </CartItemInput>
                     <CartItemInfo>
                       {cartProductInfo[i] && (
                         <>
@@ -125,7 +129,17 @@ export default function BuyerShoppingCart() {
                             <CartItemPrice>{cartProductInfo[i].price.toLocaleString()} 원</CartItemPrice>
                             <p>택배배송 / 무료배송</p>
                           </CartItemInner>
-                          <CartItemQuantity>{list.quantity}</CartItemQuantity>
+                          <CartItemQuantity>
+                            <CartItemQuantityInner>
+                              <button onClick={() => handleCounterChange(list.cart_item_id, -1)}>
+                                <img src={MinusIcon} alt="" />
+                              </button>
+                              <p>{list.quantity}</p>
+                              <button onClick={() => handleCounterChange(list.cart_item_id, +1)}>
+                                <img src={PlusIcon} alt="" />
+                              </button>
+                            </CartItemQuantityInner>
+                          </CartItemQuantity>
                           <CartItemTotalPrice>
                             <p>{(list.quantity * cartProductInfo[i].price).toLocaleString()} 원</p>
                             <OrderButton to={`/order`}>

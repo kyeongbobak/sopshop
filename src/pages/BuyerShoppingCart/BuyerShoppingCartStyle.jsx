@@ -43,13 +43,28 @@ export const CartItem = styled.li`
   align-items: center;
 `;
 
-export const CartItemInput = styled.input`
-  width: 20px;
-  height: 20px;
+export const CartItemInput = styled.div`
   flex-grow: 1;
   margin: 90px 0;
-  border: 2px solid var(--main-color);
-  border-radius: 50px;
+  input {
+    border-radius: 50px;
+  }
+
+  input[type="radio"] {
+    appearance: none;
+    width: 23px;
+    height: 23px;
+    border: 2px solid var(--main-color);
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+  }
+
+  input[type="radio"]:checked {
+    background-color: var(--main-color);
+    border: 3px solid white;
+    box-shadow: 0 0 0 1.6px var(--main-color);
+  }
 `;
 
 export const CartItemInfo = styled.div`
@@ -89,6 +104,22 @@ export const CartItemPrice = styled.div`
 export const CartItemQuantity = styled.div`
   width: 300px;
   font-size: var(--font-lg-size);
+  display: flex;
+  justify-content: center;
+`;
+
+export const CartItemQuantityInner = styled.div`
+  display: flex;
+  border: 1px solid var(--gray-color);
+  border-radius: 5px;
+  padding: 15px 0;
+  button {
+    width: 50px;
+  }
+  p {
+    width: 50px;
+    font-size: var(--font-lg-size);
+  }
 `;
 
 export const CartItemTotalPrice = styled.div`
@@ -100,7 +131,9 @@ export const CartItemTotalPrice = styled.div`
   }
 `;
 
-export const PriceDetailsContents = styled.div``;
+export const PriceDetailsContents = styled.div`
+  background-color: var(--light-gray-color);
+`;
 
 export const TotalPrice = styled.p``;
 

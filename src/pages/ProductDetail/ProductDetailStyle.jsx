@@ -55,12 +55,17 @@ export const ProductQuanTityWrapper = styled.div`
 `;
 
 export const ProductQuanTity = styled.div`
+  margin-top: 32px;
+`;
+
+export const ProductQuanTityInner = styled.div`
   width: 150px;
   display: flex;
   align-items: center;
   border: 1px solid var(--gray-color);
   border-radius: 5px;
   padding: 15px 0;
+  text-align: center;
   button {
     width: 50px;
   }

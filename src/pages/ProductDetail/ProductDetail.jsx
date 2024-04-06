@@ -9,8 +9,8 @@ import {
   ProductPrice,
   ProductDelivary,
   ProductOrderSummery,
-  ProductQuanTityWrapper,
   ProductQuanTity,
+  ProductQuanTityInner,
   ProductOrderPrice,
   ProductTotalPrice,
   ProductTotalQuanTity,
@@ -103,8 +103,8 @@ export default function ProductDetail() {
               {product.price ? product.price.toLocaleString() : "가격정보 없음"} <span>원</span>
             </ProductPrice>
             <ProductDelivary>택배배송 / 무료배송</ProductDelivary>
-            <ProductQuanTityWrapper>
-              <ProductQuanTity>
+            <ProductQuanTity>
+              <ProductQuanTityInner>
                 <button onClick={() => handleCounterChange(-1)}>
                   <img src={MinusIcon} alt="" />
                 </button>
@@ -112,8 +112,8 @@ export default function ProductDetail() {
                 <button onClick={() => handleCounterChange(1)}>
                   <img src={PlusIcon} alt="" />
                 </button>
-              </ProductQuanTity>
-            </ProductQuanTityWrapper>
+              </ProductQuanTityInner>
+            </ProductQuanTity>
             <ProductOrderSummery>
               <strong>총 상품 금액</strong>
               <ProductOrderPrice>
