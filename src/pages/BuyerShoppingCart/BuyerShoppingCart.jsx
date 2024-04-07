@@ -40,7 +40,7 @@ export default function BuyerShoppingCart() {
   const [totalProductPrice, setTotalProuctPrice] = useState(0);
   const [SelectedItem, setSelectedItem] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [count, setCount] = useState();
+  const [count, setCount] = useState(0);
 
   const getShoppingCartList = async () => {
     try {
@@ -53,14 +53,12 @@ export default function BuyerShoppingCart() {
       setIsEmpty(false);
       const cartItem = res.data.results;
       setCartList(cartItem);
-      console.log(cartList);
       console.log(cartItem);
 
       const productInfos = cartItem.map((list) => getProductInfo(list.product_id));
-      console.log(productInfos);
 
-      const productQuantity = cartItem.map((list) => modifyProductQuantity(list.cart_item_id, list.my_cart, list.is_active));
-      console.log(productQuantity);
+      // const productQuantity = cartItem.map((list) => modifyProductQuantity(list.cart_item_id, list.my_cart, list.is_active));
+      // console.log(productQuantity);
 
       const productInfoPromises = await Promise.all(productInfos);
       setCartProductInfo(productInfoPromises);
@@ -95,33 +93,39 @@ export default function BuyerShoppingCart() {
     setCount(list.quantity);
   };
 
-  const modifyProductQuantity = async (cartId, quantity, isActive) => {
+  const handleCounterChange = (cartItemId, amount, productItemId) => {
+    setCount((prev) => prev + amount);
+    setCartList((prev) => prev.map((item) => (item.cart_item_id === cartItemId ? { quantity: item.quantity + amount } : item.quantity)));
+    const productIndex = cartProductInfo.findIndex((product) => product.product_id === productItemId);
+    const productPrice = productIndex !== -1 ? cartProductInfo[productIndex].price : 0;
+    setTotalProuctPrice((prev) => prev + productPrice * amount);
+  };
+
+  const modifyProductQuantity = async (list, isActive) => {
+    console.log(list);
+    console.log(isActive);
+
     try {
       const instance = axios.create({
         headers: {
           Authorization: `JWT ${token}`,
         },
       });
+      console.log(token);
+      console.log(list);
+
       const body = {
-        product_id: cartId,
-        quantity: quantity,
+        product_id: list.product_id,
+        quantity: list.quantity,
         is_active: isActive,
       };
-      const res = await instance.put(`https://openmarket.weniv.co.kr/cart/${cartId}/`, body);
+
+      const res = await instance.put(`https://openmarket.weniv.co.kr/cart/${list.cart_item_id}/`, body);
       const data = await res.data;
       console.log(data);
     } catch (error) {
       console.log(error);
     }
-  };
-
-  const handleCounterChange = (cartItemId, amount, productItemId) => {
-    setCartList((prev) => prev.map((item) => (item.cart_item_id === cartItemId ? { quantity: item.quantity + amount } : item.quantity)));
-
-    const productIndex = cartProductInfo.findIndex((product) => product.product_id === productItemId);
-    const productPrice = productIndex !== -1 ? cartProductInfo[productIndex].price : 0;
-
-    setTotalProuctPrice((prev) => prev + productPrice * amount);
   };
 
   useEffect(() => {
@@ -183,7 +187,7 @@ export default function BuyerShoppingCart() {
                               </button>
                             </CartItemQuantityInner>
                             {isModalOpen && (
-                              <Modal text="취소" submitText="수정" onCancel={() => setIsModalOpen(false)} onSubmit={() => modifyProductQuantity()}>
+                              <Modal text="취소" submitText="수정" onCancel={() => setIsModalOpen(false)} onSubmit={() => modifyProductQuantity(list, true)}>
                                 <CartItemQuantityInner>
                                   <button onClick={() => handleCounterChange(list.cart_item_id, -1, cartProductInfo[i].product_id)}>
                                     <img src={MinusIcon} alt="" />
