@@ -31,7 +31,6 @@ import Button from "../../components/Button/Button";
 import PlusIcon from "../../assets/icon-plus-line.png";
 import MinusIcon from "../../assets/icon-minus-line.png";
 import Modal from "../../components/Modal/Modal";
-import { ModalWrapper } from "../../components/Modal/ModalStyle";
 
 export default function BuyerShoppingCart() {
   const { token, setIsLoggedIn } = useContext(AuthContext);
@@ -41,6 +40,7 @@ export default function BuyerShoppingCart() {
   const [totalProductPrice, setTotalProuctPrice] = useState(0);
   const [SelectedItem, setSelectedItem] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [count, setCount] = useState();
 
   const getShoppingCartList = async () => {
     try {
@@ -54,11 +54,16 @@ export default function BuyerShoppingCart() {
       const cartItem = res.data.results;
       setCartList(cartItem);
       console.log(cartList);
+      console.log(cartItem);
 
       const productInfos = cartItem.map((list) => getProductInfo(list.product_id));
+      console.log(productInfos);
+
+      const productQuantity = cartItem.map((list) => modifyProductQuantity(list.cart_item_id, list.my_cart, list.is_active));
+      console.log(productQuantity);
+
       const productInfoPromises = await Promise.all(productInfos);
       setCartProductInfo(productInfoPromises);
-      console.log(productInfoPromises);
 
       Promise.all(productInfoPromises).then((product) => {
         const totalProductPrice = product.map((v, i) => v.price * cartItem[i].quantity);
@@ -85,6 +90,31 @@ export default function BuyerShoppingCart() {
     }
   };
 
+  const ModalOpen = (list) => {
+    setIsModalOpen(true);
+    setCount(list.quantity);
+  };
+
+  const modifyProductQuantity = async (cartId, quantity, isActive) => {
+    try {
+      const instance = axios.create({
+        headers: {
+          Authorization: `JWT ${token}`,
+        },
+      });
+      const body = {
+        product_id: cartId,
+        quantity: quantity,
+        is_active: isActive,
+      };
+      const res = await instance.put(`https://openmarket.weniv.co.kr/cart/${cartId}/`, body);
+      const data = await res.data;
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleCounterChange = (cartItemId, amount, productItemId) => {
     setCartList((prev) => prev.map((item) => (item.cart_item_id === cartItemId ? { quantity: item.quantity + amount } : item.quantity)));
 
@@ -92,10 +122,6 @@ export default function BuyerShoppingCart() {
     const productPrice = productIndex !== -1 ? cartProductInfo[productIndex].price : 0;
 
     setTotalProuctPrice((prev) => prev + productPrice * amount);
-  };
-
-  const modifyProductQuantity = () => {
-    setIsModalOpen(true);
   };
 
   useEffect(() => {
@@ -147,37 +173,28 @@ export default function BuyerShoppingCart() {
                             <p>택배배송 / 무료배송</p>
                           </CartItemInner>
                           <CartItemQuantity>
-                            {/* <CartItemQuantityInner>
-                              <button onClick={() => handleCounterChange(list.cart_item_id, -1, cartProductInfo[i].product_id)}>
-                                <img src={MinusIcon} alt="" />
-                              </button>
-                              <p>{list.quantity}</p>
-                              <button onClick={() => handleCounterChange(list.cart_item_id, +1, cartProductInfo[i].product_id)}>
-                                <img src={PlusIcon} alt="" />
-                              </button>
-                            </CartItemQuantityInner> */}
                             <CartItemQuantityInner>
-                              <button onClick={() => modifyProductQuantity()}>
+                              <button onClick={() => ModalOpen(list)}>
                                 <img src={MinusIcon} alt="" />
                               </button>
-                              {isModalOpen && (
-                                <Modal text="취소" submitText="수정">
-                                  <CartItemQuantityInner>
-                                    <button onClick={() => handleCounterChange(list.cart_item_id, -1, cartProductInfo[i].product_id)}>
-                                      <img src={MinusIcon} alt="" />
-                                    </button>
-                                    <p>{list.quantity}</p>
-                                    <button onClick={() => handleCounterChange(list.cart_item_id, +1, cartProductInfo[i].product_id)}>
-                                      <img src={PlusIcon} alt="" />
-                                    </button>
-                                  </CartItemQuantityInner>
-                                </Modal>
-                              )}
                               <p>{list.quantity}</p>
-                              <button onClick={() => modifyProductQuantity()}>
+                              <button onClick={() => ModalOpen(list)}>
                                 <img src={PlusIcon} alt="" />
                               </button>
                             </CartItemQuantityInner>
+                            {isModalOpen && (
+                              <Modal text="취소" submitText="수정" onCancel={() => setIsModalOpen(false)} onSubmit={() => modifyProductQuantity()}>
+                                <CartItemQuantityInner>
+                                  <button onClick={() => handleCounterChange(list.cart_item_id, -1, cartProductInfo[i].product_id)}>
+                                    <img src={MinusIcon} alt="" />
+                                  </button>
+                                  <p>{count}</p>
+                                  <button onClick={() => handleCounterChange(list.cart_item_id, +1, cartProductInfo[i].product_id)}>
+                                    <img src={PlusIcon} alt="" />
+                                  </button>
+                                </CartItemQuantityInner>
+                              </Modal>
+                            )}
                           </CartItemQuantity>
                           <CartItemTotalPrice>
                             <p>{(list.quantity * cartProductInfo[i].price).toLocaleString()} 원</p>
