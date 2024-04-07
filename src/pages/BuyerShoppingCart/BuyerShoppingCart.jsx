@@ -30,6 +30,8 @@ import { AuthContext } from "../../contexts/AuthContext";
 import Button from "../../components/Button/Button";
 import PlusIcon from "../../assets/icon-plus-line.png";
 import MinusIcon from "../../assets/icon-minus-line.png";
+import Modal from "../../components/Modal/Modal";
+import { ModalWrapper } from "../../components/Modal/ModalStyle";
 
 export default function BuyerShoppingCart() {
   const { token, setIsLoggedIn } = useContext(AuthContext);
@@ -38,6 +40,7 @@ export default function BuyerShoppingCart() {
   const [cartProductInfo, setCartProductInfo] = useState([]);
   const [totalProductPrice, setTotalProuctPrice] = useState(0);
   const [SelectedItem, setSelectedItem] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const getShoppingCartList = async () => {
     try {
@@ -83,12 +86,16 @@ export default function BuyerShoppingCart() {
   };
 
   const handleCounterChange = (cartItemId, amount, productItemId) => {
-    setCartList((prev) => prev.map((item) => (item.cart_item_id === cartItemId ? { ...item, quantity: item.quantity + amount } : item)));
+    setCartList((prev) => prev.map((item) => (item.cart_item_id === cartItemId ? { quantity: item.quantity + amount } : item.quantity)));
 
     const productIndex = cartProductInfo.findIndex((product) => product.product_id === productItemId);
     const productPrice = productIndex !== -1 ? cartProductInfo[productIndex].price : 0;
 
     setTotalProuctPrice((prev) => prev + productPrice * amount);
+  };
+
+  const modifyProductQuantity = () => {
+    setIsModalOpen(true);
   };
 
   useEffect(() => {
@@ -140,12 +147,34 @@ export default function BuyerShoppingCart() {
                             <p>택배배송 / 무료배송</p>
                           </CartItemInner>
                           <CartItemQuantity>
-                            <CartItemQuantityInner>
+                            {/* <CartItemQuantityInner>
                               <button onClick={() => handleCounterChange(list.cart_item_id, -1, cartProductInfo[i].product_id)}>
                                 <img src={MinusIcon} alt="" />
                               </button>
                               <p>{list.quantity}</p>
                               <button onClick={() => handleCounterChange(list.cart_item_id, +1, cartProductInfo[i].product_id)}>
+                                <img src={PlusIcon} alt="" />
+                              </button>
+                            </CartItemQuantityInner> */}
+                            <CartItemQuantityInner>
+                              <button onClick={() => modifyProductQuantity()}>
+                                <img src={MinusIcon} alt="" />
+                              </button>
+                              {isModalOpen && (
+                                <Modal text="취소" submitText="수정">
+                                  <CartItemQuantityInner>
+                                    <button onClick={() => handleCounterChange(list.cart_item_id, -1, cartProductInfo[i].product_id)}>
+                                      <img src={MinusIcon} alt="" />
+                                    </button>
+                                    <p>{list.quantity}</p>
+                                    <button onClick={() => handleCounterChange(list.cart_item_id, +1, cartProductInfo[i].product_id)}>
+                                      <img src={PlusIcon} alt="" />
+                                    </button>
+                                  </CartItemQuantityInner>
+                                </Modal>
+                              )}
+                              <p>{list.quantity}</p>
+                              <button onClick={() => modifyProductQuantity()}>
                                 <img src={PlusIcon} alt="" />
                               </button>
                             </CartItemQuantityInner>

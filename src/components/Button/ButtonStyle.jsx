@@ -88,6 +88,7 @@ export const ButtonStyle = styled.button`
           color: var(--black-color);
           border: 1px solid var(--gray-color);
           font-weight: var(--font-bold);
+          margin-right: 10px;
 
           ${(props) =>
             props.Abled &&

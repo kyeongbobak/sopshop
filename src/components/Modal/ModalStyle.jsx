@@ -9,12 +9,15 @@ export const ModalBack = styled.div`
 `;
 
 export const ModalWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background-color: var(--white-color);
   width: 360px;
   padding: 50px 70px 40px;
   border: 1px solid var(--gray-color);
   font-size: var(--font-md-size);
-  text-align: center;
   line-height: 20px;
   box-sizing: border-box;
   position: absolute;
@@ -24,22 +27,12 @@ export const ModalWrapper = styled.div`
   z-index: 100;
 `;
 
+export const ModalContents = styled.div`
+  width: 150px;
+`;
+
 export const ButtonWrapper = styled.div`
+  width: 220px;
   margin-top: 30px;
   z-index: 101;
-
-  button {
-    color: var(--line-black-color);
-    font-size: var(--font-md-size);
-    background-color: var(--white-color);
-    border: 1px solid var(--gray-color);
-    border-radius: 5px;
-    padding: 10px 28px;
-  }
-
-  button:nth-child(2) {
-    margin-left: 10px;
-    background-color: var(--box-black-color);
-    color: var(--white-color);
-  }
 `;

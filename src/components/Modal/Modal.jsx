@@ -1,14 +1,19 @@
-import { ModalWrapper, ButtonWrapper, ModalBack } from "./ModalStyle";
+import { ModalWrapper, ModalContents, ButtonWrapper, ModalBack } from "./ModalStyle";
+import Button from "../Button/Button";
 
 export default function Modal(props) {
   return (
     <>
       <ModalBack>
         <ModalWrapper>
-          {props.children}
+          <ModalContents> {props.children}</ModalContents>
           <ButtonWrapper>
-            <button>{props.text}</button>
-            <button>{props.submitText}</button>
+            <Button SButton White onClick={() => props.onCancel()}>
+              {props.text}
+            </Button>
+            <Button SButton onClick={() => props.onSubmit()}>
+              {props.submitText}
+            </Button>
           </ButtonWrapper>
         </ModalWrapper>
       </ModalBack>
