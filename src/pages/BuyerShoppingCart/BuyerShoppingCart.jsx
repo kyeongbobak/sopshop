@@ -40,7 +40,7 @@ export default function BuyerShoppingCart() {
   const [totalProductPrice, setTotalProuctPrice] = useState(0);
   const [SelectedItem, setSelectedItem] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [count, setCount] = useState(0);
+  // const [count, setCount] = useState(0);
 
   const getShoppingCartList = async () => {
     try {
