@@ -38,12 +38,11 @@ export default function BuyerShoppingCart() {
   const [cartList, setCartList] = useState([]);
   const [cartProductInfo, setCartProductInfo] = useState([]);
   const [totalProductPrice, setTotalProuctPrice] = useState(0);
-  const [SelectedItem, setSelectedItem] = useState(null);
+  const [selectedItem, setSelectedItem] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modifiedCartItemId, setModifiedCartItemId] = useState(null);
   const [modifiedProductId, setModifiedProductId] = useState(null);
   const [modifiedQuantity, setModifiedQuantity] = useState(0);
-  const [updateQuantity, setUpdateQuantity] = useState(null);
 
   const getShoppingCartList = async () => {
     try {
@@ -56,8 +55,6 @@ export default function BuyerShoppingCart() {
       setIsEmpty(false);
       const cartItem = res.data.results;
       setCartList(cartItem);
-
-      console.log(cartItem);
 
       const productInfos = cartItem.map((list) => getProductInfo(list.product_id));
 
@@ -97,13 +94,7 @@ export default function BuyerShoppingCart() {
   };
 
   const handleCounterChange = (amount) => {
-    setUpdateQuantity(null);
     setModifiedQuantity((prev) => prev + amount);
-    // setCartList((prev) => prev.map((item) => (item.cart_item_id === cartItemId ? { ...item, quantity: item.quantity + amount } : item.quantity)));
-    // console.log(cartItemId);
-    // const productIndex = cartProductInfo.findIndex((product) => product.product_id === productItemId);
-    // const productPrice = productIndex !== -1 ? cartProductInfo[productIndex].price : 0;
-    // setTotalProuctPrice((prev) => prev + productPrice * amount);
   };
 
   const modifyProductQuantity = async (isActive) => {
@@ -126,9 +117,8 @@ export default function BuyerShoppingCart() {
       const res = await instance.put(`https://openmarket.weniv.co.kr/cart/${modifiedCartItemId}/`, body);
       const data = await res.data;
       setIsModalOpen(false);
-
       console.log(data);
-      setCartList((prev) => prev.map((item) => (item.cart_item_id === modifiedCartItemId ? { ...item, quantity: modifiedQuantity } : item)));
+      setCartList((prev) => prev.map((item) => (item.cart_item_id === modifiedCartItemId ? { quantity: modifiedQuantity } : { quantity: item.quantity })));
     } catch (error) {
       console.log(error);
     }
@@ -155,17 +145,17 @@ export default function BuyerShoppingCart() {
           ) : (
             <>
               {cartList.map((list, i) => (
-                <CartItemWrapper key={list.cart_item_id}>
-                  <CartItem>
+                <CartItemWrapper>
+                  <CartItem key={list.cart_item_id}>
                     <CartItemInput>
                       <label htmlFor="cartItemInput"></label>
                       <input
                         type="radio"
                         name="cartItemCheck"
                         id="cartItemInput"
-                        checked={SelectedItem === list.cart_item_id}
+                        checked={selectedItem === list.cart_item_id}
                         onClick={() => {
-                          if (SelectedItem === list.cart_item_id) {
+                          if (selectedItem === list.cart_item_id) {
                             setSelectedItem(null);
                           } else {
                             setSelectedItem(list.cart_item_id);
