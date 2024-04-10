@@ -43,6 +43,7 @@ export default function BuyerShoppingCart() {
   const [modifiedCartItemId, setModifiedCartItemId] = useState(null);
   const [modifiedProductId, setModifiedProductId] = useState(null);
   const [modifiedQuantity, setModifiedQuantity] = useState(0);
+  const [updateQuantity, setUpdateQuantity] = useState(null);
 
   const getShoppingCartList = async () => {
     try {
@@ -95,12 +96,14 @@ export default function BuyerShoppingCart() {
     setModifiedQuantity(list.quantity);
   };
 
-  const handleCounterChange = (cartItemId, amount, productItemId) => {
+  const handleCounterChange = (amount) => {
+    setUpdateQuantity(null);
     setModifiedQuantity((prev) => prev + amount);
-    setCartList((prev) => prev.map((item) => (item.cart_item_id === cartItemId ? { quantity: item.quantity + amount } : item.quantity)));
-    const productIndex = cartProductInfo.findIndex((product) => product.product_id === productItemId);
-    const productPrice = productIndex !== -1 ? cartProductInfo[productIndex].price : 0;
-    setTotalProuctPrice((prev) => prev + productPrice * amount);
+    // setCartList((prev) => prev.map((item) => (item.cart_item_id === cartItemId ? { ...item, quantity: item.quantity + amount } : item.quantity)));
+    // console.log(cartItemId);
+    // const productIndex = cartProductInfo.findIndex((product) => product.product_id === productItemId);
+    // const productPrice = productIndex !== -1 ? cartProductInfo[productIndex].price : 0;
+    // setTotalProuctPrice((prev) => prev + productPrice * amount);
   };
 
   const modifyProductQuantity = async (isActive) => {
@@ -123,8 +126,9 @@ export default function BuyerShoppingCart() {
       const res = await instance.put(`https://openmarket.weniv.co.kr/cart/${modifiedCartItemId}/`, body);
       const data = await res.data;
       setIsModalOpen(false);
-      setModifiedQuantity(data.quantity);
+
       console.log(data);
+      setCartList((prev) => prev.map((item) => (item.cart_item_id === modifiedCartItemId ? { ...item, quantity: modifiedQuantity } : item)));
     } catch (error) {
       console.log(error);
     }
@@ -191,11 +195,11 @@ export default function BuyerShoppingCart() {
                             {isModalOpen && (
                               <Modal text="취소" submitText="수정" onCancel={() => setIsModalOpen(false)} onSubmit={() => modifyProductQuantity(true)}>
                                 <CartItemQuantityInner>
-                                  <button onClick={() => handleCounterChange(list.cart_item_id, -1, cartProductInfo[i].product_id)}>
+                                  <button onClick={() => handleCounterChange(-1)}>
                                     <img src={MinusIcon} alt="" />
                                   </button>
                                   <p>{modifiedQuantity}</p>
-                                  <button onClick={() => handleCounterChange(list.cart_item_id, +1, cartProductInfo[i].product_id)}>
+                                  <button onClick={() => handleCounterChange(+1)}>
                                     <img src={PlusIcon} alt="" />
                                   </button>
                                 </CartItemQuantityInner>
