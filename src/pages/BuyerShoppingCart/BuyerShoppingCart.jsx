@@ -40,7 +40,9 @@ export default function BuyerShoppingCart() {
   const [totalProductPrice, setTotalProuctPrice] = useState(0);
   const [SelectedItem, setSelectedItem] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  // const [count, setCount] = useState(0);
+  const [modifiedCartItemId, setModifiedCartItemId] = useState(null);
+  const [modifiedProductId, setModifiedProductId] = useState(null);
+  const [modifiedQuantity, setModifiedQuantity] = useState(0);
 
   const getShoppingCartList = async () => {
     try {
@@ -53,12 +55,10 @@ export default function BuyerShoppingCart() {
       setIsEmpty(false);
       const cartItem = res.data.results;
       setCartList(cartItem);
+
       console.log(cartItem);
 
       const productInfos = cartItem.map((list) => getProductInfo(list.product_id));
-
-      // const productQuantity = cartItem.map((list) => modifyProductQuantity(list.cart_item_id, list.my_cart, list.is_active));
-      // console.log(productQuantity);
 
       const productInfoPromises = await Promise.all(productInfos);
       setCartProductInfo(productInfoPromises);
@@ -90,19 +90,20 @@ export default function BuyerShoppingCart() {
 
   const ModalOpen = (list) => {
     setIsModalOpen(true);
-    setCount(list.quantity);
+    setModifiedCartItemId(list.cart_item_id);
+    setModifiedProductId(list.product_id);
+    setModifiedQuantity(list.quantity);
   };
 
   const handleCounterChange = (cartItemId, amount, productItemId) => {
-    setCount((prev) => prev + amount);
+    setModifiedQuantity((prev) => prev + amount);
     setCartList((prev) => prev.map((item) => (item.cart_item_id === cartItemId ? { quantity: item.quantity + amount } : item.quantity)));
     const productIndex = cartProductInfo.findIndex((product) => product.product_id === productItemId);
     const productPrice = productIndex !== -1 ? cartProductInfo[productIndex].price : 0;
     setTotalProuctPrice((prev) => prev + productPrice * amount);
   };
 
-  const modifyProductQuantity = async (list, isActive) => {
-    console.log(list);
+  const modifyProductQuantity = async (isActive) => {
     console.log(isActive);
 
     try {
@@ -112,16 +113,17 @@ export default function BuyerShoppingCart() {
         },
       });
       console.log(token);
-      console.log(list);
 
       const body = {
-        product_id: list.product_id,
-        quantity: list.quantity,
+        product_id: modifiedProductId,
+        quantity: modifiedQuantity,
         is_active: isActive,
       };
 
-      const res = await instance.put(`https://openmarket.weniv.co.kr/cart/${list.cart_item_id}/`, body);
+      const res = await instance.put(`https://openmarket.weniv.co.kr/cart/${modifiedCartItemId}/`, body);
       const data = await res.data;
+      setIsModalOpen(false);
+      setModifiedQuantity(data.quantity);
       console.log(data);
     } catch (error) {
       console.log(error);
@@ -187,12 +189,12 @@ export default function BuyerShoppingCart() {
                               </button>
                             </CartItemQuantityInner>
                             {isModalOpen && (
-                              <Modal text="취소" submitText="수정" onCancel={() => setIsModalOpen(false)} onSubmit={() => modifyProductQuantity(list, true)}>
+                              <Modal text="취소" submitText="수정" onCancel={() => setIsModalOpen(false)} onSubmit={() => modifyProductQuantity(true)}>
                                 <CartItemQuantityInner>
                                   <button onClick={() => handleCounterChange(list.cart_item_id, -1, cartProductInfo[i].product_id)}>
                                     <img src={MinusIcon} alt="" />
                                   </button>
-                                  <p>{count}</p>
+                                  <p>{modifiedQuantity}</p>
                                   <button onClick={() => handleCounterChange(list.cart_item_id, +1, cartProductInfo[i].product_id)}>
                                     <img src={PlusIcon} alt="" />
                                   </button>
