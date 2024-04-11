@@ -87,11 +87,11 @@ export default function ProductDetail() {
       const cartContents = res.data.results;
       console.log();
 
-      const cartData = cartContents.filter((v) => v.product_id === Number(product_id));
+      const existingProduct = cartContents.find((v) => v.product_id === Number(product_id));
 
-      console.log(cartData);
+      console.log(existingProduct);
 
-      if (cartData.length > 0 && cartData[0].my_cart > 1) {
+      if (existingProduct) {
         setAddToCartWarning(true);
       } else {
         AddToCart();
