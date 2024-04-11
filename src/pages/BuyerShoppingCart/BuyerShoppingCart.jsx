@@ -8,6 +8,7 @@ import {
   CartItem,
   CartItemWrapper,
   CartItemInput,
+  CartItemDeleteButton,
   CartItemInfo,
   CartItemBranName,
   CartItemName,
@@ -31,6 +32,7 @@ import Button from "../../components/Button/Button";
 import PlusIcon from "../../assets/icon-plus-line.png";
 import MinusIcon from "../../assets/icon-minus-line.png";
 import Modal from "../../components/Modal/Modal";
+import DeleteIcon from "../../assets/icon-delete.png";
 
 export default function BuyerShoppingCart() {
   const { token, isLoggedIn } = useContext(AuthContext);
@@ -43,6 +45,7 @@ export default function BuyerShoppingCart() {
   const [modifiedCartItemId, setModifiedCartItemId] = useState(null);
   const [modifiedProductId, setModifiedProductId] = useState(null);
   const [modifiedQuantity, setModifiedQuantity] = useState(0);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const getShoppingCartList = async () => {
     try {
@@ -55,6 +58,12 @@ export default function BuyerShoppingCart() {
       setIsEmpty(false);
       const cartItem = res.data.results;
       setCartList(cartItem);
+
+      console.log(cartItem);
+
+      if (cartItem.length === 0) {
+        return setIsEmpty(true);
+      }
 
       const productInfos = cartItem.map((list) => getProductInfo(list.product_id));
 
@@ -124,6 +133,25 @@ export default function BuyerShoppingCart() {
     }
   };
 
+  const deleteCartList = async (cartItemId) => {
+    console.log(cartItemId);
+
+    try {
+      const instance = axios.create({
+        headers: {
+          Authorization: `JWT ${token}`,
+        },
+      });
+
+      const res = await instance.delete(`https://openmarket.weniv.co.kr/cart/${cartItemId}`);
+      const data = await res.data;
+      window.location.reload();
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     getShoppingCartList();
   }, [token, isLoggedIn]);
@@ -163,6 +191,14 @@ export default function BuyerShoppingCart() {
                         }}
                       />
                     </CartItemInput>
+                    <CartItemDeleteButton onClick={() => setIsDeleteModalOpen(true)}>
+                      <img src={DeleteIcon} alt="" />
+                    </CartItemDeleteButton>
+                    {isDeleteModalOpen && (
+                      <Modal text="취소" submitText="확인" onCancel={() => setIsDeleteModalOpen(false)} onSubmit={() => deleteCartList(list.cart_item_id)} width="210px">
+                        상품을 삭제하시겠습니까?
+                      </Modal>
+                    )}
                     <CartItemInfo>
                       {cartProductInfo[i] && (
                         <>

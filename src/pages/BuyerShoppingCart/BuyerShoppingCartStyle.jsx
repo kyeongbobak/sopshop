@@ -36,6 +36,7 @@ export const CartItemWrapper = styled.ul`
   border: 1px solid #e0e0e0;
   border-radius: 10px;
   margin-bottom: 10px;
+  position: relative;
 `;
 
 export const CartItem = styled.li`
@@ -65,6 +66,16 @@ export const CartItemInput = styled.div`
     background-color: var(--main-color);
     border: 3px solid white;
     box-shadow: 0 0 0 1.6px var(--main-color);
+  }
+`;
+
+export const CartItemDeleteButton = styled.button`
+  position: absolute;
+  top: 18px;
+  left: 1240px;
+  cursor: pointer;
+  img {
+    width: 22px;
   }
 `;
 

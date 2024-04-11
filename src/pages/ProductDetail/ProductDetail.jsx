@@ -39,7 +39,6 @@ export default function ProductDetail() {
   const [count, setCount] = useState(1);
   const { token, isLoggedIn } = useContext(AuthContext);
   const [loginRequired, setLoginRequired] = useState(false);
-  // const [cartStatus, setCartStatus] = useState(null);
   const [addToCartWarning, setAddToCartWarning] = useState(false);
 
   const navigate = useNavigate();
@@ -117,6 +116,7 @@ export default function ProductDetail() {
 
       const res = await instance.post("https://openmarket.weniv.co.kr/cart/", body);
       console.log(res.data);
+      navigate(`/shoppingCart`);
     } catch (error) {
       console.log("error");
     }
@@ -173,7 +173,7 @@ export default function ProductDetail() {
               )}
 
               {addToCartWarning && (
-                <Modal text="아니오" submitText="예" onCancel={() => setAddToCartWarning(false)} onSubmit={() => navigate(`/shoppingCart`)}>
+                <Modal text="아니오" submitText="예" onCancel={() => setAddToCartWarning(false)} onSubmit={() => navigate(`/shoppingCart`)} width="221px">
                   이미 장바구니에 있는 상품입니다. 장바구니로 이동하시겠습니까?
                 </Modal>
               )}
