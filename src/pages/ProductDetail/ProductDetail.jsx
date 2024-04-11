@@ -163,7 +163,7 @@ export default function ProductDetail() {
               </ProductOrderPrice>
             </ProductOrderSummery>
             <ProductDetailButtonMenu>
-              {!isLoggedIn ? <ProductOrderButton onClick={() => setLoginRequired(true)}>바로구매</ProductOrderButton> : <ProductOrderButton>바로구매</ProductOrderButton>}
+              {!isLoggedIn ? <ProductOrderButton onClick={() => setLoginRequired(true)}>바로구매</ProductOrderButton> : <ProductOrderButton onClick={() => navigate(`/order`)}>바로구매</ProductOrderButton>}
               {!isLoggedIn ? <ProductAddCartButton onClick={() => setLoginRequired(true)}>장바구니</ProductAddCartButton> : <ProductAddCartButton onClick={() => checkCartContents()}>장바구니</ProductAddCartButton>}
 
               {loginRequired && (
