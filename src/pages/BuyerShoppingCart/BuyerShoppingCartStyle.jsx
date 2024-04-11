@@ -19,6 +19,7 @@ export const ShoppingCartContents = styled.div`
 `;
 
 export const EmptyCartMessage = styled.div`
+  margin-top: 250px;
   p:nth-child(1) {
     font-size: var(--font-lg-size);
     font-weight: var(--font-bold);

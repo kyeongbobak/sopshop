@@ -76,7 +76,8 @@ export const ButtonStyle = styled.button`
     ${(props) =>
     props.SButton &&
     css`
-      padding: 10px 25px;
+      width: 60px;
+      padding: 10px 20px;
       background-color: var(--black-color);
       color: var(--white-color);
       font-size: var(--font-md-size);

@@ -23,19 +23,24 @@ import {
   ProductRefundLink,
   TabMenuItem,
 } from "./ProductDetailStyle";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+
 import PlusIcon from "../../assets/icon-plus-line.png";
 import MinusIcon from "../../assets/icon-minus-line.png";
 import BuyerHeader from "../../components/BuyerHeader/BuyerHeader";
 import axios from "axios";
 import { AuthContext } from "../../contexts/AuthContext";
+import Modal from "../../components/Modal/Modal";
 
 export default function ProductDetail() {
   const [activeTab, setActiveTab] = useState("button");
   const { product_id } = useParams();
   const [product, setProduct] = useState("");
   const [count, setCount] = useState(1);
-  const { token } = useContext(AuthContext);
+  const { token, setIsLoggedIn } = useContext(AuthContext);
+  const [loginRequired, setLoginRequired] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleTabClick = (e) => {
     setActiveTab(e);
@@ -131,8 +136,13 @@ export default function ProductDetail() {
               </ProductOrderPrice>
             </ProductOrderSummery>
             <ProductDetailButtonMenu>
-              <ProductOrderButton>바로구매</ProductOrderButton>
+              {setIsLoggedIn ? <ProductOrderButton onClick={() => setLoginRequired(true)}>바로구매</ProductOrderButton> : <ProductOrderButton>바로구매</ProductOrderButton>}
               <ProductAddCartButton onClick={() => AddToCart()}>장바구니</ProductAddCartButton>
+              {loginRequired && (
+                <Modal text="아니오" submitText="예" onCancel={() => setLoginRequired(false)} onSubmit={() => navigate(`/login`)} width="210px">
+                  로그인이 필요한 서비스입니다. 로그인 하시겠습니까?
+                </Modal>
+              )}
             </ProductDetailButtonMenu>
           </ProductDetailInfo>
         </ProductDetailContent>

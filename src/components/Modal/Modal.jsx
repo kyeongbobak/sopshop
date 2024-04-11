@@ -6,7 +6,7 @@ export default function Modal(props) {
     <>
       <ModalBack>
         <ModalWrapper>
-          <ModalContents> {props.children}</ModalContents>
+          <ModalContents {...props}> {props.children}</ModalContents>
           <ButtonWrapper>
             <Button SButton White onClick={() => props.onCancel()}>
               {props.text}

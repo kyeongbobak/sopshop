@@ -28,7 +28,8 @@ export const ModalWrapper = styled.div`
 `;
 
 export const ModalContents = styled.div`
-  width: 150px;
+  width: ${(props) => props.width || "150px"};
+  text-align: center;
 `;
 
 export const ButtonWrapper = styled.div`
