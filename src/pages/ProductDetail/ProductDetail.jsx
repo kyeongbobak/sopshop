@@ -39,6 +39,8 @@ export default function ProductDetail() {
   const [count, setCount] = useState(1);
   const { token, isLoggedIn } = useContext(AuthContext);
   const [loginRequired, setLoginRequired] = useState(false);
+  // const [cartStatus, setCartStatus] = useState(null);
+  const [addToCartWarning, setAddToCartWarning] = useState(false);
 
   const navigate = useNavigate();
 
@@ -72,6 +74,31 @@ export default function ProductDetail() {
         return newCount;
       }
     });
+  };
+
+  const checkCartContents = async () => {
+    try {
+      const instance = axios.create({
+        headers: {
+          Authorization: `JWT ${token}`,
+        },
+      });
+      const res = await instance.get("https://openmarket.weniv.co.kr/cart/");
+      const cartContents = res.data.results;
+      console.log();
+
+      const cartData = cartContents.filter((v) => v.product_id === Number(product_id));
+
+      console.log(cartData);
+
+      if (cartData.length > 0 && cartData[0].my_cart > 1) {
+        setAddToCartWarning(true);
+      } else {
+        AddToCart();
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const AddToCart = async () => {
@@ -137,11 +164,17 @@ export default function ProductDetail() {
             </ProductOrderSummery>
             <ProductDetailButtonMenu>
               {!isLoggedIn ? <ProductOrderButton onClick={() => setLoginRequired(true)}>바로구매</ProductOrderButton> : <ProductOrderButton>바로구매</ProductOrderButton>}
-              {!isLoggedIn ? <ProductAddCartButton onClick={() => setLoginRequired(true)}>장바구니</ProductAddCartButton> : <ProductAddCartButton onClick={() => AddToCart()}>장바구니</ProductAddCartButton>}
+              {!isLoggedIn ? <ProductAddCartButton onClick={() => setLoginRequired(true)}>장바구니</ProductAddCartButton> : <ProductAddCartButton onClick={() => checkCartContents()}>장바구니</ProductAddCartButton>}
 
               {loginRequired && (
                 <Modal text="아니오" submitText="예" onCancel={() => setLoginRequired(false)} onSubmit={() => navigate(`/login`)} width="210px">
                   로그인이 필요한 서비스입니다. 로그인 하시겠습니까?
+                </Modal>
+              )}
+
+              {addToCartWarning && (
+                <Modal text="아니오" submitText="예" onCancel={() => setAddToCartWarning(false)} onSubmit={() => navigate(`/shoppingCart`)}>
+                  이미 장바구니에 있는 상품입니다. 장바구니로 이동하시겠습니까?
                 </Modal>
               )}
             </ProductDetailButtonMenu>
