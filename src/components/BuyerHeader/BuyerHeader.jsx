@@ -9,9 +9,13 @@ import { AuthContext } from "../../contexts/AuthContext";
 export default function BuyerHeader() {
   const { token, isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
 
-  useEffect(() => {
+  const handleLoginStateChange = () => {
     setIsLoggedIn(!!token);
-  }, [token, setIsLoggedIn]);
+  };
+
+  useEffect(() => {
+    handleLoginStateChange();
+  });
 
   return (
     <Header>
