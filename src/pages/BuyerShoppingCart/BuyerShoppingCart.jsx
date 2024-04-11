@@ -33,7 +33,7 @@ import MinusIcon from "../../assets/icon-minus-line.png";
 import Modal from "../../components/Modal/Modal";
 
 export default function BuyerShoppingCart() {
-  const { token, setIsLoggedIn } = useContext(AuthContext);
+  const { token, isLoggedIn } = useContext(AuthContext);
   const [isEmpty, setIsEmpty] = useState(true);
   const [cartList, setCartList] = useState([]);
   const [cartProductInfo, setCartProductInfo] = useState([]);
@@ -126,7 +126,7 @@ export default function BuyerShoppingCart() {
 
   useEffect(() => {
     getShoppingCartList();
-  }, [token, setIsLoggedIn]);
+  }, [token, isLoggedIn]);
 
   return (
     <>

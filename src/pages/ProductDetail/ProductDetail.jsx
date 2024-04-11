@@ -37,7 +37,7 @@ export default function ProductDetail() {
   const { product_id } = useParams();
   const [product, setProduct] = useState("");
   const [count, setCount] = useState(1);
-  const { token, setIsLoggedIn } = useContext(AuthContext);
+  const { token, isLoggedIn } = useContext(AuthContext);
   const [loginRequired, setLoginRequired] = useState(false);
 
   const navigate = useNavigate();
@@ -136,8 +136,9 @@ export default function ProductDetail() {
               </ProductOrderPrice>
             </ProductOrderSummery>
             <ProductDetailButtonMenu>
-              {setIsLoggedIn ? <ProductOrderButton onClick={() => setLoginRequired(true)}>바로구매</ProductOrderButton> : <ProductOrderButton>바로구매</ProductOrderButton>}
-              <ProductAddCartButton onClick={() => AddToCart()}>장바구니</ProductAddCartButton>
+              {!isLoggedIn ? <ProductOrderButton onClick={() => setLoginRequired(true)}>바로구매</ProductOrderButton> : <ProductOrderButton>바로구매</ProductOrderButton>}
+              {!isLoggedIn ? <ProductAddCartButton onClick={() => setLoginRequired(true)}>장바구니</ProductAddCartButton> : <ProductAddCartButton onClick={() => AddToCart()}>장바구니</ProductAddCartButton>}
+
               {loginRequired && (
                 <Modal text="아니오" submitText="예" onCancel={() => setLoginRequired(false)} onSubmit={() => navigate(`/login`)} width="210px">
                   로그인이 필요한 서비스입니다. 로그인 하시겠습니까?
