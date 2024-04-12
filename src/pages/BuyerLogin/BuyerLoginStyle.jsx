@@ -87,7 +87,6 @@ export const LoginButton = styled.button`
   background-color: var(--black-color);
   color: white;
   font-size: var(--font-lg-size);
-  font-weight: var(--font-bold);
 `;
 
 export const LinkWrapper = styled.div`

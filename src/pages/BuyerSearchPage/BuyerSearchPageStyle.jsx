@@ -1,30 +1,53 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const SearchResultsWrapper = styled.div`
   width: 1280px;
   margin: 54px auto;
 `;
 
-export const SearchResultsInner = styled.div``;
+export const SearchResultsInner = styled.div`
+  margin-top: 60px;
+  display: flex;
+  gap: 70px;
+`;
 
 export const SearchResultItem = styled.div``;
 
-export const SearchResultsCount = styled.div``;
+export const SearchResultsCount = styled.ul`
+  font-size: var(--font-lg-size);
+  font-weight: var(--font-light);
+  margin-top: 100px;
 
-export const SearchKeywordTitle = styled.h1`
-  text-align: center;
-  font-size: var(--font-extra-size);
+  position: relative;
 
-  letter-spacing: 2px;
-  text-indent: 2px;
+  strong {
+    font-weight: var(--font-regular);
+  }
 `;
 
 export const SearchResultItemImage = styled.img`
-  width: 155px;
+  width: 380px;
+  border-radius: 10px;
 `;
 
-export const SearchResultItemDetails = styled.div``;
+export const SearchResultItemDetails = styled.div`
+  margin-top: 15px;
+`;
 
-export const SearchResultItemName = styled.div``;
+export const SearchResultItemBrandName = styled.div`
+  font-size: var(--font-lg-size);
+  font-weight: var(--font-light);
+  margin: 15px 0;
+`;
 
-export const SearchResultItemPrice = styled.div``;
+export const SearchResultItemName = styled(Link)`
+  font-size: var(--font-lg-size);
+  font-weight: var(--font-light);
+  margin: 15px 0;
+`;
+
+export const SearchResultItemPrice = styled.div`
+  font-size: var(--font-lg-size);
+  margin-top: 15px;
+`;

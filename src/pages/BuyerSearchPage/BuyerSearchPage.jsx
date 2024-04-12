@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { SearchResultsWrapper, SearchResultsInner, SearchResultItem, SearchResultsCount, SearchKeywordTitle, SearchButton, SearchResultItemImage, SearchResultItemDetails, SearchResultItemName, SearchResultItemPrice } from "./BuyerSearchPageStyle";
+import { SearchResultsWrapper, SearchResultsInner, SearchResultItem, SearchResultsCount, SearchResultItemImage, SearchResultItemDetails, SearchResultItemBrandName, SearchResultItemName, SearchResultItemPrice } from "./BuyerSearchPageStyle";
 import BuyerHeader from "../../components/BuyerHeader/BuyerHeader";
 
 export default function BuyerSearchPage() {
@@ -31,15 +31,19 @@ export default function BuyerSearchPage() {
     <>
       <BuyerHeader />
       <SearchResultsWrapper>
-        <SearchKeywordTitle>Search</SearchKeywordTitle>
-        <SearchResultsCount>{searchedProductCount}개의 검색 결과</SearchResultsCount>
+        <SearchResultsCount>
+          <li>
+            <strong>{searchedProductCount}</strong> 개의 검색 결과
+          </li>
+        </SearchResultsCount>
         <SearchResultsInner>
           {searchResults.map((i) => (
             <SearchResultItem key={i.product_id}>
               <SearchResultItemImage src={i.image} />
               <SearchResultItemDetails>
-                <SearchResultItemName>{i.product_name}</SearchResultItemName>
-                <SearchResultItemPrice>{i.price}</SearchResultItemPrice>
+                <SearchResultItemBrandName>{i.store_name}</SearchResultItemBrandName>
+                <SearchResultItemName to={`/products/${i.product_id}`}>{i.product_name}</SearchResultItemName>
+                <SearchResultItemPrice>{i.price.toLocaleString()}</SearchResultItemPrice>
               </SearchResultItemDetails>
             </SearchResultItem>
           ))}

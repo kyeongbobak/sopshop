@@ -62,7 +62,6 @@ export const ProductQuanTityInner = styled.div`
   display: flex;
   align-items: center;
   border: 1px solid var(--gray-color);
-  border-radius: 5px;
   padding: 15px 0;
   text-align: center;
   button {
@@ -122,17 +121,15 @@ export const ProductDetailButtonMenu = styled.div``;
 export const ProducDetailButtonStyle = css`
   padding: 19px 0;
   margin-top: 22px;
-  border-radius: 5px;
   text-align: center;
   font-size: var(--font-lg-size);
-  font-weight: var(--font-bold);
 `;
 
 export const ProductOrderButton = styled.button`
   ${ProducDetailButtonStyle}
   width: 416px;
   border: 1px solid var(--main-color);
-  font-weight: var(--font-bold);
+
   color: var(--main-color);
 `;
 
@@ -141,12 +138,13 @@ export const ProductAddCartButton = styled.button`
   width: 200px;
   border: 1px solid var(--gray-color);
   margin-left: 10px;
-  font-weight: var(--font-bold);
+
   color: var(--gray-color);
 `;
 
 export const ProductDetailTabMenu = styled.ul`
   width: 100%;
+  height: 300px;
   display: flex;
   margin-top: 141px;
   text-align: center;

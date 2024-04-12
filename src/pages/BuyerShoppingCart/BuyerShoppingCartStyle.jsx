@@ -8,14 +8,13 @@ export const ShoppingCartWrapper = styled.div`
 
 export const ShoppingCartTitle = styled.h1`
   font-size: var(--font-extra-size);
-
   text-align: center;
   margin: 54px 0 52px;
 `;
 
 export const ShoppingCartContents = styled.div`
   text-align: center;
-  margin-top: 35px;
+  margin-top: 20px;
 `;
 
 export const EmptyCartMessage = styled.div`
@@ -32,8 +31,6 @@ export const EmptyCartMessage = styled.div`
 `;
 
 export const CartItemWrapper = styled.ul`
-  border: 1px solid #e0e0e0;
-  border-radius: 10px;
   margin-bottom: 10px;
   position: relative;
 `;
@@ -74,7 +71,7 @@ export const CartItemDeleteButton = styled.button`
   left: 1240px;
   cursor: pointer;
   img {
-    width: 22px;
+    width: 16px;
   }
 `;
 
@@ -122,7 +119,6 @@ export const CartItemQuantity = styled.div`
 export const CartItemQuantityInner = styled.div`
   display: flex;
   border: 1px solid var(--gray-color);
-  border-radius: 5px;
   padding: 15px 0;
   button {
     width: 50px;
@@ -149,7 +145,7 @@ export const PriceDetailsContents = styled.div`
   text-align: center;
   align-items: center;
   padding: 46px 112px;
-  margin: 80px 0 40px;
+  margin: 20px 0 40px;
 
   div {
     padding: 8px 8px;
