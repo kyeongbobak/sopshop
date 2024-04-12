@@ -1,4 +1,4 @@
-import { Header, HeaderWrapper, HeaderInnerMain, HeaderLinkMenu, Logo, SearchInput, SearchButton, HeaderCartLink, HeaderUserPageLink, HeaderLoginLink } from "./BuyerHeaderStyle";
+import { Header, HeaderWrapper, HeaderInnerMain, HeaderLinkMenu, Logo, SearchForm, SearchInput, SearchButton, HeaderCartLink, HeaderUserPageLink, HeaderLoginLink } from "./BuyerHeaderStyle";
 import LogoImage from "../../assets/Logo-hodu.png";
 import ShoppingCartIcon from "../../assets/icon-shopping-cart.png";
 import UserIcon from "../../assets/icon-user.png";
@@ -21,7 +21,8 @@ export default function BuyerHeader() {
     setSearchKeyword(e.target.value);
   };
 
-  const handleSearch = () => {
+  const handleSearch = (e) => {
+    e.preventDefault();
     navigate(`/products/search/${searchKeyword}`);
   };
 
@@ -36,10 +37,12 @@ export default function BuyerHeader() {
           <Logo Link to={`/mainPage`}>
             <img src={LogoImage} alt="" />
           </Logo>
-          <SearchInput type="text" placeholder="search" value={searchKeyword} onChange={handleChange} />
-          <SearchButton onClick={handleSearch}>
-            <img src={SearchIcon} alt="" />
-          </SearchButton>
+          <SearchForm onSubmit={handleSearch}>
+            <SearchInput type="text" placeholder="search" value={searchKeyword} onChange={handleChange} />
+            <SearchButton type="submit">
+              <img src={SearchIcon} alt="" />
+            </SearchButton>
+          </SearchForm>
         </HeaderInnerMain>
         <HeaderLinkMenu>
           <HeaderCartLink Link to={`/shoppingCart`}>

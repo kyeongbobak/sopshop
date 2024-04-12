@@ -25,6 +25,8 @@ export const Logo = styled(Link)`
   }
 `;
 
+export const SearchForm = styled.form``;
+
 export const SearchButton = styled.button`
   position: relative;
 
