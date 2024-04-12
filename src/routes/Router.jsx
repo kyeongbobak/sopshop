@@ -5,6 +5,7 @@ import BuyerMainPage from "../pages/BuyerMainPage/BuyerMainPage";
 import ProductDetail from "../pages/ProductDetail/ProductDetail";
 import BuyerSignUp from "../pages/BuyerSignUp/BuyerSignUp";
 import BuyerShoppingCart from "../pages/BuyerShoppingCart/BuyerShoppingCart";
+import BuyerSearchPage from "../pages/BuyerSearchPage/BuyerSearchPage";
 // import { useLocation } from "react-router-dom";
 
 export default function Router() {
@@ -24,6 +25,7 @@ export default function Router() {
           </Route>
           <Route path="/signUp" element={<BuyerSignUp />}></Route>
           <Route path="/products/*" element={<Outlet />}>
+            <Route path="search/:searchKeyword" element={<BuyerSearchPage />} />
             <Route path=":product_id" element={<ProductDetail />}></Route>
             <Route path=":product_id/login" element={<BuyerLogin />}></Route>
           </Route>

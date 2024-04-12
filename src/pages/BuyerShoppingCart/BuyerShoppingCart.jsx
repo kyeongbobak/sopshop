@@ -146,6 +146,7 @@ export default function BuyerShoppingCart() {
       const res = await instance.delete(`https://openmarket.weniv.co.kr/cart/${cartItemId}`);
       const data = await res.data;
       window.location.reload();
+
       console.log(data);
     } catch (error) {
       console.log(error);

@@ -3,14 +3,26 @@ import LogoImage from "../../assets/Logo-hodu.png";
 import ShoppingCartIcon from "../../assets/icon-shopping-cart.png";
 import UserIcon from "../../assets/icon-user.png";
 import SearchIcon from "../../assets/search.png";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 
 export default function BuyerHeader() {
   const { token, isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
+  const [searchKeyword, setSearchKeyword] = useState();
+
+  const navigate = useNavigate();
 
   const handleLoginStateChange = () => {
     setIsLoggedIn(!!token);
+  };
+
+  const handleChange = (e) => {
+    setSearchKeyword(e.target.value);
+  };
+
+  const handleSearch = () => {
+    navigate(`/products/search/${searchKeyword}`);
   };
 
   useEffect(() => {
@@ -24,8 +36,8 @@ export default function BuyerHeader() {
           <Logo Link to={`/mainPage`}>
             <img src={LogoImage} alt="" />
           </Logo>
-          <SearchInput type="search" placeholder="상품을 검색해보세요!" />
-          <SearchButton>
+          <SearchInput type="text" placeholder="상품을 검색해보세요!" value={searchKeyword} onChange={handleChange} />
+          <SearchButton onClick={handleSearch}>
             <img src={SearchIcon} alt="" />
           </SearchButton>
         </HeaderInnerMain>
