@@ -87,11 +87,13 @@ export const LoginButton = styled.button`
   background-color: var(--black-color);
   color: white;
   font-size: var(--font-lg-size);
+  font-weight: var(--font-bold);
 `;
 
 export const LinkWrapper = styled.div`
   margin-top: 30px;
   font-size: var(--font-md-size);
+
   text-align: center;
   cursor: pointer;
 
@@ -100,7 +102,9 @@ export const LinkWrapper = styled.div`
   }
 `;
 
-export const StyledLink = styled(Link)``;
+export const StyledLink = styled(Link)`
+  color: var(--dark-gray-color);
+`;
 
 export const ValidateMessage = styled.p`
   color: red;

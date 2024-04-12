@@ -3,9 +3,9 @@ import { ProductInfoMenu, ProductInfoMenuItem, ProductInfoCheckbox } from "./Pro
 const ProductInfoHeader = ({ type }) => {
   const menuItems = {
     cart: [
-      { label: "상품정보", width: "600px" },
-      { label: "수량", width: "300px" },
-      { label: "상품금액", width: "300px" },
+      { label: "Product Info", width: "600px" },
+      { label: "Qty", width: "300px" },
+      { label: "Price", width: "300px" },
     ],
     order: [
       { label: "상품정보", width: "500px" },

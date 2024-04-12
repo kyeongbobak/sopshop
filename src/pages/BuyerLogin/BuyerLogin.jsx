@@ -92,13 +92,13 @@ export default function BuyerLogin() {
             </Label>
             <StyledInput id="userPassword" type="password" placeholder="비밀번호" value={userPassword} onChange={inputHandler} />
             {warningMessage ? <ValidateMessage>{warningMessage}</ValidateMessage> : ""}
-            <LoginButton type="submit">로그인</LoginButton>
+            <LoginButton type="submit">Log in</LoginButton>
           </LoginForm>
         </FormBox>
         <LinkWrapper>
-          <StyledLink to={"/signUp"}>회원가입</StyledLink>
+          <StyledLink to={"/signUp"}>Create Account</StyledLink>
           <span>|</span>
-          <StyledLink>비밀번호 찾기</StyledLink>
+          <StyledLink>Forgot your password?</StyledLink>
         </LinkWrapper>
       </LoginWrapper>
     </>

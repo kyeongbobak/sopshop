@@ -161,7 +161,7 @@ export default function BuyerShoppingCart() {
     <>
       <BuyerHeader />
       <ShoppingCartWrapper>
-        <ShoppingCartTitle>장바구니</ShoppingCartTitle>
+        <ShoppingCartTitle>Cart</ShoppingCartTitle>
         <ProductInfoHeader type="cart" />
         <ShoppingCartContents>
           {isEmpty ? (
@@ -206,7 +206,7 @@ export default function BuyerShoppingCart() {
                           <CartItemInner key={cartProductInfo[i].product_id}>
                             <CartItemBranName>{cartProductInfo[i].store_name}</CartItemBranName>
                             <CartItemName>{cartProductInfo[i].product_name}</CartItemName>
-                            <CartItemPrice>{cartProductInfo[i].price.toLocaleString()} 원</CartItemPrice>
+                            <CartItemPrice>{cartProductInfo[i].price.toLocaleString()}</CartItemPrice>
                             <p>택배배송 / 무료배송</p>
                           </CartItemInner>
                           <CartItemQuantity>
@@ -234,9 +234,9 @@ export default function BuyerShoppingCart() {
                             )}
                           </CartItemQuantity>
                           <CartItemTotalPrice>
-                            <p>{(list.quantity * cartProductInfo[i].price).toLocaleString()} 원</p>
+                            <p>{(list.quantity * cartProductInfo[i].price).toLocaleString()}</p>
                             <OrderButton to={`/order`}>
-                              <Button SButton>주문하기</Button>
+                              <Button SButton>Order</Button>
                             </OrderButton>
                           </CartItemTotalPrice>
                         </>
@@ -247,10 +247,8 @@ export default function BuyerShoppingCart() {
               ))}
               <PriceDetailsContents>
                 <TotalPrice>
-                  <span>총 상품금액</span>
-                  <p>
-                    {totalProductPrice.toLocaleString()} <span>원</span>
-                  </p>
+                  <span>Total Price</span>
+                  <p>{totalProductPrice.toLocaleString()}</p>
                 </TotalPrice>
                 <div>
                   <img src={MinusIcon} alt="" />
@@ -272,13 +270,11 @@ export default function BuyerShoppingCart() {
                 </DeliveryPrice>
                 <OrderTotalPrice>
                   <span>결제예정금액</span>
-                  <p>
-                    {totalProductPrice.toLocaleString()} <span>원</span>
-                  </p>
+                  <p>{totalProductPrice.toLocaleString()}</p>
                 </OrderTotalPrice>
               </PriceDetailsContents>
               <PaymentButton to={`/order`}>
-                <Button LButton>주문하기</Button>
+                <Button LButton>Order</Button>
               </PaymentButton>
             </>
           )}

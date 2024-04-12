@@ -1,9 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-export const Footer = styled.footer`
-  background-color: var(--light-gray-color);
-`;
+export const Footer = styled.footer``;
 
 export const FooterWrapper = styled.div`
   width: 1280px;
@@ -30,7 +28,9 @@ export const FooterLink = styled.li`
   }
 `;
 
-export const StyledLink = styled(Link)``;
+export const StyledLink = styled(Link)`
+  font-size: var(--font-md-size);
+`;
 
 export const StyledBoldLink = styled(Link)`
   font-weight: var(--font-bold);
@@ -48,8 +48,8 @@ export const FooterBottom = styled.div`
   flex-direction: column;
   padding: 30px 0 60px;
   border-top: 1px solid var(--gray-color);
-  font-size: var(--font-sm-size);
-  line-height: 24px;
+  font-size: var(--font-md-size);
+  line-height: 30px;
 
   .first-span {
     font-weight: var(--font-bold);

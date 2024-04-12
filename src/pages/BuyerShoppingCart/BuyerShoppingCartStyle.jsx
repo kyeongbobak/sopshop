@@ -8,7 +8,7 @@ export const ShoppingCartWrapper = styled.div`
 
 export const ShoppingCartTitle = styled.h1`
   font-size: var(--font-extra-size);
-  font-weight: var(--font-bold);
+
   text-align: center;
   margin: 54px 0 52px;
 `;
@@ -28,7 +28,6 @@ export const EmptyCartMessage = styled.div`
 
   p:nth-child(2) {
     font-size: var(--font-sm-size);
-    font-weight: var(--font-bold);
   }
 `;
 
@@ -54,18 +53,18 @@ export const CartItemInput = styled.div`
 
   input[type="radio"] {
     appearance: none;
-    width: 23px;
-    height: 23px;
-    border: 2px solid var(--main-color);
+    width: 15px;
+    height: 15px;
+    border: 1px solid var(--black-color);
     border-radius: 50%;
     outline: none;
     cursor: pointer;
   }
 
   input[type="radio"]:checked {
-    background-color: var(--main-color);
+    background-color: var(--black-color);
     border: 3px solid white;
-    box-shadow: 0 0 0 1.6px var(--main-color);
+    box-shadow: 0 0 0 1.6px var(--black-color);
   }
 `;
 
@@ -144,17 +143,15 @@ export const CartItemTotalPrice = styled.div`
 `;
 
 export const PriceDetailsContents = styled.div`
-  background-color: var(--light-gray-color);
+  border-top: 1px solid var(--black-color);
+  border-bottom: 1px solid var(--black-color);
   display: flex;
   text-align: center;
   align-items: center;
-  border-radius: 10px;
   padding: 46px 112px;
   margin: 80px 0 40px;
 
   div {
-    background-color: white;
-    border-radius: 50px;
     padding: 8px 8px;
   }
 `;
@@ -190,10 +187,6 @@ export const OrderTotalPrice = styled.p`
   width: 320px;
 
   span {
-    font-weight: var(--font-bold);
-  }
-  p {
-    color: red;
     font-weight: var(--font-bold);
   }
 `;

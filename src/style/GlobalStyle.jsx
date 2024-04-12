@@ -14,6 +14,7 @@ const GlobalStyle = createGlobalStyle`
     --black-color : #434343;
     --light-gray-color : #F2F2F2;
     --light-black-color : #767676;
+    --dark-gray-color : #9a9a9a;
    
     --font-min-size : 1.2rem; 
     --font-sm-size : 1.4rem;
@@ -31,15 +32,11 @@ const GlobalStyle = createGlobalStyle`
     margin: unset;
   }
            
-    @font-face {
-    font-family: 'SpoqaHanSansNeo-Light';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Light.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
+
   
   body{
-    font-family: 'SpoqaHanSansNeo-Light';
+    font-family: "Wanted Sans Variable", "Wanted Sans", -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+
   }
 
 

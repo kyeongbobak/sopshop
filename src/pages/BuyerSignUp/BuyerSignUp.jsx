@@ -221,7 +221,7 @@ export default function BuyerSignUp() {
                 </p>
               </SignUpAgreementWrapper>
               <SignUpButton type="submit" isSignUp={isClickedSignUp} onClick={handleOnSignUp}>
-                가입하기
+                Sign In
               </SignUpButton>
             </SignUpRegistrationSection>
           </SignUpForm>

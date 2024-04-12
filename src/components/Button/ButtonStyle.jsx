@@ -3,16 +3,16 @@ import styled, { css } from "styled-components";
 export const ButtonStyle = styled.button`
   border: ${(props) => props.border || "none"};
   text-align: ${(props) => props.textAlign || "center"};
-  border-radius: ${(props) => props.borderRadius || "5px"};
+  border-radius: ${(props) => props.borderRadius || "none"};
   cursor: pointer;
 
   ${(props) =>
     props.LButton &&
     css`
-      padding: 19px 88px;
-      background-color: var(--main-color);
+      padding: 15px 88px;
+      background-color: var(--black-color);
       color: var(--white-color);
-      font-size: var(--font-max-size);
+      font-size: var(--font-lg-size);
       font-weight: var(--font-bold);
       ${(props) =>
         props.disabled &&

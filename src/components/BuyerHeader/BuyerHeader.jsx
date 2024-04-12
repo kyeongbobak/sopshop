@@ -36,7 +36,7 @@ export default function BuyerHeader() {
           <Logo Link to={`/mainPage`}>
             <img src={LogoImage} alt="" />
           </Logo>
-          <SearchInput type="text" placeholder="상품을 검색해보세요!" value={searchKeyword} onChange={handleChange} />
+          <SearchInput type="text" placeholder="search" value={searchKeyword} onChange={handleChange} />
           <SearchButton onClick={handleSearch}>
             <img src={SearchIcon} alt="" />
           </SearchButton>
@@ -44,17 +44,17 @@ export default function BuyerHeader() {
         <HeaderLinkMenu>
           <HeaderCartLink Link to={`/shoppingCart`}>
             <img src={ShoppingCartIcon} alt="" />
-            <p>장바구니</p>
+            <p>cart</p>
           </HeaderCartLink>
           {isLoggedIn ? (
             <HeaderUserPageLink>
               <img src={UserIcon} alt="" />
-              <p>마이페이지</p>
+              <p>my page</p>
             </HeaderUserPageLink>
           ) : (
             <HeaderLoginLink to={"./login"}>
               <img src={UserIcon} alt="" />
-              <p>로그인</p>
+              <p>login</p>
             </HeaderLoginLink>
           )}
         </HeaderLinkMenu>

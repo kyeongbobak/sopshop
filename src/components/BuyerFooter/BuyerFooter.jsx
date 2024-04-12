@@ -11,7 +11,7 @@ export default function BuyerFooter() {
           <FooterMenuWrap>
             <FooterLinkMenu>
               <FooterLink>
-                <StyledLink to="">SopShop 소개</StyledLink>
+                <StyledLink to="">sopshop 소개</StyledLink>
               </FooterLink>
               <FooterLink>
                 <StyledLink to="">이용약관</StyledLink>
@@ -51,7 +51,7 @@ export default function BuyerFooter() {
           </FooterSnsWrap>
         </FooterTop>
         <FooterBottom>
-          <span className="first-span">(주)SopShop</span>
+          <span className="first-span">(주) sopshop</span>
           <span>서울시 중구 신당동 마린 빌딩 2층</span>
           <span>사업자번호 123-1234-5678 </span>
           <span>대표: 박효리</span>

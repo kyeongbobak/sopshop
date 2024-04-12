@@ -21,12 +21,11 @@ export const ProductImage = styled.img`
 
 export const ProductBrandName = styled.p`
   font-size: var(--font-lg-size);
-  font-weight: var(--font-bold);
 `;
 
 export const ProductName = styled.h2`
   font-size: var(--font-extra-size);
-  font-weight: var(--font-bold);
+  font-weight: var(--font-light);
   margin-top: 16px;
 `;
 
@@ -45,7 +44,7 @@ export const ProductDelivary = styled.div`
   padding-bottom: 20px;
   font-size: var(--font-md-size);
   color: var(--black-color);
-  border-bottom: 3px solid var(--gray-color);
+  border-bottom: 1px solid var(--gray-color);
 `;
 
 export const ProductQuanTityWrapper = styled.div`
@@ -83,7 +82,7 @@ export const ProductOrderSummery = styled.div`
 
   strong {
     font-size: var(--font-lg-size);
-    font-weight: var(--font-bold);
+    color: var(--light-black-color);
   }
 `;
 
@@ -116,10 +115,6 @@ export const ProductTotalQuanTity = styled.div`
   p {
     font-size: var(--font-lg-size);
   }
-
-  strong {
-    color: var(--main-color);
-  }
 `;
 
 export const ProductDetailButtonMenu = styled.div``;
@@ -128,7 +123,6 @@ export const ProducDetailButtonStyle = css`
   padding: 19px 0;
   margin-top: 22px;
   border-radius: 5px;
-  color: white;
   text-align: center;
   font-size: var(--font-lg-size);
   font-weight: var(--font-bold);
@@ -137,14 +131,18 @@ export const ProducDetailButtonStyle = css`
 export const ProductOrderButton = styled.button`
   ${ProducDetailButtonStyle}
   width: 416px;
-  background-color: var(--main-color);
+  border: 1px solid var(--main-color);
+  font-weight: var(--font-bold);
+  color: var(--main-color);
 `;
 
 export const ProductAddCartButton = styled.button`
   ${ProducDetailButtonStyle}
   width: 200px;
-  background-color: var(--gray-color);
-  margin-left: 14px;
+  border: 1px solid var(--gray-color);
+  margin-left: 10px;
+  font-weight: var(--font-bold);
+  color: var(--gray-color);
 `;
 
 export const ProductDetailTabMenu = styled.ul`

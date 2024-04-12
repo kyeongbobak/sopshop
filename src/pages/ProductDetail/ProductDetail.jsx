@@ -33,7 +33,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import Modal from "../../components/Modal/Modal";
 
 export default function ProductDetail() {
-  const [activeTab, setActiveTab] = useState("button");
+  const [activeTab, setActiveTab] = useState("review");
   const { product_id } = useParams();
   const [product, setProduct] = useState("");
   const [count, setCount] = useState(1);
@@ -127,12 +127,12 @@ export default function ProductDetail() {
       <BuyerHeader />
       <ProductDetailWrapper>
         <ProductDetailContent>
-          <ProductImage src={product.image}></ProductImage>
+          <ProductImage src={product.image} />
           <ProductDetailInfo>
             <ProductBrandName>{product.store_name}</ProductBrandName>
             <ProductName>{product.product_name}</ProductName>
             <ProductPrice>
-              {product.price ? product.price.toLocaleString() : "가격정보 없음"} <span>원</span>
+              {product.price ? product.price.toLocaleString() : "가격정보 없음"} <span></span>
             </ProductPrice>
             <ProductDelivary>택배배송 / 무료배송</ProductDelivary>
             <ProductQuanTity>
@@ -147,7 +147,7 @@ export default function ProductDetail() {
               </ProductQuanTityInner>
             </ProductQuanTity>
             <ProductOrderSummery>
-              <strong>총 상품 금액</strong>
+              <strong>Total Price</strong>
               <ProductOrderPrice>
                 <ProductTotalQuanTity>
                   <p>
@@ -155,16 +155,13 @@ export default function ProductDetail() {
                   </p>
                 </ProductTotalQuanTity>
                 <ProductTotalPrice>
-                  <p>
-                    {product.price ? product.price * count : product.price}
-                    <span>원</span>
-                  </p>
+                  <p>{product.price ? (product.price * count).toLocaleString() : product.price}</p>
                 </ProductTotalPrice>
               </ProductOrderPrice>
             </ProductOrderSummery>
             <ProductDetailButtonMenu>
-              {!isLoggedIn ? <ProductOrderButton onClick={() => setLoginRequired(true)}>바로구매</ProductOrderButton> : <ProductOrderButton onClick={() => navigate(`/order`)}>바로구매</ProductOrderButton>}
-              {!isLoggedIn ? <ProductAddCartButton onClick={() => setLoginRequired(true)}>장바구니</ProductAddCartButton> : <ProductAddCartButton onClick={() => checkCartContents()}>장바구니</ProductAddCartButton>}
+              {!isLoggedIn ? <ProductOrderButton onClick={() => setLoginRequired(true)}>Buy Now</ProductOrderButton> : <ProductOrderButton onClick={() => navigate(`/order`)}>Buy Now</ProductOrderButton>}
+              {!isLoggedIn ? <ProductAddCartButton onClick={() => setLoginRequired(true)}>Add To Cart</ProductAddCartButton> : <ProductAddCartButton onClick={() => checkCartContents()}>Add To Cart</ProductAddCartButton>}
 
               {loginRequired && (
                 <Modal text="아니오" submitText="예" onCancel={() => setLoginRequired(false)} onSubmit={() => navigate(`/login`)} width="210px">
@@ -183,7 +180,7 @@ export default function ProductDetail() {
         <ProductDetailTabMenu>
           <TabMenuItem>
             <ProductReviewLink onClick={() => handleTabClick("review")} isActive={activeTab === "review"}>
-              리뷰
+              Review
             </ProductReviewLink>
           </TabMenuItem>
           <TabMenuItem>
@@ -193,7 +190,7 @@ export default function ProductDetail() {
           </TabMenuItem>
           <TabMenuItem>
             <ProductRefundLink onClick={() => handleTabClick("refund")} isActive={activeTab === "refund"}>
-              반품/교환정보
+              반품/교환
             </ProductRefundLink>
           </TabMenuItem>
         </ProductDetailTabMenu>

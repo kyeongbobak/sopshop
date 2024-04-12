@@ -46,7 +46,7 @@ export default function BuyerMainPage() {
   return (
     <>
       <BuyerHeader />
-      <MainPageSlider></MainPageSlider>
+      {/* <MainPageSlider></MainPageSlider> */}
       <ProductListWrapper>
         <ProductGroup>
           {products.map((product) => (
