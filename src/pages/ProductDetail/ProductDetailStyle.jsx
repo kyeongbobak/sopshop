@@ -115,7 +115,9 @@ export const ProductTotalQuanTity = styled.div`
   }
 `;
 
-export const ProductDetailButtonMenu = styled.div``;
+export const ProductDetailButtonMenu = styled.div`
+  font-weight: var(--font-bold);
+`;
 
 export const ProducDetailButtonStyle = css`
   padding: 19px 0;
@@ -128,7 +130,6 @@ export const ProductOrderButton = styled.button`
   ${ProducDetailButtonStyle}
   width: 416px;
   border: 1px solid var(--main-color);
-
   color: var(--main-color);
 `;
 
@@ -136,8 +137,7 @@ export const ProductAddCartButton = styled.button`
   ${ProducDetailButtonStyle}
   width: 200px;
   border: 1px solid var(--gray-color);
-  margin-left: 10px;
-
+  margin-left: 8px;
   color: var(--gray-color);
 `;
 
