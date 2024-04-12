@@ -31,7 +31,6 @@ export const ProductName = styled.h2`
 
 export const ProductPrice = styled.p`
   font-size: var(--font-extra-size);
-  font-weight: var(--font-bold);
   margin-top: 20px;
 
   span {
