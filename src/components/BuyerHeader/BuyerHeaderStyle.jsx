@@ -66,10 +66,45 @@ export const HeaderCartLink = styled(Link)`
   text-align: center;
 `;
 
-export const HeaderUserPageLink = styled(Link)`
+export const HeaderUserPageLink = styled.button`
   text-align: center;
+  position: relative;
 `;
 
 export const HeaderLoginLink = styled(Link)`
   text-align: center;
+`;
+
+export const DropDownMenu = styled.ul`
+  background-color: var(--white-color);
+  position: absolute;
+  padding: 20px 30px 0px 30px;
+  top: 110px;
+  right: 315px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 1px var(--gray-color), 0px 4px 30px var(--light-gray-color);
+  font-size: var(--font-lg-size);
+
+  div {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  ::after {
+    border-top: 0px solid transparent;
+    border-bottom: 10px solid var(--white-color);
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 55px;
+  }
+`;
+
+export const UserProfileLink = styled(Link)``;
+
+export const LogoutButton = styled.button`
+  margin: 20px 0;
 `;
