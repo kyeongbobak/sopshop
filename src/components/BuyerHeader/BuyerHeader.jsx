@@ -73,7 +73,15 @@ export default function BuyerHeader() {
             <p>cart</p>
           </HeaderCartLink>
           {isLoggedIn ? (
-            <HeaderUserPageLink onClick={() => setDropDown(true)}>
+            <HeaderUserPageLink
+              onClick={() => {
+                if (dropDown === false) {
+                  setDropDown(true);
+                } else {
+                  setDropDown(false);
+                }
+              }}
+            >
               <img src={UserIcon} alt="" />
               <p>my page</p>
               {dropDown && (
