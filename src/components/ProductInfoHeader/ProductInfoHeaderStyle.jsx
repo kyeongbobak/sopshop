@@ -18,8 +18,8 @@ export const ProductInfoMenuItem = styled.li`
 `;
 
 export const ProductInfoCheckbox = styled.div`
-  width: 15px;
-  height: 15px;
+  width: 13px;
+  height: 13px;
   margin: 0 30px;
   border: 1px solid var(--black-color);
   border-radius: 50px;
