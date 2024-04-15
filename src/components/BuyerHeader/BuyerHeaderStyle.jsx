@@ -36,6 +36,7 @@ export const SearchButton = styled.button`
     top: 50%;
     transform: translateY(-50%);
     width: 22px;
+    padding-bottom: 10px;
   }
 `;
 
@@ -52,6 +53,7 @@ export const HeaderLinkMenu = styled.div`
   font-size: var(--font-md-size);
   display: flex;
   gap: 27px;
+
   img {
     width: 32px;
     padding-bottom: 5px;
@@ -78,12 +80,14 @@ export const HeaderLoginLink = styled(Link)`
 export const DropDownMenu = styled.ul`
   background-color: var(--white-color);
   position: absolute;
-  padding: 20px 30px 0px 30px;
-  top: 110px;
-  right: 315px;
+  top: 80px;
+  right: -45px;
+  padding-top: 20px;
+  width: 152px;
   border-radius: 10px;
   box-shadow: 0px 0px 10px 1px var(--gray-color), 0px 4px 30px var(--light-gray-color);
   font-size: var(--font-lg-size);
+  z-index: 999;
 
   div {
     display: flex;
@@ -93,13 +97,13 @@ export const DropDownMenu = styled.ul`
 
   ::after {
     border-top: 0px solid transparent;
-    border-bottom: 10px solid var(--white-color);
+    border-bottom: 11px solid var(--white-color);
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
     content: "";
     position: absolute;
     top: -10px;
-    left: 55px;
+    left: 70px;
   }
 `;
 

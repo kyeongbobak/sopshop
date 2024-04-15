@@ -6,6 +6,7 @@ import SearchIcon from "../../assets/search.png";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
+import axios from "axios";
 
 export default function BuyerHeader() {
   const { token, isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
@@ -31,7 +32,26 @@ export default function BuyerHeader() {
     handleLoginStateChange();
   });
 
-  const handleLogout = async () => {};
+  const handleLogout = async () => {
+    const instance = axios.create({
+      headers: {
+        Authorization: `JWT ${token}`,
+      },
+    });
+
+    try {
+      const res = await instance.post("https://openmarket.weniv.co.kr/accounts/logout/");
+      const data = await res.data;
+      console.log(data);
+      localStorage.removeItem("token");
+      localStorage.removeItem("id");
+      setIsLoggedIn(false);
+      window.location.reload();
+      navigate(`/mainPage`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Header>
@@ -56,22 +76,22 @@ export default function BuyerHeader() {
             <HeaderUserPageLink onClick={() => setDropDown(true)}>
               <img src={UserIcon} alt="" />
               <p>my page</p>
+              {dropDown && (
+                <>
+                  <DropDownMenu>
+                    <div>
+                      <UserProfileLink to={`/mypage`}>My Page</UserProfileLink>
+                      <LogoutButton onClick={() => handleLogout()}>Log out</LogoutButton>
+                    </div>
+                  </DropDownMenu>
+                </>
+              )}
             </HeaderUserPageLink>
           ) : (
             <HeaderLoginLink to={"/login"}>
               <img src={UserIcon} alt="" />
               <p>login</p>
             </HeaderLoginLink>
-          )}
-          {dropDown && (
-            <>
-              <DropDownMenu>
-                <div>
-                  <UserProfileLink to={`/mypage`}>My Page</UserProfileLink>
-                  <LogoutButton onClick={() => handleLogout}>Log out</LogoutButton>
-                </div>
-              </DropDownMenu>
-            </>
           )}
         </HeaderLinkMenu>
       </HeaderWrapper>

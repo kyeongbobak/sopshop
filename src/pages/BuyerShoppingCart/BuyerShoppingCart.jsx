@@ -59,8 +59,6 @@ export default function BuyerShoppingCart() {
       const cartItem = res.data.results;
       setCartList(cartItem);
 
-      console.log(cartItem);
-
       if (cartItem.length === 0) {
         return setIsEmpty(true);
       }
@@ -115,7 +113,6 @@ export default function BuyerShoppingCart() {
           Authorization: `JWT ${token}`,
         },
       });
-      console.log(token);
 
       const body = {
         product_id: modifiedProductId,
