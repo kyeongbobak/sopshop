@@ -10,12 +10,12 @@ import {
   CartItemInput,
   CartItemDeleteButton,
   CartItemInfo,
-  CartItemBranName,
-  CartItemName,
-  CartItemInner,
+  CartItemInfoBranName,
+  CartItemInfoName,
+  CartItemInfoInner,
   CartItemQuantity,
   CartItemQuantityInner,
-  CartItemPrice,
+  CartItemInfoPrice,
   CartItemTotalPrice,
   PriceDetailsContents,
   TotalPrice,
@@ -63,10 +63,11 @@ export default function BuyerShoppingCart() {
         return setIsEmpty(true);
       }
 
-      const productInfos = cartItem.map((list) => getProductInfo(list.product_id));
+      const productInfos = cartItem.map((item) => getProductInfo(item.product_id));
 
       const productInfoPromises = await Promise.all(productInfos);
       setCartProductInfo(productInfoPromises);
+      console.log(productInfoPromises);
 
       Promise.all(productInfoPromises).then((product) => {
         const totalProductPrice = product.map((v, i) => v.price * cartItem[i].quantity);
@@ -78,14 +79,14 @@ export default function BuyerShoppingCart() {
     }
   };
 
-  const getProductInfo = async (id) => {
+  const getProductInfo = async (ProductId) => {
     try {
       const instance = axios.create({
         headers: {
           Authorization: `JWT ${token}`,
         },
       });
-      const res = await instance.get(`https://openmarket.weniv.co.kr/products/${id}`);
+      const res = await instance.get(`https://openmarket.weniv.co.kr/products/${ProductId}`);
       const data = await res.data;
       return data;
     } catch (error) {
@@ -200,12 +201,12 @@ export default function BuyerShoppingCart() {
                     <CartItemInfo>
                       {cartProductInfo[i] && (
                         <>
-                          <CartItemInner key={cartProductInfo[i].product_id}>
-                            <CartItemBranName>{cartProductInfo[i].store_name}</CartItemBranName>
-                            <CartItemName>{cartProductInfo[i].product_name}</CartItemName>
-                            <CartItemPrice>{cartProductInfo[i].price.toLocaleString()}</CartItemPrice>
+                          <CartItemInfoInner key={cartProductInfo[i].product_id}>
+                            <CartItemInfoBranName>{cartProductInfo[i].store_name}</CartItemInfoBranName>
+                            <CartItemInfoName>{cartProductInfo[i].product_name}</CartItemInfoName>
+                            <CartItemInfoPrice>{cartProductInfo[i].price.toLocaleString()}</CartItemInfoPrice>
                             <p>택배배송 / 무료배송</p>
-                          </CartItemInner>
+                          </CartItemInfoInner>
                           <CartItemQuantity>
                             <CartItemQuantityInner>
                               <button onClick={() => ModalOpen(list)}>

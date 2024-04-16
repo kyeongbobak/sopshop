@@ -81,7 +81,7 @@ export const CartItemInfo = styled.div`
   align-items: center;
 `;
 
-export const CartItemInner = styled.div`
+export const CartItemInfoInner = styled.div`
   width: 362px;
   text-align: left;
   padding-left: 238px;
@@ -93,17 +93,17 @@ export const CartItemInner = styled.div`
   }
 `;
 
-export const CartItemBranName = styled.div`
+export const CartItemInfoBranName = styled.div`
   font-size: var(--font-sm-size);
   color: var(--black-color);
 `;
 
-export const CartItemName = styled.div`
+export const CartItemInfoName = styled.div`
   font-size: var(--font-lg-size);
   margin-top: 20px;
 `;
 
-export const CartItemPrice = styled.div`
+export const CartItemInfoPrice = styled.div`
   font-size: var(--font-md-size);
   font-weight: var(--font-bold);
   margin-top: 20px;

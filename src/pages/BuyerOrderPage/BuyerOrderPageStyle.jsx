@@ -15,10 +15,20 @@ export const OrderPageContents = styled.div``;
 
 export const OrderItemWrapper = styled.div``;
 
-export const OrderItemImage = styled.div``;
+export const OrderItem = styled.div``;
+
+export const OrderItemInfo = styled.div``;
+
+export const OrderItemInfoInner = styled.div``;
+
+export const OrderItemInfoImage = styled.div``;
+
+export const OrderItemInfoBrandName = styled.div``;
 
 export const OrderItemDiscount = styled.div``;
 
 export const OrderItemDelivery = styled.div``;
 
-export const OrderItemPrice = styled.div``;
+export const OrderItemInfoPrice = styled.div``;
+
+export const OrderItemQuantity = styled.div``;
