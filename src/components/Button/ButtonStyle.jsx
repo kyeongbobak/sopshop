@@ -24,7 +24,8 @@ export const ButtonStyle = styled.button`
   ${(props) =>
     props.MButton &&
     css`
-      padding: 19px 223px;
+      width: 200px;
+      padding: 19px 0;
       background-color: var(--main-color);
       font-size: var(--font-lg-size);
       color: var(--white-color);
@@ -43,6 +44,7 @@ export const ButtonStyle = styled.button`
         ${(props) =>
         props.White &&
         css`
+          border: 1px solid var(--main-color);
           background-color: var(--white-color);
           color: var(--black-color);
         `}
