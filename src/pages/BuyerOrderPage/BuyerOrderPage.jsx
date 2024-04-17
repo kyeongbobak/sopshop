@@ -22,7 +22,7 @@ import axios from "axios";
 export default function BuyerOrderPage() {
   const [orderList, setOrderList] = useState([]);
   const [orderProductInfo, setOrderProductInfos] = useState([]);
-
+  const [orderTotalPrice, setOrderTotalPrice] = useState(0);
   const { token } = useContext(AuthContext);
 
   const getOrderList = async () => {
@@ -39,7 +39,18 @@ export default function BuyerOrderPage() {
       const prouductInfos = orderItem.map((item) => getProductInfo(item.product_id));
 
       const productInfoPromises = await Promise.all(prouductInfos);
+
+      Promise.all(productInfoPromises).then((product) => {
+        const productPrice = product.map((v, i) => v.price * orderItem[i].quantity);
+        console.log(productPrice);
+
+        const totalPrice = productPrice.reduce((acc, cur) => acc + cur, 0);
+        setOrderTotalPrice(totalPrice);
+        console.log(totalPrice);
+      });
+
       setOrderProductInfos(productInfoPromises);
+
       console.log(productInfoPromises);
     } catch (error) {
       console.log(error);
@@ -86,7 +97,7 @@ export default function BuyerOrderPage() {
                         <OrderItemInfoBrandName>{orderProductInfo[i].store_name}</OrderItemInfoBrandName>
                         <OrderItemDiscount>-</OrderItemDiscount>
                         <OrderItemDelivery>무료배송</OrderItemDelivery>
-                        <OrderItemInfoPrice>{orderProductInfo[i].price}</OrderItemInfoPrice>
+                        <OrderItemInfoPrice>{orderProductInfo[i].price * list.quantity}</OrderItemInfoPrice>
                       </OrderItemInfoInner>
                     </>
                   )}
