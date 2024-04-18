@@ -53,7 +53,8 @@ import {
 import { AuthContext } from "../../contexts/AuthContext";
 import axios from "axios";
 import Button from "../../components/Button/Button";
-import DaumPostcode from "react-daum-postcode";
+
+import AdressSearchModal from "../../components/Modal/AdressSearchModal/AdressSearchModal";
 
 export default function BuyerOrderPage() {
   const [orderList, setOrderList] = useState([]);
@@ -208,11 +209,9 @@ export default function BuyerOrderPage() {
                 <label htmlFor="adress">배송주소</label>
                 <ZipCodeInput type="text" id="adress" value={zipCode} onChange={(e) => setZipCode(e.target.value)}></ZipCodeInput>
                 <ZipCodeSearchButton type="button" value="우편번호 조회" onClick={getZipCode()}></ZipCodeSearchButton>
-                {zipSearch && (
-                  <>
-                    <DaumPostcode></DaumPostcode>
-                  </>
-                )}
+
+                <AdressSearchModal></AdressSearchModal>
+
                 <RoadAdressInput type="text" id="adress" value={zipCode} onChange={(e) => setZipCode(e.target.value)}></RoadAdressInput>
                 <AdditionalAdressInput type="text" id="additionalAdress" value={additionalAdress} onChange={(e) => setAdditionalAdress(e.target.value)}></AdditionalAdressInput>
               </DeliveryReceiverAdress>
