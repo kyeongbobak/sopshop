@@ -53,7 +53,6 @@ import {
 import { AuthContext } from "../../contexts/AuthContext";
 import axios from "axios";
 import Button from "../../components/Button/Button";
-
 import AdressSearchModal from "../../components/Modal/AdressSearchModal/AdressSearchModal";
 
 export default function BuyerOrderPage() {
@@ -67,14 +66,15 @@ export default function BuyerOrderPage() {
   const [endNumber, setEndNumber] = useState("");
   const [buyerEmail, setBuyerEmail] = useState("");
   const [zipSearch, setZipSearch] = useState(false);
-  const [zipCode, setZipCode] = useState("");
+  const [zoneCode, setZonCode] = useState("");
+  const [roadAdress, setRoadAdress] = useState("");
   const [additionalAdress, setAdditionalAdress] = useState("");
   const [deliveryMessage, setDeliveryMessage] = useState("");
   const [receiverPrefixNumber, setReceiverPreFixNumber] = useState("");
   const [receiverMidNumber, setReceiverMidNumber] = useState("");
   const [receiverEndNumber, setReceiverEndNumber] = useState("");
 
-  console.log(prefixNumber);
+  console.log(additionalAdress);
 
   const getOrderList = async () => {
     try {
@@ -124,8 +124,10 @@ export default function BuyerOrderPage() {
     }
   };
 
-  const getZipCode = () => {
-    // setZipSearch(true);
+  const getAdress = (data) => {
+    console.log(data);
+    setZonCode(data.zonecode);
+    setRoadAdress(data.roadAddress);
   };
 
   useEffect(() => {
@@ -207,12 +209,12 @@ export default function BuyerOrderPage() {
               </DeliveryReceiverPhoneNumber>
               <DeliveryReceiverAdress>
                 <label htmlFor="adress">배송주소</label>
-                <ZipCodeInput type="text" id="adress" value={zipCode} onChange={(e) => setZipCode(e.target.value)}></ZipCodeInput>
-                <ZipCodeSearchButton type="button" value="우편번호 조회" onClick={getZipCode()}></ZipCodeSearchButton>
+                <ZipCodeInput type="text" id="adress" value={zoneCode}></ZipCodeInput>
+                <ZipCodeSearchButton type="button" value="우편번호 조회" onClick={() => setZipSearch(true)}></ZipCodeSearchButton>
 
-                <AdressSearchModal></AdressSearchModal>
+                {zipSearch && <AdressSearchModal onComplete={getAdress}></AdressSearchModal>}
 
-                <RoadAdressInput type="text" id="adress" value={zipCode} onChange={(e) => setZipCode(e.target.value)}></RoadAdressInput>
+                <RoadAdressInput type="text" id="adress" value={roadAdress}></RoadAdressInput>
                 <AdditionalAdressInput type="text" id="additionalAdress" value={additionalAdress} onChange={(e) => setAdditionalAdress(e.target.value)}></AdditionalAdressInput>
               </DeliveryReceiverAdress>
               <DeliveryMessage>
