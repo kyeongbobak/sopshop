@@ -65,6 +65,7 @@ export default function BuyerOrderPage() {
   const [midNumber, setMidNumber] = useState("");
   const [endNumber, setEndNumber] = useState("");
   const [buyerEmail, setBuyerEmail] = useState("");
+  const [receiver, setReceiver] = useState("");
   const [zipSearch, setZipSearch] = useState(false);
   const [zoneCode, setZonCode] = useState("");
   const [roadAdress, setRoadAdress] = useState("");
@@ -73,6 +74,7 @@ export default function BuyerOrderPage() {
   const [receiverPrefixNumber, setReceiverPreFixNumber] = useState("");
   const [receiverMidNumber, setReceiverMidNumber] = useState("");
   const [receiverEndNumber, setReceiverEndNumber] = useState("");
+  const [selectedPaymentOption, setSeletedPaymentOption] = useState("");
 
   console.log(additionalAdress);
 
@@ -128,6 +130,11 @@ export default function BuyerOrderPage() {
     console.log(data);
     setZonCode(data.zonecode);
     setRoadAdress(data.roadAddress);
+  };
+
+  const handleSelectedOption = (option) => {
+    setSeletedPaymentOption(option);
+    console.log(option);
   };
 
   useEffect(() => {
@@ -197,7 +204,7 @@ export default function BuyerOrderPage() {
             <DeliveryInfoForm>
               <DeliveryReceiverName>
                 <label htmlFor="">수령인</label>
-                <input type="text" />
+                <input type="text" value={receiver} onChange={(e) => setReceiver(e.target.value)} />
               </DeliveryReceiverName>
               <DeliveryReceiverPhoneNumber>
                 <label htmlFor="ReceiverPhoneNumber">휴대폰</label>
@@ -227,15 +234,15 @@ export default function BuyerOrderPage() {
                 <PaymentOptionTitle>결제수단</PaymentOptionTitle>
                 <PaymentOptionInner>
                   <PaymentOption>
-                    <input type="radio" />
+                    <input type="radio" onClick={() => handleSelectedOption("CARD")} />
                     <span>신용카드 결제</span>
-                    <input type="radio" />
+                    <input type="radio" onClick={() => handleSelectedOption("DEPOSIT")} />
                     <span>무통장 입금</span>
-                    <input type="radio" />
+                    <input type="radio" onClick={() => handleSelectedOption("PHONE_PAYMENT")} />
                     <span>휴대폰 결제</span>
-                    <input type="radio" />
+                    <input type="radio" onClick={() => handleSelectedOption("NAVERPAY")} />
                     <span>네이버 페이</span>
-                    <input type="radio" />
+                    <input type="radio" onClick={() => handleSelectedOption("KAKAOPAY")} />
                     <span>카카오 페이</span>
                   </PaymentOption>
                 </PaymentOptionInner>
