@@ -56,10 +56,10 @@ import Button from "../../components/Button/Button";
 import AdressSearchModal from "../../components/Modal/AdressSearchModal/AdressSearchModal";
 
 export default function BuyerOrderPage() {
+  const { token } = useContext(AuthContext);
   const [orderList, setOrderList] = useState([]);
   const [orderProductInfo, setOrderProductInfos] = useState([]);
   const [orderTotalPrice, setOrderTotalPrice] = useState(0);
-  const { token } = useContext(AuthContext);
   const [buyerName, setBuyerName] = useState("");
   const [prefixNumber, setPreFixNumber] = useState("");
   const [midNumber, setMidNumber] = useState("");
@@ -75,8 +75,8 @@ export default function BuyerOrderPage() {
   const [receiverMidNumber, setReceiverMidNumber] = useState("");
   const [receiverEndNumber, setReceiverEndNumber] = useState("");
   const [selectedPaymentOption, setSeletedPaymentOption] = useState("");
-
-  console.log(additionalAdress);
+  const [FullproductId, setFullProductId] = useState([]);
+  const [FullQuantity, setFullQuantity] = useState([]);
 
   const getOrderList = async () => {
     try {
@@ -86,8 +86,11 @@ export default function BuyerOrderPage() {
 
       const res = await instance.get("https://openmarket.weniv.co.kr/cart/");
       const orderItem = await res.data.results;
-      console.log(orderItem);
+
       setOrderList(orderItem);
+      const AllProductId = orderItem.map((i) => i.product_id);
+      setFullProductId(AllProductId);
+      const AllQuantity = orderItem.map((i) => i.quantity);
 
       const prouductInfos = orderItem.map((item) => getProductInfo(item.product_id));
 
@@ -95,16 +98,12 @@ export default function BuyerOrderPage() {
 
       Promise.all(productInfoPromises).then((product) => {
         const productPrice = product.map((v, i) => v.price * orderItem[i].quantity);
-        console.log(productPrice);
 
         const totalPrice = productPrice.reduce((acc, cur) => acc + cur, 0);
-        setOrderTotalPrice(totalPrice);
-        console.log(totalPrice);
+        setOrderTotalPrice(totalPrice + 5000);
       });
 
       setOrderProductInfos(productInfoPromises);
-
-      console.log(productInfoPromises);
     } catch (error) {
       console.log(error);
     }
@@ -119,7 +118,6 @@ export default function BuyerOrderPage() {
       });
       const res = await instance.get(`https://openmarket.weniv.co.kr/products/${id}`);
       const data = await res.data;
-      console.log(data);
       return data;
     } catch (error) {
       console.log(error);
@@ -127,14 +125,69 @@ export default function BuyerOrderPage() {
   };
 
   const getAdress = (data) => {
-    console.log(data);
     setZonCode(data.zonecode);
     setRoadAdress(data.roadAddress);
   };
 
   const handleSelectedOption = (option) => {
     setSeletedPaymentOption(option);
-    console.log(option);
+  };
+
+  const submitPayment = async (e) => {
+    e.preventDefault();
+
+    const fullAddress = zoneCode.concat(roadAdress).concat(additionalAdress);
+    const PhoneNumber = receiverPrefixNumber.concat(receiverMidNumber).concat(receiverEndNumber);
+    console.log(PhoneNumber);
+
+    const body = {
+      total_price: orderTotalPrice,
+      order_kind: "cart_order",
+      receiver: receiver,
+      receiver_phone_number: PhoneNumber,
+      address: fullAddress,
+      address_message: deliveryMessage,
+      payment_method: selectedPaymentOption,
+    };
+
+    console.log("receiver:", receiver);
+    console.log("receiverPrefixNumber:", receiverPrefixNumber);
+    console.log("receiverMidNumber:", receiverMidNumber);
+    console.log("receiverEndNumber:", receiverEndNumber);
+    console.log(receiverPrefixNumber + receiverMidNumber + receiverEndNumber);
+    console.log(FullproductId);
+    console.log(FullQuantity);
+    console.log(PhoneNumber);
+    console.log(orderTotalPrice);
+    console.log(receiver);
+    console.log(PhoneNumber);
+    console.log(fullAddress);
+    console.log(deliveryMessage);
+    console.log(selectedPaymentOption);
+
+    // const body = {
+    //   total_price: orderTotalPrice,
+    //   order_kind: "cart_order",
+    //   reciever: receiver,
+    //   reciever_phone_number: PhoneNumber,
+    //   address: fullAddress,
+    //   address_message: deliveryMessage,
+    //   payment_method: selectedPaymentOption,
+    // };
+
+    try {
+      const instance = axios.create({
+        headers: {
+          Authorization: `JWT ${token}`,
+        },
+      });
+      const res = await instance.post("https://openmarket.weniv.co.kr/order/", body);
+
+      const data = await res.data;
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -165,7 +218,7 @@ export default function BuyerOrderPage() {
                         </OrderItemInfoDetails>
                       </OrderItemInfoInner>
                       <OrderItemDiscount>-</OrderItemDiscount>
-                      <OrderItemDelivery>무료배송</OrderItemDelivery>
+                      <OrderItemDelivery>2,500</OrderItemDelivery>
                       <OrderItemInfoPrice>{orderProductInfo[i].price * list.quantity}</OrderItemInfoPrice>
                     </>
                   )}
@@ -200,8 +253,9 @@ export default function BuyerOrderPage() {
                 <input type="email" name="" id="email" value={buyerEmail} onChange={(e) => setBuyerEmail(e.target.value)} />
               </OrderCustomerEmail>
             </OrderInfoForm>
+
             <OrderInfoFormTitle>배송지 정보</OrderInfoFormTitle>
-            <DeliveryInfoForm>
+            <DeliveryInfoForm onSubmit={submitPayment}>
               <DeliveryReceiverName>
                 <label htmlFor="">수령인</label>
                 <input type="text" value={receiver} onChange={(e) => setReceiver(e.target.value)} />
@@ -218,9 +272,7 @@ export default function BuyerOrderPage() {
                 <label htmlFor="adress">배송주소</label>
                 <ZipCodeInput type="text" id="adress" value={zoneCode}></ZipCodeInput>
                 <ZipCodeSearchButton type="button" value="우편번호 조회" onClick={() => setZipSearch(true)}></ZipCodeSearchButton>
-
                 {zipSearch && <AdressSearchModal onComplete={getAdress}></AdressSearchModal>}
-
                 <RoadAdressInput type="text" id="adress" value={roadAdress}></RoadAdressInput>
                 <AdditionalAdressInput type="text" id="additionalAdress" value={additionalAdress} onChange={(e) => setAdditionalAdress(e.target.value)}></AdditionalAdressInput>
               </DeliveryReceiverAdress>
@@ -228,52 +280,53 @@ export default function BuyerOrderPage() {
                 <label htmlFor="deliveryMessage">배송 메세지</label>
                 <input type="text" id="deliveryMessage" value={deliveryMessage} onChange={(e) => setDeliveryMessage(e.target.value)} />
               </DeliveryMessage>
+
+              <PaymentWrapper>
+                <div>
+                  <PaymentOptionTitle>결제수단</PaymentOptionTitle>
+                  <PaymentOptionInner>
+                    <PaymentOption>
+                      <input type="radio" onClick={() => handleSelectedOption("CARD")} />
+                      <span>신용카드 결제</span>
+                      <input type="radio" onClick={() => handleSelectedOption("DEPOSIT")} />
+                      <span>무통장 입금</span>
+                      <input type="radio" onClick={() => handleSelectedOption("PHONE_PAYMENT")} />
+                      <span>휴대폰 결제</span>
+                      <input type="radio" onClick={() => handleSelectedOption("NAVERPAY")} />
+                      <span>네이버 페이</span>
+                      <input type="radio" onClick={() => handleSelectedOption("KAKAOPAY")} />
+                      <span>카카오 페이</span>
+                    </PaymentOption>
+                  </PaymentOptionInner>
+                </div>
+                <PaymentFinalInfo>
+                  <PaymentFinalInfoTitle>최종 결제 정보</PaymentFinalInfoTitle>
+                  <PaymentFinalInfoInner>
+                    <ProductPriceWrapper>
+                      <p>- 상품금액</p>
+                      <ProductPrice>{orderTotalPrice.toLocaleString()} 원</ProductPrice>
+                    </ProductPriceWrapper>
+                    <DiscounPricePriceWrapper>
+                      <p>- 할인금액</p>
+                      <DiscounPrice>0 원</DiscounPrice>
+                    </DiscounPricePriceWrapper>
+                    <DeliveryPriceWrapper>
+                      <p>- 배송비</p>
+                      <DeliveryPrice>2,500 원</DeliveryPrice>
+                    </DeliveryPriceWrapper>
+                    <PaymentPriceWrapper>
+                      <p>- 결제금액</p>
+                      <PaymentPrice>{orderTotalPrice.toLocaleString()} 원</PaymentPrice>
+                    </PaymentPriceWrapper>
+                    <div>
+                      <input type="checkbox" name="" id="" />
+                      <span>주문 내용을 확인하였으며, 정보제공에 동의합니다.</span>
+                    </div>
+                    <Button type="submit">결제하기</Button>
+                  </PaymentFinalInfoInner>
+                </PaymentFinalInfo>
+              </PaymentWrapper>
             </DeliveryInfoForm>
-            <PaymentWrapper>
-              <div>
-                <PaymentOptionTitle>결제수단</PaymentOptionTitle>
-                <PaymentOptionInner>
-                  <PaymentOption>
-                    <input type="radio" onClick={() => handleSelectedOption("CARD")} />
-                    <span>신용카드 결제</span>
-                    <input type="radio" onClick={() => handleSelectedOption("DEPOSIT")} />
-                    <span>무통장 입금</span>
-                    <input type="radio" onClick={() => handleSelectedOption("PHONE_PAYMENT")} />
-                    <span>휴대폰 결제</span>
-                    <input type="radio" onClick={() => handleSelectedOption("NAVERPAY")} />
-                    <span>네이버 페이</span>
-                    <input type="radio" onClick={() => handleSelectedOption("KAKAOPAY")} />
-                    <span>카카오 페이</span>
-                  </PaymentOption>
-                </PaymentOptionInner>
-              </div>
-              <PaymentFinalInfo>
-                <PaymentFinalInfoTitle>최종 결제 정보</PaymentFinalInfoTitle>
-                <PaymentFinalInfoInner>
-                  <ProductPriceWrapper>
-                    <p>- 상품금액</p>
-                    <ProductPrice>{orderTotalPrice.toLocaleString()} 원</ProductPrice>
-                  </ProductPriceWrapper>
-                  <DiscounPricePriceWrapper>
-                    <p>- 할인금액</p>
-                    <DiscounPrice>0 원</DiscounPrice>
-                  </DiscounPricePriceWrapper>
-                  <DeliveryPriceWrapper>
-                    <p>- 배송비</p>
-                    <DeliveryPrice>0 원</DeliveryPrice>
-                  </DeliveryPriceWrapper>
-                  <PaymentPriceWrapper>
-                    <p>- 결제금액</p>
-                    <PaymentPrice>{orderTotalPrice.toLocaleString()} 원</PaymentPrice>
-                  </PaymentPriceWrapper>
-                  <div>
-                    <input type="checkbox" name="" id="" />
-                    <span>주문 내용을 확인하였으며, 정보제공에 동의합니다.</span>
-                  </div>
-                  <Button>결제하기</Button>
-                </PaymentFinalInfoInner>
-              </PaymentFinalInfo>
-            </PaymentWrapper>
           </DeliveryInfoWrapper>
         </OrderPageContents>
       </OrderPageWrapper>

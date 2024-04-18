@@ -72,7 +72,7 @@ export default function BuyerShoppingCart() {
       Promise.all(productInfoPromises).then((product) => {
         const totalProductPrice = product.map((v, i) => v.price * cartItem[i].quantity);
         const cartTotalPrice = totalProductPrice.reduce((acc, cur) => acc + cur, 0);
-        setTotalProuctPrice(cartTotalPrice);
+        setTotalProuctPrice(cartTotalPrice + 2500);
       });
     } catch (error) {
       console.log(error);
@@ -263,7 +263,7 @@ export default function BuyerShoppingCart() {
                 <DeliveryPrice>
                   <span>배송비</span>
                   <p>
-                    0 <span>원</span>
+                    2500 <span>원</span>
                   </p>
                 </DeliveryPrice>
                 <OrderTotalPrice>
