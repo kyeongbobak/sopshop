@@ -32,6 +32,7 @@ import {
   ZipCodeInput,
   ZipCodeSearchButton,
   RoadAdressInput,
+  AdditionalAdressInput,
   DeliveryMessage,
   PaymentWrapper,
   PaymentOptionInner,
@@ -52,13 +53,27 @@ import {
 import { AuthContext } from "../../contexts/AuthContext";
 import axios from "axios";
 import Button from "../../components/Button/Button";
+import DaumPostcode from "react-daum-postcode";
 
 export default function BuyerOrderPage() {
   const [orderList, setOrderList] = useState([]);
   const [orderProductInfo, setOrderProductInfos] = useState([]);
   const [orderTotalPrice, setOrderTotalPrice] = useState(0);
   const { token } = useContext(AuthContext);
-  const { buyerName, setBuyerName } = useState("");
+  const [buyerName, setBuyerName] = useState("");
+  const [prefixNumber, setPreFixNumber] = useState("");
+  const [midNumber, setMidNumber] = useState("");
+  const [endNumber, setEndNumber] = useState("");
+  const [buyerEmail, setBuyerEmail] = useState("");
+  const [zipSearch, setZipSearch] = useState(false);
+  const [zipCode, setZipCode] = useState("");
+  const [additionalAdress, setAdditionalAdress] = useState("");
+  const [deliveryMessage, setDeliveryMessage] = useState("");
+  const [receiverPrefixNumber, setReceiverPreFixNumber] = useState("");
+  const [receiverMidNumber, setReceiverMidNumber] = useState("");
+  const [receiverEndNumber, setReceiverEndNumber] = useState("");
+
+  console.log(prefixNumber);
 
   const getOrderList = async () => {
     try {
@@ -106,6 +121,10 @@ export default function BuyerOrderPage() {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const getZipCode = () => {
+    // setZipSearch(true);
   };
 
   useEffect(() => {
@@ -156,19 +175,19 @@ export default function BuyerOrderPage() {
             <OrderInfoForm>
               <OrderCustomerName>
                 <label htmlFor="name">이름</label>
-                <input type="text" name="" id="name" onChange={(e) => e.target.value} value={buyerName} />
+                <input type="text" name="" id="name" onChange={(e) => setBuyerName(e.target.value)} value={buyerName} />
               </OrderCustomerName>
               <OrderCustomerPhoneNumber>
                 <label htmlFor="phoneNumber">휴대폰</label>
-                <input type="text" name="" id="phoneNumberPrefix" />
+                <input type="text" name="" id="phoneNumberPrefix" value={prefixNumber} onChange={(e) => setPreFixNumber(e.target.value)} />
                 <span>-</span>
-                <input type="text" name="" id="phoneNumberMid" />
+                <input type="text" name="" id="phoneNumberMid" value={midNumber} onChange={(e) => setMidNumber(e.target.value)} />
                 <span>-</span>
-                <input type="text" name="" id="phoneNumberEnd" />
+                <input type="text" name="" id="phoneNumberEnd" value={endNumber} onChange={(e) => setEndNumber(e.target.value)} />
               </OrderCustomerPhoneNumber>
               <OrderCustomerEmail>
-                <label htmlFor="">이메일</label>
-                <input type="text" name="" id="" />
+                <label htmlFor="email">이메일</label>
+                <input type="email" name="" id="email" value={buyerEmail} onChange={(e) => setBuyerEmail(e.target.value)} />
               </OrderCustomerEmail>
             </OrderInfoForm>
             <OrderInfoFormTitle>배송지 정보</OrderInfoFormTitle>
@@ -178,22 +197,28 @@ export default function BuyerOrderPage() {
                 <input type="text" />
               </DeliveryReceiverName>
               <DeliveryReceiverPhoneNumber>
-                <label htmlFor="">휴대폰</label>
-                <input type="text" name="" id="phoneNumberPrefix" />
+                <label htmlFor="ReceiverPhoneNumber">휴대폰</label>
+                <input type="text" name="" id="ReceiverPhoneNumberPrefix" value={receiverPrefixNumber} onChange={(e) => setReceiverPreFixNumber(e.target.value)} />
                 <span>-</span>
-                <input type="text" name="" id="phoneNumberMid" />
+                <input type="text" name="" id="ReceiverPhoneNumberMid" value={receiverMidNumber} onChange={(e) => setReceiverMidNumber(e.target.value)} />
                 <span>-</span>
-                <input type="text" name="" id="phoneNumberEnd" />
+                <input type="text" name="" id="ReceiverPhoneNumberEnd" value={receiverEndNumber} onChange={(e) => setReceiverEndNumber(e.target.value)} />
               </DeliveryReceiverPhoneNumber>
               <DeliveryReceiverAdress>
-                <label htmlFor="">배송주소</label>
-                <ZipCodeInput></ZipCodeInput>
-                <ZipCodeSearchButton type="button" value="우편번호 조회"></ZipCodeSearchButton>
-                <RoadAdressInput></RoadAdressInput>
+                <label htmlFor="adress">배송주소</label>
+                <ZipCodeInput type="text" id="adress" value={zipCode} onChange={(e) => setZipCode(e.target.value)}></ZipCodeInput>
+                <ZipCodeSearchButton type="button" value="우편번호 조회" onClick={getZipCode()}></ZipCodeSearchButton>
+                {zipSearch && (
+                  <>
+                    <DaumPostcode></DaumPostcode>
+                  </>
+                )}
+                <RoadAdressInput type="text" id="adress" value={zipCode} onChange={(e) => setZipCode(e.target.value)}></RoadAdressInput>
+                <AdditionalAdressInput type="text" id="additionalAdress" value={additionalAdress} onChange={(e) => setAdditionalAdress(e.target.value)}></AdditionalAdressInput>
               </DeliveryReceiverAdress>
               <DeliveryMessage>
-                <label htmlFor="">배송 메세지</label>
-                <input type="text" />
+                <label htmlFor="deliveryMessage">배송 메세지</label>
+                <input type="text" id="deliveryMessage" value={deliveryMessage} onChange={(e) => setDeliveryMessage(e.target.value)} />
               </DeliveryMessage>
             </DeliveryInfoForm>
             <PaymentWrapper>

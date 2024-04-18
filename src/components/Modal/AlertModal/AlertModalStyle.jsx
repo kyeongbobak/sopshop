@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ModalBack = styled.div`
+export const AlertModalBack = styled.div`
   position: fixed;
   width: 100vw;
   height: 100vh;
@@ -8,7 +8,7 @@ export const ModalBack = styled.div`
   left: 0;
 `;
 
-export const ModalWrapper = styled.div`
+export const AlertModalWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -27,7 +27,7 @@ export const ModalWrapper = styled.div`
   z-index: 100;
 `;
 
-export const ModalContents = styled.div`
+export const AlertModalContents = styled.div`
   width: ${(props) => props.width || "150px"};
   text-align: center;
 `;

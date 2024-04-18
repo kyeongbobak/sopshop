@@ -31,7 +31,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import Button from "../../components/Button/Button";
 import PlusIcon from "../../assets/icon-plus-line.png";
 import MinusIcon from "../../assets/icon-minus-line.png";
-import Modal from "../../components/Modal/Modal";
+import AlertModal from "../../components/Modal/AlertModal/AlertModal";
 import DeleteIcon from "../../assets/icon-delete.png";
 
 export default function BuyerShoppingCart() {
@@ -194,9 +194,9 @@ export default function BuyerShoppingCart() {
                       <img src={DeleteIcon} alt="" />
                     </CartItemDeleteButton>
                     {isDeleteModalOpen && (
-                      <Modal text="취소" submitText="확인" onCancel={() => setIsDeleteModalOpen(false)} onSubmit={() => deleteCartList(list.cart_item_id)} width="210px">
+                      <AlertModal text="취소" submitText="확인" onCancel={() => setIsDeleteModalOpen(false)} onSubmit={() => deleteCartList(list.cart_item_id)} width="210px">
                         상품을 삭제하시겠습니까?
-                      </Modal>
+                      </AlertModal>
                     )}
                     <CartItemInfo>
                       {cartProductInfo[i] && (
@@ -218,7 +218,7 @@ export default function BuyerShoppingCart() {
                               </button>
                             </CartItemQuantityInner>
                             {isModalOpen && (
-                              <Modal text="취소" submitText="수정" onCancel={() => setIsModalOpen(false)} onSubmit={() => modifyProductQuantity(true)}>
+                              <AlertModal text="취소" submitText="수정" onCancel={() => setIsModalOpen(false)} onSubmit={() => modifyProductQuantity(true)}>
                                 <CartItemQuantityInner>
                                   <button onClick={() => handleCounterChange(-1)}>
                                     <img src={MinusIcon} alt="" />
@@ -228,7 +228,7 @@ export default function BuyerShoppingCart() {
                                     <img src={PlusIcon} alt="" />
                                   </button>
                                 </CartItemQuantityInner>
-                              </Modal>
+                              </AlertModal>
                             )}
                           </CartItemQuantity>
                           <CartItemTotalPrice>

@@ -30,7 +30,7 @@ import MinusIcon from "../../assets/icon-minus-line.png";
 import BuyerHeader from "../../components/BuyerHeader/BuyerHeader";
 import axios from "axios";
 import { AuthContext } from "../../contexts/AuthContext";
-import Modal from "../../components/Modal/Modal";
+import AlertModal from "../../components/Modal/AlertModal/AlertModal";
 
 export default function ProductDetail() {
   const [activeTab, setActiveTab] = useState("review");
@@ -164,15 +164,15 @@ export default function ProductDetail() {
               {!isLoggedIn ? <ProductAddCartButton onClick={() => setLoginRequired(true)}>Add To Cart</ProductAddCartButton> : <ProductAddCartButton onClick={() => checkCartContents()}>Add To Cart</ProductAddCartButton>}
 
               {loginRequired && (
-                <Modal text="아니오" submitText="예" onCancel={() => setLoginRequired(false)} onSubmit={() => navigate(`/login`)} width="210px">
+                <AlertModal text="아니오" submitText="예" onCancel={() => setLoginRequired(false)} onSubmit={() => navigate(`/login`)} width="210px">
                   로그인이 필요한 서비스입니다. 로그인 하시겠습니까?
-                </Modal>
+                </AlertModal>
               )}
 
               {addToCartWarning && (
-                <Modal text="아니오" submitText="예" onCancel={() => setAddToCartWarning(false)} onSubmit={() => navigate(`/shoppingCart`)} width="221px">
+                <AlertModal text="아니오" submitText="예" onCancel={() => setAddToCartWarning(false)} onSubmit={() => navigate(`/shoppingCart`)} width="221px">
                   이미 장바구니에 있는 상품입니다. 장바구니로 이동하시겠습니까?
-                </Modal>
+                </AlertModal>
               )}
             </ProductDetailButtonMenu>
           </ProductDetailInfo>

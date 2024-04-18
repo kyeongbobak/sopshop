@@ -120,10 +120,13 @@ export const InfoInputCommonStyle = css`
     height: 40px;
     border: 1px solid var(--black-color);
     margin-left: 125px;
+    font-size: var(--font-md-size);
   }
 `;
 
-export const OrderInfoForm = styled.form``;
+export const OrderInfoForm = styled.form`
+  font-size: var(--font-md-size);
+`;
 
 export const OrderCustomerName = styled.div`
   ${InfoformCommonStyle}
@@ -153,7 +156,11 @@ export const OrderCustomerEmail = styled.div`
   ${InfoInputCommonStyle}
 `;
 
-export const DeliveryInfoForm = styled.form``;
+export const DeliveryInfoForm = styled.form`
+  input {
+    font-size: var(--font-md-size);
+  }
+`;
 
 export const DeliveryReceiverName = styled.div`
   ${InfoformCommonStyle}
@@ -180,7 +187,7 @@ export const DeliveryReceiverAdress = styled.div`
 `;
 
 export const ZipCodeInput = styled.input`
-  width: 800px;
+  width: 170px;
   height: 40px;
   border: 1px solid var(--black-color);
   margin-left: 112px;
@@ -201,6 +208,13 @@ export const RoadAdressInput = styled.input`
   height: 40px;
   border: 1px solid var(--black-color);
   margin-left: 167px;
+`;
+
+export const AdditionalAdressInput = styled.input`
+  width: 800px;
+  height: 40px;
+  border: 1px solid var(--black-color);
+  margin: 8px 0px 0px 167px;
 `;
 
 export const DeliveryMessage = styled.div`
