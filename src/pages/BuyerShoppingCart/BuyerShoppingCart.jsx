@@ -40,6 +40,8 @@ export default function BuyerShoppingCart() {
   const [cartList, setCartList] = useState([]);
   const [cartProductInfo, setCartProductInfo] = useState([]);
   const [totalProductPrice, setTotalProuctPrice] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [shippingFee, setShippingFee] = useState(0);
   const [selectedItem, setSelectedItem] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modifiedCartItemId, setModifiedCartItemId] = useState(null);
@@ -70,9 +72,13 @@ export default function BuyerShoppingCart() {
       console.log(productInfoPromises);
 
       Promise.all(productInfoPromises).then((product) => {
+        console.log(product);
         const totalProductPrice = product.map((v, i) => v.price * cartItem[i].quantity);
         const cartTotalPrice = totalProductPrice.reduce((acc, cur) => acc + cur, 0);
-        setTotalProuctPrice(cartTotalPrice + 2500);
+        const totalProductShippingFee = product.map((i) => i.shipping_fee).reduce((acc, cur) => acc + cur, 0);
+        setShippingFee(totalProductShippingFee);
+        setTotalProuctPrice(cartTotalPrice);
+        setTotalPrice(cartTotalPrice + totalProductShippingFee);
       });
     } catch (error) {
       console.log(error);
@@ -262,15 +268,16 @@ export default function BuyerShoppingCart() {
                 </div>
                 <DeliveryPrice>
                   <span>배송비</span>
-                  <p>
-                    2500 <span>원</span>
+                  <p key={cartProductInfo.product_id}>
+                    {shippingFee} <span>원</span>
                   </p>
                 </DeliveryPrice>
                 <OrderTotalPrice>
                   <span>결제예정금액</span>
-                  <p>{totalProductPrice.toLocaleString()}</p>
+                  <p>{totalPrice.toLocaleString()}</p>
                 </OrderTotalPrice>
               </PriceDetailsContents>
+
               <PaymentButton to={`/order`}>
                 <Button LButton>Order</Button>
               </PaymentButton>
