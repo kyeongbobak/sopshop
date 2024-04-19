@@ -175,3 +175,13 @@ export const ProductRefundLink = styled(Link)`
   ${ProductDetailTabLink}
   border-bottom: ${(props) => (props.isActive ? "6px solid var(--black-color)" : "6px solid #e0e0e0")};
 `;
+
+export const ProductSoldOutButton = styled.button`
+  width: 630px;
+  height: 60px;
+  border: 1px solid var(--black-color);
+  color: var(--black-color);
+  font-size: var(--font-lg-size);
+  text-align: center;
+  margin-top: 22px;
+`;

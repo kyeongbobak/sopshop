@@ -22,6 +22,7 @@ import {
   ProductQnALink,
   ProductRefundLink,
   TabMenuItem,
+  ProductSoldOutButton,
 } from "./ProductDetailStyle";
 import { useParams, useNavigate } from "react-router-dom";
 
@@ -40,6 +41,9 @@ export default function ProductDetail() {
   const { token, isLoggedIn } = useContext(AuthContext);
   const [loginRequired, setLoginRequired] = useState(false);
   const [addToCartWarning, setAddToCartWarning] = useState(false);
+  const [soldOut, setSoldOut] = useState(false);
+
+  console.log(product);
 
   const navigate = useNavigate();
 
@@ -55,6 +59,10 @@ export default function ProductDetail() {
         });
         const data = await res.json();
         setProduct(data);
+        if (data.stock === 0) {
+          setSoldOut(true);
+          setCount(0);
+        }
       } catch (error) {}
     };
 
@@ -84,7 +92,7 @@ export default function ProductDetail() {
       });
       const res = await instance.get("https://openmarket.weniv.co.kr/cart/");
       const cartContents = res.data.results;
-      console.log();
+      console.log(cartContents);
 
       const existingProduct = cartContents.find((v) => v.product_id === Number(product_id));
 
@@ -165,8 +173,16 @@ export default function ProductDetail() {
               </ProductOrderPrice>
             </ProductOrderSummery>
             <ProductDetailButtonMenu>
-              {!isLoggedIn ? <ProductOrderButton onClick={() => setLoginRequired(true)}>Buy Now</ProductOrderButton> : <ProductOrderButton onClick={() => getDirectOrder()}>Buy Now</ProductOrderButton>}
-              {!isLoggedIn ? <ProductAddCartButton onClick={() => setLoginRequired(true)}>Add To Cart</ProductAddCartButton> : <ProductAddCartButton onClick={() => checkCartContents()}>Add To Cart</ProductAddCartButton>}
+              {soldOut ? (
+                <>
+                  <ProductSoldOutButton>Out Of Stock</ProductSoldOutButton>
+                </>
+              ) : (
+                <>
+                  {!isLoggedIn ? <ProductOrderButton onClick={() => setLoginRequired(true)}>Buy Now</ProductOrderButton> : <ProductOrderButton onClick={() => getDirectOrder()}>Buy Now</ProductOrderButton>}
+                  {!isLoggedIn ? <ProductAddCartButton onClick={() => setLoginRequired(true)}>Add To Cart</ProductAddCartButton> : <ProductAddCartButton onClick={() => checkCartContents()}>Add To Cart</ProductAddCartButton>}
+                </>
+              )}
 
               {loginRequired && (
                 <AlertModal text="아니오" submitText="예" onCancel={() => setLoginRequired(false)} onSubmit={() => navigate(`/login`)} width="210px">
