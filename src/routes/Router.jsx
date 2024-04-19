@@ -35,7 +35,7 @@ export default function Router() {
           <Route path="/shoppingCart/*" element={<Outlet />}>
             <Route path="login" element={<BuyerLogin />}></Route>
           </Route>
-          <Route path="order" element={<BuyerOrderPage />}></Route>
+          <Route path="/order" element={<BuyerOrderPage />}></Route>
           <Route path="/404" element={<NotFoundPage />}></Route>
         </Routes>
       </AuthProvider>

@@ -33,8 +33,8 @@ import { AuthContext } from "../../contexts/AuthContext";
 import AlertModal from "../../components/Modal/AlertModal/AlertModal";
 
 export default function ProductDetail() {
-  const [activeTab, setActiveTab] = useState("review");
   const { product_id } = useParams();
+  const [activeTab, setActiveTab] = useState("review");
   const [product, setProduct] = useState("");
   const [count, setCount] = useState(1);
   const { token, isLoggedIn } = useContext(AuthContext);
@@ -94,10 +94,16 @@ export default function ProductDetail() {
         setAddToCartWarning(true);
       } else {
         AddToCart();
+        navigate(`/shoppingCart`);
       }
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const getDirectOrder = () => {
+    AddToCart();
+    navigate(`/order`);
   };
 
   const AddToCart = async () => {
@@ -116,7 +122,6 @@ export default function ProductDetail() {
 
       const res = await instance.post("https://openmarket.weniv.co.kr/cart/", body);
       console.log(res.data);
-      navigate(`/shoppingCart`);
     } catch (error) {
       console.log("error");
     }
@@ -160,7 +165,7 @@ export default function ProductDetail() {
               </ProductOrderPrice>
             </ProductOrderSummery>
             <ProductDetailButtonMenu>
-              {!isLoggedIn ? <ProductOrderButton onClick={() => setLoginRequired(true)}>Buy Now</ProductOrderButton> : <ProductOrderButton onClick={() => navigate(`/order`)}>Buy Now</ProductOrderButton>}
+              {!isLoggedIn ? <ProductOrderButton onClick={() => setLoginRequired(true)}>Buy Now</ProductOrderButton> : <ProductOrderButton onClick={() => getDirectOrder()}>Buy Now</ProductOrderButton>}
               {!isLoggedIn ? <ProductAddCartButton onClick={() => setLoginRequired(true)}>Add To Cart</ProductAddCartButton> : <ProductAddCartButton onClick={() => checkCartContents()}>Add To Cart</ProductAddCartButton>}
 
               {loginRequired && (

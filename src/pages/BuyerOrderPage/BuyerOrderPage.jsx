@@ -75,8 +75,8 @@ export default function BuyerOrderPage() {
   const [receiverMidNumber, setReceiverMidNumber] = useState("");
   const [receiverEndNumber, setReceiverEndNumber] = useState("");
   const [selectedPaymentOption, setSeletedPaymentOption] = useState("");
-  const [FullproductId, setFullProductId] = useState([]);
-  const [FullQuantity, setFullQuantity] = useState([]);
+  const [fullproductId, setFullProductId] = useState([]);
+  const [fullQuantity, setFullQuantity] = useState([]);
 
   const getOrderList = async () => {
     try {
@@ -88,9 +88,17 @@ export default function BuyerOrderPage() {
       const orderItem = await res.data.results;
 
       setOrderList(orderItem);
+
+      console.log(orderItem);
+
       const AllProductId = orderItem.map((i) => i.product_id);
-      setFullProductId(AllProductId);
       const AllQuantity = orderItem.map((i) => i.quantity);
+      setFullProductId(AllProductId);
+
+      setFullQuantity(AllQuantity);
+
+      console.log(AllProductId);
+
       console.log(AllQuantity);
 
       const prouductInfos = orderItem.map((item) => getProductInfo(item.product_id));
@@ -100,7 +108,6 @@ export default function BuyerOrderPage() {
       Promise.all(productInfoPromises).then((product) => {
         const productPrice = product.map((v, i) => v.price * orderItem[i].quantity);
         const productShippingFee = product.map((i) => i.shipping_fee).reduce((acc, cur) => acc + cur, 0);
-
         const totalPrice = productPrice.reduce((acc, cur) => acc + cur, 0);
         setOrderTotalPrice(totalPrice + productShippingFee);
       });
@@ -142,30 +149,20 @@ export default function BuyerOrderPage() {
     const PhoneNumber = receiverPrefixNumber.concat(receiverMidNumber).concat(receiverEndNumber);
     console.log(PhoneNumber);
 
+    const productIds = JSON.stringify(fullproductId);
+    const productQuantitys = JSON.stringify(fullQuantity);
+
     const body = {
+      product_id: productIds,
+      quantity: productQuantitys,
+      order_kind: "direct_order",
       total_price: orderTotalPrice,
-      order_kind: "cart_order",
       receiver: receiver,
       receiver_phone_number: PhoneNumber,
       address: fullAddress,
       address_message: deliveryMessage,
       payment_method: selectedPaymentOption,
     };
-
-    console.log("receiver:", receiver);
-    console.log("receiverPrefixNumber:", receiverPrefixNumber);
-    console.log("receiverMidNumber:", receiverMidNumber);
-    console.log("receiverEndNumber:", receiverEndNumber);
-    console.log(receiverPrefixNumber + receiverMidNumber + receiverEndNumber);
-    console.log(FullproductId);
-    console.log(FullQuantity);
-    console.log(PhoneNumber);
-    console.log(orderTotalPrice);
-    console.log(receiver);
-    console.log(PhoneNumber);
-    console.log(fullAddress);
-    console.log(deliveryMessage);
-    console.log(selectedPaymentOption);
 
     // const body = {
     //   total_price: orderTotalPrice,
@@ -184,7 +181,6 @@ export default function BuyerOrderPage() {
         },
       });
       const res = await instance.post("https://openmarket.weniv.co.kr/order/", body);
-
       const data = await res.data;
       console.log(data);
     } catch (error) {
@@ -195,6 +191,28 @@ export default function BuyerOrderPage() {
   useEffect(() => {
     getOrderList();
   }, [token]);
+
+  // const getDirectOrderList = async () => {
+  //   const instance = axios.create({
+  //     headers: {
+  //       Authorization: `JWT ${token}`,
+  //     },
+  //   });
+
+  //   try {
+  //     const res = await instance.get(`https://openmarket.weniv.co.kr/products/${product_id}/`);
+  //     const data = await res.data;
+  //     console.log(data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+
+  //   console.log(product_id);
+  // };
+
+  // useEffect(() => {
+  //   getDirectOrderList();
+  // }, []);
 
   return (
     <>
