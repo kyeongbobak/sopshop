@@ -91,15 +91,11 @@ export default function BuyerOrderPage() {
 
       console.log(orderItem);
 
-      const AllProductId = orderItem.map((i) => i.product_id);
-      const AllQuantity = orderItem.map((i) => i.quantity);
+      const AllProductId = orderItem.map((i) => i.product_id).join();
+      const AllQuantity = orderItem.map((i) => i.quantity).join();
       setFullProductId(AllProductId);
 
       setFullQuantity(AllQuantity);
-
-      console.log(AllProductId);
-
-      console.log(AllQuantity);
 
       const prouductInfos = orderItem.map((item) => getProductInfo(item.product_id));
 
@@ -111,6 +107,8 @@ export default function BuyerOrderPage() {
         const totalPrice = productPrice.reduce((acc, cur) => acc + cur, 0);
         setOrderTotalPrice(totalPrice + productShippingFee);
       });
+
+      console.log(productInfoPromises);
 
       setOrderProductInfos(productInfoPromises);
     } catch (error) {
@@ -149,12 +147,9 @@ export default function BuyerOrderPage() {
     const PhoneNumber = receiverPrefixNumber.concat(receiverMidNumber).concat(receiverEndNumber);
     console.log(PhoneNumber);
 
-    const productIds = JSON.stringify(fullproductId);
-    const productQuantitys = JSON.stringify(fullQuantity);
-
-    const body = {
-      product_id: productIds,
-      quantity: productQuantitys,
+    const directOrder = {
+      product_id: fullproductId,
+      quantity: fullQuantity,
       order_kind: "direct_order",
       total_price: orderTotalPrice,
       receiver: receiver,
@@ -164,15 +159,15 @@ export default function BuyerOrderPage() {
       payment_method: selectedPaymentOption,
     };
 
-    // const body = {
-    //   total_price: orderTotalPrice,
-    //   order_kind: "cart_order",
-    //   reciever: receiver,
-    //   reciever_phone_number: PhoneNumber,
-    //   address: fullAddress,
-    //   address_message: deliveryMessage,
-    //   payment_method: selectedPaymentOption,
-    // };
+    const cartOrder = {
+      total_price: orderTotalPrice,
+      order_kind: "cart_order",
+      receiver: receiver,
+      receiver_phone_number: PhoneNumber,
+      address: fullAddress,
+      address_message: deliveryMessage,
+      payment_method: selectedPaymentOption,
+    };
 
     try {
       const instance = axios.create({
@@ -180,7 +175,7 @@ export default function BuyerOrderPage() {
           Authorization: `JWT ${token}`,
         },
       });
-      const res = await instance.post("https://openmarket.weniv.co.kr/order/", body);
+      const res = orderList.length === 1 ? await instance.post("https://openmarket.weniv.co.kr/order/", directOrder) : await instance.post("https://openmarket.weniv.co.kr/order/", cartOrder);
       const data = await res.data;
       console.log(data);
     } catch (error) {
@@ -191,28 +186,6 @@ export default function BuyerOrderPage() {
   useEffect(() => {
     getOrderList();
   }, [token]);
-
-  // const getDirectOrderList = async () => {
-  //   const instance = axios.create({
-  //     headers: {
-  //       Authorization: `JWT ${token}`,
-  //     },
-  //   });
-
-  //   try {
-  //     const res = await instance.get(`https://openmarket.weniv.co.kr/products/${product_id}/`);
-  //     const data = await res.data;
-  //     console.log(data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-
-  //   console.log(product_id);
-  // };
-
-  // useEffect(() => {
-  //   getDirectOrderList();
-  // }, []);
 
   return (
     <>
