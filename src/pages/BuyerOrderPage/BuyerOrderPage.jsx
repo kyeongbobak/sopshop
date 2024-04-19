@@ -91,6 +91,7 @@ export default function BuyerOrderPage() {
       const AllProductId = orderItem.map((i) => i.product_id);
       setFullProductId(AllProductId);
       const AllQuantity = orderItem.map((i) => i.quantity);
+      console.log(AllQuantity);
 
       const prouductInfos = orderItem.map((item) => getProductInfo(item.product_id));
 
@@ -98,9 +99,10 @@ export default function BuyerOrderPage() {
 
       Promise.all(productInfoPromises).then((product) => {
         const productPrice = product.map((v, i) => v.price * orderItem[i].quantity);
+        const productShippingFee = product.map((i) => i.shipping_fee).reduce((acc, cur) => acc + cur, 0);
 
         const totalPrice = productPrice.reduce((acc, cur) => acc + cur, 0);
-        setOrderTotalPrice(totalPrice + 5000);
+        setOrderTotalPrice(totalPrice + productShippingFee);
       });
 
       setOrderProductInfos(productInfoPromises);
@@ -218,7 +220,7 @@ export default function BuyerOrderPage() {
                         </OrderItemInfoDetails>
                       </OrderItemInfoInner>
                       <OrderItemDiscount>-</OrderItemDiscount>
-                      <OrderItemDelivery>2,500</OrderItemDelivery>
+                      <OrderItemDelivery>{orderProductInfo[i].shipping_fee.toLocaleString()}</OrderItemDelivery>
                       <OrderItemInfoPrice>{orderProductInfo[i].price * list.quantity}</OrderItemInfoPrice>
                     </>
                   )}
