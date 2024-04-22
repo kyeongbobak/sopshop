@@ -42,12 +42,16 @@ export default function BuyerShoppingCart() {
   const [totalProductPrice, setTotalProuctPrice] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   const [shippingFee, setShippingFee] = useState(0);
-  const [selectedItem, setSelectedItem] = useState(null);
+
+  const [selectedItems, setSelectedItems] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modifiedCartItemId, setModifiedCartItemId] = useState(null);
   const [modifiedProductId, setModifiedProductId] = useState(null);
   const [modifiedQuantity, setModifiedQuantity] = useState(0);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isActive, setIsActive] = useState(false);
+
+  console.log(selectedItems);
 
   const getShoppingCartList = async () => {
     try {
@@ -183,15 +187,15 @@ export default function BuyerShoppingCart() {
                     <CartItemInput>
                       <label htmlFor="cartItemInput"></label>
                       <input
-                        type="radio"
+                        type="checkbox"
                         name="cartItemCheck"
                         id="cartItemInput"
-                        checked={selectedItem === list.cart_item_id}
+                        // checked={selectedItems.includes(list.cart_item_id)}
                         onClick={() => {
-                          if (selectedItem === list.cart_item_id) {
-                            setSelectedItem(null);
+                          if (selectedItems.includes(list.cart_item_id)) {
+                            setSelectedItems(selectedItems.filter((item) => item !== list.cart_item_id));
                           } else {
-                            setSelectedItem(list.cart_item_id);
+                            setSelectedItems([...selectedItems, list.cart_item_id]);
                           }
                         }}
                       />
