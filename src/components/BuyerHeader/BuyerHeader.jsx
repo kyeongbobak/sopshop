@@ -4,14 +4,19 @@ import ShoppingCartIcon from "../../assets/icon-shopping-cart.png";
 import UserIcon from "../../assets/icon-user.png";
 import SearchIcon from "../../assets/search.png";
 import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import axios from "axios";
+import { useLocation } from "react-router-dom";
 
 export default function BuyerHeader() {
   const { token, isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
   const [searchKeyword, setSearchKeyword] = useState();
   const [dropDown, setDropDown] = useState(false);
+
+  const location = useLocation();
+  const currentPath = location.pathname;
+  console.log(currentPath);
 
   const navigate = useNavigate();
 
@@ -30,7 +35,7 @@ export default function BuyerHeader() {
 
   useEffect(() => {
     handleLoginStateChange();
-  });
+  }, []);
 
   const handleLogout = async () => {
     const instance = axios.create({
@@ -46,8 +51,8 @@ export default function BuyerHeader() {
       localStorage.removeItem("token");
       localStorage.removeItem("id");
       setIsLoggedIn(false);
-      window.location.reload();
       navigate(`/mainPage`);
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }
@@ -82,9 +87,16 @@ export default function BuyerHeader() {
                 }
               }}
             >
-              <img src={UserIcon} alt="" />
-              <p>my page</p>
-              {dropDown && (
+              {currentPath !== "/mypage" && <img src={UserIcon} alt="" />}
+              {currentPath === "/mypage" ? (
+                <button onClick={() => handleLogout()}>
+                  <img src={UserIcon} alt="" />
+                  <p>logout</p>
+                </button>
+              ) : (
+                <p>my page</p>
+              )}
+              {currentPath !== "/mypage" && dropDown && (
                 <>
                   <DropDownMenu>
                     <div>

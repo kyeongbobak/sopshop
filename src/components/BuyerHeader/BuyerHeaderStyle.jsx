@@ -62,6 +62,10 @@ export const HeaderLinkMenu = styled.div`
   p {
     color: var(--light-black-color);
   }
+
+  button {
+    color: var(--light-black-color);
+  }
 `;
 
 export const HeaderCartLink = styled(Link)`
@@ -71,6 +75,9 @@ export const HeaderCartLink = styled(Link)`
 export const HeaderUserPageLink = styled.button`
   text-align: center;
   position: relative;
+
+  button {
+  }
 `;
 
 export const HeaderLoginLink = styled(Link)`

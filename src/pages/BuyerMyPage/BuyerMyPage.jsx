@@ -1,5 +1,7 @@
+import BuyerHeader from "../../components/BuyerHeader/BuyerHeader";
 import axios from "axios";
 import { AuthContext } from "../../contexts/AuthContext";
+
 import { useContext, useEffect, useState } from "react";
 
 export default function BuyerMyPage() {
@@ -27,7 +29,7 @@ export default function BuyerMyPage() {
 
   return (
     <>
-      <h1>hello</h1>
+      <BuyerHeader></BuyerHeader>
     </>
   );
 }
