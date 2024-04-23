@@ -8,6 +8,7 @@ import BuyerShoppingCart from "../pages/BuyerShoppingCart/BuyerShoppingCart";
 import BuyerSearchPage from "../pages/BuyerSearchPage/BuyerSearchPage";
 import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
 import BuyerOrderPage from "../pages/BuyerOrderPage/BuyerOrderPage";
+import BuyerMyPage from "../pages/BuyerMyPage/BuyerMyPage";
 // import { useLocation } from "react-router-dom";
 
 export default function Router() {
@@ -37,6 +38,7 @@ export default function Router() {
           </Route>
           <Route path="/order" element={<BuyerOrderPage />}></Route>
           <Route path="/404" element={<NotFoundPage />}></Route>
+          <Route path="/mypage" element={<BuyerMyPage />}></Route>
         </Routes>
       </AuthProvider>
     </>
