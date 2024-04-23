@@ -42,8 +42,7 @@ export default function BuyerShoppingCart() {
   const [totalProductPrice, setTotalProuctPrice] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   const [shippingFee, setShippingFee] = useState(0);
-
-  const [selectedItems, setSelectedItems] = useState([]);
+  const [selectedItem, setSelectedItem] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modifiedCartItemId, setModifiedCartItemId] = useState(null);
   const [modifiedProductId, setModifiedProductId] = useState(null);
@@ -51,7 +50,7 @@ export default function BuyerShoppingCart() {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isActive, setIsActive] = useState(false);
 
-  console.log(selectedItems);
+  console.log(selectedItem);
 
   const getShoppingCartList = async () => {
     try {
@@ -161,6 +160,20 @@ export default function BuyerShoppingCart() {
     }
   };
 
+  const getCartOneOrder = () => {
+    // const cartOneOrder = {
+    //   product_id: fullproductId,
+    //   quantity: fullQuantity,
+    //   order_kind: "direct_order",
+    //   total_price: orderTotalPrice,
+    //   receiver: receiver,
+    //   receiver_phone_number: PhoneNumber,
+    //   address: fullAddress,
+    //   address_message: deliveryMessage,
+    //   payment_method: selectedPaymentOption,
+    // };
+  };
+
   useEffect(() => {
     getShoppingCartList();
   }, [token, isLoggedIn]);
@@ -187,14 +200,15 @@ export default function BuyerShoppingCart() {
                     <CartItemInput>
                       <label htmlFor="cartItemInput"></label>
                       <input
-                        type="checkbox"
+                        type="radio"
                         name="cartItemCheck"
                         id="cartItemInput"
+                        checked={selectedItem === list.cart_item_id}
                         onClick={() => {
-                          if (selectedItems.includes(list.cart_item_id)) {
-                            setSelectedItems(selectedItems.filter((item) => item !== list.cart_item_id));
+                          if (selectedItem === list.cart_item_id) {
+                            setSelectedItem(null);
                           } else {
-                            setSelectedItems([...selectedItems, list.cart_item_id]);
+                            setSelectedItem(list.cart_item_id);
                           }
                         }}
                       />
@@ -281,8 +295,10 @@ export default function BuyerShoppingCart() {
                 </OrderTotalPrice>
               </PriceDetailsContents>
 
-              <PaymentButton to={`/order`}>
-                <Button LButton>Order</Button>
+              <PaymentButton>
+                <Button LButton onClick={getCartOneOrder()}>
+                  Order
+                </Button>
               </PaymentButton>
             </>
           )}
