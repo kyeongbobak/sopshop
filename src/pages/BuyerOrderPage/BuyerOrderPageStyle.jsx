@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 export const OrderPageWrapper = styled.div`
   width: 1280px;
-  margin: 0 auto;
+  margin: 0 auto 100px;
 `;
 
 export const OrderPageTitle = styled.h1`
@@ -118,8 +118,10 @@ export const InfoInputCommonStyle = css`
   input {
     width: 334px;
     height: 40px;
+    box-sizing: border-box;
     border: 1px solid var(--black-color);
     margin-left: 125px;
+    padding-left: 10px;
     font-size: var(--font-md-size);
   }
 `;
@@ -145,10 +147,13 @@ export const OrderCustomerPhoneNumber = styled.div`
     width: 97px;
     height: 40px;
     border: 1px solid var(--black-color);
+    box-sizing: border-box;
+    font-size: var(--font-md-size);
+    padding-left: 10px;
   }
 
   span {
-    padding: 0 5px;
+    padding: 0 7px;
   }
 `;
 export const OrderCustomerEmail = styled.div`
@@ -176,10 +181,12 @@ export const DeliveryReceiverPhoneNumber = styled.div`
     width: 97px;
     height: 40px;
     border: 1px solid var(--black-color);
+    box-sizing: border-box;
+    padding-left: 10px;
   }
 
   span {
-    padding: 0 5px;
+    padding: 0 7px;
   }
 `;
 export const DeliveryReceiverAdress = styled.div`
@@ -191,7 +198,9 @@ export const ZipCodeInput = styled.input`
   height: 40px;
   border: 1px solid var(--black-color);
   margin-left: 112px;
+  padding-left: 10px;
   margin-bottom: 8px;
+  box-sizing: border-box;
 `;
 
 export const ZipCodeSearchButton = styled.input`
@@ -208,6 +217,8 @@ export const RoadAdressInput = styled.input`
   height: 40px;
   border: 1px solid var(--black-color);
   margin-left: 167px;
+  padding-left: 10px;
+  box-sizing: border-box;
 `;
 
 export const AdditionalAdressInput = styled.input`
@@ -215,6 +226,8 @@ export const AdditionalAdressInput = styled.input`
   height: 40px;
   border: 1px solid var(--black-color);
   margin: 8px 0px 0px 167px;
+  padding-left: 10px;
+  box-sizing: border-box;
 `;
 
 export const DeliveryMessage = styled.div`
@@ -224,6 +237,8 @@ export const DeliveryMessage = styled.div`
     height: 40px;
     border: 1px solid var(--black-color);
     margin-left: 92px;
+    padding-left: 10px;
+    box-sizing: border-box;
   }
 `;
 export const PaymentWrapper = styled.div`
