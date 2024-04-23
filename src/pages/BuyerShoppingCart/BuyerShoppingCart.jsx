@@ -190,7 +190,6 @@ export default function BuyerShoppingCart() {
                         type="checkbox"
                         name="cartItemCheck"
                         id="cartItemInput"
-                        // checked={selectedItems.includes(list.cart_item_id)}
                         onClick={() => {
                           if (selectedItems.includes(list.cart_item_id)) {
                             setSelectedItems(selectedItems.filter((item) => item !== list.cart_item_id));

@@ -48,17 +48,16 @@ export const CartItemInput = styled.div`
     border-radius: 50px;
   }
 
-  input[type="radio"] {
+  input[type="checkbox"] {
     appearance: none;
     width: 15px;
     height: 15px;
     border: 1px solid var(--black-color);
     border-radius: 50%;
-    outline: none;
     cursor: pointer;
   }
 
-  input[type="radio"]:checked {
+  input[type="checkbox"]:checked {
     background-color: var(--black-color);
     border: 3px solid white;
     box-shadow: 0 0 0 1.6px var(--black-color);
