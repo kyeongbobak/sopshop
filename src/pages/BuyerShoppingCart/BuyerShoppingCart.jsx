@@ -42,15 +42,13 @@ export default function BuyerShoppingCart() {
   const [totalProductPrice, setTotalProuctPrice] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   const [shippingFee, setShippingFee] = useState(0);
+  const [selected, setSelected] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modifiedCartItemId, setModifiedCartItemId] = useState(null);
   const [modifiedProductId, setModifiedProductId] = useState(null);
   const [modifiedQuantity, setModifiedQuantity] = useState(0);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [isActive, setIsActive] = useState(false);
-
-  console.log(selectedItem);
 
   const getShoppingCartList = async () => {
     try {
@@ -62,6 +60,7 @@ export default function BuyerShoppingCart() {
       const res = await instance.get("https://openmarket.weniv.co.kr/cart/");
       setIsEmpty(false);
       const cartItem = res.data.results;
+      console.log(cartItem);
       setCartList(cartItem);
 
       if (cartItem.length === 0) {
@@ -72,10 +71,8 @@ export default function BuyerShoppingCart() {
 
       const productInfoPromises = await Promise.all(productInfos);
       setCartProductInfo(productInfoPromises);
-      console.log(productInfoPromises);
 
       Promise.all(productInfoPromises).then((product) => {
-        console.log(product);
         const totalProductPrice = product.map((v, i) => v.price * cartItem[i].quantity);
         const cartTotalPrice = totalProductPrice.reduce((acc, cur) => acc + cur, 0);
         const totalProductShippingFee = product.map((i) => i.shipping_fee).reduce((acc, cur) => acc + cur, 0);
@@ -160,18 +157,42 @@ export default function BuyerShoppingCart() {
     }
   };
 
-  const getCartOneOrder = () => {
-    // const cartOneOrder = {
-    //   product_id: fullproductId,
-    //   quantity: fullQuantity,
-    //   order_kind: "direct_order",
-    //   total_price: orderTotalPrice,
-    //   receiver: receiver,
-    //   receiver_phone_number: PhoneNumber,
-    //   address: fullAddress,
-    //   address_message: deliveryMessage,
-    //   payment_method: selectedPaymentOption,
-    // };
+  const deleteAllCartList = async () => {
+    try {
+      const instance = axios.create({
+        headers: {
+          Authorization: `JWT ${token}`,
+        },
+      });
+      const res = await instance.delete(`https://openmarket.weniv.co.kr/cart/`);
+      const data = await res.data();
+      console.log(data);
+    } catch (error) {
+      console.log("error");
+    }
+  };
+
+  const cartOneOrder = async (selectedId, selectedQuantity) => {
+    deleteAllCartList();
+
+    try {
+      const instance = axios.create({
+        headers: {
+          Authorization: `JWT ${token}`,
+        },
+      });
+
+      const body = {
+        product_id: selectedId,
+        quantity: selectedQuantity,
+        check: selected,
+      };
+
+      const res = await instance.post(`https://openmarket.weniv.co.kr/cart/`, body);
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -209,6 +230,7 @@ export default function BuyerShoppingCart() {
                             setSelectedItem(null);
                           } else {
                             setSelectedItem(list.cart_item_id);
+                            setSelected(true);
                           }
                         }}
                       />
@@ -257,7 +279,9 @@ export default function BuyerShoppingCart() {
                           <CartItemTotalPrice>
                             <p>{(list.quantity * cartProductInfo[i].price).toLocaleString()}</p>
                             <OrderButton to={`/order`}>
-                              <Button SButton>Order</Button>
+                              <Button SButton onClick={() => cartOneOrder(cartProductInfo[i].product_id, list.quantity)}>
+                                Order
+                              </Button>
                             </OrderButton>
                           </CartItemTotalPrice>
                         </>
@@ -295,10 +319,8 @@ export default function BuyerShoppingCart() {
                 </OrderTotalPrice>
               </PriceDetailsContents>
 
-              <PaymentButton>
-                <Button LButton onClick={getCartOneOrder()}>
-                  Order
-                </Button>
+              <PaymentButton to={`/order`}>
+                <Button LButton>Order</Button>
               </PaymentButton>
             </>
           )}
