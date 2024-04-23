@@ -11,18 +11,15 @@ const GlobalStyle = createGlobalStyle`
     --main-color : #D5BEB1;
     --gray-color : #C4C4C4;
     --white-color : #fff;
-
-    --box-gray-color : #F2F2F2;
-    --box-black-color : #434343;
+    --black-color : #434343;
+    --light-gray-color : #F2F2F2;
+    --light-black-color : #767676;
+    --dark-gray-color : #9a9a9a;
    
-    --line-black-color : #767676;
-
     --font-min-size : 1.2rem; 
-
     --font-sm-size : 1.4rem;
     --font-md-size : 1.6rem;
     --font-lg-size : 1.8rem;
-
     --font-max-size : 2.4rem;
     --font-extra-size : 3.6rem;
 
@@ -34,23 +31,16 @@ const GlobalStyle = createGlobalStyle`
   body,p{
     margin: unset;
   }
-
-            @font-face {
-    font-family: 'SpoqaHanSansNeo-Light';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Light.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-            @font-face {
-    font-family: 'SpoqaHanSansNeo-Bold';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Bold.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
- }
-
+           
+  
   body{
-    font-family: 'SpoqaHanSansNeo-Light';
+    font-family: "Wanted Sans Variable", "Wanted Sans", -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+
+  }
+
+  h1,h2,h3{
+    padding: unset;
+    font-weight: unset;
   }
 
 
@@ -68,6 +58,11 @@ const GlobalStyle = createGlobalStyle`
     list-style: none;
   }
 
+  ul,li{
+    padding: unset;
+    list-style: none;
+  }
+
   button{
     all:  unset;
   }
@@ -76,6 +71,12 @@ const GlobalStyle = createGlobalStyle`
     border: unset;
     outline : none;
   }
+
+  select{
+    appearance: none;
+  }
+
+
 
   .a11y-hidden {
   clip: rect(1px, 1px, 1px, 1px);
