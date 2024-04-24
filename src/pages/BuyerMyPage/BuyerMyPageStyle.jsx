@@ -36,6 +36,8 @@ export const BuyerMyPageContents = styled.div``;
 
 export const OrderRecordsWrapper = styled.div``;
 
+export const OrderRecordsItem = styled.div``;
+
 export const ProductImage = styled.div``;
 
 export const ProductInfo = styled.div``;

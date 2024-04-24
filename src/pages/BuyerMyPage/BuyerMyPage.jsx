@@ -8,6 +8,7 @@ import {
   BuyerMyPageHeader,
   BuyerMyPageContents,
   OrderRecordsWrapper,
+  OrderRecordsItem,
   ProductImage,
   ProductInfo,
   ProductPrice,
@@ -22,23 +23,10 @@ import { useContext, useEffect, useState } from "react";
 
 export default function BuyerMyPage() {
   const { token, isLoggedIn } = useContext(AuthContext);
-  const [orderProductInfo, setOrderProductInfo] = useState("");
+  const [orderHistories, setOrderHistories] = useState([]);
+  const [orderProductInfos, setOrderProductInfos] = useState([]);
 
-  console.log(orderProductInfo);
-
-  const getOrderProductInfo = async () => {
-    try {
-      const instance = axios.create({
-        headers: {
-          Authorization: `JWT ${token}`,
-        },
-      });
-
-      // const res = await instance.get(`https://openmarket.weniv.co.kr/products/${}/`)
-    } catch (error) {
-      console.log("error");
-    }
-  };
+  console.log(orderHistories);
 
   const getOrderHistory = async () => {
     try {
@@ -50,8 +38,37 @@ export default function BuyerMyPage() {
       const res = await instance.get(`https://openmarket.weniv.co.kr/order/`);
       const data = await res.data;
       console.log(data.results);
+      setOrderHistories(data.results);
+
+      const orderHistoryInfos = data.results;
+
+      const orderProductIds = orderHistoryInfos.map((i) => i.order_items);
+      const mergedProductIds = [].concat(...orderProductIds);
+      const productInfos = mergedProductIds.map((productId) => getOrderProductInfo(productId));
+
+      const productInfoPromises = (await Promise.all(productInfos)).splice(0, 3);
+
+      setOrderProductInfos(productInfoPromises);
+
+      console.log(productInfoPromises);
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const getOrderProductInfo = async (productId) => {
+    try {
+      const instance = axios.create({
+        headers: {
+          Authorization: `JWT ${token}`,
+        },
+      });
+
+      const res = await instance.get(`https://openmarket.weniv.co.kr/products/${productId}/`);
+      const data = await res.data;
+      return data;
+    } catch (error) {
+      console.log("error");
     }
   };
 
@@ -76,19 +93,31 @@ export default function BuyerMyPage() {
         </BuyerMyPageHeader>
         <BuyerMyPageContents>
           <OrderRecordsWrapper>
-            <ProductImage>
-              <img src="" alt="" />
-            </ProductImage>
-            <ProductInfo></ProductInfo>
-            <ProductPrice></ProductPrice>
-            <ProductQauntity></ProductQauntity>
-            <PointsEarned></PointsEarned>
-            <ShippingOption></ShippingOption>
-            <ShippingFee></ShippingFee>
-            <OrderRecordsImage>
-              <img src="" alt="" />
-            </OrderRecordsImage>
-            <ProductTotalPrice></ProductTotalPrice>
+            {orderHistories.map((order, i) => (
+              <>
+                <OrderRecordsItem key={order}>
+                  {orderProductInfos[i] && (
+                    <>
+                      <ProductImage>
+                        <img src={orderProductInfos[i].image} alt="" />
+                      </ProductImage>
+                      <ProductInfo>
+                        <p>{orderProductInfos[i].product_name}</p>
+                      </ProductInfo>
+                      <ProductPrice>{orderProductInfos[i].price}</ProductPrice>
+                      <ProductQauntity></ProductQauntity>
+                      <PointsEarned></PointsEarned>
+                      <ShippingOption></ShippingOption>
+                      <ShippingFee></ShippingFee>
+                      <OrderRecordsImage>
+                        <img src="" alt="" />
+                      </OrderRecordsImage>
+                      <ProductTotalPrice></ProductTotalPrice>
+                    </>
+                  )}
+                </OrderRecordsItem>
+              </>
+            ))}
           </OrderRecordsWrapper>
         </BuyerMyPageContents>
         <Button MsButton>Prev</Button>
