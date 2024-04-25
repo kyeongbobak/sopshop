@@ -66,6 +66,7 @@ export const ProductImage = styled.div`
 
 export const ProductInfo = styled.div`
   ${OrderRecordsItemStyle}
+  line-height: 22px;
 `;
 
 export const ProductPrice = styled.p`
