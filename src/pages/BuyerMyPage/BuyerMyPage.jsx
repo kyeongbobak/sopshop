@@ -86,7 +86,7 @@ export default function BuyerMyPage() {
       <BuyerMyPageWrapper>
         <BuyerMyPageTitle>Order Records</BuyerMyPageTitle>
         <BuyerMyPageHeader>
-          <li>주문일자 / 주문번호</li>
+          <li>주문일자</li>
           <li>이미지</li>
           <li>상품정보</li>
           <li>수량</li>
@@ -99,9 +99,7 @@ export default function BuyerMyPage() {
             {orderHistories.map((order, i) => (
               <>
                 <OrderRecordsItem key={order}>
-                  <OrderNumber>
-                    {order.created_at.slice(0, order.created_at.indexOf("T"))} / {order.order_number}
-                  </OrderNumber>
+                  <OrderNumber>{order.created_at.slice(0, order.created_at.indexOf("T"))}</OrderNumber>
                   {orderProductInfos[i] && (
                     <>
                       <ProductImage>

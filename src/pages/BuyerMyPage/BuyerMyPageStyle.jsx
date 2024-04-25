@@ -19,10 +19,14 @@ export const BuyerMyPageHeader = styled.ul`
   border-top: 1px solid var(--black-color);
   border-bottom: 1px solid var(--black-color);
   padding: 20px 0;
+
   text-align: center;
 
   li {
     width: 152px;
+  }
+
+  li:nth-child(1) {
   }
 
   li:nth-child(2) {

@@ -4,7 +4,7 @@ import ShoppingCartIcon from "../../assets/icon-shopping-cart.png";
 import UserIcon from "../../assets/icon-user.png";
 import SearchIcon from "../../assets/search.png";
 import { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import axios from "axios";
 import { useLocation } from "react-router-dom";

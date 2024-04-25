@@ -114,7 +114,9 @@ export const DropDownMenu = styled.ul`
   }
 `;
 
-export const UserProfileLink = styled(Link)``;
+export const UserProfileLink = styled(Link)`
+  color: var(--light-black-color);
+`;
 
 export const LogoutButton = styled.button`
   margin: 20px 0;
