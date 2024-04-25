@@ -110,7 +110,7 @@ export default function BuyerMyPage() {
                         <p>{orderProductInfos[i].product_name}</p>
                       </ProductInfo>
                       {orderProductQuantyties[i] && <ProductQauntity>{orderProductQuantyties[i]}</ProductQauntity>}
-                      <ProductPrice>{orderProductInfos[i].price}</ProductPrice>
+                      <ProductPrice>{orderProductInfos[i].price.toLocaleString()}</ProductPrice>
                       <DeliveryStatus>{order.delivery_status === "COMPLETE_PAYMENT" && "결제완료"}</DeliveryStatus>
                       <ShippingOption>{orderProductInfos[i].shipping_fee === 0 ? "무료배송" : "기본배송"}</ShippingOption>
                     </>
