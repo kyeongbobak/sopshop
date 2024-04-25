@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { css } from "styled-components";
 
 export const BuyerMyPageWrapper = styled.div`
   width: 1280px;
@@ -23,7 +25,7 @@ export const BuyerMyPageHeader = styled.ul`
     width: 152px;
   }
 
-  li:nth-child(3) {
+  li:nth-child(2) {
     width: 368px;
   }
 `;
@@ -32,24 +34,60 @@ export const BuyerMyPageContents = styled.div``;
 
 export const OrderRecordsWrapper = styled.div``;
 
-export const OrderRecordsItem = styled.div``;
+export const OrderRecordsItem = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+`;
 
-export const OrderNumber = styled.div``;
+export const OrderRecordsItemStyle = css`
+  font-size: var(--font-md-size);
+  flex-grow: 1;
+  width: 152px;
+  text-align: center;
+`;
 
-export const ProductImage = styled.div``;
+export const OrderNumber = styled.div`
+  ${OrderRecordsItemStyle}
+`;
 
-export const ProductInfo = styled.div``;
+export const ProductImage = styled.div`
+  img {
+    width: 200px;
+  }
+  width: 368px;
+  text-align: center;
+`;
 
-export const ProductPrice = styled.p``;
+export const ProductInfo = styled.div`
+  ${OrderRecordsItemStyle}
+`;
 
-export const ProductQauntity = styled.p``;
+export const ProductPrice = styled.p`
+  ${OrderRecordsItemStyle}
+`;
 
-export const PointsEarned = styled.p``;
+export const ProductQauntity = styled.p`
+  ${OrderRecordsItemStyle}
+`;
 
-export const ShippingOption = styled.div``;
+export const DeliveryStatus = styled.p`
+  ${OrderRecordsItemStyle}
+`;
 
-export const ShippingFee = styled.p``;
+export const ShippingOption = styled.div`
+  ${OrderRecordsItemStyle}
+`;
 
-export const OrderRecordsImage = styled.div``;
+export const PrevButtonWrapper = styled(Link)``;
 
-export const ProductTotalPrice = styled.p``;
+export const PrevButton = styled.button`
+  width: 166px;
+  height: 54px;
+  background-color: var(--black-color);
+  color: var(--white-color);
+  font-size: var(--font-md-size);
+  text-align: center;
+  float: right;
+`;

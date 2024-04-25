@@ -1,5 +1,4 @@
 import BuyerHeader from "../../components/BuyerHeader/BuyerHeader";
-import Button from "../../components/Button/Button";
 import axios from "axios";
 import { AuthContext } from "../../contexts/AuthContext";
 import {
@@ -14,11 +13,10 @@ import {
   ProductInfo,
   ProductPrice,
   ProductQauntity,
-  PointsEarned,
+  DeliveryStatus,
   ShippingOption,
-  ShippingFee,
-  OrderRecordsImage,
-  ProductTotalPrice,
+  PrevButtonWrapper,
+  PrevButton,
 } from "./BuyerMyPageStyle";
 import { useContext, useEffect, useState } from "react";
 
@@ -94,16 +92,16 @@ export default function BuyerMyPage() {
           <li>수량</li>
           <li>상품구매금액</li>
           <li>주문처리상태</li>
-          <li>취소 / 교환반품</li>
+          <li>배송구분</li>
         </BuyerMyPageHeader>
         <BuyerMyPageContents>
           <OrderRecordsWrapper>
             {orderHistories.map((order, i) => (
               <>
-                <OrderNumber>
-                  {order.created_at} / {order.order_number}
-                </OrderNumber>
                 <OrderRecordsItem key={order}>
+                  <OrderNumber>
+                    {order.created_at.slice(0, order.created_at.indexOf("T"))} / {order.order_number}
+                  </OrderNumber>
                   {orderProductInfos[i] && (
                     <>
                       <ProductImage>
@@ -115,8 +113,8 @@ export default function BuyerMyPage() {
                       </ProductInfo>
                       {orderProductQuantyties[i] && <ProductQauntity>{orderProductQuantyties[i]}</ProductQauntity>}
                       <ProductPrice>{orderProductInfos[i].price}</ProductPrice>
-                      <deliveryStatus>{order.delivery_status === "COMPLETE_PAYMENT" && "결제완료"}</deliveryStatus>
-                      <ShippingOption>{orderProductInfos[i].shipping_fee === 0 ? "무료배송" : "택배배송"}</ShippingOption>
+                      <DeliveryStatus>{order.delivery_status === "COMPLETE_PAYMENT" && "결제완료"}</DeliveryStatus>
+                      <ShippingOption>{orderProductInfos[i].shipping_fee === 0 ? "무료배송" : "기본배송"}</ShippingOption>
                     </>
                   )}
                 </OrderRecordsItem>
@@ -124,7 +122,9 @@ export default function BuyerMyPage() {
             ))}
           </OrderRecordsWrapper>
         </BuyerMyPageContents>
-        <Button MsButton>Prev</Button>
+        <PrevButtonWrapper to={`/shoppingCart`}>
+          <PrevButton>Prev</PrevButton>
+        </PrevButtonWrapper>
       </BuyerMyPageWrapper>
     </>
   );
