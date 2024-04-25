@@ -20,15 +20,11 @@ export const BuyerMyPageHeader = styled.ul`
   text-align: center;
 
   li {
-    width: 160px;
+    width: 152px;
   }
 
-  li:nth-child(2) {
-    width: 240px;
-  }
-
-  li:nth-child(4) {
-    width: 80px;
+  li:nth-child(3) {
+    width: 368px;
   }
 `;
 
@@ -37,6 +33,8 @@ export const BuyerMyPageContents = styled.div``;
 export const OrderRecordsWrapper = styled.div``;
 
 export const OrderRecordsItem = styled.div``;
+
+export const OrderNumber = styled.div``;
 
 export const ProductImage = styled.div``;
 

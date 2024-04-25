@@ -8,6 +8,7 @@ import {
   BuyerMyPageHeader,
   BuyerMyPageContents,
   OrderRecordsWrapper,
+  OrderNumber,
   OrderRecordsItem,
   ProductImage,
   ProductInfo,
@@ -25,6 +26,7 @@ export default function BuyerMyPage() {
   const { token, isLoggedIn } = useContext(AuthContext);
   const [orderHistories, setOrderHistories] = useState([]);
   const [orderProductInfos, setOrderProductInfos] = useState([]);
+  const [orderProductQuantyties, setOrderProductQuantyties] = useState([]);
 
   console.log(orderHistories);
 
@@ -38,7 +40,7 @@ export default function BuyerMyPage() {
       const res = await instance.get(`https://openmarket.weniv.co.kr/order/`);
       const data = await res.data;
       console.log(data.results);
-      setOrderHistories(data.results);
+      setOrderHistories(data.results.slice(0, 3));
 
       const orderHistoryInfos = data.results;
 
@@ -46,7 +48,11 @@ export default function BuyerMyPage() {
       const mergedProductIds = [].concat(...orderProductIds);
       const productInfos = mergedProductIds.map((productId) => getOrderProductInfo(productId));
 
-      const productInfoPromises = (await Promise.all(productInfos)).splice(0, 3);
+      const orderProductQauntyties = orderHistoryInfos.map((i) => i.order_quantity);
+      const mergedProductQauntyties = [].concat(...orderProductQauntyties);
+      setOrderProductQuantyties(mergedProductQauntyties);
+
+      const productInfoPromises = (await Promise.all(productInfos)).slice(0, 3);
 
       setOrderProductInfos(productInfoPromises);
 
@@ -82,19 +88,21 @@ export default function BuyerMyPage() {
       <BuyerMyPageWrapper>
         <BuyerMyPageTitle>Order Records</BuyerMyPageTitle>
         <BuyerMyPageHeader>
+          <li>주문일자 / 주문번호</li>
           <li>이미지</li>
           <li>상품정보</li>
-          <li>판매가</li>
           <li>수량</li>
-          <li>적립금</li>
-          <li>배송구분</li>
-          <li>배송비</li>
-          <li>합계</li>
+          <li>상품구매금액</li>
+          <li>주문처리상태</li>
+          <li>취소 / 교환반품</li>
         </BuyerMyPageHeader>
         <BuyerMyPageContents>
           <OrderRecordsWrapper>
             {orderHistories.map((order, i) => (
               <>
+                <OrderNumber>
+                  {order.created_at} / {order.order_number}
+                </OrderNumber>
                 <OrderRecordsItem key={order}>
                   {orderProductInfos[i] && (
                     <>
@@ -102,17 +110,13 @@ export default function BuyerMyPage() {
                         <img src={orderProductInfos[i].image} alt="" />
                       </ProductImage>
                       <ProductInfo>
+                        <p>{orderProductInfos[i].store_name}</p>
                         <p>{orderProductInfos[i].product_name}</p>
                       </ProductInfo>
+                      {orderProductQuantyties[i] && <ProductQauntity>{orderProductQuantyties[i]}</ProductQauntity>}
                       <ProductPrice>{orderProductInfos[i].price}</ProductPrice>
-                      <ProductQauntity></ProductQauntity>
-                      <PointsEarned></PointsEarned>
-                      <ShippingOption></ShippingOption>
-                      <ShippingFee></ShippingFee>
-                      <OrderRecordsImage>
-                        <img src="" alt="" />
-                      </OrderRecordsImage>
-                      <ProductTotalPrice></ProductTotalPrice>
+                      <deliveryStatus>{order.delivery_status === "COMPLETE_PAYMENT" && "결제완료"}</deliveryStatus>
+                      <ShippingOption>{orderProductInfos[i].shipping_fee === 0 ? "무료배송" : "택배배송"}</ShippingOption>
                     </>
                   )}
                 </OrderRecordsItem>
