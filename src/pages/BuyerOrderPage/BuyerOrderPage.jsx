@@ -77,6 +77,7 @@ export default function BuyerOrderPage() {
   const [selectedPaymentOption, setSeletedPaymentOption] = useState("");
   const [fullproductId, setFullProductId] = useState([]);
   const [fullQuantity, setFullQuantity] = useState([]);
+  const [totalShippingFee, setTotalShippingFee] = useState(0);
 
   const getOrderList = async () => {
     try {
@@ -106,6 +107,7 @@ export default function BuyerOrderPage() {
         const productShippingFee = product.map((i) => i.shipping_fee).reduce((acc, cur) => acc + cur, 0);
         const totalPrice = productPrice.reduce((acc, cur) => acc + cur, 0);
         setOrderTotalPrice(totalPrice + productShippingFee);
+        setTotalShippingFee(productShippingFee);
       });
 
       console.log(productInfoPromises);
@@ -212,7 +214,7 @@ export default function BuyerOrderPage() {
                       </OrderItemInfoInner>
                       <OrderItemDiscount>-</OrderItemDiscount>
                       <OrderItemDelivery>{orderProductInfo[i].shipping_fee.toLocaleString()}</OrderItemDelivery>
-                      <OrderItemInfoPrice>{orderProductInfo[i].price * list.quantity}</OrderItemInfoPrice>
+                      <OrderItemInfoPrice>{(parseInt(orderProductInfo[i].price) * parseInt(list.quantity)).toLocaleString()}</OrderItemInfoPrice>
                     </>
                   )}
                 </OrderItemInfo>
@@ -305,7 +307,7 @@ export default function BuyerOrderPage() {
                     </DiscounPricePriceWrapper>
                     <DeliveryPriceWrapper>
                       <p>- 배송비</p>
-                      <DeliveryPrice>2,500 원</DeliveryPrice>
+                      <DeliveryPrice>{totalShippingFee.toLocaleString()} 원</DeliveryPrice>
                     </DeliveryPriceWrapper>
                     <PaymentPriceWrapper>
                       <p>- 결제금액</p>
