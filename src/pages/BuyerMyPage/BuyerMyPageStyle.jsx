@@ -85,7 +85,10 @@ export const ShippingOption = styled.div`
   ${OrderRecordsItemStyle}
 `;
 
-export const PrevButtonWrapper = styled(Link)``;
+export const PrevButtonWrapper = styled(Link)`
+  display: flex;
+  justify-content: end;
+`;
 
 export const PrevButton = styled.button`
   width: 166px;
@@ -95,5 +98,5 @@ export const PrevButton = styled.button`
   font-size: var(--font-md-size);
   text-align: center;
   float: right;
-  margin-bottom: 500px;
+  margin-bottom: 300px;
 `;

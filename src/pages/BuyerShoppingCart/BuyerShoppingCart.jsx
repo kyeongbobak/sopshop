@@ -1,5 +1,7 @@
 import ProductInfoHeader from "../../components/ProductInfoHeader/ProductInfoHeader";
 import BuyerHeader from "../../components/BuyerHeader/BuyerHeader";
+import BuyerCartegory from "../../components/BuyerCartegory/BuyerCartegory";
+import BuyerFooter from "../../components/BuyerFooter/BuyerFooter";
 import {
   ShoppingCartWrapper,
   ShoppingCartTitle,
@@ -202,6 +204,7 @@ export default function BuyerShoppingCart() {
   return (
     <>
       <BuyerHeader />
+      <BuyerCartegory />
       <ShoppingCartWrapper>
         <ShoppingCartTitle>Cart</ShoppingCartTitle>
         <ProductInfoHeader type="cart" />
@@ -326,6 +329,7 @@ export default function BuyerShoppingCart() {
           )}
         </ShoppingCartContents>
       </ShoppingCartWrapper>
+      <BuyerFooter />
     </>
   );
 }

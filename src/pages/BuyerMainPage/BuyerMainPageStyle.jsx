@@ -1,31 +1,12 @@
 import styled from "styled-components";
 
-export const BuyerMainPageWrapper = styled.div`
-  /* font-size: 22px;
-  padding: 50px;
-  position: relative; */
-`;
+export const BuyerMainPageWrapper = styled.div``;
 
-export const BuyerMainPageCategory = styled.div`
-  /* ul {
-    position: absolute;
-    div {
-      margin: 40px 0 0 20px;
-    }
-  }
-
-  li {
-    margin-top: 15px;
-  }
-
-  li:nth-child(4) {
-    margin-top: 90px;
-  } */
-`;
+export const BuyerMainPageCategory = styled.div``;
 
 export const ProductListWrapper = styled.div`
   width: 1280px;
-  margin: 80px auto;
+  margin: 30px auto;
 `;
 
 export const ProductGroup = styled.ul`

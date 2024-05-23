@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 
 export const ShoppingCartWrapper = styled.div`
   width: 1280px;
-  margin: 0 auto;
+  margin: 0 auto 300px;
 `;
 
 export const ShoppingCartTitle = styled.h1`

@@ -1,4 +1,6 @@
 import BuyerHeader from "../../components/BuyerHeader/BuyerHeader";
+import BuyerCartegory from "../../components/BuyerCartegory/BuyerCartegory";
+import BuyerFooter from "../../components/BuyerFooter/BuyerFooter";
 import axios from "axios";
 import { AuthContext } from "../../contexts/AuthContext";
 import {
@@ -82,7 +84,8 @@ export default function BuyerMyPage() {
 
   return (
     <>
-      <BuyerHeader></BuyerHeader>
+      <BuyerHeader />
+      <BuyerCartegory />
       <BuyerMyPageWrapper>
         <BuyerMyPageTitle>Order Records</BuyerMyPageTitle>
         <BuyerMyPageHeader>
@@ -124,6 +127,7 @@ export default function BuyerMyPage() {
           <PrevButton>Prev</PrevButton>
         </PrevButtonWrapper>
       </BuyerMyPageWrapper>
+      <BuyerFooter />
     </>
   );
 }

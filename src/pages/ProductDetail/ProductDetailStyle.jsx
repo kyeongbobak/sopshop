@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export const ProductDetailWrapper = styled.div`
   width: 1280px;
-  margin: 81px auto;
+  margin: 81px auto 300px;
 `;
 
 export const ProductDetailContent = styled.div`

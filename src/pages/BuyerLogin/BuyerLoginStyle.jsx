@@ -3,9 +3,8 @@ import { Link } from "react-router-dom";
 
 export const LoginWrapper = styled.div`
   width: 550px;
-  margin: 74px auto;
+  margin: 200px auto;
 `;
-
 export const FormBox = styled.div``;
 
 export const SiteLogo = styled(Link)`

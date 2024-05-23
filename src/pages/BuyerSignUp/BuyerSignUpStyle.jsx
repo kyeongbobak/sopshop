@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export const SignUpWrapper = styled.div`
   width: 550px;
-  margin: 74px auto;
+  margin: 200px auto;
 `;
 
 export const FormBox = styled.div``;

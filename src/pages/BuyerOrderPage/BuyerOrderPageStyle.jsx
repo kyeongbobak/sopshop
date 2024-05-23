@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 export const OrderPageWrapper = styled.div`
   width: 1280px;
-  margin: 0 auto 100px;
+  margin: 0 auto 200px;
 `;
 
 export const OrderPageTitle = styled.h1`

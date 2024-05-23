@@ -1,13 +1,14 @@
-import { BuyerMainPageWrapper, BuyerMainPageCategory, ProductListWrapper, ProductGroup, SearchForm, SearchButton, SearchInput } from "../BuyerMainPage/BuyerMainPageStyle";
+import { ProductListWrapper, ProductGroup, SearchForm, SearchButton, SearchInput } from "../BuyerMainPage/BuyerMainPageStyle";
 import { useContext, useEffect, useState } from "react";
 import ProductList from "../../components/ProductList/ProductList";
 
 import { AuthContext } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import BuyerHeader from "../../components/BuyerHeader/BuyerHeader";
+import BuyerCartegory from "../../components/BuyerCartegory/BuyerCartegory";
 import BuyerFooter from "../../components/BuyerFooter/BuyerFooter";
 import SearchIcon from "../../assets/search.png";
-import BuyerCartegory from "../../components/BuyerCartegory/BuyerCartegory";
+
 import getProduct from "../../api/ProductApi";
 
 export default function BuyerMainPage() {
@@ -74,18 +75,14 @@ export default function BuyerMainPage() {
   return (
     <>
       <BuyerHeader />
-      <BuyerMainPageWrapper>
-        <BuyerMainPageCategory>
-          <BuyerCartegory />
-        </BuyerMainPageCategory>
-        <ProductListWrapper>
-          <ProductGroup>
-            {products.map((product) => (
-              <ProductList key={product.product_id} product_id={product.product_id} product_img={product.image} product_store_name={product.store_name} product product_name={product.product_name} product_price={product.price} />
-            ))}
-          </ProductGroup>
-        </ProductListWrapper>
-      </BuyerMainPageWrapper>
+      <BuyerCartegory />
+      <ProductListWrapper>
+        <ProductGroup>
+          {products.map((product) => (
+            <ProductList key={product.product_id} product_id={product.product_id} product_img={product.image} product_store_name={product.store_name} product product_name={product.product_name} product_price={product.price} />
+          ))}
+        </ProductGroup>
+      </ProductListWrapper>
       <SearchForm onSubmit={handleSearch}>
         <SearchInput type="text" placeholder="search" value={searchKeyword} onChange={handleChange} />
         <SearchButton type="submit">

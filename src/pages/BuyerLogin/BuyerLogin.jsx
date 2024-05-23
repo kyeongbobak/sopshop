@@ -1,4 +1,7 @@
 import LogoImage from "../../assets/Logo-hodu.png";
+import BuyerHeader from "../../components/BuyerHeader/BuyerHeader";
+import BuyerFooter from "../../components/BuyerFooter/BuyerFooter";
+import BuyerCartegory from "../../components/BuyerCartegory/BuyerCartegory";
 import { useState } from "react";
 import { LoginWrapper, FormBox, SiteLogo, LoginForm, Label, StyledInput, LoginButton, LinkWrapper, StyledLink, UserTypeTabs, LoginTab, SellerLoginTabLink, BuyerLoginTabLink, ValidateMessage } from "./BuyerLoginStyle";
 import { useNavigate } from "react-router-dom";

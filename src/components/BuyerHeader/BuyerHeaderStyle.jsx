@@ -64,7 +64,7 @@ export const HeaderLinkMenu = styled.div`
   }
 
   p {
-    color: #eb9bf9;
+    color: var(--black-color);
   }
 
   p:nth-child(2) {
@@ -100,7 +100,7 @@ export const DropDownMenu = styled.ul`
   width: 152px;
   border-radius: 10px;
   /* box-shadow: 0px 0px 10px 1px var(--gray-color), 0px 4px 30px var(--light-gray-color); */
-  border: 1px solid #eb9bf9;
+  border: 1px solid var(--black-color);
   font-size: var(--font-lg-size);
   z-index: 999;
 
