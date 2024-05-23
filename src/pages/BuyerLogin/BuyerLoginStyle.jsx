@@ -35,7 +35,7 @@ const LoginTabLink = css`
   border: 1px solid var(--gray-color);
   background-color: var(--light-gray-color);
   box-sizing: border-box;
-  border-radius: 10px 10px 0px 0px;
+
   border-bottom: 0;
   z-index: 2;
 `;
@@ -63,7 +63,7 @@ export const LoginForm = styled.form`
   display: flex;
   flex-direction: column;
   border: 1px solid var(--gray-color);
-  border-radius: 10px;
+
   padding: 35px;
   text-align: center;
   background-color: white;
@@ -102,7 +102,7 @@ export const LinkWrapper = styled.div`
 `;
 
 export const StyledLink = styled(Link)`
-  color: var(--dark-gray-color);
+  color: var(--black-color);
 `;
 
 export const ValidateMessage = styled.p`

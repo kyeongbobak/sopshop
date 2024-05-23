@@ -4,8 +4,7 @@ import { Link } from "react-router-dom";
 export const Footer = styled.footer``;
 
 export const FooterWrapper = styled.div`
-  width: 1280px;
-  margin: 0 auto;
+  margin: 0 40px auto;
   display: flex;
   flex-direction: column;
 `;

@@ -102,7 +102,7 @@ export const UserIdDupicateButton = styled.button`
   border-radius: 5px;
   background-color: var(--main-color);
   font-size: var(--font-md-size);
-  color: white;
+  color: var(--white-color);
   text-align: center;
 `;
 
@@ -197,6 +197,8 @@ export const PhoneNumberStyledInput = styled.input`
   border: 1px solid var(--gray-color);
   border-radius: 5px;
   height: 54px;
+  font-size: var(--font-md-size);
+  text-align: center;
 `;
 
 export const SignUpRegistrationSection = styled.div`

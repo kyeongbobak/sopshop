@@ -106,6 +106,12 @@ export default function BuyerSignUp() {
 
       const data = await res.json();
 
+      console.log(data);
+
+      if (res.ok) {
+        alert("회원가입이 성공적으로 완료되었습니다!");
+      }
+
       if (!userPassword && !userPassWordCheck) {
         setPassWordWarningMessage("이 필드는 blank일 수 없습니다.");
       } else if (userPassword.length < 8 && userPassWordCheck.length < 8) {
@@ -128,6 +134,8 @@ export default function BuyerSignUp() {
         setPhoneNumberWarningMessage("핸드폰번호는 01*으로 시작해야 하는 10~11자리 숫자여야 합니다.");
       } else if (data.phone_number) {
         setPhoneNumberWarningMessage("해당 사용자 전화번호는 이미 존재합니다.");
+      } else {
+        setPhoneNumberWarningMessage("");
       }
     } catch (error) {
       console.log(error);

@@ -2,16 +2,15 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export const Header = styled.header`
-  box-shadow: 0px 0px 2px 2px var(--light-gray-color);
+  /* box-shadow: 0px 0px 2px 2px var(--light-gray-color); */
 `;
 
 export const HeaderWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 1280px;
-  margin: 0 auto;
-  padding: 30px 0;
+  margin: 0 50px auto;
+  padding: 70px 0;
   padding-right: 10px;
 `;
 
@@ -20,8 +19,13 @@ export const HeaderInnerMain = styled.div`
 `;
 
 export const Logo = styled(Link)`
+  margin-left: 122px;
   img {
-    width: 150px;
+    width: 250px;
+  }
+
+  p {
+    font-size: 30px;
   }
 `;
 
@@ -50,7 +54,7 @@ export const SearchInput = styled.input`
 `;
 
 export const HeaderLinkMenu = styled.div`
-  font-size: var(--font-md-size);
+  font-size: 22px;
   display: flex;
   gap: 27px;
 
@@ -60,7 +64,10 @@ export const HeaderLinkMenu = styled.div`
   }
 
   p {
-    color: var(--light-black-color);
+    color: #eb9bf9;
+  }
+
+  p:nth-child(2) {
   }
 
   button {
@@ -87,12 +94,13 @@ export const HeaderLoginLink = styled(Link)`
 export const DropDownMenu = styled.ul`
   background-color: var(--white-color);
   position: absolute;
-  top: 80px;
+  top: 50px;
   right: -45px;
   padding-top: 20px;
   width: 152px;
   border-radius: 10px;
-  box-shadow: 0px 0px 10px 1px var(--gray-color), 0px 4px 30px var(--light-gray-color);
+  /* box-shadow: 0px 0px 10px 1px var(--gray-color), 0px 4px 30px var(--light-gray-color); */
+  border: 1px solid #eb9bf9;
   font-size: var(--font-lg-size);
   z-index: 999;
 

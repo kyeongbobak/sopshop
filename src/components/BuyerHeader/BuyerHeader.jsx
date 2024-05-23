@@ -1,8 +1,6 @@
-import { Header, HeaderWrapper, HeaderInnerMain, HeaderLinkMenu, Logo, SearchForm, SearchInput, SearchButton, HeaderCartLink, HeaderUserPageLink, HeaderLoginLink, DropDownMenu, UserProfileLink, LogoutButton } from "./BuyerHeaderStyle";
+import { Header, HeaderWrapper, HeaderInnerMain, HeaderLinkMenu, Logo, HeaderCartLink, HeaderUserPageLink, HeaderLoginLink, DropDownMenu, UserProfileLink, LogoutButton } from "./BuyerHeaderStyle";
 import LogoImage from "../../assets/Logo-hodu.png";
-import ShoppingCartIcon from "../../assets/icon-shopping-cart.png";
-import UserIcon from "../../assets/icon-user.png";
-import SearchIcon from "../../assets/search.png";
+
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
@@ -11,7 +9,6 @@ import { useLocation } from "react-router-dom";
 
 export default function BuyerHeader() {
   const { token, isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
-  const [searchKeyword, setSearchKeyword] = useState();
   const [dropDown, setDropDown] = useState(false);
 
   const location = useLocation();
@@ -22,15 +19,6 @@ export default function BuyerHeader() {
 
   const handleLoginStateChange = () => {
     setIsLoggedIn(!!token);
-  };
-
-  const handleChange = (e) => {
-    setSearchKeyword(e.target.value);
-  };
-
-  const handleSearch = (e) => {
-    e.preventDefault();
-    navigate(`/products/search/${searchKeyword}`);
   };
 
   useEffect(() => {
@@ -61,21 +49,13 @@ export default function BuyerHeader() {
   return (
     <Header>
       <HeaderWrapper>
-        <HeaderInnerMain>
-          <Logo Link to={`/mainPage`}>
-            <img src={LogoImage} alt="" />
-          </Logo>
-          <SearchForm onSubmit={handleSearch}>
-            <SearchInput type="text" placeholder="search" value={searchKeyword} onChange={handleChange} />
-            <SearchButton type="submit">
-              <img src={SearchIcon} alt="" />
-            </SearchButton>
-          </SearchForm>
-        </HeaderInnerMain>
+        <HeaderInnerMain></HeaderInnerMain>
+        <Logo Link to={`/mainPage`}>
+          <img src={LogoImage} alt="" />
+        </Logo>
         <HeaderLinkMenu>
           <HeaderCartLink Link to={`/shoppingCart`}>
-            <img src={ShoppingCartIcon} alt="" />
-            <p>cart</p>
+            <p>Cart</p>
           </HeaderCartLink>
           {isLoggedIn ? (
             <HeaderUserPageLink
@@ -87,21 +67,19 @@ export default function BuyerHeader() {
                 }
               }}
             >
-              {currentPath !== "/mypage" && <img src={UserIcon} alt="" />}
               {currentPath === "/mypage" ? (
                 <button onClick={() => handleLogout()}>
-                  <img src={UserIcon} alt="" />
-                  <p>logout</p>
+                  <p>Logout</p>
                 </button>
               ) : (
-                <p>my page</p>
+                <p>Menu</p>
               )}
               {currentPath !== "/mypage" && dropDown && (
                 <>
                   <DropDownMenu>
                     <div>
-                      <UserProfileLink to={`/mypage`}>My Page</UserProfileLink>
-                      <LogoutButton onClick={() => handleLogout()}>Log out</LogoutButton>
+                      <UserProfileLink to={`/mypage`}>my page</UserProfileLink>
+                      <LogoutButton onClick={() => handleLogout()}>log out</LogoutButton>
                     </div>
                   </DropDownMenu>
                 </>
@@ -109,8 +87,7 @@ export default function BuyerHeader() {
             </HeaderUserPageLink>
           ) : (
             <HeaderLoginLink to={"/login"}>
-              <img src={UserIcon} alt="" />
-              <p>login</p>
+              <p>Login</p>
             </HeaderLoginLink>
           )}
         </HeaderLinkMenu>

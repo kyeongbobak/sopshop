@@ -6,7 +6,6 @@ export const Product = styled.li``;
 export const ProductImage = styled(Link)`
   img {
     width: 380px;
-    border-radius: 10px;
   }
 `;
 

@@ -1,14 +1,28 @@
-import { MainPageSlider, ProductListWrapper, ProductGroup } from "../BuyerMainPage/BuyerMainPageStyle";
+import { MainPageSlider, ProductListWrapper, ProductGroup, SearchForm, SearchButton, SearchInput } from "../BuyerMainPage/BuyerMainPageStyle";
 import { useContext, useEffect, useState } from "react";
 import ProductList from "../../components/ProductList/ProductList";
 import axios from "axios";
 import { AuthContext } from "../../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 import BuyerHeader from "../../components/BuyerHeader/BuyerHeader";
 import BuyerFooter from "../../components/BuyerFooter/BuyerFooter";
+import SearchIcon from "../../assets/search.png";
 
 export default function BuyerMainPage() {
   const { token } = useContext(AuthContext);
   const [products, setProducts] = useState([]);
+  const [searchKeyword, setSearchKeyword] = useState();
+
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setSearchKeyword(e.target.value);
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    navigate(`/products/search/${searchKeyword}`);
+  };
 
   useEffect(() => {
     const getProduct = async () => {
@@ -47,6 +61,7 @@ export default function BuyerMainPage() {
     <>
       <BuyerHeader />
       {/* <MainPageSlider></MainPageSlider> */}
+
       <ProductListWrapper>
         <ProductGroup>
           {products.map((product) => (
@@ -54,6 +69,15 @@ export default function BuyerMainPage() {
           ))}
         </ProductGroup>
       </ProductListWrapper>
+      <SearchForm onSubmit={handleSearch}>
+        <SearchInput type="text" placeholder="search" value={searchKeyword} onChange={handleChange} />
+
+        <SearchButton type="submit">
+          <div>
+            <img src={SearchIcon} alt="" />
+          </div>
+        </SearchButton>
+      </SearchForm>
       <BuyerFooter />
     </>
   );

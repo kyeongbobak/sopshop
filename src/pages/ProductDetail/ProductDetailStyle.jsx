@@ -139,16 +139,17 @@ export const ProducDetailButtonStyle = css`
 export const ProductOrderButton = styled.button`
   ${ProducDetailButtonStyle}
   width: 416px;
-  border: 1px solid var(--main-color);
-  color: var(--main-color);
+  background-color: var(--black-color);
+  /* border: 1px solid #eb9bf9; */
+  color: var(--white-color);
 `;
 
 export const ProductAddCartButton = styled.button`
   ${ProducDetailButtonStyle}
   width: 200px;
-  border: 1px solid var(--gray-color);
+  border: 1px solid var(--black-color);
   margin-left: 8px;
-  color: var(--gray-color);
+  color: var(--black-color);
 `;
 
 export const ProductDetailTabMenu = styled.ul`
