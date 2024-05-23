@@ -1,4 +1,4 @@
-import { BuyerCartegoryWrapper, About, Shop, Flop } from "./BuyerCartegoryStyle";
+import { BuyerCartegoryWrapper, About, Shop, Flop, Ditto, TooMuchShop } from "./BuyerCartegoryStyle";
 
 export default function BuyerCartegory() {
   return (
@@ -17,11 +17,13 @@ export default function BuyerCartegory() {
               </Shop>
             </li>
             <div>
-              <Flop Link to={`/Flops`}>
-                FLOPS
-              </Flop>
-              <li>Ditto</li>
-              <li>Too_much_shop</li>
+              <Flop to={`/FLOPS`}>FLOPS</Flop>
+              <Ditto Link to={`/Ditto`}>
+                Ditto
+              </Ditto>
+              <TooMuchShop Link to={`/Too_much_shop`}>
+                Too_much_shop
+              </TooMuchShop>
             </div>
             <li>Notice</li>
             <li>Q & A</li>

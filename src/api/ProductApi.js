@@ -21,9 +21,9 @@ const getProduct = async (token) => {
     const res = await Promise.all(promises);
     const data = await Promise.all(res.map((res) => (token ? res.data : res.json())));
     const mergedData = data.flatMap((result) => result.results);
-    // const newArray = mergedData.filter((i) => i.store_name === "FLOPS" || i.store_name === "Ditto" || i.store_name === "Too_much_shop");
-    // setProducts(newArray);
-    return mergedData;
+    const newArray = mergedData.filter((i) => i.store_name === "FLOPS" || i.store_name === "Ditto" || i.store_name === "Too_much_shop");
+
+    return newArray;
   } catch (error) {
     console.log("error");
   }

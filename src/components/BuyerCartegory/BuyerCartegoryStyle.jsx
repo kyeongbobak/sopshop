@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { css } from "styled-components";
 import { Link } from "react-router-dom";
 
 export const BuyerCartegoryWrapper = styled.div`
@@ -24,10 +25,24 @@ export const BuyerCartegoryWrapper = styled.div`
   }
 `;
 
+export const CategoryLinkCommonStyle = css`
+  display: flex;
+  margin-bottom: 15px;
+`;
+
 export const About = styled(Link)``;
 
 export const Shop = styled(Link)``;
 
 export const Flop = styled(Link)`
+  ${CategoryLinkCommonStyle}
   color: #eb9bf9;
+`;
+
+export const Ditto = styled(Link)`
+  ${CategoryLinkCommonStyle}
+`;
+
+export const TooMuchShop = styled(Link)`
+  ${CategoryLinkCommonStyle}
 `;
