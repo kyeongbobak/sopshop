@@ -17,7 +17,7 @@ export default function BuyerCartegory() {
               </Shop>
             </li>
             <div>
-              <Flop Link to={`/Flop`}>
+              <Flop Link to={`/Flops`}>
                 FLOPS
               </Flop>
               <li>Ditto</li>

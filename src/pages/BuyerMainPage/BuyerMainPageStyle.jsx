@@ -25,7 +25,6 @@ export const BuyerMainPageCategory = styled.div`
 
 export const ProductListWrapper = styled.div`
   width: 1280px;
-
   margin: 80px auto;
 `;
 

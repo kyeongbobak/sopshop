@@ -94,7 +94,7 @@ export const HeaderLoginLink = styled(Link)`
 export const DropDownMenu = styled.ul`
   background-color: var(--white-color);
   position: absolute;
-  top: 50px;
+  top: 35px;
   right: -45px;
   padding-top: 20px;
   width: 152px;

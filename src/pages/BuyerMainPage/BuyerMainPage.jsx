@@ -1,13 +1,14 @@
 import { BuyerMainPageWrapper, BuyerMainPageCategory, ProductListWrapper, ProductGroup, SearchForm, SearchButton, SearchInput } from "../BuyerMainPage/BuyerMainPageStyle";
 import { useContext, useEffect, useState } from "react";
 import ProductList from "../../components/ProductList/ProductList";
-import axios from "axios";
+
 import { AuthContext } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import BuyerHeader from "../../components/BuyerHeader/BuyerHeader";
 import BuyerFooter from "../../components/BuyerFooter/BuyerFooter";
 import SearchIcon from "../../assets/search.png";
 import BuyerCartegory from "../../components/BuyerCartegory/BuyerCartegory";
+import getProduct from "../../api/ProductApi";
 
 export default function BuyerMainPage() {
   const { token } = useContext(AuthContext);
@@ -26,39 +27,49 @@ export default function BuyerMainPage() {
   };
 
   useEffect(() => {
-    const getProduct = async () => {
-      try {
-        const promises = [];
-        if (token) {
-          const instance = axios.create({
-            headers: {
-              Authorization: `JWT ${token}`,
-            },
-          });
-          promises.push(instance.get("https://openmarket.weniv.co.kr/products/?page=4"));
-          promises.push(instance.get("https://openmarket.weniv.co.kr/products/?page=5"));
-          promises.push(instance.get("https://openmarket.weniv.co.kr/products/?page=6"));
-        } else {
-          promises.push(fetch("https://openmarket.weniv.co.kr/products/?page=4"));
-          promises.push(fetch("https://openmarket.weniv.co.kr/products/?page=5"));
-          promises.push(fetch("https://openmarket.weniv.co.kr/products/?page=6"));
-        }
-        const res = await Promise.all(promises);
-        const data = await Promise.all(res.map((res) => (token ? res.data : res.json())));
-        console.log(data);
-        const mergedData = [...data[0].results, ...data[1].results, ...data[2].results];
-        // const newArray = mergedData.filter((i) => i.store_name === "Too_much_shop" || i.store_name === "FLOPS");
-        // setProducts([...newArray.slice(2, 5), ...newArray.slice(-4, -2)]);
-
-        const newArray = [...data[0].results, ...data[1].results, ...data[2].results];
-        setProducts(newArray);
-        console.log(newArray);
-      } catch (error) {
-        console.log("error");
-      }
+    const fetchData = async () => {
+      const fetchedProducts = await getProduct(token);
+      console.log(fetchedProducts);
+      setProducts(fetchedProducts);
     };
-    getProduct();
+
+    fetchData();
   }, [token]);
+
+  // useEffect(() => {
+  //   const getProduct = async () => {
+  //     try {
+  //       const promises = [];
+  //       if (token) {
+  //         const instance = axios.create({
+  //           headers: {
+  //             Authorization: `JWT ${token}`,
+  //           },
+  //         });
+  //         promises.push(instance.get("https://openmarket.weniv.co.kr/products/?page=4"));
+  //         promises.push(instance.get("https://openmarket.weniv.co.kr/products/?page=5"));
+  //         promises.push(instance.get("https://openmarket.weniv.co.kr/products/?page=6"));
+  //       } else {
+  //         promises.push(fetch("https://openmarket.weniv.co.kr/products/?page=4"));
+  //         promises.push(fetch("https://openmarket.weniv.co.kr/products/?page=5"));
+  //         promises.push(fetch("https://openmarket.weniv.co.kr/products/?page=6"));
+  //       }
+  //       const res = await Promise.all(promises);
+  //       const data = await Promise.all(res.map((res) => (token ? res.data : res.json())));
+  //       console.log(data);
+  //       const mergedData = [...data[0].results, ...data[1].results, ...data[2].results];
+  //       // const newArray = mergedData.filter((i) => i.store_name === "Too_much_shop" || i.store_name === "FLOPS");
+  //       // setProducts([...newArray.slice(2, 5), ...newArray.slice(-4, -2)]);
+
+  //       const newArray = [...data[0].results, ...data[1].results, ...data[2].results];
+  //       setProducts(newArray);
+  //       console.log(newArray);
+  //     } catch (error) {
+  //       console.log("error");
+  //     }
+  //   };
+  //   getProduct();
+  // }, [token]);
 
   return (
     <>

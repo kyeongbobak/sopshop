@@ -10,7 +10,7 @@ import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
 import BuyerOrderPage from "../pages/BuyerOrderPage/BuyerOrderPage";
 import BuyerMyPage from "../pages/BuyerMyPage/BuyerMyPage";
 import BuyerOrderSuccess from "../pages/BuyerOrderSuccess/BuyerOrderSuccess";
-import Flop from "../components/BuyerCartegoryProduct/Flop/Flop";
+import Flops from "../pages/BrandCartegory/Flops/Flops";
 // import { useLocation } from "react-router-dom";
 
 export default function Router() {
@@ -25,7 +25,7 @@ export default function Router() {
         <Routes>
           <Route path="login" element={<BuyerLogin />}></Route>
           <Route path="/mainPage" element={<BuyerMainPage />}></Route>
-          <Route path="/Flop" element={<Flop />}></Route>
+          <Route path="/Flops" element={<Flops />}></Route>
           <Route path="login" element={<BuyerLogin />}></Route>
           <Route path="/signUp" element={<BuyerSignUp />}></Route>
           <Route path="/products/*" element={<Outlet />}>
