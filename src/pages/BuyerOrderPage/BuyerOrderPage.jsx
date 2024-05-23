@@ -54,6 +54,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import axios from "axios";
 import Button from "../../components/Button/Button";
 import AdressSearchModal from "../../components/Modal/AdressSearchModal/AdressSearchModal";
+import { useNavigate } from "react-router-dom";
 
 export default function BuyerOrderPage() {
   const { token } = useContext(AuthContext);
@@ -78,6 +79,8 @@ export default function BuyerOrderPage() {
   const [fullproductId, setFullProductId] = useState([]);
   const [fullQuantity, setFullQuantity] = useState([]);
   const [totalShippingFee, setTotalShippingFee] = useState(0);
+
+  const navigate = useNavigate();
 
   const getOrderList = async () => {
     try {
@@ -180,6 +183,11 @@ export default function BuyerOrderPage() {
       const res = orderList.length === 1 ? await instance.post("https://openmarket.weniv.co.kr/order/", directOrder) : await instance.post("https://openmarket.weniv.co.kr/order/", cartOrder);
       const data = await res.data;
       console.log(data);
+
+      if (res.ok) {
+        navigate(`/orderSuccess`);
+        alert("주문에 성공하셨습니다!");
+      }
     } catch (error) {
       console.log(error);
     }

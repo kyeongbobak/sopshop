@@ -95,4 +95,5 @@ export const PrevButton = styled.button`
   font-size: var(--font-md-size);
   text-align: center;
   float: right;
+  margin-bottom: 500px;
 `;

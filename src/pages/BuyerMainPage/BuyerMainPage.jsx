@@ -1,4 +1,4 @@
-import { MainPageSlider, ProductListWrapper, ProductGroup, SearchForm, SearchButton, SearchInput } from "../BuyerMainPage/BuyerMainPageStyle";
+import { BuyerMainPageWrapper, BuyerMainPageCategory, ProductListWrapper, ProductGroup, SearchForm, SearchButton, SearchInput } from "../BuyerMainPage/BuyerMainPageStyle";
 import { useContext, useEffect, useState } from "react";
 import ProductList from "../../components/ProductList/ProductList";
 import axios from "axios";
@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import BuyerHeader from "../../components/BuyerHeader/BuyerHeader";
 import BuyerFooter from "../../components/BuyerFooter/BuyerFooter";
 import SearchIcon from "../../assets/search.png";
+import BuyerCartegory from "../../components/BuyerCartegory/BuyerCartegory";
 
 export default function BuyerMainPage() {
   const { token } = useContext(AuthContext);
@@ -46,10 +47,12 @@ export default function BuyerMainPage() {
         const data = await Promise.all(res.map((res) => (token ? res.data : res.json())));
         console.log(data);
         const mergedData = [...data[0].results, ...data[1].results, ...data[2].results];
-        const newArray = mergedData.filter((i) => i.store_name === "Too_much_shop" || i.store_name === "FLOPS");
-        setProducts([...newArray.slice(2, 5), ...newArray.slice(-4, -2)]);
+        // const newArray = mergedData.filter((i) => i.store_name === "Too_much_shop" || i.store_name === "FLOPS");
+        // setProducts([...newArray.slice(2, 5), ...newArray.slice(-4, -2)]);
+
+        const newArray = [...data[0].results, ...data[1].results, ...data[2].results];
+        setProducts(newArray);
         console.log(newArray);
-        console.log(mergedData);
       } catch (error) {
         console.log("error");
       }
@@ -60,18 +63,20 @@ export default function BuyerMainPage() {
   return (
     <>
       <BuyerHeader />
-      {/* <MainPageSlider></MainPageSlider> */}
-
-      <ProductListWrapper>
-        <ProductGroup>
-          {products.map((product) => (
-            <ProductList key={product.product_id} product_id={product.product_id} product_img={product.image} product_store_name={product.store_name} product product_name={product.product_name} product_price={product.price} />
-          ))}
-        </ProductGroup>
-      </ProductListWrapper>
+      <BuyerMainPageWrapper>
+        <BuyerMainPageCategory>
+          <BuyerCartegory />
+        </BuyerMainPageCategory>
+        <ProductListWrapper>
+          <ProductGroup>
+            {products.map((product) => (
+              <ProductList key={product.product_id} product_id={product.product_id} product_img={product.image} product_store_name={product.store_name} product product_name={product.product_name} product_price={product.price} />
+            ))}
+          </ProductGroup>
+        </ProductListWrapper>
+      </BuyerMainPageWrapper>
       <SearchForm onSubmit={handleSearch}>
         <SearchInput type="text" placeholder="search" value={searchKeyword} onChange={handleChange} />
-
         <SearchButton type="submit">
           <div>
             <img src={SearchIcon} alt="" />

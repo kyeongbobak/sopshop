@@ -1,11 +1,31 @@
 import styled from "styled-components";
 
-export const MainPageSlider = styled.div`
-  height: 500px;
+export const BuyerMainPageWrapper = styled.div`
+  /* font-size: 22px;
+  padding: 50px;
+  position: relative; */
+`;
+
+export const BuyerMainPageCategory = styled.div`
+  /* ul {
+    position: absolute;
+    div {
+      margin: 40px 0 0 20px;
+    }
+  }
+
+  li {
+    margin-top: 15px;
+  }
+
+  li:nth-child(4) {
+    margin-top: 90px;
+  } */
 `;
 
 export const ProductListWrapper = styled.div`
   width: 1280px;
+
   margin: 80px auto;
 `;
 
@@ -30,7 +50,7 @@ export const SearchButton = styled.button`
     transform: translateY(-50%); */
     width: 22px;
     padding-bottom: 10px;
-    margin: -340px 0 0 330px;
+    margin: -500px 0 0 330px;
   }
 `;
 
@@ -43,5 +63,5 @@ export const SearchInput = styled.input`
   outline: none;
   font-size: var(--font-lg-size);
   position: absolute;
-  margin-top: -350px;
+  margin-top: -500px;
 `;
