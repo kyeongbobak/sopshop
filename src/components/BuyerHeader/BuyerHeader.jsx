@@ -1,5 +1,5 @@
 import { Header, HeaderWrapper, HeaderInnerMain, HeaderLinkMenu, Logo, HeaderCartLink, HeaderUserPageLink, HeaderLoginLink, DropDownMenu, UserProfileLink, LogoutButton } from "./BuyerHeaderStyle";
-import LogoImage from "../../assets/Logo-hodu.png";
+import LogoImage from "../../assets/img/Logo-SopShop.png";
 
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -39,7 +39,7 @@ export default function BuyerHeader() {
       localStorage.removeItem("token");
       localStorage.removeItem("id");
       setIsLoggedIn(false);
-      navigate(`/mainPage`);
+      navigate(`/`);
       window.location.reload();
     } catch (error) {
       console.log(error);
@@ -50,7 +50,7 @@ export default function BuyerHeader() {
     <Header>
       <HeaderWrapper>
         <HeaderInnerMain></HeaderInnerMain>
-        <Logo Link to={`/mainPage`}>
+        <Logo Link to={`/`}>
           <img src={LogoImage} alt="" />
         </Logo>
         <HeaderLinkMenu>

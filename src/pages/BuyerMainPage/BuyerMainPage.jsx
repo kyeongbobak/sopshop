@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import BuyerHeader from "../../components/BuyerHeader/BuyerHeader";
 import BuyerCartegory from "../../components/BuyerCartegory/BuyerCartegory";
 import BuyerFooter from "../../components/BuyerFooter/BuyerFooter";
-import SearchIcon from "../../assets/search.png";
+import SearchIcon from "../../assets/img/search.png";
 
 import getProduct from "../../api/ProductApi";
 

@@ -12,20 +12,13 @@ import BuyerMyPage from "../pages/BuyerMyPage/BuyerMyPage";
 import OrderSuccessPage from "../pages/BuyerOrderSuccess/OrderSuccessPage";
 import BrandCategoryPage from "../pages/BrandCartegory/BrandCategoryPage";
 
-// import { useLocation } from "react-router-dom";
-
 export default function Router() {
-  // const location = useLocation();
-  // console.log(location);
-  // const currentPath = location.pathname;
-  // console.log(currentPath);
-
   return (
     <>
       <AuthProvider>
         <Routes>
           <Route path="login" element={<BuyerLogin />}></Route>
-          <Route path="/mainPage" element={<BuyerMainPage />}></Route>
+          <Route path="/" element={<BuyerMainPage />}></Route>
           <Route path=":BrandName" element={<BrandCategoryPage />} />
           <Route path="login" element={<BuyerLogin />}></Route>
           <Route path="/signUp" element={<BuyerSignUp />}></Route>

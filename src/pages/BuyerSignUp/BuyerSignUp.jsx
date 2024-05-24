@@ -1,4 +1,3 @@
-import LogoImage from "../../assets/Logo-hodu.png";
 import {
   SignUpWrapper,
   SiteLogo,
@@ -28,10 +27,11 @@ import {
   ValidateMessage,
 } from "./BuyerSignUpStyle";
 import { useState } from "react";
-import DropDownIcon from "../../assets/icon-down-arrow.png";
-import PullUpIcon from "../../assets/icon-up-arrow.png";
-import CheckOffIcon from "../../assets/icon-check-off.png";
-import CheckOnIcon from "../../assets/icon-check-on.png";
+import LogoImage from "../../assets/img/Logo-SopShop.png";
+import DropDownIcon from "../../assets/img/icon-down-arrow.png";
+import PullUpIcon from "../../assets/img/icon-up-arrow.png";
+import CheckOffIcon from "../../assets/img/icon-check-off.png";
+import CheckOnIcon from "../../assets/img/icon-check-on.png";
 
 export default function BuyerSignUp() {
   const [activeTab, setActiveTab] = useState("buyer");
@@ -145,7 +145,7 @@ export default function BuyerSignUp() {
   return (
     <>
       <SignUpWrapper>
-        <SiteLogo to={"/mainPage"}>
+        <SiteLogo to={"/"}>
           <img src={LogoImage} alt="" />
         </SiteLogo>
         <FormBox>

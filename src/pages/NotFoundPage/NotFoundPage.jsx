@@ -1,6 +1,6 @@
 import Button from "../../components/Button/Button";
 
-import NotFoundIcon from "../../assets/icon-404.png";
+import NotFoundIcon from "../../assets/img/icon-404.png";
 import { NotFoundPageInner, NotFoundPageWrapper, NotFoundPageGraphic, NotFoundPageContents, NotFoundPageMessage, NotFoundPageDescription, NotFoundPageButtonMenu } from "./NotFoundPageStyle";
 import { useNavigate } from "react-router-dom";
 

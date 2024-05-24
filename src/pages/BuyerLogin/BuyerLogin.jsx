@@ -1,7 +1,5 @@
-import LogoImage from "../../assets/Logo-hodu.png";
-import BuyerHeader from "../../components/BuyerHeader/BuyerHeader";
-import BuyerFooter from "../../components/BuyerFooter/BuyerFooter";
-import BuyerCartegory from "../../components/BuyerCartegory/BuyerCartegory";
+import LogoImage from "../../assets/img/Logo-SopShop.png";
+
 import { useState } from "react";
 import { LoginWrapper, FormBox, SiteLogo, LoginForm, Label, StyledInput, LoginButton, LinkWrapper, StyledLink, UserTypeTabs, LoginTab, SellerLoginTabLink, BuyerLoginTabLink, ValidateMessage } from "./BuyerLoginStyle";
 import { useNavigate } from "react-router-dom";
@@ -69,7 +67,7 @@ export default function BuyerLogin() {
   return (
     <>
       <LoginWrapper>
-        <SiteLogo to={"/mainPage"}>
+        <SiteLogo to={"/"}>
           <img src={LogoImage} alt="" />
         </SiteLogo>
         <FormBox>

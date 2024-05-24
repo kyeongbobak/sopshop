@@ -1,7 +1,7 @@
 import { Footer, FooterWrapper, FooterMenuWrap, FooterLinkMenu, FooterLink, StyledLink, StyledBoldLink, FooterTop, FooterBottom, FooterSnsWrap, FooterSns, FooterSnsLink } from "./BuyerFooterStyle";
-import InstagramIcon from "../../assets/icon-insta.png";
-import FaceBookIcon from "../../assets/icon-fb.png";
-import YouTuBeIcon from "../../assets/icon-yt.png";
+import InstagramIcon from "../../assets/img/icon-insta.png";
+import FaceBookIcon from "../../assets/img/icon-fb.png";
+import YouTuBeIcon from "../../assets/img/icon-yt.png";
 
 export default function BuyerFooter() {
   return (

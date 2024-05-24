@@ -26,8 +26,8 @@ import {
 } from "./ProductDetailStyle";
 import { useParams, useNavigate } from "react-router-dom";
 
-import PlusIcon from "../../assets/icon-plus-line.png";
-import MinusIcon from "../../assets/icon-minus-line.png";
+import PlusIcon from "../../assets/img/icon-plus-line.png";
+import MinusIcon from "../../assets/img/icon-minus-line.png";
 import BuyerHeader from "../../components/BuyerHeader/BuyerHeader";
 import BuyerCartegory from "../../components/BuyerCartegory/BuyerCartegory";
 import BuyerFooter from "../../components/BuyerFooter/BuyerFooter";

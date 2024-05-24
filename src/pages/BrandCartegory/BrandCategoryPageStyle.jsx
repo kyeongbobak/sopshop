@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const ProductListWrapper = styled.div`
   width: 1280px;
-  margin: 80px auto;
+  margin: 80px auto 250px;
 `;
 
 export const ProductPageNumber = styled.div`

@@ -31,10 +31,10 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../../contexts/AuthContext";
 import Button from "../../components/Button/Button";
-import PlusIcon from "../../assets/icon-plus-line.png";
-import MinusIcon from "../../assets/icon-minus-line.png";
+import PlusIcon from "../../assets/img/icon-plus-line.png";
+import MinusIcon from "../../assets/img/icon-minus-line.png";
+import DeleteIcon from "../../assets/img/icon-delete.png";
 import AlertModal from "../../components/Modal/AlertModal/AlertModal";
-import DeleteIcon from "../../assets/icon-delete.png";
 
 export default function BuyerShoppingCart() {
   const { token, isLoggedIn } = useContext(AuthContext);

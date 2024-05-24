@@ -12,7 +12,7 @@ export default function BuyerCartegory() {
               </About>
             </li>
             <li>
-              <Shop Link to={`/mainPage`}>
+              <Shop Link to={`/`}>
                 Shop
               </Shop>
             </li>
