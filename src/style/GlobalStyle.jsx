@@ -13,7 +13,6 @@ import reset from "styled-reset";
 const GlobalStyle = createGlobalStyle`
   ${reset}
 
-    /* 사용자 정의 속성 */
     :root{
      font-size: 10px;
 

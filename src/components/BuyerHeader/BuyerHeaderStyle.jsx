@@ -1,9 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-export const Header = styled.header`
-  /* box-shadow: 0px 0px 2px 2px var(--light-gray-color); */
-`;
+export const Header = styled.header``;
 
 export const HeaderWrapper = styled.div`
   display: flex;
@@ -100,7 +98,6 @@ export const DropDownMenu = styled.ul`
   padding-top: 20px;
   width: 152px;
   border-radius: 10px;
-  /* box-shadow: 0px 0px 10px 1px var(--gray-color), 0px 4px 30px var(--light-gray-color); */
   border: 1px solid var(--black-color);
   font-size: var(--font-lg-size);
   z-index: 999;
