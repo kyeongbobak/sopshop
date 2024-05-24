@@ -21,11 +21,13 @@ export const ProductImage = styled.img`
 
 export const ProductBrandName = styled.p`
   font-size: var(--font-lg-size);
+  font-weight: var(--font-bold);
 `;
 
 export const ProductName = styled.h2`
+  font-family: "Pretendard";
   font-size: var(--font-extra-size);
-  font-weight: var(--font-light);
+  font-weight: var(--font-extra-light);
   margin-top: 16px;
 `;
 
@@ -35,12 +37,14 @@ export const ProductPrice = styled.p`
 
   span {
     font-size: var(--font-lg-size);
+    font-weight: var(--font-light);
   }
 `;
 
 export const ProductDelivary = styled.div`
   margin-top: 138px;
   padding-bottom: 20px;
+  font-family: "Pretendard";
   font-size: var(--font-md-size);
   color: var(--black-color);
   border-bottom: 1px solid var(--gray-color);
@@ -111,6 +115,7 @@ export const ProductTotalPrice = styled.div`
 
 export const ProductTotalQuanTity = styled.div`
   p {
+    font-family: "Pretendard";
     font-size: var(--font-lg-size);
   }
 `;
@@ -134,6 +139,7 @@ export const ProducDetailButtonStyle = css`
   margin-top: 22px;
   text-align: center;
   font-size: var(--font-lg-size);
+  font-weight: var(--font-medium);
 `;
 
 export const ProductOrderButton = styled.button`
@@ -184,5 +190,6 @@ export const ProductQnALink = styled(Link)`
 `;
 export const ProductRefundLink = styled(Link)`
   ${ProductDetailTabLink}
+  font-family: "Pretendard";
   border-bottom: ${(props) => (props.isActive ? "6px solid var(--black-color)" : "6px solid #e0e0e0")};
 `;

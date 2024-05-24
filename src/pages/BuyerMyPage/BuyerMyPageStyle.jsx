@@ -5,16 +5,19 @@ import { css } from "styled-components";
 export const BuyerMyPageWrapper = styled.div`
   width: 1280px;
   margin: 0px auto;
+  font-family: "Pretendard";
 `;
 
 export const BuyerMyPageTitle = styled.div`
   font-size: var(--font-extra-size);
   margin: 54px 0 52px;
   text-align: center;
+  font-family: "GmarketSans";
 `;
 
 export const BuyerMyPageHeader = styled.ul`
   display: flex;
+
   font-size: var(--font-lg-size);
   border-top: 1px solid var(--black-color);
   border-bottom: 1px solid var(--black-color);
@@ -50,6 +53,7 @@ export const OrderRecordsItemStyle = css`
   flex-grow: 1;
   width: 152px;
   text-align: center;
+  font-family: "Pretendard";
 `;
 
 export const OrderNumber = styled.div`
@@ -67,6 +71,12 @@ export const ProductImage = styled.div`
 export const ProductInfo = styled.div`
   ${OrderRecordsItemStyle}
   line-height: 22px;
+  p {
+    font-family: "Pretendard";
+  }
+  p:nth-child(1) {
+    font-weight: var(--font-semi-bold);
+  }
 `;
 
 export const ProductPrice = styled.p`

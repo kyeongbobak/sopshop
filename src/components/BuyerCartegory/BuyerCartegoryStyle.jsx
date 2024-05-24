@@ -4,20 +4,21 @@ import { Link } from "react-router-dom";
 
 export const BuyerCartegoryWrapper = styled.div`
   div {
-    font-size: 22px;
-    padding-left: 50px;
+    font-size: 25px;
+    padding-left: 70px;
     position: relative;
   }
 
   ul {
     position: absolute;
     div {
-      margin: 40px 0 0 -20px;
+      margin: 40px 0 0 -30px;
     }
   }
 
   li {
     margin-top: 15px;
+    font-weight: var(--font-light);
   }
 
   li:nth-child(4) {
@@ -28,6 +29,7 @@ export const BuyerCartegoryWrapper = styled.div`
 export const CategoryLinkCommonStyle = css`
   display: flex;
   margin-bottom: 15px;
+  font-weight: var(--font-medium);
 `;
 
 export const About = styled(Link)``;
@@ -36,7 +38,7 @@ export const Shop = styled(Link)``;
 
 export const Flop = styled(Link)`
   ${CategoryLinkCommonStyle}
-  color: #eb9bf9;
+  color: var(--main-color);
 `;
 
 export const Ditto = styled(Link)`
@@ -47,14 +49,8 @@ export const TooMuchShop = styled(Link)`
   ${CategoryLinkCommonStyle}
 `;
 
-export const Notice = styled(Link)`
-  ${CategoryLinkCommonStyle}
-`;
+export const Notice = styled(Link)``;
 
-export const QandA = styled(Link)`
-  ${CategoryLinkCommonStyle}
-`;
+export const QandA = styled(Link)``;
 
-export const Review = styled(Link)`
-  ${CategoryLinkCommonStyle}
-`;
+export const Review = styled(Link)``;

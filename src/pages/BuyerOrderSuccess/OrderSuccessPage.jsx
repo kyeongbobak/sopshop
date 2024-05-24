@@ -44,7 +44,7 @@ export default function BuyerOrderSuccess() {
         <OrderSuccessPageContents>
           <OrderSuccessMessage>주문이 완료되었습니다!</OrderSuccessMessage>
           <OrderDate>
-            <span>주문 일자</span> {RecentOrderDate}
+            <span>주문 일자 : </span> {RecentOrderDate}
           </OrderDate>
         </OrderSuccessPageContents>
         <DeliveryInfoWrapper>

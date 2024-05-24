@@ -17,8 +17,9 @@ export const AlertModalWrapper = styled.div`
   width: 360px;
   padding: 50px 70px 40px;
   border: 1px solid var(--gray-color);
-  font-size: var(--font-md-size);
-  line-height: 20px;
+  font-family: "Pretendard";
+  font-size: 16.5px;
+  line-height: 22px;
   box-sizing: border-box;
   position: absolute;
   top: 50%;

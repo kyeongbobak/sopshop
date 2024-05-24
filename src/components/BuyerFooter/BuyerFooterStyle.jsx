@@ -7,6 +7,8 @@ export const FooterWrapper = styled.div`
   margin: 0 40px auto;
   display: flex;
   flex-direction: column;
+  font-family: "Pretendard";
+  font-size: var(--font-lg-size);
 `;
 
 export const FooterMenuWrap = styled.nav``;
@@ -16,7 +18,6 @@ export const FooterLinkMenu = styled.ul`
 `;
 
 export const FooterLink = styled.li`
-  font-size: var(--font-sm-size);
   cursor: pointer;
 
   + li::before {
@@ -28,11 +29,13 @@ export const FooterLink = styled.li`
 `;
 
 export const StyledLink = styled(Link)`
-  font-size: var(--font-md-size);
+  span {
+    font-weight: var(--font-extra-bold);
+  }
 `;
 
 export const StyledBoldLink = styled(Link)`
-  font-weight: var(--font-bold);
+  font-weight: var(--font-extra-bold);
 `;
 
 export const FooterTop = styled.div`
@@ -47,7 +50,6 @@ export const FooterBottom = styled.div`
   flex-direction: column;
   padding: 30px 0 60px;
   border-top: 1px solid var(--gray-color);
-  font-size: var(--font-md-size);
   line-height: 30px;
 
   .first-span {
@@ -65,6 +67,6 @@ export const FooterSns = styled.ul`
 export const FooterSnsLink = styled.li`
   cursor: pointer;
   img {
-    width: 32px;
+    width: 45px;
   }
 `;

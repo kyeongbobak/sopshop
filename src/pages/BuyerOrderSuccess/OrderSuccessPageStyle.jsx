@@ -4,6 +4,7 @@ export const OrderSuccessPageWrapper = styled.div`
   width: 1280px;
   margin: 0 auto 300px;
   text-align: center;
+  font-family: "Pretendard";
 `;
 
 export const OrderSuccessPageTitle = styled.div`
@@ -12,6 +13,7 @@ export const OrderSuccessPageTitle = styled.div`
   border-bottom: 1px solid var(--black-color);
   padding: 20px 0 52px 0;
   font-size: var(--font-extra-size);
+  font-family: "GmarketSans";
 `;
 
 export const OrderSuccessPageContents = styled.div`
@@ -19,15 +21,13 @@ export const OrderSuccessPageContents = styled.div`
 `;
 
 export const OrderSuccessMessage = styled.div`
-  font-size: var(--font-extra-size);
+  font-size: 27px;
+  line-height: 50px;
 `;
 
 export const OrderDate = styled.div`
-  font-size: var(--font-max-size);
+  font-size: var(--font-lg-size);
   margin-top: 10px;
-  span {
-    color: var(--light-black-color);
-  }
 `;
 
 export const DeliveryInfoWrapper = styled.div`

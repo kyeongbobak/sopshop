@@ -50,7 +50,7 @@ export default function BuyerLogin() {
         localStorage.setItem("token", data.token);
         localStorage.setItem("id", data.id);
         setWarningMessage("");
-        navigate("/mainPage");
+        navigate("/");
         window.location.reload();
       } else if (!userId && !userPassword) {
         setWarningMessage("아이디를 입력해주세요");

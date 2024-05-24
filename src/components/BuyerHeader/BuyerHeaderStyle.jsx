@@ -57,6 +57,7 @@ export const HeaderLinkMenu = styled.div`
   font-size: 22px;
   display: flex;
   gap: 27px;
+  font-weight: var(--font-light);
 
   img {
     width: 32px;

@@ -1,4 +1,13 @@
 import { createGlobalStyle } from "styled-components";
+import GmarketSansLight from "../assets/font/GmarketSansLight.otf";
+import GmarketSansMedium from "../assets/font/GmarketSansMedium.otf";
+import GmarketSansBold from "../assets/font/GmarketSansBold.otf";
+import PretendardThin from "../assets/font/Pretendard-Thin.otf";
+import PretendardExtraLight from "../assets/font/Pretendard-ExtraLight.otf";
+import PretendardLight from "../assets/font/Pretendard-Light.otf";
+import PretendardRegular from "../assets/font/Pretendard-Regular.otf";
+import PretendardSemiBold from "../assets/font/Pretendard-SemiBold.otf";
+
 import reset from "styled-reset";
 
 const GlobalStyle = createGlobalStyle`
@@ -23,18 +32,75 @@ const GlobalStyle = createGlobalStyle`
     --font-max-size : 2.4rem;
     --font-extra-size : 3.6rem;
 
-    --font-light :100;
-    --font-bold : 800;
+    --font-thin : 100;
+    --font-extra-light : 200;
+    --font-light :300;
+    --font-regular : 400;
+    --font-medium : 500;
+    --font-semi-bold : 600;
+    --font-bold : 700;
+    --font-extra-bold : 900;
+  }
+
+  @font-face {
+    font-family: 'GmarketSans';
+    font-weight: 300;
+    src: url(${GmarketSansLight}) format('opentype');
+  }
+
+  @font-face {
+    font-family: 'GmarketSans';
+    font-weight: 500; 
+    src: url(${GmarketSansMedium}) format('opentype');
+  }
+
+  @font-face {
+    font-family: 'GmarketSans';
+    font-weight: 700; 
+    src: url(${GmarketSansBold}) format('opentype');
+  }
+
+
+
+  @font-face {
+    font-family: 'Pretendard';
+    font-weight: 100;
+    src: url(${PretendardThin}) format('opentype');
+  }
+
+  @font-face {
+    font-family: 'Pretendard';
+    font-weight: 200; 
+    src: url(${PretendardExtraLight}) format('opentype');
+  }
+
+  @font-face {
+    font-family: 'Pretendard';
+    font-weight: 300; 
+    src: url(${PretendardLight}) format('opentype');
+  }
+
+  @font-face {
+    font-family: 'Pretendard';
+    font-weight: 400;
+    src: url(${PretendardRegular}) format('opentype');
+  }
+
+  @font-face {
+    font-family: 'Pretendard';
+    font-weight: 600; 
+    src: url(${PretendardSemiBold}) format('opentype');
   }
 
 
   body,p{
     margin: unset;
+    font-family: 'GmarketSans';
   }
 
 
 
-  h1,h2,h3{
+  h1,h2,h3,h4{
     padding: unset;
     font-weight: unset;
   }
@@ -71,7 +137,6 @@ const GlobalStyle = createGlobalStyle`
   select{
     appearance: none;
   }
-
 
 
   .a11y-hidden {

@@ -13,7 +13,7 @@ export const ButtonStyle = styled.button`
       background-color: var(--black-color);
       color: var(--white-color);
       font-size: var(--font-lg-size);
-      font-weight: var(--font-bold);
+      font-weight: var(--font-medium);
       ${(props) =>
         props.disabled &&
         css`
@@ -78,6 +78,7 @@ export const ButtonStyle = styled.button`
     ${(props) =>
     props.SButton &&
     css`
+      font-family: "Pretendard";
       width: 60px;
       padding: 10px 20px;
       background-color: var(--black-color);

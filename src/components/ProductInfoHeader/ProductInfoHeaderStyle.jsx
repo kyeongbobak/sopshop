@@ -8,6 +8,7 @@ export const ProductInfoMenu = styled.ul`
   border-bottom: 1px solid var(--black-color);
   text-align: center;
   padding: 20px 0;
+  font-family: "Pretendard";
   font-size: var(--font-lg-size);
   justify-content: center;
   align-items: center;

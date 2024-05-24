@@ -12,18 +12,21 @@ export const ProductImage = styled(Link)`
 export const ProductStoreName = styled.div`
   color: var(--box-black-color);
   font-size: var(--font-md-size);
-  font-weight: var(--font-light);
+  font-weight: var(--font-medium);
   margin-top: 17px;
 `;
 
 export const ProductName = styled(Link)`
+  font-family: "Pretendard";
   display: inline-block;
   font-size: var(--font-lg-size);
-  font-weight: var(--font-light);
+  font-weight: var(--font-thin);
   margin-top: 15px;
 `;
 
 export const ProductPrice = styled.p`
   font-size: var(--font-lg-size);
+  font-family: "Pretendard";
+  font-weight: var(--font-light);
   margin-top: 15px;
 `;

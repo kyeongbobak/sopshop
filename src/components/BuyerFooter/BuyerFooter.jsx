@@ -11,7 +11,9 @@ export default function BuyerFooter() {
           <FooterMenuWrap>
             <FooterLinkMenu>
               <FooterLink>
-                <StyledLink to="">sopshop 소개</StyledLink>
+                <StyledLink to="">
+                  <span>sopshop</span> 소개
+                </StyledLink>
               </FooterLink>
               <FooterLink>
                 <StyledLink to="">이용약관</StyledLink>

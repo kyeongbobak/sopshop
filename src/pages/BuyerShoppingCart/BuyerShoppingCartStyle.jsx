@@ -19,6 +19,10 @@ export const ShoppingCartContents = styled.div`
 
 export const EmptyCartMessage = styled.div`
   margin-top: 250px;
+  p {
+    font-family: "Pretendard";
+  }
+
   p:nth-child(1) {
     font-size: var(--font-lg-size);
     font-weight: var(--font-bold);
@@ -26,7 +30,7 @@ export const EmptyCartMessage = styled.div`
   }
 
   p:nth-child(2) {
-    font-size: var(--font-sm-size);
+    font-size: var(--font-md-size);
   }
 `;
 
@@ -87,24 +91,29 @@ export const CartItemInfoInner = styled.div`
 
   p {
     margin-top: 40px;
-    font-size: var(--font-sm-size);
+    font-family: "Pretendard";
+    font-size: var(--font-md-size);
+    font-weight: var(--font-semi-bold);
     color: var(--black-color);
   }
 `;
 
 export const CartItemInfoBranName = styled.div`
-  font-size: var(--font-sm-size);
+  font-size: var(--font-md-size);
+  font-weight: var(--font-extra-bold);
   color: var(--black-color);
 `;
 
 export const CartItemInfoName = styled.div`
+  font-family: "Pretendard";
   font-size: var(--font-lg-size);
   margin-top: 20px;
 `;
 
 export const CartItemInfoPrice = styled.div`
-  font-size: var(--font-md-size);
-  font-weight: var(--font-bold);
+  font-family: "Pretendard";
+  font-size: var(--font-lg-size);
+  font-weight: var(--font-semi-bold);
   margin-top: 20px;
 `;
 
@@ -152,18 +161,22 @@ export const PriceDetailsContents = styled.div`
 `;
 
 export const PriceDetailsContentsCommon = css`
+  font-family: "Pretendard";
   span {
     font-size: var(--font-md-size);
+    font-weight: var(--font-regular);
   }
 
   p {
-    font-size: var(--font-max-size);
+    font-size: 20px;
+    font-weight: var(--font-light);
     padding-top: 12px;
   }
 `;
 
 export const TotalPrice = styled.p`
   ${PriceDetailsContentsCommon}
+
   width: 320px;
 `;
 
@@ -186,10 +199,13 @@ export const OrderTotalPrice = styled.p`
   }
 `;
 
-export const OrderButton = styled(Link)``;
+export const OrderButton = styled(Link)`
+  font-weight: var(--font-medium);
+`;
 
 export const PaymentButton = styled(Link)`
   display: flex;
   justify-content: center;
   margin-bottom: 80px;
+  font-weight: var(--font-medium);
 `;

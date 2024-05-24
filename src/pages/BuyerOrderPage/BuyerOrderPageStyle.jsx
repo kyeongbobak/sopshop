@@ -11,7 +11,9 @@ export const OrderPageTitle = styled.h1`
   margin: 54px 0 52px;
 `;
 
-export const OrderPageContents = styled.div``;
+export const OrderPageContents = styled.div`
+  font-family: "Pretendard";
+`;
 
 export const OrderItemWrapper = styled.div``;
 
@@ -20,7 +22,9 @@ export const OrderTotalCost = styled.div`
   justify-content: end;
   align-items: end;
   gap: 10px;
+
   p {
+    font-family: "Pretendard";
     font-size: var(--font-lg-size);
   }
 
@@ -40,6 +44,8 @@ export const OrderItemInfo = styled.div`
 
 export const OrderItemInfoInner = styled.div`
   display: flex;
+  p {
+  }
 `;
 
 export const OrderItemInfoDetails = styled.div`
@@ -59,7 +65,8 @@ export const OrderItemInfoImage = styled.div`
 `;
 
 export const OrderItemInfoBrandName = styled.div`
-  font-size: var(--font-sm-size);
+  font-size: var(--font-md-size);
+  font-weight: var(--font-semi-bold);
   color: var(--black-color);
 `;
 
@@ -88,12 +95,14 @@ export const OrderItemInfoPrice = styled.div`
 `;
 
 export const OrderItemQuantity = styled.div`
-  font-size: var(--font-sm-size);
+  font-size: var(--font-md-size);
+  font-weight: var(--font-regular);
   color: var(--black-color);
 `;
 
 export const DeliveryInfoWrapper = styled.div`
   margin-top: 96px;
+  font-family: "Pretendard";
 `;
 export const DeliveryInfoTitle = styled.h1`
   font-size: var(--font-max-size);
@@ -110,6 +119,7 @@ export const OrderInfoFormTitle = styled.h2`
 
 export const InfoformCommonStyle = css`
   font-size: var(--font-md-size);
+
   border-bottom: 1px solid var(--black-color);
   padding: 8px 0;
 `;
@@ -286,6 +296,7 @@ export const PaymentFinalInfoInner = styled.div`
   padding: 30px;
 
   p {
+    font-family: "Pretendard";
     font-size: var(--font-md-size);
   }
 
