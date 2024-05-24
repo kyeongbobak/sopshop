@@ -94,7 +94,7 @@ export const DropDownMenu = styled.ul`
   background-color: var(--white-color);
   position: absolute;
   top: 35px;
-  right: -45px;
+  right: -39px;
   padding-top: 20px;
   width: 152px;
   border-radius: 10px;
