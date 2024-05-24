@@ -35,7 +35,7 @@ export const SearchButton = styled.button`
 `;
 
 export const SearchInput = styled.input`
-  width: 300px;
+  width: 200px;
   padding: 10px 15px 10px 15px;
   margin-left: 30px;
   border: none;

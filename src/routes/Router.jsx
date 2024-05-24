@@ -9,7 +9,7 @@ import BuyerSearchPage from "../pages/BuyerSearchPage/BuyerSearchPage";
 import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
 import BuyerOrderPage from "../pages/BuyerOrderPage/BuyerOrderPage";
 import BuyerMyPage from "../pages/BuyerMyPage/BuyerMyPage";
-import BuyerOrderSuccess from "../pages/BuyerOrderSuccess/BuyerOrderSuccess";
+import OrderSuccessPage from "../pages/BuyerOrderSuccess/OrderSuccessPage";
 import BrandCategoryPage from "../pages/BrandCartegory/BrandCategoryPage";
 
 // import { useLocation } from "react-router-dom";
@@ -26,9 +26,7 @@ export default function Router() {
         <Routes>
           <Route path="login" element={<BuyerLogin />}></Route>
           <Route path="/mainPage" element={<BuyerMainPage />}></Route>
-
           <Route path=":BrandName" element={<BrandCategoryPage />} />
-
           <Route path="login" element={<BuyerLogin />}></Route>
           <Route path="/signUp" element={<BuyerSignUp />}></Route>
           <Route path="/products/*" element={<Outlet />}>
@@ -43,7 +41,7 @@ export default function Router() {
           <Route path="/order" element={<BuyerOrderPage />}></Route>
           <Route path="/404" element={<NotFoundPage />}></Route>
           <Route path="/mypage" element={<BuyerMyPage />}></Route>
-          <Route path="/orderSuccess" element={<BuyerOrderSuccess />}></Route>
+          <Route path="/orderSuccess" element={<OrderSuccessPage />}></Route>
         </Routes>
       </AuthProvider>
     </>

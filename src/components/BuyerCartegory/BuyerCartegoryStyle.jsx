@@ -46,3 +46,15 @@ export const Ditto = styled(Link)`
 export const TooMuchShop = styled(Link)`
   ${CategoryLinkCommonStyle}
 `;
+
+export const Notice = styled(Link)`
+  ${CategoryLinkCommonStyle}
+`;
+
+export const QandA = styled(Link)`
+  ${CategoryLinkCommonStyle}
+`;
+
+export const Review = styled(Link)`
+  ${CategoryLinkCommonStyle}
+`;

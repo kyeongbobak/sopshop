@@ -1,4 +1,4 @@
-import { BuyerCartegoryWrapper, About, Shop, Flop, Ditto, TooMuchShop } from "./BuyerCartegoryStyle";
+import { BuyerCartegoryWrapper, About, Shop, Flop, Ditto, TooMuchShop, Notice, QandA, Review } from "./BuyerCartegoryStyle";
 
 export default function BuyerCartegory() {
   return (
@@ -25,9 +25,21 @@ export default function BuyerCartegory() {
                 Too_much_shop
               </TooMuchShop>
             </div>
-            <li>Notice</li>
-            <li>Q & A</li>
-            <li>Review</li>
+            <li>
+              <Notice Link to={`/Notice`}>
+                Notice
+              </Notice>
+            </li>
+            <li>
+              <QandA Link to={`/QandA`}>
+                Q & A
+              </QandA>
+            </li>
+            <li>
+              <Review Link to={`/Review`}>
+                Review
+              </Review>
+            </li>
           </ul>
         </div>
       </BuyerCartegoryWrapper>

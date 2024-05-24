@@ -186,9 +186,8 @@ export default function BuyerOrderPage() {
       const data = await res.data;
       console.log(data);
 
-      if (res.ok) {
+      if (res.status >= 200 && res.status < 300) {
         navigate(`/orderSuccess`);
-        alert("주문에 성공하셨습니다!");
       }
     } catch (error) {
       console.log(error);
