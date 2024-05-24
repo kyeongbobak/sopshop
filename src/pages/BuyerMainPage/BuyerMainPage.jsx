@@ -30,47 +30,13 @@ export default function BuyerMainPage() {
   useEffect(() => {
     const fetchData = async () => {
       const fetchedProducts = await getProduct(token);
-      console.log(fetchedProducts);
-      setProducts(fetchedProducts);
+      const newProductList = fetchedProducts.filter((i) => i.store_name === "FLOPS" || i.store_name === "Too_much_shop").slice(2, 9);
+      console.log(newProductList);
+      setProducts(newProductList);
     };
 
     fetchData();
   }, [token]);
-
-  // useEffect(() => {
-  //   const getProduct = async () => {
-  //     try {
-  //       const promises = [];
-  //       if (token) {
-  //         const instance = axios.create({
-  //           headers: {
-  //             Authorization: `JWT ${token}`,
-  //           },
-  //         });
-  //         promises.push(instance.get("https://openmarket.weniv.co.kr/products/?page=4"));
-  //         promises.push(instance.get("https://openmarket.weniv.co.kr/products/?page=5"));
-  //         promises.push(instance.get("https://openmarket.weniv.co.kr/products/?page=6"));
-  //       } else {
-  //         promises.push(fetch("https://openmarket.weniv.co.kr/products/?page=4"));
-  //         promises.push(fetch("https://openmarket.weniv.co.kr/products/?page=5"));
-  //         promises.push(fetch("https://openmarket.weniv.co.kr/products/?page=6"));
-  //       }
-  //       const res = await Promise.all(promises);
-  //       const data = await Promise.all(res.map((res) => (token ? res.data : res.json())));
-  //       console.log(data);
-  //       const mergedData = [...data[0].results, ...data[1].results, ...data[2].results];
-  //       // const newArray = mergedData.filter((i) => i.store_name === "Too_much_shop" || i.store_name === "FLOPS");
-  //       // setProducts([...newArray.slice(2, 5), ...newArray.slice(-4, -2)]);
-
-  //       const newArray = [...data[0].results, ...data[1].results, ...data[2].results];
-  //       setProducts(newArray);
-  //       console.log(newArray);
-  //     } catch (error) {
-  //       console.log("error");
-  //     }
-  //   };
-  //   getProduct();
-  // }, [token]);
 
   return (
     <>

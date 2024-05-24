@@ -26,22 +26,20 @@ export const SearchButton = styled.button`
 
   img {
     right: 10px;
-    /* top: 50%;
-    transform: translateY(-50%); */
     width: 22px;
     padding-bottom: 10px;
-    margin: -500px 0 0 330px;
+    margin: -795px 0 0 320px;
   }
 `;
 
 export const SearchInput = styled.input`
-  width: 200px;
+  width: 250px;
   padding: 10px 15px 10px 15px;
-  margin-left: 30px;
+  margin-left: 70px;
   border: none;
   border-bottom: 1px solid var(--black-color);
   outline: none;
   font-size: var(--font-lg-size);
   position: absolute;
-  margin-top: -500px;
+  margin-top: -800px;
 `;
