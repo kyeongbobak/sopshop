@@ -33,7 +33,6 @@ export default function BuyerMainPage() {
       const BrandProductList = fetchedProducts.filter((i) => i.store_name === "FLOPS" || i.store_name === "Too_much_shop").slice(2, 9);
       const DittoProductList = fetchedProducts.filter((i) => i.product_name.includes("헤어 집게핀"));
       const mainPageProductList = [...BrandProductList, ...DittoProductList];
-
       setProducts(mainPageProductList);
     };
 
