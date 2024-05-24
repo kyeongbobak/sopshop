@@ -232,7 +232,7 @@ export const SignUpButton = styled.button`
   border-radius: 5px;
   color: white;
   font-family: "GmarketSans";
-  font-size: var(--font-md-size);
+  font-size: var(--font-sm-size);
   background-color: ${(props) => (props.isSignUp ? "var(--main-color)" : "var(--gray-color)")};
 `;
 

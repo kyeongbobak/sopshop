@@ -86,7 +86,7 @@ export const LoginButton = styled.button`
   background-color: var(--black-color);
   color: white;
   font-family: "GmarketSans";
-  font-size: var(--font-md-size);
+  font-size: var(--font-sm-size);
 `;
 
 export const LinkWrapper = styled.div`
