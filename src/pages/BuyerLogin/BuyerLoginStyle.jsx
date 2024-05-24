@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 export const LoginWrapper = styled.div`
   width: 550px;
   margin: 200px auto;
+  font-family: "Pretendard";
 `;
 export const FormBox = styled.div``;
 
@@ -34,7 +35,6 @@ const LoginTabLink = css`
   border: 1px solid var(--gray-color);
   background-color: var(--light-gray-color);
   box-sizing: border-box;
-
   border-bottom: 0;
   z-index: 2;
 `;
@@ -85,7 +85,8 @@ export const LoginButton = styled.button`
   border-radius: 5px;
   background-color: var(--black-color);
   color: white;
-  font-size: var(--font-lg-size);
+  font-family: "GmarketSans";
+  font-size: var(--font-md-size);
 `;
 
 export const LinkWrapper = styled.div`

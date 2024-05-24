@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 export const SignUpWrapper = styled.div`
   width: 550px;
   margin: 200px auto;
+  font-family: "Pretendard";
 `;
 
 export const FormBox = styled.div``;
@@ -214,6 +215,7 @@ export const SignUpAgreementWrapper = styled.div`
   font-size: var(--font-md-size);
 
   p {
+    font-family: "Pretendard";
     text-align: left;
     line-height: 20px;
   }
@@ -229,6 +231,7 @@ export const SignUpButton = styled.button`
   height: 60px;
   border-radius: 5px;
   color: white;
+  font-family: "GmarketSans";
   font-size: var(--font-md-size);
   background-color: ${(props) => (props.isSignUp ? "var(--main-color)" : "var(--gray-color)")};
 `;
