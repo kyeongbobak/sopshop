@@ -262,6 +262,8 @@ export const SignUpAgreementCheckBox = styled.input`
 
 export const ValidateMessage = styled.p`
   padding-top: 12px;
+  font-family: "Pretendard";
+  font-weight: var(--font-medium);
   font-size: var(--font-md-size);
   color: ${(props) => (props.isDuplicate || props.isPassWordError ? "red" : "var(--black-color)")};
 `;

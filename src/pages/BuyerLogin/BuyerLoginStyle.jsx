@@ -109,5 +109,7 @@ export const ValidateMessage = styled.p`
   color: red;
   text-align: left;
   padding-top: 25px;
+  font-family: "Pretendard";
+  font-weight: var(--font-medium);
   font-size: var(--font-sm-size);
 `;
