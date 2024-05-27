@@ -147,6 +147,7 @@ export default function BuyerOrderPage() {
   };
 
   const handleSelectedOption = (option) => {
+    console.log(option);
     setSeletedPaymentOption(option);
   };
 
@@ -294,15 +295,15 @@ export default function BuyerOrderPage() {
                   <PaymentOptionTitle>결제수단</PaymentOptionTitle>
                   <PaymentOptionInner>
                     <PaymentOption>
-                      <input type="radio" onClick={() => handleSelectedOption("CARD")} />
+                      <input type="radio" checked={selectedPaymentOption === "CARD"} onClick={() => handleSelectedOption("CARD")} />
                       <span>신용카드 결제</span>
-                      <input type="radio" onClick={() => handleSelectedOption("DEPOSIT")} />
+                      <input type="radio" checked={selectedPaymentOption === "DEPOSIT"} onClick={() => handleSelectedOption("DEPOSIT")} />
                       <span>무통장 입금</span>
-                      <input type="radio" onClick={() => handleSelectedOption("PHONE_PAYMENT")} />
+                      <input type="radio" checked={selectedPaymentOption === "PHONE_PAYMENT"} onClick={() => handleSelectedOption("PHONE_PAYMENT")} />
                       <span>휴대폰 결제</span>
-                      <input type="radio" onClick={() => handleSelectedOption("NAVERPAY")} />
+                      <input type="radio" checked={selectedPaymentOption === "NAVERPAY"} onClick={() => handleSelectedOption("NAVERPAY")} />
                       <span>네이버 페이</span>
-                      <input type="radio" onClick={() => handleSelectedOption("KAKAOPAY")} />
+                      <input type="radio" checked={selectedPaymentOption === "KAKAOPAY"} onClick={() => handleSelectedOption("KAKAOPAY")} />
                       <span>카카오 페이</span>
                     </PaymentOption>
                   </PaymentOptionInner>

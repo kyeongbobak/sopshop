@@ -27,6 +27,7 @@ import {
   ValidateMessage,
 } from "./BuyerSignUpStyle";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import LogoImage from "../../assets/img/Logo-SopShop.png";
 import DropDownIcon from "../../assets/img/icon-down-arrow.png";
 import PullUpIcon from "../../assets/img/icon-up-arrow.png";
@@ -49,6 +50,8 @@ export default function BuyerSignUp() {
   const [userNameWarningMessage, setUserNameWarningMessage] = useState("");
   const [phoneNumberWarningMessage, setPhoneNumberWarningMessage] = useState("");
   const [isClickedSignUp, setIsClickedSignUp] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -110,32 +113,33 @@ export default function BuyerSignUp() {
 
       if (res.ok) {
         alert("회원가입이 성공적으로 완료되었습니다!");
-      }
-
-      if (!userPassword && !userPassWordCheck) {
-        setPassWordWarningMessage("이 필드는 blank일 수 없습니다.");
-      } else if (userPassword.length < 8 && userPassWordCheck.length < 8) {
-        setPassWordWarningMessage("비밀번호는 8자 이상이어야 합니다.");
-      } else if (userPassword.search(/[a-z]/gi) < 0 && userPassWordCheck.search(/[a-z]/gi) < 0) {
-        setPassWordWarningMessage("비밀번호는 한개 이상의 영소문자가 필수적으로 들어가야 합니다.");
-      } else if (userPassword.search(/[0-9]/g) < 0 && userPassWordCheck.search(/[0-9]/g) < 0) {
-        setPassWordWarningMessage("비밀번호는 한개 이상의 숫자가 필수적으로 들어가야 합니다.");
-      }
-
-      if (20 < userId.length || /^[a-zA-Z0-9]$/.test(userId)) {
-        setUserNameWarningMessage("ID는 20자 이내의 영어 소문자, 대문자, 숫자만 가능합니다.");
-      } else if (!userId) {
-        setUserNameWarningMessage(data.username[0]);
-      }
-
-      if (!phoneNumberMiddle || !phoneNumberEnd) {
-        setPhoneNumberWarningMessage("이 필드는 blank일 수 없습니다.");
-      } else if (!/^01[0-9]{8,10}$/.test(phoneNumber)) {
-        setPhoneNumberWarningMessage("핸드폰번호는 01*으로 시작해야 하는 10~11자리 숫자여야 합니다.");
-      } else if (data.phone_number) {
-        setPhoneNumberWarningMessage("해당 사용자 전화번호는 이미 존재합니다.");
+        navigate(`/login`);
       } else {
-        setPhoneNumberWarningMessage("");
+        if (!userPassword && !userPassWordCheck) {
+          setPassWordWarningMessage("이 필드는 blank일 수 없습니다.");
+        } else if (userPassword.length < 8 && userPassWordCheck.length < 8) {
+          setPassWordWarningMessage("비밀번호는 8자 이상이어야 합니다.");
+        } else if (userPassword.search(/[a-z]/gi) < 0 && userPassWordCheck.search(/[a-z]/gi) < 0) {
+          setPassWordWarningMessage("비밀번호는 한개 이상의 영소문자가 필수적으로 들어가야 합니다.");
+        } else if (userPassword.search(/[0-9]/g) < 0 && userPassWordCheck.search(/[0-9]/g) < 0) {
+          setPassWordWarningMessage("비밀번호는 한개 이상의 숫자가 필수적으로 들어가야 합니다.");
+        }
+
+        if (20 < userId.length || !/^[a-zA-Z0-9]+$/.test(userId)) {
+          setUserNameWarningMessage("ID는 20자 이내의 영어 소문자, 대문자, 숫자만 가능합니다.");
+        } else if (!userId) {
+          setUserNameWarningMessage(data.username[0]);
+        }
+
+        if (!phoneNumberMiddle || !phoneNumberEnd) {
+          setPhoneNumberWarningMessage("이 필드는 blank일 수 없습니다.");
+        } else if (!/^01[0-9]{8,10}$/.test(phoneNumber)) {
+          setPhoneNumberWarningMessage("핸드폰번호는 01*으로 시작해야 하는 10~11자리 숫자여야 합니다.");
+        } else if (data.phone_number) {
+          setPhoneNumberWarningMessage("해당 사용자 전화번호는 이미 존재합니다.");
+        } else {
+          setPhoneNumberWarningMessage("");
+        }
       }
     } catch (error) {
       console.log(error);
