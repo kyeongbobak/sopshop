@@ -10,7 +10,7 @@ import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
 import BuyerOrderPage from "../pages/BuyerOrderPage/BuyerOrderPage";
 import BuyerMyPage from "../pages/BuyerMyPage/BuyerMyPage";
 import OrderSuccessPage from "../pages/BuyerOrderSuccess/OrderSuccessPage";
-import BrandCategoryPage from "../pages/BrandCartegory/BrandCategoryPage";
+import BrandCategoryPage from "../pages/BrandCartegoryPage/BrandCategoryPage";
 
 export default function Router() {
   return (

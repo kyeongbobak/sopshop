@@ -1,7 +1,8 @@
+import { useContext, useEffect, useState, useCallback } from "react";
+import axios from "axios";
 import BuyerHeader from "../../components/BuyerHeader/BuyerHeader";
 import BuyerCartegory from "../../components/BuyerCartegory/BuyerCartegory";
 import BuyerFooter from "../../components/BuyerFooter/BuyerFooter";
-import axios from "axios";
 import { AuthContext } from "../../contexts/AuthContext";
 import {
   BuyerMyPageWrapper,
@@ -20,17 +21,31 @@ import {
   PrevButtonWrapper,
   PrevButton,
 } from "./BuyerMyPageStyle";
-import { useContext, useEffect, useState } from "react";
 
 export default function BuyerMyPage() {
-  const { token, isLoggedIn } = useContext(AuthContext);
+  const { token } = useContext(AuthContext);
   const [orderHistories, setOrderHistories] = useState([]);
   const [orderProductInfos, setOrderProductInfos] = useState([]);
   const [orderProductQuantyties, setOrderProductQuantyties] = useState([]);
 
-  console.log(orderHistories);
+  const getOrderProductInfo = useCallback(
+    async (productId) => {
+      try {
+        const instance = axios.create({
+          headers: {
+            Authorization: `JWT ${token}`,
+          },
+        });
+        const res = await instance.get(`https://openmarket.weniv.co.kr/products/${productId}/`);
+        return res.data;
+      } catch (error) {
+        console.log("error", error);
+      }
+    },
+    [token]
+  );
 
-  const getOrderHistory = async () => {
+  const getOrderHistory = useCallback(async () => {
     try {
       const instance = axios.create({
         headers: {
@@ -38,49 +53,26 @@ export default function BuyerMyPage() {
         },
       });
       const res = await instance.get(`https://openmarket.weniv.co.kr/order/`);
-      const data = await res.data;
-      console.log(data.results);
+      const data = res.data;
       setOrderHistories(data.results.slice(0, 3));
 
       const orderHistoryInfos = data.results;
+      const orderProductIds = orderHistoryInfos.map((i) => i.order_items).flat();
+      const orderProductQauntyties = orderHistoryInfos.map((i) => i.order_quantity).flat();
+      setOrderProductQuantyties(orderProductQauntyties);
 
-      const orderProductIds = orderHistoryInfos.map((i) => i.order_items);
-      const mergedProductIds = [].concat(...orderProductIds);
-      const productInfos = mergedProductIds.map((productId) => getOrderProductInfo(productId));
-
-      const orderProductQauntyties = orderHistoryInfos.map((i) => i.order_quantity);
-      const mergedProductQauntyties = [].concat(...orderProductQauntyties);
-      setOrderProductQuantyties(mergedProductQauntyties);
-
-      const productInfoPromises = (await Promise.all(productInfos)).slice(0, 3);
-
-      setOrderProductInfos(productInfoPromises);
-
-      console.log(productInfoPromises);
+      const productInfoPromises = await Promise.all(orderProductIds.map((productId) => getOrderProductInfo(productId)));
+      setOrderProductInfos(productInfoPromises.slice(0, 3));
     } catch (error) {
-      console.log(error);
+      console.log("error", error);
     }
-  };
-
-  const getOrderProductInfo = async (productId) => {
-    try {
-      const instance = axios.create({
-        headers: {
-          Authorization: `JWT ${token}`,
-        },
-      });
-
-      const res = await instance.get(`https://openmarket.weniv.co.kr/products/${productId}/`);
-      const data = await res.data;
-      return data;
-    } catch (error) {
-      console.log("error");
-    }
-  };
+  }, [token, getOrderProductInfo]);
 
   useEffect(() => {
-    getOrderHistory();
-  }, [token, isLoggedIn]);
+    if (token) {
+      getOrderHistory();
+    }
+  }, [token, getOrderHistory]);
 
   return (
     <>
@@ -100,26 +92,24 @@ export default function BuyerMyPage() {
         <BuyerMyPageContents>
           <OrderRecordsWrapper>
             {orderHistories.map((order, i) => (
-              <>
-                <OrderRecordsItem key={order}>
-                  <OrderNumber>{order.created_at.slice(0, order.created_at.indexOf("T"))}</OrderNumber>
-                  {orderProductInfos[i] && (
-                    <>
-                      <ProductImage>
-                        <img src={orderProductInfos[i].image} alt="" />
-                      </ProductImage>
-                      <ProductInfo>
-                        <p>{orderProductInfos[i].store_name}</p>
-                        <p>{orderProductInfos[i].product_name}</p>
-                      </ProductInfo>
-                      {orderProductQuantyties[i] && <ProductQauntity>{orderProductQuantyties[i]}</ProductQauntity>}
-                      <ProductPrice>{orderProductInfos[i].price.toLocaleString()}</ProductPrice>
-                      <DeliveryStatus>{order.delivery_status === "COMPLETE_PAYMENT" && "결제완료"}</DeliveryStatus>
-                      <ShippingOption>{orderProductInfos[i].shipping_fee === 0 ? "무료배송" : "기본배송"}</ShippingOption>
-                    </>
-                  )}
-                </OrderRecordsItem>
-              </>
+              <OrderRecordsItem key={order.created_at}>
+                <OrderNumber>{order.created_at.slice(0, order.created_at.indexOf("T"))}</OrderNumber>
+                {orderProductInfos[i] && (
+                  <>
+                    <ProductImage>
+                      <img src={orderProductInfos[i].image} alt="" />
+                    </ProductImage>
+                    <ProductInfo>
+                      <p>{orderProductInfos[i].store_name}</p>
+                      <p>{orderProductInfos[i].product_name}</p>
+                    </ProductInfo>
+                    <ProductQauntity>{orderProductQuantyties[i]}</ProductQauntity>
+                    <ProductPrice>{orderProductInfos[i].price.toLocaleString()}</ProductPrice>
+                    <DeliveryStatus>{order.delivery_status === "COMPLETE_PAYMENT" && "결제완료"}</DeliveryStatus>
+                    <ShippingOption>{orderProductInfos[i].shipping_fee === 0 ? "무료배송" : "기본배송"}</ShippingOption>
+                  </>
+                )}
+              </OrderRecordsItem>
             ))}
           </OrderRecordsWrapper>
         </BuyerMyPageContents>

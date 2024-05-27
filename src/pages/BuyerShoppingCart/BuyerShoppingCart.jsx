@@ -27,7 +27,7 @@ import {
   OrderButton,
   PaymentButton,
 } from "./BuyerShoppingCartStyle";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import { AuthContext } from "../../contexts/AuthContext";
 import Button from "../../components/Button/Button";
@@ -52,7 +52,7 @@ export default function BuyerShoppingCart() {
   const [modifiedQuantity, setModifiedQuantity] = useState(0);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-  const getShoppingCartList = async () => {
+  const getShoppingCartList = useCallback(async () => {
     try {
       const instance = axios.create({
         headers: {
@@ -85,22 +85,25 @@ export default function BuyerShoppingCart() {
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [token]);
 
-  const getProductInfo = async (ProductId) => {
-    try {
-      const instance = axios.create({
-        headers: {
-          Authorization: `JWT ${token}`,
-        },
-      });
-      const res = await instance.get(`https://openmarket.weniv.co.kr/products/${ProductId}`);
-      const data = await res.data;
-      return data;
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const getProductInfo = useCallback(
+    async (ProductId) => {
+      try {
+        const instance = axios.create({
+          headers: {
+            Authorization: `JWT ${token}`,
+          },
+        });
+        const res = await instance.get(`https://openmarket.weniv.co.kr/products/${ProductId}`);
+        const data = await res.data;
+        return data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    [token]
+  );
 
   const ModalOpen = (list) => {
     setIsModalOpen(true);
@@ -199,7 +202,7 @@ export default function BuyerShoppingCart() {
 
   useEffect(() => {
     getShoppingCartList();
-  }, [token, isLoggedIn]);
+  }, [token, isLoggedIn, getShoppingCartList]);
 
   return (
     <>

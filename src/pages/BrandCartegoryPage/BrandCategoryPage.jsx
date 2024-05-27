@@ -1,7 +1,7 @@
 import BuyerHeader from "../../components/BuyerHeader/BuyerHeader";
 import BuyerFooter from "../../components/BuyerFooter/BuyerFooter";
 import BuyerCartegory from "../../components/BuyerCartegory/BuyerCartegory";
-import { ProductListWrapper, ProductPageNumber, ProductGroup, ProductGroupTitle } from "./BrandCategoryPageStyle";
+import { ProductListWrapper, ProductPageNumber, PrevButton, PageNumberButton, NextButton, ProductGroup, ProductGroupTitle } from "./BrandCategoryPageStyle";
 import ProductList from "../../components/ProductList/ProductList";
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
@@ -42,13 +42,15 @@ export default function BrandCategoryPage() {
           ))}
         </ProductGroup>
         <ProductPageNumber>
-          <span>
-            <a href="">Prev</a>
-          </span>
-          <a href="">1</a>
-          <span>
-            <a href="">Next</a>
-          </span>
+          <PrevButton to={`/${BrandName}`}>
+            <span>Prev</span>
+          </PrevButton>
+          <PageNumberButton to={`/${BrandName}`}>
+            <span>1</span>
+          </PageNumberButton>
+          <NextButton to={`/${BrandName}`}>
+            <span>Next</span>
+          </NextButton>
         </ProductPageNumber>
       </ProductListWrapper>
       <BuyerFooter />

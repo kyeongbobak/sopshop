@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import { SearchResultsWrapper, SearchResultsInner, SearchResultItem, SearchResultsCount, SearchResultItemImage, SearchResultItemDetails, SearchResultItemBrandName, SearchResultItemName, SearchResultItemPrice } from "./BuyerSearchPageStyle";
 import BuyerHeader from "../../components/BuyerHeader/BuyerHeader";
@@ -10,7 +10,7 @@ export default function BuyerSearchPage() {
 
   console.log(searchKeyword);
 
-  const searchProduct = async () => {
+  const searchProduct = useCallback(async () => {
     try {
       const res = await fetch(`https://openmarket.weniv.co.kr/products/?search=${searchKeyword}`, {
         method: "GET",
@@ -20,12 +20,14 @@ export default function BuyerSearchPage() {
       console.log(data.results);
       setSearchedProductCount(data.count);
       setSearchResults(data.results);
-    } catch (error) {}
-  };
+    } catch (error) {
+      console.error(error);
+    }
+  }, [searchKeyword]);
 
   useEffect(() => {
     searchProduct();
-  }, [searchKeyword]);
+  }, [searchProduct]);
 
   return (
     <>

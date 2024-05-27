@@ -33,7 +33,7 @@ export default function BuyerOrderSuccess() {
     };
 
     getOrderHistory();
-  }, []);
+  }, [token]);
 
   return (
     <>

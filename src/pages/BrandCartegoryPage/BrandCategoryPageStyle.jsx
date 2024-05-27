@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const ProductListWrapper = styled.div`
@@ -27,3 +28,9 @@ export const ProductGroup = styled.ul`
   flex-flow: wrap;
   gap: 70px;
 `;
+
+export const PrevButton = styled(Link)``;
+
+export const PageNumberButton = styled(Link)``;
+
+export const NextButton = styled(Link)``;
