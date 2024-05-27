@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { SideBarWrapper, About, Shop, Flop, Ditto, TooMuchShop, Notice, QandA, Review, SearchForm, SearchInput, SearchButton } from "./SidebarStyle";
 
-export default function Sidebar() {
+export default function SideBar() {
   const [searchKeyword, setSearchKeyword] = useState();
 
   const navigate = useNavigate();
