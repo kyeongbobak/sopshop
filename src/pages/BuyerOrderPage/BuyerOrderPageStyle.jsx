@@ -7,7 +7,7 @@ export const OrderPageWrapper = styled.div`
 
 export const OrderPageTitle = styled.h1`
   text-align: center;
-  font-size: var(--font-extra-size);
+  font-size: var(--font-lg-size);
   margin: 54px 0 52px;
 `;
 
@@ -25,11 +25,11 @@ export const OrderTotalCost = styled.div`
 
   p {
     font-family: "Pretendard";
-    font-size: var(--font-lg-size);
+    font-size: var(--font-sm-size);
   }
 
   span {
-    font-size: var(--font-max-size);
+    font-size: var(--font-lg-size);
   }
 `;
 
@@ -310,7 +310,7 @@ export const PaymentFinalInfoInner = styled.div`
     height: 68px;
     background-color: var(--black-color);
     color: white;
-    font-size: var(--font-max-size);
+    font-size: var(--font-lg-size);
     margin: 30px 0 0 122px;
   }
 `;

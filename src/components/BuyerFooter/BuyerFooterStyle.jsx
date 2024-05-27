@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 export const Footer = styled.footer``;
 
 export const FooterWrapper = styled.div`
-  margin: 0 40px auto;
+  margin: 0px 30px auto;
   display: flex;
   flex-direction: column;
   font-family: "Pretendard";
-  font-size: var(--font-lg-size);
+  font-size: var(--font-sm-size);
 `;
 
 export const FooterMenuWrap = styled.nav``;
@@ -48,7 +48,7 @@ export const FooterTop = styled.div`
 export const FooterBottom = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 30px 0 60px;
+  padding: 10px 0px 30px;
   border-top: 1px solid var(--gray-color);
   line-height: 30px;
 
@@ -67,6 +67,6 @@ export const FooterSns = styled.ul`
 export const FooterSnsLink = styled.li`
   cursor: pointer;
   img {
-    width: 45px;
+    width: 30px;
   }
 `;

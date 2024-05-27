@@ -5,13 +5,13 @@ export const Product = styled.li``;
 
 export const ProductImage = styled(Link)`
   img {
-    width: 380px;
+    width: 280px;
   }
 `;
 
 export const ProductStoreName = styled.div`
   color: var(--box-black-color);
-  font-size: var(--font-md-size);
+  font-size: var(--font-min-size);
   font-weight: var(--font-medium);
   margin-top: 17px;
 `;
@@ -19,14 +19,13 @@ export const ProductStoreName = styled.div`
 export const ProductName = styled(Link)`
   font-family: "Pretendard";
   display: inline-block;
-  font-size: var(--font-lg-size);
+  font-size: var(--font-sm-size);
   font-weight: var(--font-thin);
   margin-top: 15px;
 `;
 
 export const ProductPrice = styled.p`
-  font-size: var(--font-lg-size);
+  font-size: var(--font-md-size);
   font-family: "Pretendard";
-  font-weight: var(--font-light);
   margin-top: 15px;
 `;

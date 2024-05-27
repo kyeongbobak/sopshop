@@ -11,6 +11,9 @@ export const ProductDetailContent = styled.div`
 `;
 
 export const ProductDetailInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+
   width: 630px;
   margin-left: 51px;
 `;
@@ -20,19 +23,19 @@ export const ProductImage = styled.img`
 `;
 
 export const ProductBrandName = styled.p`
-  font-size: var(--font-lg-size);
+  font-size: var(--font-md-size);
   font-weight: var(--font-bold);
 `;
 
 export const ProductName = styled.h2`
   font-family: "Pretendard";
-  font-size: var(--font-extra-size);
+  font-size: var(--font-max-size);
   font-weight: var(--font-extra-light);
   margin-top: 16px;
 `;
 
 export const ProductPrice = styled.p`
-  font-size: var(--font-extra-size);
+  font-size: var(--font-max-size);
   margin-top: 20px;
 
   span {
@@ -72,7 +75,7 @@ export const ProductQuanTityInner = styled.div`
   }
   p {
     width: 50px;
-    font-size: var(--font-lg-size);
+    font-size: var(--font-sm-size);
   }
 `;
 
@@ -80,10 +83,10 @@ export const ProductOrderSummery = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 32px;
+  margin-top: auto;
 
   strong {
-    font-size: var(--font-lg-size);
+    font-size: var(--font-sm-size);
     color: var(--light-black-color);
   }
 `;
@@ -94,7 +97,7 @@ export const ProductOrderPrice = styled.div`
 `;
 
 export const ProductTotalPrice = styled.div`
-  font-size: var(--font-extra-size);
+  font-size: var(--font-max-size);
   p {
     &::before {
       display: inline-block;
@@ -116,7 +119,7 @@ export const ProductTotalPrice = styled.div`
 export const ProductTotalQuanTity = styled.div`
   p {
     font-family: "Pretendard";
-    font-size: var(--font-lg-size);
+    font-size: var(--font-sm-size);
   }
 `;
 
@@ -129,7 +132,7 @@ export const ProductSoldOutButton = styled.button`
   height: 60px;
   background-color: var(--black-color);
   color: var(--white-color);
-  font-size: var(--font-lg-size);
+  font-size: var(--font-md-size);
   text-align: center;
   margin-top: 22px;
 `;
@@ -138,7 +141,7 @@ export const ProducDetailButtonStyle = css`
   padding: 19px 0;
   margin-top: 22px;
   text-align: center;
-  font-size: var(--font-lg-size);
+  font-size: var(--font-sm-size);
   font-weight: var(--font-medium);
 `;
 
@@ -164,7 +167,7 @@ export const ProductDetailTabMenu = styled.ul`
   display: flex;
   margin-top: 141px;
   text-align: center;
-  font-size: var(--font-lg-size);
+  font-size: var(--font-sm-size);
 `;
 export const TabMenuItem = styled.li`
   width: 100%;

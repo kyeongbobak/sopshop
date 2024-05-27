@@ -1,9 +1,24 @@
-import { BuyerCartegoryWrapper, About, Shop, Flop, Ditto, TooMuchShop, Notice, QandA, Review } from "./BuyerCartegoryStyle";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { SideBarWrapper, About, Shop, Flop, Ditto, TooMuchShop, Notice, QandA, Review, SearchForm, SearchInput, SearchButton } from "./SidebarStyle";
 
-export default function BuyerCartegory() {
+export default function Sidebar() {
+  const [searchKeyword, setSearchKeyword] = useState();
+
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setSearchKeyword(e.target.value);
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    navigate(`/products/search/${searchKeyword}`);
+  };
+
   return (
     <>
-      <BuyerCartegoryWrapper>
+      <SideBarWrapper>
         <div>
           <ul>
             <li>
@@ -42,7 +57,12 @@ export default function BuyerCartegory() {
             </li>
           </ul>
         </div>
-      </BuyerCartegoryWrapper>
+        <SearchForm onSubmit={handleSearch}>
+          <span>Search</span>
+          <SearchInput type="text" placeholder="" value={searchKeyword} onChange={handleChange} />
+          <SearchButton type="submit"></SearchButton>
+        </SearchForm>
+      </SideBarWrapper>
     </>
   );
 }

@@ -7,7 +7,7 @@ export const ShoppingCartWrapper = styled.div`
 `;
 
 export const ShoppingCartTitle = styled.h1`
-  font-size: var(--font-extra-size);
+  font-size: var(--font-lg-size);
   text-align: center;
   margin: 54px 0 52px;
 `;
@@ -54,8 +54,8 @@ export const CartItemInput = styled.div`
 
   input[type="radio"] {
     appearance: none;
-    width: 15px;
-    height: 15px;
+    width: 11px;
+    height: 11px;
     border: 1px solid var(--black-color);
     border-radius: 50%;
     cursor: pointer;
@@ -63,7 +63,7 @@ export const CartItemInput = styled.div`
 
   input[type="radio"]:checked {
     background-color: var(--black-color);
-    border: 3px solid white;
+    border: 2px solid white;
     box-shadow: 0 0 0 1.6px var(--black-color);
   }
 `;
@@ -92,34 +92,34 @@ export const CartItemInfoInner = styled.div`
   p {
     margin-top: 40px;
     font-family: "Pretendard";
-    font-size: var(--font-md-size);
+    font-size: var(--font-min-size);
     font-weight: var(--font-semi-bold);
     color: var(--black-color);
   }
 `;
 
 export const CartItemInfoBranName = styled.div`
-  font-size: var(--font-md-size);
+  font-size: var(--font-sm-size);
   font-weight: var(--font-extra-bold);
   color: var(--black-color);
 `;
 
 export const CartItemInfoName = styled.div`
   font-family: "Pretendard";
-  font-size: var(--font-lg-size);
+  font-size: var(--font-sm-size);
   margin-top: 20px;
 `;
 
 export const CartItemInfoPrice = styled.div`
   font-family: "Pretendard";
-  font-size: var(--font-lg-size);
+  font-size: var(--font-md-size);
   font-weight: var(--font-semi-bold);
   margin-top: 20px;
 `;
 
 export const CartItemQuantity = styled.div`
   width: 300px;
-  font-size: var(--font-lg-size);
+  font-size: var(--font-sm-size);
   display: flex;
   justify-content: center;
 `;
@@ -129,11 +129,15 @@ export const CartItemQuantityInner = styled.div`
   border: 1px solid var(--gray-color);
   padding: 15px 0;
   button {
-    width: 50px;
+    width: 48px;
+
+    img {
+      width: 12px;
+    }
   }
   p {
     width: 50px;
-    font-size: var(--font-lg-size);
+    font-size: var(--font-sm-size);
   }
 `;
 
@@ -163,12 +167,12 @@ export const PriceDetailsContents = styled.div`
 export const PriceDetailsContentsCommon = css`
   font-family: "Pretendard";
   span {
-    font-size: var(--font-md-size);
+    font-size: var(--font-sm-size);
     font-weight: var(--font-regular);
   }
 
   p {
-    font-size: 20px;
+    font-size: var(--font-lg-size);
     font-weight: var(--font-light);
     padding-top: 12px;
   }

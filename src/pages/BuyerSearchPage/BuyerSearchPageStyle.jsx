@@ -1,9 +1,13 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
+export const SearchPageWrapper = styled.div`
+  display: flex;
+`;
+
 export const SearchResultsWrapper = styled.div`
-  width: 1280px;
-  margin: 54px auto;
+  width: 1150px;
+  margin: 0 auto 300px;
 `;
 
 export const SearchResultsInner = styled.div`
@@ -15,10 +19,9 @@ export const SearchResultsInner = styled.div`
 export const SearchResultItem = styled.div``;
 
 export const SearchResultsCount = styled.ul`
-  font-size: var(--font-lg-size);
+  font-size: var(--font-sm-size);
   font-weight: var(--font-light);
-  margin-top: 100px;
-
+  margin-top: 48px;
   position: relative;
 
   strong {
@@ -27,8 +30,7 @@ export const SearchResultsCount = styled.ul`
 `;
 
 export const SearchResultItemImage = styled.img`
-  width: 380px;
-  border-radius: 10px;
+  width: 280px;
 `;
 
 export const SearchResultItemDetails = styled.div`
@@ -36,18 +38,20 @@ export const SearchResultItemDetails = styled.div`
 `;
 
 export const SearchResultItemBrandName = styled.div`
-  font-size: var(--font-lg-size);
-  font-weight: var(--font-light);
+  font-size: var(--font-min-size);
+  font-weight: var(--font-medium);
   margin: 15px 0;
 `;
 
 export const SearchResultItemName = styled(Link)`
-  font-size: var(--font-lg-size);
-  font-weight: var(--font-light);
+  font-family: "Pretendard";
+  font-size: var(--font-sm-size);
+  font-weight: var(--font-thin);
   margin: 15px 0;
 `;
 
 export const SearchResultItemPrice = styled.div`
-  font-size: var(--font-lg-size);
+  font-family: "Pretendard";
+  font-size: var(--font-sm-size);
   margin-top: 15px;
 `;

@@ -29,7 +29,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import PlusIcon from "../../assets/img/icon-plus-line.png";
 import MinusIcon from "../../assets/img/icon-minus-line.png";
 import BuyerHeader from "../../components/BuyerHeader/BuyerHeader";
-import BuyerCartegory from "../../components/BuyerCartegory/BuyerCartegory";
+
 import BuyerFooter from "../../components/BuyerFooter/BuyerFooter";
 import axios from "axios";
 import { AuthContext } from "../../contexts/AuthContext";
@@ -140,7 +140,7 @@ export default function ProductDetail() {
   return (
     <>
       <BuyerHeader />
-      <BuyerCartegory />
+
       <ProductDetailWrapper>
         <ProductDetailContent>
           <ProductImage src={product.image} />

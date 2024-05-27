@@ -9,7 +9,7 @@ export const BuyerMyPageWrapper = styled.div`
 `;
 
 export const BuyerMyPageTitle = styled.div`
-  font-size: var(--font-extra-size);
+  font-size: var(--font-lg-size);
   margin: 54px 0 52px;
   text-align: center;
   font-family: "GmarketSans";
@@ -18,7 +18,7 @@ export const BuyerMyPageTitle = styled.div`
 export const BuyerMyPageHeader = styled.ul`
   display: flex;
 
-  font-size: var(--font-lg-size);
+  font-size: var(--font-sm-size);
   border-top: 1px solid var(--black-color);
   border-bottom: 1px solid var(--black-color);
   padding: 20px 0;
@@ -49,7 +49,7 @@ export const OrderRecordsItem = styled.div`
 `;
 
 export const OrderRecordsItemStyle = css`
-  font-size: var(--font-md-size);
+  font-size: var(--font-sm-size);
   flex-grow: 1;
   width: 152px;
   text-align: center;
@@ -62,7 +62,7 @@ export const OrderNumber = styled.div`
 
 export const ProductImage = styled.div`
   img {
-    width: 200px;
+    width: 190px;
   }
   width: 368px;
   text-align: center;

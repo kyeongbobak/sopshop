@@ -19,7 +19,7 @@ export const HeaderInnerMain = styled.div`
 export const Logo = styled(Link)`
   margin-left: 122px;
   img {
-    width: 250px;
+    width: 200px;
   }
 
   p {
@@ -52,7 +52,7 @@ export const SearchInput = styled.input`
 `;
 
 export const HeaderLinkMenu = styled.div`
-  font-size: 22px;
+  font-size: var(--font-md-size);
   display: flex;
   gap: 27px;
   font-weight: var(--font-light);
@@ -94,12 +94,12 @@ export const DropDownMenu = styled.ul`
   background-color: var(--white-color);
   position: absolute;
   top: 35px;
-  right: -39px;
+  right: -45px;
   padding-top: 20px;
   width: 152px;
   border-radius: 10px;
   border: 1px solid var(--black-color);
-  font-size: var(--font-lg-size);
+  font-size: var(--font-sm-size);
   z-index: 999;
 
   div {

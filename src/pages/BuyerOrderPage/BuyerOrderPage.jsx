@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState, useCallback } from "react";
 import ProductInfoHeader from "../../components/ProductInfoHeader/ProductInfoHeader";
 import BuyerHeader from "../../components/BuyerHeader/BuyerHeader";
-import BuyerCartegory from "../../components/BuyerCartegory/BuyerCartegory";
+
 import BuyerFooter from "../../components/BuyerFooter/BuyerFooter";
 import {
   OrderPageWrapper,
@@ -204,7 +204,7 @@ export default function BuyerOrderPage() {
   return (
     <>
       <BuyerHeader />
-      <BuyerCartegory />
+
       <OrderPageWrapper>
         <OrderPageTitle>Order</OrderPageTitle>
         <ProductInfoHeader type="order"></ProductInfoHeader>

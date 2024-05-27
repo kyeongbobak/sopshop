@@ -1,5 +1,4 @@
 import BuyerHeader from "../../components/BuyerHeader/BuyerHeader";
-import BuyerCartegory from "../../components/BuyerCartegory/BuyerCartegory";
 import BuyerFooter from "../../components/BuyerFooter/BuyerFooter";
 import { OrderSuccessPageWrapper, OrderSuccessPageTitle, OrderSuccessPageContents, DeliveryInfoTitle, OrderSuccessMessage, OrderDate } from "./OrderSuccessPageStyle";
 import { useContext, useEffect, useState } from "react";
@@ -38,7 +37,7 @@ export default function BuyerOrderSuccess() {
   return (
     <>
       <BuyerHeader />
-      <BuyerCartegory />
+
       <OrderSuccessPageWrapper>
         <OrderSuccessPageTitle>Order Result</OrderSuccessPageTitle>
         <OrderSuccessPageContents>

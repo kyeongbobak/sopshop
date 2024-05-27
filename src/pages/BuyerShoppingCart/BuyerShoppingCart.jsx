@@ -1,6 +1,5 @@
 import ProductInfoHeader from "../../components/ProductInfoHeader/ProductInfoHeader";
 import BuyerHeader from "../../components/BuyerHeader/BuyerHeader";
-import BuyerCartegory from "../../components/BuyerCartegory/BuyerCartegory";
 import BuyerFooter from "../../components/BuyerFooter/BuyerFooter";
 import {
   ShoppingCartWrapper,
@@ -35,7 +34,6 @@ import PlusIcon from "../../assets/img/icon-plus-line.png";
 import MinusIcon from "../../assets/img/icon-minus-line.png";
 import DeleteIcon from "../../assets/img/icon-delete.png";
 import AlertModal from "../../components/Modal/AlertModal/AlertModal";
-
 export default function BuyerShoppingCart() {
   const { token, isLoggedIn } = useContext(AuthContext);
   const [isEmpty, setIsEmpty] = useState(true);
@@ -207,7 +205,6 @@ export default function BuyerShoppingCart() {
   return (
     <>
       <BuyerHeader />
-      <BuyerCartegory />
       <ShoppingCartWrapper>
         <ShoppingCartTitle>Cart</ShoppingCartTitle>
         <ProductInfoHeader type="cart" />

@@ -12,7 +12,7 @@ export const ButtonStyle = styled.button`
       padding: 15px 88px;
       background-color: var(--black-color);
       color: var(--white-color);
-      font-size: var(--font-lg-size);
+      font-size: var(--font-sm-size);
       font-weight: var(--font-medium);
       ${(props) =>
         props.disabled &&
@@ -83,7 +83,7 @@ export const ButtonStyle = styled.button`
       padding: 10px 20px;
       background-color: var(--black-color);
       color: var(--white-color);
-      font-size: var(--font-md-size);
+      font-size: var(--font-sm-size);
 
       ${(props) =>
         props.White &&
