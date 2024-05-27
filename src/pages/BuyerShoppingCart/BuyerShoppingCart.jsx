@@ -52,6 +52,24 @@ export default function BuyerShoppingCart() {
   const [modifiedQuantity, setModifiedQuantity] = useState(0);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
+  const getProductInfo = useCallback(
+    async (ProductId) => {
+      try {
+        const instance = axios.create({
+          headers: {
+            Authorization: `JWT ${token}`,
+          },
+        });
+        const res = await instance.get(`https://openmarket.weniv.co.kr/products/${ProductId}`);
+        const data = await res.data;
+        return data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    [token]
+  );
+
   const getShoppingCartList = useCallback(async () => {
     try {
       const instance = axios.create({
@@ -85,25 +103,7 @@ export default function BuyerShoppingCart() {
     } catch (error) {
       console.log(error);
     }
-  }, [token]);
-
-  const getProductInfo = useCallback(
-    async (ProductId) => {
-      try {
-        const instance = axios.create({
-          headers: {
-            Authorization: `JWT ${token}`,
-          },
-        });
-        const res = await instance.get(`https://openmarket.weniv.co.kr/products/${ProductId}`);
-        const data = await res.data;
-        return data;
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    [token]
-  );
+  }, [token, getProductInfo]);
 
   const ModalOpen = (list) => {
     setIsModalOpen(true);

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useCallback } from "react";
 import ProductInfoHeader from "../../components/ProductInfoHeader/ProductInfoHeader";
 import BuyerHeader from "../../components/BuyerHeader/BuyerHeader";
 import BuyerCartegory from "../../components/BuyerCartegory/BuyerCartegory";
@@ -84,7 +84,25 @@ export default function BuyerOrderPage() {
 
   const navigate = useNavigate();
 
-  const getOrderList = async () => {
+  const getProductInfo = useCallback(
+    async (id) => {
+      try {
+        const instance = axios.create({
+          headers: {
+            Authorization: `JWT ${token}`,
+          },
+        });
+        const res = await instance.get(`https://openmarket.weniv.co.kr/products/${id}`);
+        const data = await res.data;
+        return data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    [token]
+  );
+
+  const getOrderList = useCallback(async () => {
     try {
       const instance = axios.create({
         headers: { Authorization: `JWT ${token}` },
@@ -121,22 +139,7 @@ export default function BuyerOrderPage() {
     } catch (error) {
       console.log(error);
     }
-  };
-
-  const getProductInfo = async (id) => {
-    try {
-      const instance = axios.create({
-        headers: {
-          Authorization: `JWT ${token}`,
-        },
-      });
-      const res = await instance.get(`https://openmarket.weniv.co.kr/products/${id}`);
-      const data = await res.data;
-      return data;
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  }, [token, getProductInfo]);
 
   const getAdress = (data) => {
     setZonCode(data.zonecode);
@@ -196,7 +199,7 @@ export default function BuyerOrderPage() {
 
   useEffect(() => {
     getOrderList();
-  }, [token]);
+  }, [token, getOrderList]);
 
   return (
     <>
