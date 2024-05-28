@@ -59,8 +59,6 @@ const GlobalStyle = createGlobalStyle`
     src: url(${GmarketSansBold}) format('opentype');
   }
 
-
-
   @font-face {
     font-family: 'Pretendard';
     font-weight: 100;
@@ -136,7 +134,6 @@ const GlobalStyle = createGlobalStyle`
   select{
     appearance: none;
   }
-
 
   .a11y-hidden {
   clip: rect(1px, 1px, 1px, 1px);

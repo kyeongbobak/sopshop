@@ -17,10 +17,9 @@ export default function Router() {
     <>
       <AuthProvider>
         <Routes>
-          <Route path="login" element={<BuyerLogin />}></Route>
           <Route path="/" element={<BuyerMainPage />}></Route>
           <Route path=":BrandName" element={<BrandCategoryPage />} />
-          <Route path="login" element={<BuyerLogin />}></Route>
+          <Route path="/login" element={<BuyerLogin />}></Route>
           <Route path="/signUp" element={<BuyerSignUp />}></Route>
           <Route path="/products/*" element={<Outlet />}>
             <Route path="search/:searchKeyword" element={<BuyerSearchPage />} />
