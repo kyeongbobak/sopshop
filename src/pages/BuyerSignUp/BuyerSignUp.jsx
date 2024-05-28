@@ -123,12 +123,16 @@ export default function BuyerSignUp() {
           setPassWordWarningMessage("비밀번호는 한개 이상의 영소문자가 필수적으로 들어가야 합니다.");
         } else if (userPassword.search(/[0-9]/g) < 0 && userPassWordCheck.search(/[0-9]/g) < 0) {
           setPassWordWarningMessage("비밀번호는 한개 이상의 숫자가 필수적으로 들어가야 합니다.");
+        } else {
+          setUserNameWarningMessage("");
         }
 
         if (20 < userId.length || !/^[a-zA-Z0-9]+$/.test(userId)) {
           setUserNameWarningMessage("ID는 20자 이내의 영어 소문자, 대문자, 숫자만 가능합니다.");
         } else if (!userId) {
           setUserNameWarningMessage(data.username[0]);
+        } else {
+          setUserNameWarningMessage("");
         }
 
         if (!phoneNumberMiddle || !phoneNumberEnd) {

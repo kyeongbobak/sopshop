@@ -34,6 +34,7 @@ import PlusIcon from "../../assets/img/icon-plus-line.png";
 import MinusIcon from "../../assets/img/icon-minus-line.png";
 import DeleteIcon from "../../assets/img/icon-delete.png";
 import AlertModal from "../../components/Modal/AlertModal/AlertModal";
+
 export default function BuyerShoppingCart() {
   const { token, isLoggedIn } = useContext(AuthContext);
   const [isEmpty, setIsEmpty] = useState(true);
@@ -135,6 +136,7 @@ export default function BuyerShoppingCart() {
       setIsModalOpen(false);
       console.log(data);
       setCartList((prev) => prev.map((item) => (item.cart_item_id === modifiedCartItemId ? { quantity: modifiedQuantity } : { quantity: item.quantity })));
+      getShoppingCartList();
     } catch (error) {
       console.log(error);
     }
@@ -152,8 +154,9 @@ export default function BuyerShoppingCart() {
 
       const res = await instance.delete(`https://openmarket.weniv.co.kr/cart/${cartItemId}`);
       const data = await res.data;
-      getShoppingCartList();
 
+      getShoppingCartList();
+      setIsDeleteModalOpen(false);
       console.log(data);
     } catch (error) {
       console.log(error);
@@ -168,16 +171,16 @@ export default function BuyerShoppingCart() {
         },
       });
       const res = await instance.delete(`https://openmarket.weniv.co.kr/cart/`);
-      const data = await res.data();
+      const data = await res.data;
       console.log(data);
+      setIsDeleteModalOpen(false);
     } catch (error) {
-      console.log("error");
+      console.log(error);
     }
   };
 
   const cartOneOrder = async (selectedId, selectedQuantity) => {
     deleteAllCartList();
-
     try {
       const instance = axios.create({
         headers: {
@@ -190,9 +193,12 @@ export default function BuyerShoppingCart() {
         quantity: selectedQuantity,
         check: selected,
       };
-
+      console.log("API 요청 전:", body);
       const res = await instance.post(`https://openmarket.weniv.co.kr/cart/`, body);
-      console.log(res);
+      const data = await res.data;
+      console.log(data);
+      getShoppingCartList(selectedId);
+      console.log(selectedId);
     } catch (error) {
       console.log(error);
     }

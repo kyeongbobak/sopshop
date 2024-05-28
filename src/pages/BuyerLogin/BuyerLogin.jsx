@@ -24,6 +24,10 @@ export default function BuyerLogin() {
     if (e.target.id === "userPassword") {
       setUserPassword(e.target.value);
     }
+
+    if (warningMessage) {
+      setWarningMessage("");
+    }
   };
 
   const onSubmitHandler = async (e) => {
