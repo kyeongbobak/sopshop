@@ -5,9 +5,9 @@
 
 ## [SopShop](https://sopshop.netlify.app/)
 
-- 서비스 이용을 위한 테스트 계정
-  ID : sopshop37 <br/>
-  PASSWORD : sop373737
+**서비스 이용을 위한 테스트 계정**  <br/>
+- ID : sopshop37 <br/>
+- PASSWORD : sop373737
   <br/>
 
 ## 프로젝트 목적
