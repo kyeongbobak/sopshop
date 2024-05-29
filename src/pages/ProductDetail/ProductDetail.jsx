@@ -22,6 +22,7 @@ import {
   ProductQnALink,
   ProductRefundLink,
   TabMenuItem,
+  TabMenuContents,
   ProductSoldOutButton,
 } from "./ProductDetailStyle";
 import { useParams, useNavigate } from "react-router-dom";
@@ -44,6 +45,7 @@ export default function ProductDetail() {
   const [loginRequired, setLoginRequired] = useState(false);
   const [addToCartWarning, setAddToCartWarning] = useState(false);
   const [soldOut, setSoldOut] = useState(false);
+  const [menuContents, setMenuContents] = useState("");
 
   console.log(product);
 
@@ -51,6 +53,8 @@ export default function ProductDetail() {
 
   const handleTabClick = (e) => {
     setActiveTab(e);
+    console.log(typeof e);
+    setMenuContents(e);
   };
 
   useEffect(() => {
@@ -217,6 +221,7 @@ export default function ProductDetail() {
             </ProductRefundLink>
           </TabMenuItem>
         </ProductDetailTabMenu>
+        <TabMenuContents>{menuContents}</TabMenuContents>
       </ProductDetailWrapper>
       <BuyerFooter />
     </>

@@ -163,7 +163,7 @@ export const ProductAddCartButton = styled.button`
 
 export const ProductDetailTabMenu = styled.ul`
   width: 100%;
-  height: 300px;
+  /* height: 300px; */
   display: flex;
   margin-top: 141px;
   text-align: center;
@@ -171,6 +171,11 @@ export const ProductDetailTabMenu = styled.ul`
 `;
 export const TabMenuItem = styled.li`
   width: 100%;
+`;
+
+export const TabMenuContents = styled.div`
+  font-size: var(--font-md-size);
+  padding: 20px;
 `;
 
 export const ProductDetailTabLink = css`
