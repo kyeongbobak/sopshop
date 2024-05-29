@@ -113,7 +113,7 @@ footer
 | ![로그인 / 로그아웃](/public/gif/LoginLogout.gif) |
 | **회원가입**                                      |
 | 기능 설명                                         |
-| ![회원가입](/public/gif/SingUp.gif)               |
+| ![회원가입](/public/gif/SignUp.gif)               |
 
 | 상품 검색 결과 페이지                       |
 | :------------------------------------------ |
