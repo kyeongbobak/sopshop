@@ -70,6 +70,37 @@ export default function BuyerSignUp() {
     name: userName,
   };
 
+  const inputHandler = (e) => {
+    if (e.target.id === "userId") {
+      setUserId(e.target.value);
+    }
+    if (e.target.id === "userPassWord") {
+      setUserPassword(e.target.value);
+    }
+    if (e.target.id === "userPassWordCheck") {
+      setUserPassWordCheck(e.target.value);
+    }
+    if (e.target.id === "userPassWordCheck") {
+      setUserPassWordCheck(e.target.value);
+    }
+
+    if (e.target.id === "userPhoneNumberOther") {
+      setPhoneNumberMiddle(e.target.value);
+    }
+    if (e.target.id === "userPhoneNumberTheOther") {
+      setPhonNumberEnd(e.target.value);
+    }
+    if (DuplicateMessage) {
+      setDuplicateMessage("");
+    }
+    if (passWordWarningMessage) {
+      setPassWordWarningMessage("");
+    }
+    if (phoneNumberWarningMessage) {
+      setPhoneNumberWarningMessage("");
+    }
+  };
+
   const verifyAccount = async (e) => {
     e.preventDefault();
 
@@ -173,19 +204,19 @@ export default function BuyerSignUp() {
             <SignUpFormSection>
               <Label htmlFor="userId">아이디</Label>
               <UserIdInputWrapper>
-                <UserIdInput id="userId" type="text" onChange={(e) => setUserId(e.target.value)} value={userId} isUserIdError={DuplicateMessage === "username 필드를 추가해주세요 :)" || DuplicateMessage === "해당 사용자 아이디는 이미 존재합니다."} />
+                <UserIdInput id="userId" type="text" onChange={inputHandler} value={userId} isUserIdError={DuplicateMessage === "username 필드를 추가해주세요 :)" || DuplicateMessage === "해당 사용자 아이디는 이미 존재합니다."} />
                 <UserIdDupicateButton onClick={verifyAccount}>중복확인</UserIdDupicateButton>
               </UserIdInputWrapper>
               {DuplicateMessage ? <ValidateMessage isDuplicate={DuplicateMessage === "username 필드를 추가해주세요 :)" || DuplicateMessage === "해당 사용자 아이디는 이미 존재합니다."}>{DuplicateMessage}</ValidateMessage> : ""}
               {userNameWarningMessage ? <ValidateMessage>{userNameWarningMessage}</ValidateMessage> : ""}
               <PassWordInputWrapper>
                 <Label htmlFor="userPassword">비밀번호</Label>
-                <PassWordInput id="userPassWord" type="password" onChange={(e) => setUserPassword(e.target.value)} value={userPassword} />
+                <PassWordInput id="userPassWord" type="password" onChange={inputHandler} value={userPassword} />
                 {userPassword ? <img src={CheckOnIcon} alt="" /> : <img src={CheckOffIcon} alt="" />}
               </PassWordInputWrapper>
               <PassWordInputWrapper>
                 <Label htmlFor="userPassWordCheck">비밀번호 재확인</Label>
-                <PassWordCheckInput id="userPassWordCheck" type="password" onChange={(e) => setUserPassWordCheck(e.target.value)} value={userPassWordCheck} isPassWordError={passWordWarningMessage !== ""} />
+                <PassWordCheckInput id="userPassWordCheck" type="password" onChange={inputHandler} value={userPassWordCheck} isPassWordError={passWordWarningMessage !== ""} />
                 {userPassWordCheck ? <img src={CheckOnIcon} alt="" /> : <img src={CheckOffIcon} alt="" />}
                 {passWordWarningMessage ? <ValidateMessage isPassWordError={passWordWarningMessage !== ""}>{passWordWarningMessage}</ValidateMessage> : ""}
               </PassWordInputWrapper>
@@ -219,8 +250,8 @@ export default function BuyerSignUp() {
                       ))}
                     </ul>
                   )}
-                  <PhoneNumberStyledInput id="userPhoneNumberOther" type="text" onChange={(e) => setPhoneNumberMiddle(e.target.value)} value={phoneNumberMiddle} />
-                  <PhoneNumberStyledInput id="userPhoneNumberTheOther" type="text" onChange={(e) => setPhonNumberEnd(e.target.value)} value={phoneNumberEnd} />
+                  <PhoneNumberStyledInput id="userPhoneNumberOther" type="text" onChange={inputHandler} value={phoneNumberMiddle} />
+                  <PhoneNumberStyledInput id="userPhoneNumberTheOther" type="text" onChange={inputHandler} value={phoneNumberEnd} />
                 </PhoneStyledInputWrapper>
                 {phoneNumberWarningMessage ? <ValidateMessage>{phoneNumberWarningMessage}</ValidateMessage> : ""}
               </PhoneNumberWrapper>
