@@ -71,25 +71,26 @@ export default function BuyerSignUp() {
   };
 
   const inputHandler = (e) => {
-    if (e.target.id === "userId") {
-      setUserId(e.target.value);
-    }
-    if (e.target.id === "userPassWord") {
-      setUserPassword(e.target.value);
-    }
-    if (e.target.id === "userPassWordCheck") {
-      setUserPassWordCheck(e.target.value);
-    }
-    if (e.target.id === "userPassWordCheck") {
-      setUserPassWordCheck(e.target.value);
+    switch (e.target.id) {
+      case "userId":
+        setUserId(e.target.value);
+        break;
+      case "userPassWord":
+        setUserPassword(e.target.value);
+        break;
+      case "userPassWordCheck":
+        setUserPassWordCheck(e.target.value);
+        break;
+      case "userPhoneNumberOther":
+        setPhoneNumberMiddle(e.target.value);
+        break;
+      case "userPhoneNumberTheOther":
+        setPhonNumberEnd(e.target.value);
+        break;
+      default:
+        break;
     }
 
-    if (e.target.id === "userPhoneNumberOther") {
-      setPhoneNumberMiddle(e.target.value);
-    }
-    if (e.target.id === "userPhoneNumberTheOther") {
-      setPhonNumberEnd(e.target.value);
-    }
     if (DuplicateMessage) {
       setDuplicateMessage("");
     }
