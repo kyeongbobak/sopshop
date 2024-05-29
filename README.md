@@ -131,7 +131,7 @@ footer
 | :--------------------------------------------------------------------- |
 | **로그아웃 시 상품 바로 구매 / 상품 장바구니 담기**                    |
 | 기능 설명                                                              |
-| ![상품 바로 구매/장바구니 담기](./public/gif/LogoutBuyShoppinCart.gif) |
+| ![상품 바로 구매/장바구니 담기](/public/gif/LogoutBuyShoppingCart.gif) |
 | **로그인 시 상품 바로 구매**                                           |
 | 기능 설명                                                              |
 | ![상품 바로 구매](/public/gif/LoginDirectBuy.gif)                      |
