@@ -1,4 +1,10 @@
+import axios from "axios";
 import { useContext, useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthContext";
+import BuyerHeader from "../../components/BuyerHeader/BuyerHeader";
+import BuyerFooter from "../../components/BuyerFooter/BuyerFooter";
+import AlertModal from "../../components/Modal/AlertModal/AlertModal";
 import {
   ProductDetailWrapper,
   ProductDetailContent,
@@ -25,16 +31,10 @@ import {
   TabMenuContents,
   ProductSoldOutButton,
 } from "./ProductDetailStyle";
-import { useParams, useNavigate } from "react-router-dom";
-
 import PlusIcon from "../../assets/img/icon-plus-line.png";
 import MinusIcon from "../../assets/img/icon-minus-line.png";
-import BuyerHeader from "../../components/BuyerHeader/BuyerHeader";
-
-import BuyerFooter from "../../components/BuyerFooter/BuyerFooter";
-import axios from "axios";
-import { AuthContext } from "../../contexts/AuthContext";
-import AlertModal from "../../components/Modal/AlertModal/AlertModal";
+import { getProductContents } from "../../api/Product";
+import { getCartList } from "../../api/Cart";
 
 export default function ProductDetail() {
   const { product_id } = useParams();
@@ -47,29 +47,25 @@ export default function ProductDetail() {
   const [soldOut, setSoldOut] = useState(false);
   const [menuContents, setMenuContents] = useState("");
 
-  console.log(product);
-
   const navigate = useNavigate();
 
   const handleTabClick = (e) => {
     setActiveTab(e);
-    console.log(typeof e);
     setMenuContents(e);
   };
 
   useEffect(() => {
     const getProductDetail = async () => {
       try {
-        const res = await fetch(`https://openmarket.weniv.co.kr/products/${product_id}`, {
-          method: "GET",
-        });
-        const data = await res.json();
+        const data = await getProductContents(product_id);
         setProduct(data);
         if (data.stock === 0) {
           setSoldOut(true);
           setCount(0);
         }
-      } catch (error) {}
+      } catch (error) {
+        console.log("Error fetching product details:", error);
+      }
     };
 
     getProductDetail();
@@ -91,18 +87,8 @@ export default function ProductDetail() {
 
   const checkCartContents = async () => {
     try {
-      const instance = axios.create({
-        headers: {
-          Authorization: `JWT ${token}`,
-        },
-      });
-      const res = await instance.get("https://openmarket.weniv.co.kr/cart/");
-      const cartContents = res.data.results;
-      console.log(cartContents);
-
+      const cartContents = await getCartList(token);
       const existingProduct = cartContents.find((v) => v.product_id === Number(product_id));
-
-      console.log(existingProduct);
 
       if (existingProduct) {
         setAddToCartWarning(true);

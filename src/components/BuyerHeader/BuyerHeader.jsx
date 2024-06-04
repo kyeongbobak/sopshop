@@ -13,7 +13,6 @@ export default function BuyerHeader() {
 
   const location = useLocation();
   const currentPath = location.pathname;
-  console.log(currentPath);
 
   const navigate = useNavigate();
 

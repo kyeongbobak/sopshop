@@ -33,6 +33,7 @@ import DropDownIcon from "../../assets/img/icon-down-arrow.png";
 import PullUpIcon from "../../assets/img/icon-up-arrow.png";
 import CheckOffIcon from "../../assets/img/icon-check-off.png";
 import CheckOnIcon from "../../assets/img/icon-check-on.png";
+import { validateAccount, signUp } from "../../api/Account";
 
 export default function BuyerSignUp() {
   const [activeTab, setActiveTab] = useState("buyer");
@@ -106,15 +107,7 @@ export default function BuyerSignUp() {
     e.preventDefault();
 
     try {
-      const res = await fetch("https://openmarket.weniv.co.kr/accounts/signup/valid/username/", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({ username: userId }),
-      });
-      const data = await res.json();
-      console.log(data);
+      const data = await validateAccount(userId);
       if (data.Success) {
         setDuplicateMessage(data.Success);
       } else if (!userId) {
@@ -131,15 +124,7 @@ export default function BuyerSignUp() {
     e.preventDefault();
 
     try {
-      const res = await fetch("https://openmarket.weniv.co.kr/accounts/signup/", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(body),
-      });
-
-      const data = await res.json();
+      const { res, data } = await signUp(body);
 
       console.log(data);
 

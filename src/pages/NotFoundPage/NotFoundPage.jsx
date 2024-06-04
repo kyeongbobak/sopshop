@@ -1,8 +1,7 @@
-import Button from "../../components/Button/Button";
-
-import NotFoundIcon from "../../assets/img/icon-404.png";
-import { NotFoundPageInner, NotFoundPageWrapper, NotFoundPageGraphic, NotFoundPageContents, NotFoundPageMessage, NotFoundPageDescription, NotFoundPageButtonMenu } from "./NotFoundPageStyle";
 import { useNavigate } from "react-router-dom";
+import { NotFoundPageInner, NotFoundPageWrapper, NotFoundPageGraphic, NotFoundPageContents, NotFoundPageMessage, NotFoundPageDescription, NotFoundPageButtonMenu } from "./NotFoundPageStyle";
+import Button from "../../components/Button/Button";
+import NotFoundIcon from "../../assets/img/icon-404.png";
 
 export default function NotFoundPage() {
   const navigate = useNavigate();

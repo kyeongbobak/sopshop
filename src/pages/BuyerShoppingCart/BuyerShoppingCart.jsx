@@ -1,6 +1,9 @@
-import ProductInfoHeader from "../../components/ProductInfoHeader/ProductInfoHeader";
+import { useContext, useEffect, useState, useCallback } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
 import BuyerHeader from "../../components/BuyerHeader/BuyerHeader";
+import ProductInfoHeader from "../../components/ProductInfoHeader/ProductInfoHeader";
 import BuyerFooter from "../../components/BuyerFooter/BuyerFooter";
+import AlertModal from "../../components/Modal/AlertModal/AlertModal";
 import {
   ShoppingCartWrapper,
   ShoppingCartTitle,
@@ -26,14 +29,15 @@ import {
   OrderButton,
   PaymentButton,
 } from "./BuyerShoppingCartStyle";
-import { useContext, useEffect, useState, useCallback } from "react";
-import axios from "axios";
-import { AuthContext } from "../../contexts/AuthContext";
 import Button from "../../components/Button/Button";
 import PlusIcon from "../../assets/img/icon-plus-line.png";
 import MinusIcon from "../../assets/img/icon-minus-line.png";
 import DeleteIcon from "../../assets/img/icon-delete.png";
-import AlertModal from "../../components/Modal/AlertModal/AlertModal";
+import { getProductContents } from "../../api/Product";
+import { addToCart, getCartList } from "../../api/Cart";
+import { modifyCartQuantity } from "../../api/Cart";
+import { deleteCartItem } from "../../api/Cart";
+import { deleteAllCartItem } from "../../api/Cart";
 
 export default function BuyerShoppingCart() {
   const { token, isLoggedIn } = useContext(AuthContext);
@@ -54,14 +58,7 @@ export default function BuyerShoppingCart() {
   const getProductInfo = useCallback(
     async (ProductId) => {
       try {
-        const instance = axios.create({
-          headers: {
-            Authorization: `JWT ${token}`,
-          },
-        });
-        const res = await instance.get(`https://openmarket.weniv.co.kr/products/${ProductId}`);
-        const data = await res.data;
-        return data;
+        return await getProductContents(ProductId, token);
       } catch (error) {
         console.log(error);
       }
@@ -71,15 +68,9 @@ export default function BuyerShoppingCart() {
 
   const getShoppingCartList = useCallback(async () => {
     try {
-      const instance = axios.create({
-        headers: {
-          Authorization: `JWT ${token}`,
-        },
-      });
-      const res = await instance.get("https://openmarket.weniv.co.kr/cart/");
+      const data = await getCartList(token);
       setIsEmpty(false);
-      const cartItem = res.data.results;
-      console.log(cartItem);
+      const cartItem = data;
       setCartList(cartItem);
 
       if (cartItem.length === 0) {
@@ -116,26 +107,18 @@ export default function BuyerShoppingCart() {
   };
 
   const modifyProductQuantity = async (isActive) => {
-    console.log(isActive);
-
     try {
-      const instance = axios.create({
-        headers: {
-          Authorization: `JWT ${token}`,
-        },
-      });
-
       const body = {
         product_id: modifiedProductId,
         quantity: modifiedQuantity,
         is_active: isActive,
       };
 
-      const res = await instance.put(`https://openmarket.weniv.co.kr/cart/${modifiedCartItemId}/`, body);
-      const data = await res.data;
-      setIsModalOpen(false);
+      const data = await modifyCartQuantity(token, body, modifiedCartItemId);
       console.log(data);
+      setIsModalOpen(false);
       setCartList((prev) => prev.map((item) => (item.cart_item_id === modifiedCartItemId ? { quantity: modifiedQuantity } : { quantity: item.quantity })));
+
       getShoppingCartList();
     } catch (error) {
       console.log(error);
@@ -143,21 +126,11 @@ export default function BuyerShoppingCart() {
   };
 
   const deleteCartList = async (cartItemId) => {
-    console.log(cartItemId);
-
     try {
-      const instance = axios.create({
-        headers: {
-          Authorization: `JWT ${token}`,
-        },
-      });
-
-      const res = await instance.delete(`https://openmarket.weniv.co.kr/cart/${cartItemId}`);
-      const data = await res.data;
-
+      const data = await deleteCartItem(token, cartItemId);
+      console.log(data);
       getShoppingCartList();
       setIsDeleteModalOpen(false);
-      console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -165,13 +138,7 @@ export default function BuyerShoppingCart() {
 
   const deleteAllCartList = async () => {
     try {
-      const instance = axios.create({
-        headers: {
-          Authorization: `JWT ${token}`,
-        },
-      });
-      const res = await instance.delete(`https://openmarket.weniv.co.kr/cart/`);
-      const data = await res.data;
+      const data = await deleteAllCartItem(token);
       console.log(data);
       setIsDeleteModalOpen(false);
     } catch (error) {
@@ -182,23 +149,15 @@ export default function BuyerShoppingCart() {
   const cartOneOrder = async (selectedId, selectedQuantity) => {
     deleteAllCartList();
     try {
-      const instance = axios.create({
-        headers: {
-          Authorization: `JWT ${token}`,
-        },
-      });
-
       const body = {
         product_id: selectedId,
         quantity: selectedQuantity,
         check: selected,
       };
-      console.log("API 요청 전:", body);
-      const res = await instance.post(`https://openmarket.weniv.co.kr/cart/`, body);
-      const data = await res.data;
+
+      const data = await addToCart(token, body);
       console.log(data);
       getShoppingCartList(selectedId);
-      console.log(selectedId);
     } catch (error) {
       console.log(error);
     }

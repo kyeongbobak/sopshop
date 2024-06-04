@@ -1,8 +1,7 @@
 import { useContext, useEffect, useState, useCallback } from "react";
-import axios from "axios";
+import { AuthContext } from "../../contexts/AuthContext";
 import BuyerHeader from "../../components/BuyerHeader/BuyerHeader";
 import BuyerFooter from "../../components/BuyerFooter/BuyerFooter";
-import { AuthContext } from "../../contexts/AuthContext";
 import {
   BuyerMyPageWrapper,
   BuyerMyPageTitle,
@@ -20,6 +19,8 @@ import {
   PrevButtonWrapper,
   PrevButton,
 } from "./BuyerMyPageStyle";
+import { getProductContents } from "../../api/Product";
+import { getOrderList } from "../../api/Order";
 
 export default function BuyerMyPage() {
   const { token } = useContext(AuthContext);
@@ -30,13 +31,7 @@ export default function BuyerMyPage() {
   const getOrderProductInfo = useCallback(
     async (productId) => {
       try {
-        const instance = axios.create({
-          headers: {
-            Authorization: `JWT ${token}`,
-          },
-        });
-        const res = await instance.get(`https://openmarket.weniv.co.kr/products/${productId}/`);
-        return res.data;
+        return await getProductContents(productId);
       } catch (error) {
         console.log("error", error);
       }
@@ -46,13 +41,7 @@ export default function BuyerMyPage() {
 
   const getOrderHistory = useCallback(async () => {
     try {
-      const instance = axios.create({
-        headers: {
-          Authorization: `JWT ${token}`,
-        },
-      });
-      const res = await instance.get(`https://openmarket.weniv.co.kr/order/`);
-      const data = res.data;
+      const data = await getOrderList(token);
       setOrderHistories(data.results.slice(0, 3));
 
       const orderHistoryInfos = data.results;

@@ -1,7 +1,9 @@
 import { useContext, useEffect, useState, useCallback } from "react";
-import ProductInfoHeader from "../../components/ProductInfoHeader/ProductInfoHeader";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthContext";
 import BuyerHeader from "../../components/BuyerHeader/BuyerHeader";
-
+import ProductInfoHeader from "../../components/ProductInfoHeader/ProductInfoHeader";
+import AdressSearchModal from "../../components/Modal/AdressSearchModal/AdressSearchModal";
 import BuyerFooter from "../../components/BuyerFooter/BuyerFooter";
 import {
   OrderPageWrapper,
@@ -52,11 +54,10 @@ import {
   PaymentPriceWrapper,
   PaymentPrice,
 } from "./BuyerOrderPageStyle";
-import { AuthContext } from "../../contexts/AuthContext";
-import axios from "axios";
 import Button from "../../components/Button/Button";
-import AdressSearchModal from "../../components/Modal/AdressSearchModal/AdressSearchModal";
-import { useNavigate } from "react-router-dom";
+import { getProductContents } from "../../api/Product";
+import { getCartList } from "../../api/Cart";
+import { order } from "../../api/Order";
 
 export default function BuyerOrderPage() {
   const { token } = useContext(AuthContext);
@@ -84,62 +85,38 @@ export default function BuyerOrderPage() {
 
   const navigate = useNavigate();
 
-  const getProductInfo = useCallback(
-    async (id) => {
+  const getOrderProductInfo = useCallback(
+    async (productId) => {
       try {
-        const instance = axios.create({
-          headers: {
-            Authorization: `JWT ${token}`,
-          },
-        });
-        const res = await instance.get(`https://openmarket.weniv.co.kr/products/${id}`);
-        const data = await res.data;
-        return data;
+        return await getProductContents(productId, token);
       } catch (error) {
-        console.log(error);
+        console.log("error", error);
       }
     },
     [token]
   );
 
   const getOrderList = useCallback(async () => {
-    try {
-      const instance = axios.create({
-        headers: { Authorization: `JWT ${token}` },
-      });
+    const data = await getCartList(token);
+    setOrderList(data);
+    const AllProductId = data.map((i) => i.product_id).join();
+    const AllQuantity = data.map((i) => i.quantity).join();
+    setFullProductId(AllProductId);
+    setFullQuantity(AllQuantity);
 
-      const res = await instance.get("https://openmarket.weniv.co.kr/cart/");
-      const orderItem = await res.data.results;
+    const prouductInfos = data.map((item) => getOrderProductInfo(item.product_id));
+    const productInfoPromises = await Promise.all(prouductInfos);
 
-      setOrderList(orderItem);
+    Promise.all(productInfoPromises).then((product) => {
+      const productPrice = product.map((v, i) => v.price * data[i].quantity);
+      const productShippingFee = product.map((i) => i.shipping_fee).reduce((acc, cur) => acc + cur, 0);
+      const totalPrice = productPrice.reduce((acc, cur) => acc + cur, 0);
+      setOrderTotalPrice(totalPrice + productShippingFee);
+      setTotalShippingFee(productShippingFee);
+    });
 
-      console.log(orderItem);
-
-      const AllProductId = orderItem.map((i) => i.product_id).join();
-      const AllQuantity = orderItem.map((i) => i.quantity).join();
-      setFullProductId(AllProductId);
-
-      setFullQuantity(AllQuantity);
-
-      const prouductInfos = orderItem.map((item) => getProductInfo(item.product_id));
-
-      const productInfoPromises = await Promise.all(prouductInfos);
-
-      Promise.all(productInfoPromises).then((product) => {
-        const productPrice = product.map((v, i) => v.price * orderItem[i].quantity);
-        const productShippingFee = product.map((i) => i.shipping_fee).reduce((acc, cur) => acc + cur, 0);
-        const totalPrice = productPrice.reduce((acc, cur) => acc + cur, 0);
-        setOrderTotalPrice(totalPrice + productShippingFee);
-        setTotalShippingFee(productShippingFee);
-      });
-
-      console.log(productInfoPromises);
-
-      setOrderProductInfos(productInfoPromises);
-    } catch (error) {
-      console.log(error);
-    }
-  }, [token, getProductInfo]);
+    setOrderProductInfos(productInfoPromises);
+  }, [token, getOrderProductInfo]);
 
   const getAdress = (data) => {
     setZonCode(data.zonecode);
@@ -147,7 +124,6 @@ export default function BuyerOrderPage() {
   };
 
   const handleSelectedOption = (option) => {
-    console.log(option);
     setSeletedPaymentOption(option);
   };
 
@@ -181,16 +157,8 @@ export default function BuyerOrderPage() {
     };
 
     try {
-      const instance = axios.create({
-        headers: {
-          Authorization: `JWT ${token}`,
-        },
-      });
-      const res = orderList.length === 1 ? await instance.post("https://openmarket.weniv.co.kr/order/", directOrder) : await instance.post("https://openmarket.weniv.co.kr/order/", cartOrder);
-      const data = await res.data;
-      console.log(data);
-
-      if (res.status >= 200 && res.status < 300) {
+      const data = await order(directOrder, cartOrder, token, orderList);
+      if (data) {
         navigate(`/orderSuccess`);
       }
     } catch (error) {

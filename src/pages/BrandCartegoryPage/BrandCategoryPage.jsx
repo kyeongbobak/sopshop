@@ -1,12 +1,12 @@
-import BuyerHeader from "../../components/BuyerHeader/BuyerHeader";
-import Sidebar from "../../components/Sidebar/Sidebar";
-import BuyerFooter from "../../components/BuyerFooter/BuyerFooter";
-import { BrandCategoryPageWrapper, ProductListWrapper, ProductPageNumber, PrevButton, PageNumberButton, NextButton, ProductGroup, ProductGroupTitle } from "./BrandCategoryPageStyle";
-import ProductList from "../../components/ProductList/ProductList";
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
-import getProduct from "../../api/ProductApi";
 import { useParams } from "react-router-dom";
+import { BrandCategoryPageWrapper, ProductListWrapper, ProductPageNumber, PrevButton, PageNumberButton, NextButton, ProductGroup, ProductGroupTitle } from "./BrandCategoryPageStyle";
+import BuyerHeader from "../../components/BuyerHeader/BuyerHeader";
+import Sidebar from "../../components/Sidebar/Sidebar";
+import ProductList from "../../components/ProductList/ProductList";
+import BuyerFooter from "../../components/BuyerFooter/BuyerFooter";
+import { getProducts } from "../../api/Product";
 
 export default function BrandCategoryPage() {
   const { token } = useContext(AuthContext);
@@ -20,14 +20,13 @@ export default function BrandCategoryPage() {
   }, [BrandName]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const fetchedProducts = await getProduct(token);
-      console.log(fetchedProducts);
+    const getProductList = async () => {
+      const fetchedProducts = await getProducts(token);
       const filterProducts = fetchedProducts.filter((product) => product.store_name === selectedBrandName);
       setProducts(filterProducts);
     };
 
-    fetchData();
+    getProductList();
   }, [token, selectedBrandName]);
 
   return (

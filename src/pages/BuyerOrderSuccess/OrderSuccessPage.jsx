@@ -1,27 +1,32 @@
-import BuyerHeader from "../../components/BuyerHeader/BuyerHeader";
-import BuyerFooter from "../../components/BuyerFooter/BuyerFooter";
-import { OrderSuccessPageWrapper, OrderSuccessPageTitle, OrderSuccessPageContents, DeliveryInfoTitle, OrderSuccessMessage, OrderDate } from "./OrderSuccessPageStyle";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
-import axios from "axios";
-import { DeliveryInfoWrapper, DeliveryInfoInner, DeliveryReceiver, DeliveryReceiverAdress, OrderPrice, PaymentMethod } from "./OrderSuccessPageStyle";
+import BuyerHeader from "../../components/BuyerHeader/BuyerHeader";
+import BuyerFooter from "../../components/BuyerFooter/BuyerFooter";
+import {
+  OrderSuccessPageWrapper,
+  OrderSuccessPageTitle,
+  OrderSuccessPageContents,
+  DeliveryInfoTitle,
+  OrderSuccessMessage,
+  OrderDate,
+  DeliveryInfoWrapper,
+  DeliveryInfoInner,
+  DeliveryReceiver,
+  DeliveryReceiverAdress,
+  OrderPrice,
+  PaymentMethod,
+} from "./OrderSuccessPageStyle";
+import { getOrderList } from "../../api/Order";
 
 export default function BuyerOrderSuccess() {
   const { token } = useContext(AuthContext);
-
   const [RecentOrderInfo, setRecentOrderInfo] = useState([]);
   const [RecentOrderDate, setRecentOrderDate] = useState([]);
 
   useEffect(() => {
     const getOrderHistory = async () => {
       try {
-        const instance = axios.create({
-          headers: {
-            Authorization: `JWT ${token}`,
-          },
-        });
-        const res = await instance.get(`https://openmarket.weniv.co.kr/order/`);
-        const data = await res.data;
+        const data = await getOrderList(token);
         const OrderInfo = data.results.slice(0, 1);
         const OrderDate = OrderInfo[0].created_at.split("T")[0];
         setRecentOrderInfo(OrderInfo[0]);

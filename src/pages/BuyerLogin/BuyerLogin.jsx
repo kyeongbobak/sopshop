@@ -1,8 +1,8 @@
-import LogoImage from "../../assets/img/Logo-SopShop.png";
-
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { LoginWrapper, FormBox, SiteLogo, LoginForm, Label, StyledInput, LoginButton, LinkWrapper, StyledLink, UserTypeTabs, LoginTab, SellerLoginTabLink, BuyerLoginTabLink, ValidateMessage } from "./BuyerLoginStyle";
-import { useNavigate } from "react-router-dom";
+import LogoImage from "../../assets/img/Logo-SopShop.png";
+import login from "../../api/LoginOut";
 
 export default function BuyerLogin() {
   const [activeTab, setActiveTab] = useState("buyer");
@@ -40,16 +40,8 @@ export default function BuyerLogin() {
     };
 
     try {
-      const res = await fetch("https://openmarket.weniv.co.kr/accounts/login/", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(body),
-      });
+      const data = await login(body);
 
-      const data = await res.json();
-      console.log(data);
       if (data.id) {
         localStorage.setItem("token", data.token);
         localStorage.setItem("id", data.id);
