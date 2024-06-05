@@ -17,8 +17,7 @@ export const login = async (body) => {
   }
 };
 
-// logout
-
+// 로그아웃
 export const logout = async (token) => {
   try {
     const instance = axios.create({
