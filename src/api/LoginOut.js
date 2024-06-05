@@ -1,5 +1,7 @@
+import axios from "axios";
+
 // 로그인
-const login = async (body) => {
+export const login = async (body) => {
   try {
     const res = await fetch("https://openmarket.weniv.co.kr/accounts/login/", {
       method: "POST",
@@ -15,4 +17,18 @@ const login = async (body) => {
   }
 };
 
-export default login;
+// logout
+
+export const logout = async (token) => {
+  try {
+    const instance = axios.create({
+      headers: {
+        Authorization: `JWT ${token}`,
+      },
+    });
+    const res = await instance.post("https://openmarket.weniv.co.kr/accounts/logout/");
+    return await res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};

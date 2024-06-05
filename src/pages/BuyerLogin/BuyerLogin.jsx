@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { LoginWrapper, FormBox, SiteLogo, LoginForm, Label, StyledInput, LoginButton, LinkWrapper, StyledLink, UserTypeTabs, LoginTab, SellerLoginTabLink, BuyerLoginTabLink, ValidateMessage } from "./BuyerLoginStyle";
 import LogoImage from "../../assets/img/Logo-SopShop.png";
-import login from "../../api/LoginOut";
+import { login } from "../../api/LoginOut";
 
 export default function BuyerLogin() {
   const [activeTab, setActiveTab] = useState("buyer");

@@ -173,7 +173,6 @@ export default function BuyerOrderPage() {
   return (
     <>
       <BuyerHeader />
-
       <OrderPageWrapper>
         <OrderPageTitle>Order</OrderPageTitle>
         <ProductInfoHeader type="order"></ProductInfoHeader>

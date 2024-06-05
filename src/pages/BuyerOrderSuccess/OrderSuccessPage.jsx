@@ -42,7 +42,6 @@ export default function BuyerOrderSuccess() {
   return (
     <>
       <BuyerHeader />
-
       <OrderSuccessPageWrapper>
         <OrderSuccessPageTitle>Order Result</OrderSuccessPageTitle>
         <OrderSuccessPageContents>

@@ -130,7 +130,6 @@ export default function ProductDetail() {
   return (
     <>
       <BuyerHeader />
-
       <ProductDetailWrapper>
         <ProductDetailContent>
           <ProductImage src={product.image} />
