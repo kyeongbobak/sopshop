@@ -249,7 +249,7 @@ export default function BuyerSignUp() {
                 </Label>
                 <SignUpAgreementCheckBox type="checkbox" id="chk"></SignUpAgreementCheckBox>
                 <p>
-                  호두샵의 <strong>이용약관</strong>및 <strong>개인정보처리방침</strong>에 대한 내용을 확인하였고 동<br />
+                  <span>sopshop</span> 의 <strong>이용약관</strong>및 <strong>개인정보처리방침</strong>에 대한 내용을 확인하였고 동<br />
                   의합니다.
                 </p>
               </SignUpAgreementWrapper>

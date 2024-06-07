@@ -33,7 +33,6 @@ export const SignUpTabLink = css`
   padding-top: 20px;
   background-color: var(--light-gray-color);
   border: 1px solid var(--gray-color);
-  border-radius: 10px 10px 0px 0px;
   box-sizing: border-box;
   border-bottom: 0;
   position: relative;
@@ -64,7 +63,7 @@ export const SignUpFormSection = styled.div`
   flex-direction: column;
   padding: 36px 35px;
   border: 1px solid var(--gray-color);
-  border-radius: 10px;
+
   background-color: white;
   position: relative;
   z-index: 3;
@@ -214,10 +213,14 @@ export const SignUpAgreementWrapper = styled.div`
   padding: 34px 0;
   font-size: var(--font-md-size);
 
+  span {
+    font-weight: var(--font-bold);
+  }
+
   p {
     font-family: "Pretendard";
     text-align: left;
-    line-height: 20px;
+    line-height: 21px;
   }
 
   strong {
