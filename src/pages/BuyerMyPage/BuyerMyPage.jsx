@@ -28,16 +28,13 @@ export default function BuyerMyPage() {
   const [orderProductInfos, setOrderProductInfos] = useState([]);
   const [orderProductQuantyties, setOrderProductQuantyties] = useState([]);
 
-  const getOrderProductInfo = useCallback(
-    async (productId) => {
-      try {
-        return await getProductContents(productId);
-      } catch (error) {
-        console.log("error", error);
-      }
-    },
-    [token]
-  );
+  const getOrderProductInfo = useCallback(async (productId) => {
+    try {
+      return await getProductContents(productId);
+    } catch (error) {
+      console.log("error", error);
+    }
+  }, []);
 
   const getOrderHistory = useCallback(async () => {
     try {
