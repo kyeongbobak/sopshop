@@ -108,15 +108,9 @@ export default function BuyerSignUp() {
 
     try {
       const data = await validateAccount(userId);
-      if (data.Success) {
-        setDuplicateMessage(data.Success);
-      } else if (!userId) {
-        setDuplicateMessage(data.FAIL_Message);
-      } else if (data.FAIL_Message) {
-        setDuplicateMessage("해당 사용자 아이디는 이미 존재합니다.");
-      }
+      setDuplicateMessage(data.Success);
     } catch (error) {
-      console.log(error);
+      setDuplicateMessage("해당 사용자 아이디는 이미 존재합니다.");
     }
   };
 
@@ -124,11 +118,9 @@ export default function BuyerSignUp() {
     e.preventDefault();
 
     try {
-      const { res, data } = await signUp(body);
+      const data = await signUp(body);
 
-      console.log(data);
-
-      if (res.ok) {
+      if (data.status === 201) {
         alert("회원가입이 성공적으로 완료되었습니다!");
         navigate(`/login`);
       } else {

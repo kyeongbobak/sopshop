@@ -1,17 +1,11 @@
-import axios from "axios";
+import { Instance } from "./instance/Instance";
 
 // 로그인
 export const login = async (body) => {
   try {
-    const res = await fetch("https://openmarket.weniv.co.kr/accounts/login/", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(body),
-    });
-
-    return res.json();
+    const res = await Instance.post(`/accounts/login/`, body);
+    console.log(res);
+    return res.data;
   } catch (error) {
     console.log("error");
   }
@@ -20,13 +14,12 @@ export const login = async (body) => {
 // 로그아웃
 export const logout = async (token) => {
   try {
-    const instance = axios.create({
+    const res = await Instance.post(`accounts/logout/`, {
       headers: {
         Authorization: `JWT ${token}`,
       },
     });
-    const res = await instance.post("https://openmarket.weniv.co.kr/accounts/logout/");
-    return await res.data;
+    return res.data;
   } catch (error) {
     console.log(error);
   }

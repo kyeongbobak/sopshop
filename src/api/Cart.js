@@ -1,13 +1,11 @@
-import axios from "axios";
+import { Instance } from "./instance/Instance";
 
 // 장바구니 목록 보기
 export const getCartList = async (token) => {
   try {
-    const instance = axios.create({
+    const res = await Instance.get(`/cart/`, {
       headers: { Authorization: `JWT ${token}` },
     });
-
-    const res = await instance.get("https://openmarket.weniv.co.kr/cart/");
     const data = await res.data.results;
     return data;
   } catch (error) {
@@ -18,14 +16,12 @@ export const getCartList = async (token) => {
 // 장바구니 물건 넣기
 export const addToCart = async (token, body) => {
   try {
-    const instance = axios.create({
+    const res = await Instance.post(`/cart/`, body, {
       headers: {
         Authorization: `JWT ${token}`,
       },
     });
-
-    const res = await instance.post(`https://openmarket.weniv.co.kr/cart/`, body);
-    return await res.data;
+    return res.data;
   } catch (error) {
     console.log(error);
   }
@@ -34,13 +30,11 @@ export const addToCart = async (token, body) => {
 // 장바구니 수량 수정하기
 export const modifyCartQuantity = async (token, body, modifiedCartItemId) => {
   try {
-    const instance = axios.create({
+    const res = await Instance.put(`/cart/${modifiedCartItemId}/`, body, {
       headers: {
         Authorization: `JWT ${token}`,
       },
     });
-
-    const res = await instance.put(`https://openmarket.weniv.co.kr/cart/${modifiedCartItemId}/`, body);
     return await res.data;
   } catch (error) {
     console.log(error);
@@ -50,12 +44,11 @@ export const modifyCartQuantity = async (token, body, modifiedCartItemId) => {
 // 장바구니 전부 삭제하기
 export const deleteAllCartItem = async (token) => {
   try {
-    const instance = axios.create({
+    const res = await Instance.delete(`/cart/`, {
       headers: {
         Authorization: `JWT ${token}`,
       },
     });
-    const res = await instance.delete(`https://openmarket.weniv.co.kr/cart/`);
     return await res.data;
   } catch (error) {
     console.log(error);
@@ -65,13 +58,11 @@ export const deleteAllCartItem = async (token) => {
 // 장바구니 개별 삭제하기
 export const deleteCartItem = async (token, cartItemId) => {
   try {
-    const instance = axios.create({
+    const res = await Instance.delete(`/cart/${cartItemId}`, {
       headers: {
         Authorization: `JWT ${token}`,
       },
     });
-
-    const res = await instance.delete(`https://openmarket.weniv.co.kr/cart/${cartItemId}`);
     return await res.data;
   } catch (error) {
     console.log(error);

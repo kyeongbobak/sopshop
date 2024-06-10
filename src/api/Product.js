@@ -1,45 +1,54 @@
-import axios from "axios";
+import { Instance } from "./instance/Instance";
 
 // 상품 전체 불러오기
 export const getProducts = async (token) => {
   try {
     const promises = [];
     if (token) {
-      const instance = axios.create({
-        headers: {
-          Authorization: `JWT ${token}`,
-        },
-      });
-      promises.push(instance.get("https://openmarket.weniv.co.kr/products/?page=4"));
-      promises.push(instance.get("https://openmarket.weniv.co.kr/products/?page=5"));
-      promises.push(instance.get("https://openmarket.weniv.co.kr/products/?page=6"));
+      promises.push(
+        Instance.get("/products/?page=5", {
+          headers: {
+            Authorization: `JWT ${token}`,
+          },
+        })
+      );
+      promises.push(
+        Instance.get("/products/?page=6", {
+          headers: {
+            Authorization: `JWT ${token}`,
+          },
+        })
+      );
+      promises.push(
+        Instance.get("/products/?page=7", {
+          headers: {
+            Authorization: `JWT ${token}`,
+          },
+        })
+      );
     } else {
-      promises.push(fetch("https://openmarket.weniv.co.kr/products/?page=4"));
       promises.push(fetch("https://openmarket.weniv.co.kr/products/?page=5"));
       promises.push(fetch("https://openmarket.weniv.co.kr/products/?page=6"));
+      promises.push(fetch("https://openmarket.weniv.co.kr/products/?page=7"));
     }
+
     const res = await Promise.all(promises);
-    const data = await Promise.all(res.map((res) => (token ? res.data : res.json())));
+
+    const data = await Promise.all(res.map((response) => (token ? response.data : response.json())));
     const mergedData = data.flatMap((result) => result.results);
-    const newArray = mergedData.filter((i) => i.store_name === "FLOPS" || i.store_name === "Ditto" || i.store_name === "Too_much_shop");
+    const newArray = mergedData.filter((item) => item.store_name === "FLOPS" || item.store_name === "Ditto" || item.store_name === "Too_much_shop");
 
     return newArray;
   } catch (error) {
-    console.log("error");
+    console.log("error", error);
   }
 };
 
 // 상품 디테일
 export const getProductContents = async (productId) => {
   try {
-    const res = await fetch(`https://openmarket.weniv.co.kr/products/${productId}/`, {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-      },
-    });
+    const res = await Instance.get(`/products/${productId}/`);
     const data = await res.json();
-    console.log(data);
     return data;
   } catch (error) {
     console.log("error", error);
@@ -49,10 +58,7 @@ export const getProductContents = async (productId) => {
 // 상품 검색하기
 export const search = async (setSearchedProductCount, setSearchResults, searchKeyword) => {
   try {
-    const res = await fetch(`https://openmarket.weniv.co.kr/products/?search=${searchKeyword}`, {
-      method: "GET",
-    });
-
+    const res = await Instance.get(`/products/?search=${searchKeyword}`);
     const data = await res.json();
     setSearchedProductCount(data.count);
     setSearchResults(data.results);
