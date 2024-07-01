@@ -228,7 +228,7 @@ footer
 
 ## 트러블 슈팅
 
-#### API요청 최적화
+### API요청 최적화
 
 ##### 문제 상황
 
@@ -288,7 +288,7 @@ export const getProducts = async (token) => {
 };
 ```
 
-#### 불필요한 재렌더링 방지
+### 불필요한 재렌더링 방지
 
 ##### 문제 상황
 
@@ -331,7 +331,7 @@ const getShoppingCartList = useCallback(async () => {
 }, [token, getProductInfo]);
 ```
 
-#### 상품 삭제 API를 통한 개별 구매 처리
+### 상품 삭제 API를 통한 개별 구매 처리
 
 ##### 문제 상황
 
