@@ -29,7 +29,7 @@
 ## 적용기술
 
 - <img src="https://img.shields.io/badge/LANGUAGE-%23121011?style=for-the-badge"> <img src="https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E"><br/>
-- <img src="https://img.shields.io/badge/LIBRARY-%23121011?style=for-the-badge"> <img src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB"><img src="https://img.shields.io/badge/Context--Api-000000?style=for-the-badge&logo=react"><img src="https://img.shields.io/badge/React%20Hook%20Form-%23EC5990.svg?style=for-the-badge&logo=reacthookform&logoColor=white"><img src="https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white"><img src="https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white"/><br/>
+- <img src="https://img.shields.io/badge/LIBRARY-%23121011?style=for-the-badge"> <img src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB"><img src="https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white"><img src="https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white"/><br/>
 - <img src="https://img.shields.io/badge/IDE/EDITOR-%23121011?style=for-the-badge"> <img src="https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white"><br/>
 - <img src="https://img.shields.io/badge/VERSIONCONTROL-%23121011?style=for-the-badge"> <img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white"><br/>
 - <img src="https://img.shields.io/badge/DESIGN -%23121011?style=for-the-badge"> <img src="https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white"><br/>
@@ -104,7 +104,8 @@ footer
 
 - ESLint와 Prettier를 사용하여 일관된 스타일 준수
 - 코드 포맷은 Prettier가 자동으로 처리
-  <br/>
+
+<br/>
 
 ## 구현 기능
 
@@ -227,52 +228,244 @@ footer
 
 ## 트러블 슈팅
 
+#### API요청 최적화
+
+##### 문제 상황
+
+서버에서 불러온 상품 정보 중 특정 브랜드의 상품만 필요했지만,페이지당 항목 수가 15개로 제한되었습니다. 페이지 당 항목 수를 제한하는 것이 일반적인 RESTFUL API의 동작방식이기 때문에 상품 정보 요청하는 API 엔드포인트로 보내게 되면 가장 첫번째 페이지의 상품 정보만 응답하여 상품 API 응답 데이터 중 사용하고 싶은 특정 브랜드의 상품정보를 사용하기 어려웠습니다. 한 번의 API 호출로는 원하는 데이터를 가져올 수 없었고, 여러 번의 API 호출을 통해 특정 브랜드 상품 데이터를 수집하면 시스템의 복잡성이 증가했습니다.
+
+##### 해결 방법
+
+1. 필요한 특정 브랜드의 상품 정보가 담긴 페이지 수를 확인합니다.
+2. 한 번에 3개의 요청을 처리하는 경우, 일반적으로 서버에 큰 부하 증가 없이 잘 처리될 수 있을 것으로 판단하였습니다. 따라서 원하는 특정 브랜드의 상품 정보가 담겨있는 세 개의 페이지를 `Promise.all`을 사용하여 병렬로 API를 호출하여 여러번의 API 호출을 간소화하였습니다.
+3. 각 페이지별 응답 데이터를 중첩된 배열로 처리할 필요 없이 하나의 배열로 합칩니다.
+4. 특정 브랜드의 상품을 필터링합니다.
+
+```javascript
+import { Instance } from "./instance/Instance";
+
+export const getProducts = async (token) => {
+  try {
+    const promises = [];
+    if (token) {
+      promises.push(
+        Instance.get("/products/?page=5", {
+          headers: {
+            Authorization: `JWT ${token}`,
+          },
+        })
+      );
+      promises.push(
+        Instance.get("/products/?page=6", {
+          headers: {
+            Authorization: `JWT ${token}`,
+          },
+        })
+      );
+      promises.push(
+        Instance.get("/products/?page=7", {
+          headers: {
+            Authorization: `JWT ${token}`,
+          },
+        })
+      );
+    } else {
+      promises.push(fetch("https://openmarket.weniv.co.kr/products/?page=5"));
+      promises.push(fetch("https://openmarket.weniv.co.kr/products/?page=6"));
+      promises.push(fetch("https://openmarket.weniv.co.kr/products/?page=7"));
+    }
+
+    const res = await Promise.all(promises);
+
+    const data = await Promise.all(res.map((response) => (token ? response.data : response.json())));
+    const mergedData = data.flatMap((result) => result.results);
+    const newArray = mergedData.filter((item) => item.store_name === "FLOPS" || item.store_name === "Ditto" || item.store_name === "Too_much_shop");
+
+    return newArray;
+  } catch (error) {
+    console.log("error", error);
+  }
+};
+```
+
+#### 불필요한 재렌더링 방지
+
+##### 문제 상황
+
+useEffect 내부에서 사용되는 함수를 의존성 배열에 추가하지 않음으로 인해 불필요한 재렌더링이 발생하고 성능 저하가 일어났습니다.
+
+##### 해결 방법
+
+1. 함수가 불필요하게 재성성되지 않도록 useCallback을 사용하여 메모제이션합니다. 이를 통해 useEffect가 다시 실행되지 않도록 합니다.
+2. useEffect의 의존성 배열에 필요한 함수를 추가하여, 함수가 변경될 때만 useEffect가 다시 실행되도록 합니다.
+
+```javascript
+// BuyerShoppingCart.jsx
+
+const getShoppingCartList = useCallback(async () => {
+  try {
+    const data = await getCartList(token);
+    setIsEmpty(false);
+    const cartItem = data;
+    setCartList(cartItem);
+
+    if (cartItem.length === 0) {
+      return setIsEmpty(true);
+    }
+
+    const productInfos = cartItem.map((item) => getProductInfo(item.product_id));
+    const productInfoPromises = await Promise.all(productInfos);
+    setCartProductInfo(productInfoPromises);
+
+    Promise.all(productInfoPromises).then((product) => {
+      const totalProductPrice = product.map((v, i) => v.price * cartItem[i].quantity);
+      const cartTotalPrice = totalProductPrice.reduce((acc, cur) => acc + cur, 0);
+      const totalProductShippingFee = product.map((i) => i.shipping_fee).reduce((acc, cur) => acc + cur, 0);
+      setShippingFee(totalProductShippingFee);
+      setTotalProuctPrice(cartTotalPrice);
+      setTotalPrice(cartTotalPrice + totalProductShippingFee);
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}, [token, getProductInfo]);
+```
+
+#### 상품 삭제 API를 통한 개별 구매 처리
+
+##### 문제 상황
+
+개별 구매를 직접 처리할 수 있는 API가 없어, 장바구니에서 개별 상품을 구매하는 기능을 구현하기 어려웠습니다.
+
+##### 해결 방법
+
+1. 기존에 있는 상품 삭제 API 함수를 사용하여 장바구니를 비웁니다.
+2. 장바구니를 비운 후, 선택한 상품만 다시 장바구니에 추가하고 주문을 처리하는 API 함수를 추가합니다.
+
+```javascript
+const cartOneOrder = async (selectedId, selectedQuantity) => {
+  deleteAllCartList();
+  try {
+    const body = {
+      product_id: selectedId,
+      quantity: selectedQuantity,
+      check: selected,
+    };
+
+    const data = await addToCart(token, body);
+    console.log(data);
+    getShoppingCartList(selectedId);
+  } catch (error) {
+    console.log(error);
+  }
+};
+```
+
 <br/>
 
 ## 기술적 선택 사항
 
-### 1. Context API
+### Context API
 
 #### 선택 이유
 
-프로젝트에서 사용자가 로그인 후 인증 토큰을 유지하고, API 요청시마다 이 토큰을 포함시켜야 했습니다. 이를 위해 모든 컴포넌트가 인증토큰에 쉽게 접근할 수 있는 방법이 필요했고, 그 중에서도 Context API를 선택한 이유는 Recoil이나 다른 상태 관리 라이브러리는 강력한 기능을 제공하지만 간단한 상태 관리에는 과할 수 있다고 생각되어 비교적 단순한 전역 상태 관리가 가능한 Context API를 선택했습니다.
+프로젝트에서 사용자가 로그인 후 인증 토큰을 유지하고, API 요청시마다 이 토큰을 포함시켜야 했습니다. 이를 위해 모든 컴포넌트가 인증 토큰에 쉽게 접근할 수 있는 방법이 필요했고, 그 중에서도 Context API를 선택한 이유는 Recoil이나 다른 상태 관리 라이브러리는 강력한 기능을 제공하지만 다음 프로젝트의 간단한 상태 관리에는 과할 수 있다고 생각되어 비교적 단순한 전역 상태 관리가 가능한 Context API를 선택했습니다.
 
-#### 구현방법
+#### 구현 방법
 
-- ##### AuthContext와 AuthProvider 생성
-  - 애플리케이션 전체에서 인증 토큰을 관리할 수 있도록 설정
-  - `token, setToken, isLoggedIn, setIsLoggedIn` 상태를 관리
+- `AuthContext`와 `AuthProvider` 생성하여 애플리케이션 전체에서 인증 토큰을 관리할 수 있도록 설정합니다.
+- `token, setToken, isLoggedIn, setIsLoggedIn` 상태를 관리합니다.
 
-```
-import {createContext, useState} from "react";
+```javascript
+import { createContext, useState } from "react";
 
 const AuthContext = createContext();
 
-const AuthProvider = ({children}) => {
- const [token, setToken] = useState(localStorage.getItem("token") || null);
+const AuthProvider = ({ children }) => {
+  const [token, setToken] = useState(localStorage.getItem("token") || null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  return(
-    <AuthContext.Provider value = {{token, setToken, isLoggedIn, setIsLoggiedIn}}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={{ token, setToken, isLoggedIn, setIsLoggiedIn }}>{children}</AuthContext.Provider>;
 };
 
 export { AuthContext, AuthProvider };
 ```
 
-### 2. Promise.all
-
-3. axios
+### react-daum-postcode
 
 #### 선택 이유
 
-#### 구현방법
+주문 시 배송지 주소가 자동으로 입력될 수 있도록 주소 검색 기능을 구현하기 위해 `react-daum-postcode` 라이브러리를 사용했습니다.
+Daum 주소 검색 서비스를 간단하게 사용할 수 있고, 사용자가 직접 주소를 입력하는 것보다 주소 검색 서비스를 통해 빠르고 정확하게 주소를 입력할 수 있어 선택했습니다.
 
-- 주소 검색
-  리드미 개별구매 모두 구매 이부분 쇼핑카트부분
+#### 구현 방법
+
+- `AdressSearchModal` 컴포넌트는 사용자가 주소를 검색하고 선택할 수 있는 모달을 제공합니다.
+- `completeHandler` 함수는 주소 선택이 완료되었을 때 호출되며, 선택된 주소 데이터를 부모 컴포넌트로 전달하고 이를 통해 주소 데이터를 쉽게 관리하고 사용가능합니다.
+
+```javascript
+import DaumPostcode from "react-daum-postcode";
+import { DaumPostcodeBack } from "./AdressSearchModalStyle";
+
+export default function AdressSearchModal(props) {
+  const completeHandler = (data) => {
+    props.onComplete(data);
+  };
+
+  return (
+    <>
+      <DaumPostcodeBack>
+        <DaumPostcode onComplete={completeHandler}></DaumPostcode>
+      </DaumPostcodeBack>
+    </>
+  );
+}
+```
 
 <br/>
 
 ## 리팩토링
+
+### 리팩토링 진행 상황
+
+현재 프로젝트는 **일부 리팩토링이 완료**되었으며, 아래와 같은 주요 개선 사항들을 포함하고 있습니다:
+
+## [sopshop_refactor](https://github.com/kyeongbobak/sopshop_refactor.git)
+
+1. **함수형 컴포넌트와 React Hook Form 도입**
+
+   기존의 클래스 컴포넌트를 함수형 컴포넌트로 변경하고, react-hook-form을 도입하여 폼 관리를 효율적으로 개선했습니다. 이를 통해 폼 유효성 검사와 오류 처리를 간단하게 할 수 있습니다.
+   <br/>
+
+2. **React Query를 이용한 API 호출 관리**
+
+   @tanstack/react-query를 사용하여 데이터 가져오기와 상태 관리를 간소화했습니다. API 호출의 성공 및 실패 처리를 쉽게 구현하고, 데이터 캐싱과 자동 재요청 기능을 활용하여 성능을 최적화했습니다.
+   <br/>
+
+3. **CSS-in-JS를 활용한 UI 간소화**
+
+   styled-components를 채택하여 각 컴포넌트의 스타일을 정의하고 모듈화하여 UI를 간소화하고 재사용성을 높였습니다. 이는 코드의 가독성과 유지보수성을 개선하는 데 기여했습니다.
+   <br/>
+
+4. **Recoil을 통한 지역 상태 관리**
+
+   전역 상태 관리보다 필요한 컴포넌트 내에서만 관리할 수 있도록 Recoil을 도입했습니다. 예를 들어, 로그인 상태 관리에 useRecoilState를 사용하여 상태를 로컬하게 관리했습니다.
+   <br/>
+
+5. **useMutation을 이용한 API 처리 간소화**
+
+   useMutation Hook을 사용하여 API 호출을 간소화하고, 성공 및 실패 시 처리 로직을 명확하게 구현했습니다. onSuccess와 onError 콜백을 이용하여 데이터 처리와 오류 관리를 효율적으로 처리했습니다.
+   <br/>
+
+6. **중복되는 인스턴스 헤더 분리**
+
+   API 호출 시 반복적으로 사용되는 인스턴스 헤더를 별도의 파일로 분리하여 코드 중복을 최소화했습니다. 이는 axios의 create 메서드를 활용하여 공통 헤더를 설정하는 방식으로 구현했습니다.
+   <br/>
+
+7. **폴더 구조 및 파일 재분리**
+
+   각 기능별로 컴포넌트, API 호출 함수, 스타일, 상태 관리 등을 모듈화하여 폴더 구조를 재구성했습니다. 이는 코드의 구조화와 관리를 용이하게 하여 개발자들이 프로젝트를 더 쉽게 이해하고 확장할 수 있도록 돕습니다.
+   <br/>
+
+8. **커스텀 훅을 통한 코드 중복 최소화**
+   여러 컴포넌트에서 반복되는 로직을 추출하여 커스텀 훅으로 작성하여 코드 중복을 최소화했습니다. 예를 들어, 로그인 폼 처리 로직을 useLoginForm이라는 커스텀 훅으로 만들어서 재사용 가능하게 구현했습니다.
