@@ -4,7 +4,6 @@ import { Instance } from "./instance/Instance";
 export const login = async (body) => {
   try {
     const res = await Instance.post(`/accounts/login/`, body);
-    console.log(res);
     return res.data;
   } catch (error) {
     console.log("error");
@@ -14,7 +13,7 @@ export const login = async (body) => {
 // 로그아웃
 export const logout = async (token) => {
   try {
-    const res = await Instance.post(`accounts/logout/`, {
+    const res = await Instance.post(`/accounts/logout/`, {
       headers: {
         Authorization: `JWT ${token}`,
       },

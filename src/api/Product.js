@@ -1,40 +1,17 @@
 import { Instance } from "./instance/Instance";
 
 // 상품 전체 불러오기
-export const getProducts = async (token) => {
+export const getProducts = async () => {
   try {
     const promises = [];
-    if (token) {
-      promises.push(
-        Instance.get("/products/?page=5", {
-          headers: {
-            Authorization: `JWT ${token}`,
-          },
-        })
-      );
-      promises.push(
-        Instance.get("/products/?page=6", {
-          headers: {
-            Authorization: `JWT ${token}`,
-          },
-        })
-      );
-      promises.push(
-        Instance.get("/products/?page=7", {
-          headers: {
-            Authorization: `JWT ${token}`,
-          },
-        })
-      );
-    } else {
-      promises.push(fetch("https://openmarket.weniv.co.kr/products/?page=5"));
-      promises.push(fetch("https://openmarket.weniv.co.kr/products/?page=6"));
-      promises.push(fetch("https://openmarket.weniv.co.kr/products/?page=7"));
-    }
+
+    promises.push(fetch("https://openmarket.weniv.co.kr/products/?page=5"));
+    promises.push(fetch("https://openmarket.weniv.co.kr/products/?page=6"));
+    promises.push(fetch("https://openmarket.weniv.co.kr/products/?page=7"));
 
     const res = await Promise.all(promises);
 
-    const data = await Promise.all(res.map((response) => (token ? response.data : response.json())));
+    const data = await Promise.all(res.map((response) => response.json()));
     const mergedData = data.flatMap((result) => result.results);
     const newArray = mergedData.filter((item) => item.store_name === "FLOPS" || item.store_name === "Ditto" || item.store_name === "Too_much_shop");
 
