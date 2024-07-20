@@ -105,7 +105,6 @@ export const ProductTotalPrice = styled.div`
       width: 2px;
       height: 23px;
       background-color: var(--main-color);
-
       margin: 0 12px;
     }
   }

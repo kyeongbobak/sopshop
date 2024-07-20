@@ -44,8 +44,6 @@ export const OrderItemInfo = styled.div`
 
 export const OrderItemInfoInner = styled.div`
   display: flex;
-  p {
-  }
 `;
 
 export const OrderItemInfoDetails = styled.div`
