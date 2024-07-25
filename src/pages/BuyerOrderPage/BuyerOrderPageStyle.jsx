@@ -140,7 +140,7 @@ export const OrderInfoForm = styled.form`
 
 export const OrderCustomerName = styled.div`
   ${InfoformCommonStyle}
-  ${InfoInputCommonStyle}
+
   label {
     padding-right: 15px;
   }

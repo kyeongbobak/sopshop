@@ -246,7 +246,7 @@ export default function BuyerOrderPage() {
               </DeliveryReceiverPhoneNumber>
               <DeliveryReceiverAdress>
                 <label htmlFor="adress">배송주소</label>
-                <ZipCodeInput type="text" id="adress" value={zoneCode}></ZipCodeInput>
+                <ZipCodeInput type="text" id="adress" value={zoneCode} />
                 <ZipCodeSearchButton type="button" value="우편번호 조회" onClick={() => setZipSearch(true)}></ZipCodeSearchButton>
                 {zipSearch && <AdressSearchModal onComplete={getAdress}></AdressSearchModal>}
                 <RoadAdressInput type="text" id="adress" value={roadAdress}></RoadAdressInput>
