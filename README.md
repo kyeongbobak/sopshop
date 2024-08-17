@@ -461,4 +461,5 @@ export default function AdressSearchModal(props) {
    <br/>
 
 8. **커스텀 훅을 통한 코드 중복 최소화**
+
    여러 컴포넌트에서 반복되는 로직을 추출하여 커스텀 훅으로 작성하여 코드 중복을 최소화했습니다. 예를 들어, 로그인 폼 처리 로직을 useLoginForm이라는 커스텀 훅으로 만들어서 재사용 가능하게 구현했습니다.
