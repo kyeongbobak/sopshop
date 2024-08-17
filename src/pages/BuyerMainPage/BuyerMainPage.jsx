@@ -4,7 +4,7 @@ import ProductList from "../../components/ProductList/ProductList";
 import { AuthContext } from "../../contexts/AuthContext";
 import BuyerHeader from "../../components/BuyerHeader/BuyerHeader";
 import BuyerFooter from "../../components/BuyerFooter/BuyerFooter";
-import Sidebar from "../../components/Sidebar/Sidebar";
+import SideBar from "../../components/SideBar/SideBar";
 import { getProducts } from "../../api/Product";
 export default function BuyerMainPage() {
   const { token } = useContext(AuthContext);
@@ -27,7 +27,7 @@ export default function BuyerMainPage() {
     <>
       <BuyerHeader />
       <MainPageContentsWrapper>
-        <Sidebar />
+        <SideBar />
         <ProductListWrapper>
           <ProductGroup>
             {products.map((product) => (

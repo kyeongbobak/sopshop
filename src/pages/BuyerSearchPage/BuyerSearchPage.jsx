@@ -13,7 +13,7 @@ import {
   SearchResultItemPrice,
 } from "./BuyerSearchPageStyle";
 import BuyerHeader from "../../components/BuyerHeader/BuyerHeader";
-import Sidebar from "../../components/Sidebar/Sidebar";
+import SideBar from "../../components/SideBar/SideBar";
 import BuyerFooter from "../../components/BuyerFooter/BuyerFooter";
 import { search } from "../../api/Product";
 
@@ -33,7 +33,7 @@ export default function BuyerSearchPage() {
     <>
       <BuyerHeader />
       <SearchPageWrapper>
-        <Sidebar />
+        <SideBar />
         <SearchResultsWrapper>
           <SearchResultsCount>
             <li>

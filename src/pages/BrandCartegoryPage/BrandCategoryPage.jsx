@@ -3,7 +3,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { useParams } from "react-router-dom";
 import { BrandCategoryPageWrapper, ProductListWrapper, ProductPageNumber, PrevButton, PageNumberButton, NextButton, ProductGroup, ProductGroupTitle } from "./BrandCategoryPageStyle";
 import BuyerHeader from "../../components/BuyerHeader/BuyerHeader";
-import Sidebar from "../../components/Sidebar/Sidebar";
+import SideBar from "../../components/SideBar/SideBar";
 import ProductList from "../../components/ProductList/ProductList";
 import BuyerFooter from "../../components/BuyerFooter/BuyerFooter";
 import { getProducts } from "../../api/Product";
@@ -33,7 +33,7 @@ export default function BrandCategoryPage() {
     <>
       <BuyerHeader />
       <BrandCategoryPageWrapper>
-        <Sidebar />
+        <SideBar />
         <ProductListWrapper>
           <ProductGroupTitle>{BrandName}</ProductGroupTitle>
           <ProductGroup>
