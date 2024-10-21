@@ -427,7 +427,7 @@ export default function AdressSearchModal(props) {
 
 1. **함수형 컴포넌트와 React Hook Form 도입**
 
-   기존의 클래스 컴포넌트를 함수형 컴포넌트로 변경하고, react-hook-form을 도입하여 폼 관리를 효율적으로 개선했습니다. 이를 통해 폼 유효성 검사와 오류 처리를 간단하게 할 수 있습니다.
+   react-hook-form을 도입하여 폼 관리를 효율적으로 개선했습니다. 이를 통해 폼 유효성 검사와 오류 처리를 간단하게 할 수 있습니다.
    <br/>
 
 2. **React Query를 이용한 API 호출 관리**
