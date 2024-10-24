@@ -425,26 +425,14 @@ export default function AdressSearchModal(props) {
 
 1. **함수형 컴포넌트와 React Hook Form 도입**
 
-   <br/>
-
 2. **React Query를 이용한 API 호출 관리**
-
-   <br/>
 
 3. **CSS-in-JS를 활용한 UI 간소화**
 
-   <br/>
-
 4. **Recoil을 통한 지역 상태 관리**
-
-   <br/>
 
 5. **useMutation을 이용한 API 처리 간소화**
 
-   <br/>
-
 6. **폴더 구조 및 파일 재분리**
-
-   <br/>
 
 7. **커스텀 훅을 통한 코드 중복 최소화**
