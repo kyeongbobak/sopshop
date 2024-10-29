@@ -2,7 +2,7 @@
 
 > 실용적인 프론트엔드 기술을 기반으로 한 브랜드 편집샵 온라인 쇼핑몰 서비스 플랫폼
 
-## [SopShop](https://sopshop.netlify.app/)
+## [SopShop](https://sop-shop.netlify.app/)
 
 **서비스 이용을 위한 테스트 계정** <br/>
 
