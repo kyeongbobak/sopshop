@@ -419,8 +419,6 @@ export default function AdressSearchModal(props) {
 
 ## 리팩토링
 
-### 리팩토링 진행 상황
-
 ## [sopshop_refactor](https://github.com/kyeongbobak/sopshop_refactor.git)
 
 1. **함수형 컴포넌트와 React Hook Form 도입**
